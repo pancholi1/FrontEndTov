@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     backgroundColor:"#ffffff",
     borderWidth: 1,
     borderRadius: 16,
-
   },
   imagen_perfil:{
     width: "20%",
@@ -110,15 +109,9 @@ const styles = StyleSheet.create({
     marginTop:"10%",
   },
   info_colegio:{
-    //display:"flex",
     width: "70%",
     marginLeft:"5%",
-    //height: "80%",
     backgroundColor:"#ffffff",
-    //alignItems: "flex-start",
-    //flexDirection: "row",
-    //alignItems: "center",
-    //justifyContent:"center",
   },
   colegio:{
     fontStyle: "normal",
@@ -130,7 +123,6 @@ const styles = StyleSheet.create({
   img_colegio:{
     width: 15,
     height: 15,
-    // backgroundColor: "#b5101e",
   },
   container_cuenta:{
     width: "90%",
