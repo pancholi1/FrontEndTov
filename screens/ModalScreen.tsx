@@ -4,7 +4,9 @@ import { Image } from "react-native";
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
-export default function ModalScreen() {
+
+
+export default function ModalScreen(){
   return (
     <View style={styles.container}>
 
@@ -15,12 +17,9 @@ export default function ModalScreen() {
           style={styles.imagen_perfil}
           />
             <View style={styles.info_colegio}>
-              <Text style={styles.name}>
-                Francisco Porta
-              </Text>
+              <Text style={styles.name}>Francisco Porta</Text>
               <Text style={styles.colegio}>
-                <Image
-                style={styles.img_colegio}
+                <Image style={styles.img_colegio}
                 source={require("../assets/images/ModalScreen/casa.jpg")}/>
                 Colegio Sacachispa
               </Text>
@@ -90,56 +89,61 @@ const styles = StyleSheet.create({
     width: "90%",
     height:"23%",
     borderColor: "#F3F3F6",
+    backgroundColor:"#ffffff",
     borderWidth: 1,
     borderRadius: 16,
+
   },
   imagen_perfil:{
     width: "20%",
     height: "60%",
-    marginTop:"5%"
+    marginTop:"5%",
+    borderRadius:16,
+    marginLeft:"9%"
   },
   name:{
     fontStyle: "normal",
-    fontFamily: 'Poppins',
     fontSize: 16,
     fontWeight: "600",
-    lineHeight: 24,
     letterSpacing: 0.38,
     color: "#333333",
-    marginTop:"15%",
-    marginLeft:"2%"
-  },
-  img_colegio:{
-    width: "10%",
-    height: "100%",
+    marginTop:"10%",
   },
   info_colegio:{
-    width: "60%",
+    //display:"flex",
+    width: "70%",
     marginLeft:"5%",
-    height: "80%",
+    //height: "80%",
+    backgroundColor:"#ffffff",
+    //alignItems: "flex-start",
+    //flexDirection: "row",
+    //alignItems: "center",
+    //justifyContent:"center",
   },
   colegio:{
-    fontFamily: 'Poppins',
     fontStyle: "normal",
     fontWeight: "400",
     fontSize: 16,
-    display: "flex",
-    alignItems: "center",
     color: "#333333",
+    bottom:1
   },
-  //---------------------------------------------------------------
+  img_colegio:{
+    width: 15,
+    height: 15,
+    // backgroundColor: "#b5101e",
+  },
   container_cuenta:{
-    gap: 16,
     width: "90%",
     height: 142,
     marginTop:10,
-    backgroundColor: "#FFFFFF",
+    backgroundColor:"#ffffff",
     borderColor: "#F3F3F6",
     borderWidth: 1,
     borderRadius: 16,
   },
   cuenta_superior:{
     display:"flex",
+    backgroundColor:"#ffffff",
     flexDirection:"row",
     justifyContent: "center",
     alignItems: "center",
@@ -149,12 +153,11 @@ const styles = StyleSheet.create({
     height:"25%"
   },
   mi_cuenta:{
-    fontFamily: "Poppins",
     fontStyle: "normal",
     fontWeight: "500",
     fontSize: 18,
     color: "#888DA6",
-    width:"100%"
+    width:"40%"
   },
   button_contraseña:{
     justifyContent: "center",
@@ -166,7 +169,6 @@ const styles = StyleSheet.create({
 
   },
   text_button:{
-    fontFamily: 'poppins',
     fontStyle: "normal",
     fontWeight: "600",
     fontSize: 14,
@@ -177,11 +179,11 @@ const styles = StyleSheet.create({
     color: "#3D3D3D",
   },
   cuenta_inferior:{
-    marginTop:"5%",
+    backgroundColor:"#ffffff",
+    marginTop:"9%",
     marginLeft:"7%",
   },
   email:{
-    fontFamily: 'serif',
     fontStyle: "normal",
     fontWeight: "400",
     fontSize: 16,
@@ -189,15 +191,13 @@ const styles = StyleSheet.create({
     color: "#333333",
   },
   password:{
-    fontFamily: 'Poppins',
     fontStyle: "normal",
     fontWeight: "400",
     fontSize: 16,
     color: "#888DA6",
   },
-
-  //---------------------------------------------------
   container_buttons:{
+    backgroundColor:"#ffffff",
     marginTop:10,
     width: "90%",
     height: 60,
