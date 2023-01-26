@@ -18,24 +18,25 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
+  Profile: undefined;
   NotFound: undefined;
   HomeScreen: undefined;
   Personality: undefined;
   BottomTabNavigator: undefined;
-  TabOne: undefined;
+  SingUp: undefined;
+  Resultados: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
-  TabOne: undefined;
   HomeScreen: undefined;
-  TabTwo: undefined;
   Personality: undefined;
-  Modal: undefined;
+  Profile: undefined;
   BottomTabNavigator: undefined;
+  SingUp: undefined;
+  Resultados: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =

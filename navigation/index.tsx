@@ -12,22 +12,18 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import {
-  ColorSchemeName,
-  Pressable,
-  TouchableWithoutFeedbackComponent,
-} from "react-native";
+import { ColorSchemeName, Pressable } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
 import Login from "../screens/Login";
 
-import ModalScreen from "../screens/ModalScreen";
+import ModalScreen from "../screens/ProfileScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
+import SingUpScreen from "../screens/SingUpScreen";
 import Personality from "../screens/Personality";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import ResultadosScreen from "../screens/ResultadosScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -70,7 +66,7 @@ function RootNavigator() {
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
-          name="Modal"
+          name="Profile"
           component={ModalScreen}
           options={{ title: "Perfil!" }}
         />
@@ -89,6 +85,24 @@ function RootNavigator() {
           component={Personality}
           options={({ navigation }: RootTabScreenProps<"Personality">) => ({
             title: "Personalidad",
+
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <TabBarIcon name="arrow-left" color={"white"} />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="SingUp"
+          component={SingUpScreen}
+          options={({ navigation }: RootTabScreenProps<"SingUp">) => ({
+            title: "Registrarte",
 
             headerLeft: () => (
               <Pressable
@@ -134,7 +148,7 @@ function BottomTabNavigator() {
 
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("Modal")}
+              onPress={() => navigation.navigate("Profile")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
@@ -151,14 +165,14 @@ function BottomTabNavigator() {
       />
 
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
+        name="Resultados"
+        component={ResultadosScreen}
+        options={({ navigation }: RootTabScreenProps<"Resultados">) => ({
+          title: "Resultados",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("Modal")}
+              onPress={() => navigation.navigate("Profile")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}

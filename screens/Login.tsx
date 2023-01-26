@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { RootStackScreenProps } from "../types";
-import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }: RootStackScreenProps<"Root">) => {
   const [text, onChangeText] = React.useState("Useless Text");
@@ -16,22 +16,17 @@ const Login = ({ navigation }: RootStackScreenProps<"Root">) => {
   const image = {
     uri: "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=600",
   };
-  const inUserFuction = () => {
+  const inUserFuction = async () => {
+    try {
+      const value = true;
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("@storage_Key", jsonValue);
+      const data = await AsyncStorage.getItem("@storage_Key");
+      console.log("leyendo data", data);
+    } catch (error) {
+      console.log(error);
+    }
     navigation.navigate("BottomTabNavigator");
-    // axios
-    //   .post("https://localhost:3001/create/login", {
-    //     email: "francisco@olivero.com",
-    //     password: "olivero",
-    //   })
-    //   .then(function (response) {
-
-    //     console.log(response);
-    //   })
-
-    //   .catch(function (error) {
-    //     alert("aaaasd");
-    //     console.log(error);
-    //   });
   };
 
   return (
@@ -67,15 +62,13 @@ const Login = ({ navigation }: RootStackScreenProps<"Root">) => {
         <Pressable onPress={() => inUserFuction()} style={styles.login_button}>
           <Text style={styles.login_butontext}> Cambiar de pantalla</Text>
         </Pressable>
-
-        {/* <Pressable
-          onPress={(e) => {
-            inUserFuction();
-          }}
+        <Pressable
+          onPress={() => navigation.navigate("SingUp")}
           style={styles.login_button}
         >
-          <Text style={styles.login_butontext}>Entrar a Tov</Text>
-        </Pressable> */}
+          <Text style={styles.login_butontext}> Crear cuenta</Text>
+        </Pressable>
+
         <View style={styles.login_containerhelp}>
           <Text style={styles.login_titlehelp}>¿Necesitas ayuda?</Text>
           <Text style={styles.login_parrafohelp}>

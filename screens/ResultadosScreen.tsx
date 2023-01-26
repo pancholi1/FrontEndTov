@@ -7,7 +7,7 @@ import { Pressable } from "react-native";
 
 export default function TabOneScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<"Resultados">) {
   return (
     <View style={styles.container}>
       <Pressable
