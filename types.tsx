@@ -25,6 +25,7 @@ export type RootStackParamList = {
   BottomTabNavigator: undefined;
   SingUp: undefined;
   Resultados: undefined;
+  Planes: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -37,6 +38,7 @@ export type RootTabParamList = {
   BottomTabNavigator: undefined;
   SingUp: undefined;
   Resultados: undefined;
+  Planes: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
