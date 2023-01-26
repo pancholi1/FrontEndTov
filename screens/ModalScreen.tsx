@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins",
     fontStyle: "normal",
     fontWeight: "500",
-    fontSize: 16,
+    fontSize: 18,
     color: "#888DA6",
     width:"100%"
   },
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     fontFamily: 'serif',
     fontStyle: "normal",
     fontWeight: "400",
-    fontSize: 14,
+    fontSize: 16,
     marginBottom:"3%",
     color: "#333333",
   },
