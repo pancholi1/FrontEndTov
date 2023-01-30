@@ -174,7 +174,6 @@ const styles = StyleSheet.create({
   },
   buttonDetalle: {
     borderRadius: 10,
-    border: "5px solid grey",
     borderColor: "grey",
     borderWidth: 1,
     width: 300,
