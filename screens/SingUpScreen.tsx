@@ -3,23 +3,14 @@ import React from "react";
 
 const SingUpScreen = () => {
 
-    // const [input, setInput] = React.useState({
-    //   name:"",
-    //   apellido:"",
-    //   email:"",
-    //   password:"",
-    //   school:""
-    // });
-    const [name, changeName] = React.useState("");
-    const [apelido, changeApellido] = React.useState("");
-    const [email, changeEmail] = React.useState("");
-    const [password, changePassword] = React.useState("");
-    const [school, changeSchool] = React.useState("");
+    const [input, setInput] = React.useState({
+      name:"",
+      apellido:"",
+      email:"",
+      password:"",
+      school:""
+    });
 
-    // const handleName = (value) => {
-    //   setName(value);
-    //   console.log(value)
-    // }
     const sendInfo = (changeApellido) => {
       console.log(changeApellido)
     }
@@ -34,9 +25,7 @@ const SingUpScreen = () => {
           style={styles.input_nombre}
           placeholder="Nombre Completo"
           placeholderTextColor="#636262"
-          onChangeText={changeName}
-          //onChangeText={(value) => handleName(value)}
-          //value={name}
+          onChangeText={(value) => {setInput({...input, name:value})}}
         />
         </View>
 
@@ -46,7 +35,7 @@ const SingUpScreen = () => {
           placeholder="Apellido"
           style={styles.input_nombre}
           placeholderTextColor="#636262"
-          onChangeText={changeApellido}
+          onChangeText={(value) => {setInput({...input, apellido:value})}}
         />
         </View>
 
@@ -57,7 +46,7 @@ const SingUpScreen = () => {
           style={styles.input_nombre}
           keyboardType="email-address"
           placeholderTextColor="#636262"
-          onChangeText={changeEmail}
+          onChangeText={(value) => {setInput({...input, email:value})}}
         />
         </View>
 
@@ -68,7 +57,7 @@ const SingUpScreen = () => {
           secureTextEntry={true}
           style={styles.input_nombre}
           placeholderTextColor="#636262"
-          onChangeText={changePassword}
+          onChangeText={(value) => {setInput({...input, password:value})}}
         />
         </View>
         
@@ -86,7 +75,7 @@ const SingUpScreen = () => {
           placeholder="Escuela"
           style={styles.input_nombre}
           placeholderTextColor="#636262"
-          onChangeText={changeSchool}
+          onChangeText={(value) => {setInput({...input, school:value})}}
         />
         </View>
 
@@ -113,7 +102,6 @@ const styles = StyleSheet.create({
     flexDirection:"column",
   },
   container_panel:{
-    // alignItems: "center",
     width:"95%",
     height:"95%",
     backgroundColor:"#ffffff",
