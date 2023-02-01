@@ -45,6 +45,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Root">) => {
             style={styles.input}
             placeholder="Juan@gmail.com"
             onChangeText={onChangeText}
+            placeholderTextColor="#636262"
           />
           <TextInput
             secureTextEntry={true}
@@ -53,6 +54,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Root">) => {
             keyboardType="numeric"
             selectionColor="white"
             onChangeText={onChangeNumber}
+            placeholderTextColor="#636262"
           />
 
           <View style={styles.login_container_forgotPassword}>

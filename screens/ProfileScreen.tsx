@@ -113,9 +113,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.38,
     color: "#333333",
     marginTop: "10%",
+    width:"80%"
   },
   info_colegio: {
-    width: "70%",
+    width: "60%",
     marginLeft: "5%",
     backgroundColor: "#ffffff",
   },
@@ -179,6 +180,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     marginTop: "9%",
     marginLeft: "7%",
+    width:"80%"
   },
   email: {
     fontStyle: "normal",
@@ -192,6 +194,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 16,
     color: "#888DA6",
+    // width:"50%"
   },
   container_buttons: {
     backgroundColor: "#ffffff",
