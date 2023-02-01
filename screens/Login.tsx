@@ -10,7 +10,7 @@ import {
 import { RootStackScreenProps } from "../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = ({ navigation }: RootStackScreenProps<"Root">) => {
+const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const [text, onChangeText] = React.useState("Useless Text");
   const [number, onChangeNumber] = React.useState("aSas");
   const image = {

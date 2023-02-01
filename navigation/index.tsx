@@ -31,6 +31,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import PlanesScreen from "../screens/PlanesScreen";
+import MainScreen from "../screens/MainScreen";
 
 export default function Navigation({
   colorScheme,
@@ -54,7 +55,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
-        component={Login}
+        component={MainScreen}
         options={{
           headerShown: false,
         }}
@@ -74,6 +75,7 @@ function RootNavigator() {
       </Stack.Group>
       <Stack.Group>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen
           options={{
             headerShown: false,
@@ -86,7 +88,6 @@ function RootNavigator() {
           component={Personality}
           options={({ navigation }: RootTabScreenProps<"Personality">) => ({
             title: "Personalidad",
-
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}
