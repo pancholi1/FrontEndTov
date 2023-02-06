@@ -29,6 +29,7 @@ export type RootStackParamList = {
   MainScreen: undefined;
   Login: undefined;
   Calendar: undefined;
+  Psicotecnico: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

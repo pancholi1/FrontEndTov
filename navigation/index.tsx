@@ -33,6 +33,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import PlanesScreen from "../screens/PlanesScreen";
 import MainScreen from "../screens/MainScreen";
 import CalendarInterviewScreen from "../screens/CalendarInterviewScreen";
+import { Psicotecnico } from "../screens/Psicotecnico";
 
 export default function Navigation({
   colorScheme,
@@ -77,6 +78,7 @@ function RootNavigator() {
       <Stack.Group>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Psicotecnico" component={Psicotecnico} />
         <Stack.Screen
           options={{
             headerShown: false,
