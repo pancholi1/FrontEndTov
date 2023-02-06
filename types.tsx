@@ -28,6 +28,7 @@ export type RootStackParamList = {
   Planes: undefined;
   MainScreen: undefined;
   Login: undefined;
+  Psicotecnico: undefined;s
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

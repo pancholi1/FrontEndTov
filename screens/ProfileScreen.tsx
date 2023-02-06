@@ -2,6 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { Platform, Pressable, StyleSheet } from "react-native";
 import { Image } from "react-native";
 import { Text, View } from "../components/Themed";
+import { AntDesign } from '@expo/vector-icons'; 
+
 
 export default function ModalScreen() {
   return (
@@ -38,7 +40,7 @@ export default function ModalScreen() {
           </View>
         </View>
 
-        <View style={styles.container_buttons}>
+        {/* <View style={styles.container_buttons}> */}
           <Pressable style={styles.button_terminos}>
             <Image
               source={require("../assets/images/ModalScreen/terminos_condiciones.jpg")}
@@ -47,26 +49,28 @@ export default function ModalScreen() {
             <Text style={styles.text_button_terminos}>
               Términos y Condiciones
             </Text>
-            <Image
+            <AntDesign name="right" size={26} color="black" />
+            {/* <Image
               source={require("../assets/images/ModalScreen/terminos_back.jpg")}
               style={styles.back_terminos}
-            />
+            /> */}
           </Pressable>
-        </View>
+        {/* </View> */}
 
-        <View style={styles.container_button_privacidad}>
-          <Pressable style={styles.button_terminos}>
+        {/* <View style={styles.container_button_privacidad}> */}
+          <Pressable style={styles.button_privacidad}>
             <Image
               source={require("../assets/images/ModalScreen/img_privacidad.jpg")}
               style={styles.img_terminos}
             />
             <Text style={styles.text_button_terminos}>Privacidad</Text>
-            <Image
+            {/* <Image
               source={require("../assets/images/ModalScreen/terminos_back.jpg")}
               style={styles.back_terminos}
-            />
+            /> */}
+            <AntDesign name="right" size={26} color="black" />
           </Pressable>
-        </View>
+        {/* </View> */}
 
         {/* <EditScreenInfo path="/screens/ModalScreen.tsx" />  */}
 
@@ -79,12 +83,12 @@ export default function ModalScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#F5F5F9",
+    backgroundColor: "black",
     flex: 1,
   },
   container_panel: {
     alignItems: "center",
-    backgroundColor: "#F5F5F9",
+    backgroundColor: "black",
     width: "100%",
     height: "65%",
     top: 10,
@@ -194,56 +198,54 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 16,
     color: "#888DA6",
-    // width:"50%"
   },
   container_buttons: {
     backgroundColor: "#ffffff",
     marginTop: 10,
     width: "90%",
-    height: 60,
+    
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
-
   button_terminos: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
     marginTop: "3%",
-    width: "100%",
+    height: 60,
+    width: "90%",
     backgroundColor: "#FFFFFF",
     borderStyle: "solid",
     borderColor: "#F3F3F6",
-    order: 0,
-    flexGrow: 0,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   img_terminos: {
     width: "6%",
     height: 24,
-    marginLeft: "4%",
+    paddingLeft: "4%",
     borderRadius: 16,
+    marginLeft:"7%",
   },
   text_button_terminos: {
-    width: "70%",
+    width: "75%",
     height: 19,
     fontStyle: "normal",
     fontWeight: "400",
     fontSize: 16,
-    marginLeft: "3%",
+    paddingLeft: "3%",
     marginBottom: "1%",
     color: "#4C4F63",
   },
-  back_terminos: {
-    width: "10%",
-    height: 35.48,
-    borderRadius: 16,
-  },
-  container_button_privacidad: {
-    width: "90%",
+  button_privacidad: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: "1%",
     height: 60,
-    marginTop: 3,
+    width: "90%",
     backgroundColor: "#FFFFFF",
-    borderBottomRightRadius: 16,
+    borderStyle: "solid",
+    borderColor: "#F3F3F6",
     borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
   },
 });

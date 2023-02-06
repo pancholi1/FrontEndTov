@@ -24,7 +24,7 @@ const SingUpScreen = () => {
           <TextInput
           style={styles.input_nombre}
           placeholder="Nombre Completo"
-          placeholderTextColor="#636262"
+          placeholderTextColor="white"
           onChangeText={(value) => {setInput({...input, name:value})}}
         />
         </View>
@@ -34,7 +34,7 @@ const SingUpScreen = () => {
           <TextInput
           placeholder="Apellido"
           style={styles.input_nombre}
-          placeholderTextColor="#636262"
+          placeholderTextColor="white"
           onChangeText={(value) => {setInput({...input, apellido:value})}}
         />
         </View>
@@ -45,7 +45,7 @@ const SingUpScreen = () => {
           placeholder="Correo Electronico"
           style={styles.input_nombre}
           keyboardType="email-address"
-          placeholderTextColor="#636262"
+          placeholderTextColor="white"
           onChangeText={(value) => {setInput({...input, email:value})}}
         />
         </View>
@@ -56,7 +56,7 @@ const SingUpScreen = () => {
           placeholder="Contraseña"
           secureTextEntry={true}
           style={styles.input_nombre}
-          placeholderTextColor="#636262"
+          placeholderTextColor="white"
           onChangeText={(value) => {setInput({...input, password:value})}}
         />
         </View>
@@ -74,7 +74,7 @@ const SingUpScreen = () => {
           <TextInput
           placeholder="Escuela"
           style={styles.input_nombre}
-          placeholderTextColor="#636262"
+          placeholderTextColor="white"
           onChangeText={(value) => {setInput({...input, school:value})}}
         />
         </View>
@@ -87,6 +87,7 @@ const SingUpScreen = () => {
 
           <Text style={styles.text_bottom}>Ya está registrado?</Text>
 
+
       </ScrollView>
     </View>
   );
@@ -97,23 +98,24 @@ export default SingUpScreen;
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor: "#F5F5F9",
+    backgroundColor: "black",
     alignItems: "center",
     flexDirection:"column",
   },
   container_panel:{
     width:"95%",
     height:"95%",
-    backgroundColor:"#ffffff",
+    backgroundColor:"black",
     marginTop: 20,
     borderRadius:20,
   },
   title:{
     fontWeight: "700",
     fontSize: 30,
-    backgroundColor:"#ffffff",
+    backgroundColor:"black",
     marginTop:15,
-    marginLeft:"29%"
+    marginLeft:"29%",
+    color:"white",
    },
    container_input_name:{
     width:"90%",
@@ -124,6 +126,7 @@ const styles = StyleSheet.create({
     fontWeight:"600",
     fontSize:20,
     marginBottom:10,
+    color:"white",
    },
    input_nombre:{
     borderColor: "#edebeb",
