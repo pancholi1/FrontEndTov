@@ -54,13 +54,13 @@ export default PlanesCard;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "white",
     width: "90%",
+    height: 500,
     borderRadius: 25,
     borderColor: "grey",
     borderWidth: 2,
-    marginBottom: 15
+    marginBottom: 15,
   },
   card: {
     flex: 0,
