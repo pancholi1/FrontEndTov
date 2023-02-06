@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { RootStackScreenProps } from "../types";
 
-const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
-
+const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
   return (
     <View style={styles.container}>
       <View style={styles.img_logo_container}>
@@ -24,16 +17,19 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
         </View>
         <View></View>
       </View>
-        <View style={styles.login_button_container}>
-      <Pressable onPress={() => navigation.navigate("Login")} style={styles.login_button}>
-        <Text style={styles.login_butontext}> Ingresa a TOV </Text>
-      </Pressable>
-      <Pressable
-        onPress={() => navigation.navigate("SingUp")}
-        style={styles.login_button}
-      >
-        <Text style={styles.login_butontext}> Registrate </Text>
-      </Pressable>
+      <View style={styles.login_button_container}>
+        <Pressable
+          onPress={() => navigation.navigate("Login")}
+          style={styles.login_button}
+        >
+          <Text style={styles.login_butontext}> Ingresa a TOV </Text>
+        </Pressable>
+        <Pressable
+          onPress={() => navigation.navigate("SingUp")}
+          style={styles.login_button}
+        >
+          <Text style={styles.login_butontext}> Registrate </Text>
+        </Pressable>
       </View>
       <View style={styles.login_containerhelp}>
         <Text style={styles.login_parrafohelp}>
@@ -88,9 +84,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     fontWeight: "bold",
-
   },
-  login_button_container:{
+  login_button_container: {
     alignItems: "center",
   },
   login_containerhelp: {

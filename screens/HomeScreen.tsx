@@ -58,23 +58,28 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           />
         </View>
       </View>
-      <View style={styles.container_bloquesGray}>
-        <View style={styles.container_bloquesImg}>
-          <MaterialIcons
-            name="phone-in-talk"
-            size={40}
-            style={styles.image}
-            color="black"
-          />
+      <Pressable
+        onPress={() => navigation.navigate("Calendar")}
+        style={{ width: "100%" }}
+      >
+        <View style={styles.container_bloquesGray}>
+          <View style={styles.container_bloquesImg}>
+            <MaterialIcons
+              name="phone-in-talk"
+              size={40}
+              style={styles.image}
+              color="black"
+            />
+          </View>
+          <View style={styles.container_bloquesText}>
+            <Text style={styles.bloques_text}> Entrevista Virtual</Text>
+            <Image
+              style={styles.bloques_image}
+              source={require("../assets/images/HomeScreen/checkGray.svg")}
+            />
+          </View>
         </View>
-        <View style={styles.container_bloquesText}>
-          <Text style={styles.bloques_text}> Entrevista Virtual</Text>
-          <Image
-            style={styles.bloques_image}
-            source={require("../assets/images/HomeScreen/checkGray.svg")}
-          />
-        </View>
-      </View>
+      </Pressable>
     </View>
   );
 };

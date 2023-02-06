@@ -1,20 +1,37 @@
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import PlanesCard from "../components/PlanesCard";
-
+import Carousel from "react-native-anchor-carousel";
+const { width: windowWidth } = Dimensions.get("window");
 const PlanesScreen = () => {
+  const carouselRef = React.useRef(null);
+  const renderItem = ({ item, index }) => {
+    return (
+      <PlanesCard
+        headerText={"Seguro de terceros"}
+        pricePerMonth={"$15.000"}
+        totalPrice={"$1.200.500"}
+      />
+    );
+  };
   return (
     <ScrollView>
       <View style={styles.container}>
-        <PlanesCard
-          headerText={"Contra todo riesgo"}
-          pricePerMonth={"$9.488"}
-          totalPrice={"$1.596.000"}
-        />
-        <PlanesCard
-          headerText={"Seguro de terceros"}
-          pricePerMonth={"$15.000"}
-          totalPrice={"$1.200.500"}
+        <Carousel
+          ref={carouselRef}
+          data={Array(3).fill(0)}
+          renderItem={renderItem}
+          style={styles.carousel}
+          itemWidth={windowWidth * 0.8}
+          containerWidth={windowWidth}
+          separatorWidth={0}
         />
       </View>
     </ScrollView>
@@ -31,6 +48,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    backgroundColor: "gray",
+    backgroundColor: "black",
+  },
+  carousel: {
+    flexGrow: 0,
+    height: "100%",
   },
 });
