@@ -31,7 +31,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.image} source={image} resizeMode="cover">
+      
         <Text style={styles.login_title}>TovLogo</Text>
         <View>
           <Text style={styles.login_subtitle}>¡Bienvenido a Tov!</Text>
@@ -64,12 +64,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
         <Pressable onPress={() => inUserFuction()} style={styles.login_button}>
           <Text style={styles.login_butontext}> Cambiar de pantalla</Text>
         </Pressable>
-        <Pressable
-          onPress={() => navigation.navigate("SingUp")}
-          style={styles.login_button}
-        >
-          <Text style={styles.login_butontext}> Crear cuenta</Text>
-        </Pressable>
+
 
         <View style={styles.login_containerhelp}>
           <Text style={styles.login_titlehelp}>¿Necesitas ayuda?</Text>
@@ -78,7 +73,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
             +52 55 4169 1994.
           </Text>
         </View>
-      </ImageBackground>
+
     </View>
   );
 };
@@ -86,24 +81,24 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
+    backgroundColor:"black"
   },
   image: {
     flex: 1,
-    alignItems: "center",
   },
   login_title: {
     marginTop: 30,
-
     fontWeight: "800",
     fontSize: 38,
-    color: "#ca8941",
+    color: "white",
   },
   login_subtitle: {
     textAlign: "center",
 
     fontWeight: "700",
     fontSize: 32,
-    color: "#333333",
+    color: "white",
     marginTop: 30,
   },
   login_introduction: {
@@ -135,12 +130,12 @@ const styles = StyleSheet.create({
 
   login_button: {
     marginTop: 35,
-    backgroundColor: "#ca8941",
+    backgroundColor: "#2800F9",
     width: "90%",
     height: 54,
     alignItems: "center",
     justifyContent: "center",
-    borderBottomColor: "#b16e23",
+    borderBottomColor: "#2800F9",
     borderBottomWidth: 4,
     borderRadius: 15,
   },

@@ -32,6 +32,8 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import PlanesScreen from "../screens/PlanesScreen";
 import MainScreen from "../screens/MainScreen";
+import CalendarInterviewScreen from "../screens/CalendarInterviewScreen";
+import { Psicotecnico } from "../screens/Psicotecnico";
 
 export default function Navigation({
   colorScheme,
@@ -76,6 +78,7 @@ function RootNavigator() {
       <Stack.Group>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Psicotecnico" component={Psicotecnico} />
         <Stack.Screen
           options={{
             headerShown: false,
@@ -88,6 +91,23 @@ function RootNavigator() {
           component={Personality}
           options={({ navigation }: RootTabScreenProps<"Personality">) => ({
             title: "Personalidad",
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <TabBarIcon name="arrow-left" color={"white"} />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Calendar"
+          component={CalendarInterviewScreen}
+          options={({ navigation }: RootTabScreenProps<"Calendar">) => ({
+            title: "Calendario de Entrevista",
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}

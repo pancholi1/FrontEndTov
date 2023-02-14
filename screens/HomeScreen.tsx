@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import { RootStackScreenProps } from "../types";
 import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
@@ -6,75 +13,68 @@ import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={() => navigation.navigate("Personality")}
-        style={{ width: "100%" }}
-      >
-        <View style={styles.container_bloques}>
-          <View style={styles.container_bloquesImg}>
-            <FontAwesome5
-              name="school"
-              size={40}
-              style={styles.image}
-              color="black"
-            />
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>Hola</Text>
+        <Text style={styles.name}>Francisco Olivero</Text>
 
-            {/* <Image
-              style={styles.image}
-              source={require("../assets/images/HomeScreen/school.svg")}
-            /> */}
-          </View>
-
-          <View style={styles.container_bloquesText}>
-            <Text style={styles.bloques_text}> Examen de Personalidad</Text>
-
-            <Image
-              style={styles.bloques_image}
-              source={require("../assets/images/HomeScreen/check.svg")}
-            />
-          </View>
+        <View style={styles.container_progreso}>
+          <Text style={styles.title_progreso}>Progreso</Text>
+          <Text style={styles.text_progreso}>
+            Realiza el 100% de los test para obtener el resultado final
+          </Text>
+          <Text style={styles.title_progreso}>0%</Text>
+          <Text style={styles.text_progreso}>Aca va la barra con el %</Text>
         </View>
-      </Pressable>
 
-      <View style={styles.container_bloques}>
-        <View style={styles.container_bloquesImg}>
-          <FontAwesome5
-            name="brain"
-            color="black"
-            size={40}
-            style={styles.image}
-          />
+        <Text style={styles.text_test}>Test</Text>
 
-          {/* <Image
-            style={styles.image}
-            source={require("../assets/images/HomeScreen/schoolGrey.svg")}
-          /> */}
-        </View>
-        <View style={styles.container_bloquesText}>
-          <Text style={styles.bloques_text}> Psicotécnicos</Text>
+        <View style={styles.test_personalidad}>
           <Image
-            style={styles.bloques_image}
-            source={require("../assets/images/HomeScreen/checkGray.svg")}
+            source={require("../assets/images/adaptive-icon.png")}
+            style={styles.img_test}
           />
+          <View style={styles.contenedor_text}>
+            <Pressable onPress={() => navigation.navigate("Personality")}>
+              <Text style={styles.personalidad_title}>
+                Test de Personalidad
+              </Text>
+            </Pressable>
+            <Text style={styles.text_personalidad}>
+              Toma menos de 12 minutos.
+            </Text>
+            <Text style={styles.text_personalidad2}>Responde honestamente</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.container_bloquesGray}>
-        <View style={styles.container_bloquesImg}>
-          <MaterialIcons
-            name="phone-in-talk"
-            size={40}
-            style={styles.image}
-            color="black"
-          />
-        </View>
-        <View style={styles.container_bloquesText}>
-          <Text style={styles.bloques_text}> Entrevista Virtual</Text>
+
+        <View style={styles.test_personalidad}>
           <Image
-            style={styles.bloques_image}
-            source={require("../assets/images/HomeScreen/checkGray.svg")}
+            source={require("../assets/images/adaptive-icon.png")}
+            style={styles.img_test}
           />
+          <View style={styles.contenedor_text}>
+            <Pressable onPress={() => navigation.navigate("Psicotecnico")}>
+              <Text style={styles.personalidad_title}>Test psicotecnico</Text>
+            </Pressable>
+            <Text style={styles.text_psicotecnico}>
+              Comprueba por ti mismo las aptitudes que tienes para resolver este
+              tipo de pruebas
+            </Text>
+          </View>
         </View>
-      </View>
+
+        <View style={styles.test_personalidad}>
+          <Image
+            source={require("../assets/images/adaptive-icon.png")}
+            style={styles.img_test}
+          />
+          <View style={styles.contenedor_text}>
+            <Text style={styles.personalidad_title}>Entrevista</Text>
+            <Text style={styles.text_entrevista}>
+              Agenda una entrevista con un profesional capacitado
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -84,55 +84,97 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
+    flexDirection: "column",
+    backgroundColor: "black",
+    paddingLeft: "3%",
+    paddingRight: "3%",
   },
-  container_bloquesGray: {
-    margin: 3,
-    marginTop: 18,
-    padding: 5,
-    width: "95%",
-    height: 85,
-    backgroundColor: "#B0B3CB",
+  title: {
+    color: "white",
+    fontSize: 36,
+    fontWeight: "700",
+    marginTop: 20,
+  },
+  name: {
+    color: "white",
+    fontSize: 36,
+    fontWeight: "700",
+    marginBottom: 20,
+  },
+  container_progreso: {
+    backgroundColor: "#333333",
     borderRadius: 15,
-    borderColor: "none",
-    borderWidth: 1,
+    padding: 10,
+    marginTop: 5,
+  },
+  title_progreso: {
+    color: "white",
+    marginLeft: 5,
+    fontWeight: "700",
+    fontSize: 20,
+  },
+  text_progreso: {
+    color: "#C1C1C1",
+    marginLeft: 5,
+    fontSize: 12,
+    marginBottom: 15,
+  },
+  text_test: {
+    color: "white",
+    marginLeft: 5,
+    fontWeight: "700",
+    fontSize: 20,
+    marginTop: 15,
+  },
+  test_personalidad: {
+    backgroundColor: "#333333",
+    borderRadius: 15,
     display: "flex",
     flexDirection: "row",
+    marginTop: 20,
+    fontWeight: "500",
   },
-  container_bloques: {
-    margin: 3,
-    marginTop: 18,
-    padding: 5,
-    width: "95%",
-    height: 85,
-    backgroundColor: "snow",
-    borderRadius: 15,
-    borderColor: "none",
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "row",
-  },
-  image: { height: 60, width: 65, marginTop: 7, marginLeft: 5 },
-  container_bloquesImg: {
-    display: "flex",
-    alignItems: "center",
-    marginTop: 3,
-    justifyContent: "center",
+  img_test: {
+    borderRadius: 7,
     width: "25%",
+    height: 90,
   },
-  container_bloquesText: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+  personalidad_title: {
+    fontSize: 14,
+    color: "white",
+    marginTop: 5,
+    marginLeft: 10,
+    marginBottom: 5,
+    fontWeight: "500",
+  },
+  text_personalidad: {
+    fontSize: 14,
+    color: "white",
+    marginTop: 5,
+    marginLeft: 10,
+  },
+  text_personalidad2: {
+    fontSize: 14,
+    color: "white",
+    marginBottom: 5,
+    marginLeft: 10,
+  },
+  contenedor_text: {
+    flexDirection: "column",
+  },
+  text_psicotecnico: {
+    fontSize: 14,
+    color: "white",
+    marginBottom: 5,
+    marginLeft: 10,
+    width: "40%",
+    paddingBottom: "1%",
+  },
+  text_entrevista: {
+    fontSize: 14,
+    color: "white",
+    marginBottom: 5,
+    marginLeft: 10,
     width: "70%",
-    marginTop: 10,
   },
-  bloques_text: {
-    fontSize: 16,
-    fontWeight: "600",
-    textAlign: "left",
-  },
-  bloques_image: { height: 20, width: 25 },
 });
