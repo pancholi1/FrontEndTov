@@ -2,21 +2,24 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { RootStackScreenProps } from "../types";
 
-const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
+const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
   return (
     <View style={styles.container}>
       <View style={styles.img_logo_container}>
         <Image
           style={styles.img_logo}
-          source={require("../assets/images/Login/logoInicio.webp")}
+          source={require("../assets/images/Login/loginInicio.png")}
         ></Image>
-        <View style={styles.login_subtitle_container}>
-          <Text style={styles.login_subtitle}>
-            Test de orientacion vocacional
-          </Text>
-        </View>
-        <View></View>
       </View>
+      <View style={styles.login_container_text}>
+        <Text style={styles.login_subtitle_text}>TEST</Text>
+      </View>
+      <View style={styles.login_container_ov}>
+        <Text style={styles.login_subtitle_orientacion}>ORIENTACIÓN</Text>
+
+        <Text style={styles.login_subtitle_vocacional}>VOCACIONAL</Text>
+      </View>
+
       <View style={styles.login_button_container}>
         <Pressable
           onPress={() => navigation.navigate("Login")}
@@ -28,12 +31,16 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
           onPress={() => navigation.navigate("SingUp")}
           style={styles.login_button}
         >
-          <Text style={styles.login_butontext}> Registrate </Text>
+          <Text style={styles.login_butontext}> Registrarte </Text>
         </Pressable>
       </View>
+
       <View style={styles.login_containerhelp}>
         <Text style={styles.login_parrafohelp}>
-          By continuing you agree to the Terms and Conditions
+          By continuing you agree to the
+        </Text>
+        <Text style={styles.login_parrafohelp_finish}>
+          terms and Conditions
         </Text>
       </View>
     </View>
@@ -43,62 +50,79 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
-    marginTop: 50,
+    backgroundColor: "#130C34",
+    marginTop: 5,
   },
   image: {
     flex: 1,
   },
   img_logo: {
-    width: 300,
-    height: 300,
+    width: 404,
+    height: 450,
   },
   img_logo_container: {
     paddingTop: 20,
     alignItems: "center",
   },
-
-  login_subtitle: {
-    fontWeight: "900",
-    fontSize: 35,
-    marginTop: 30,
-    marginBottom: 30,
-    color: "white",
+  login_container_text: {
+    alignItems: "center",
   },
 
-  login_subtitle_container: {
-    width: 300,
+  login_subtitle_text: {
+    fontSize: 60,
+    color: "#DED3F4",
+    fontWeight: "bold",
+  },
+  login_container_ov: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  login_subtitle_orientacion: {
+    color: "#06D6DD",
+    fontSize: 33,
+  },
+  login_subtitle_vocacional: {
+    color: "#06D6DD",
+    fontSize: 30,
   },
   login_button: {
     marginTop: 35,
-    backgroundColor: "rgb(30, 144, 255)",
-    width: "90%",
+    backgroundColor: "#282056",
+    width: "75%",
     height: 54,
     alignItems: "center",
     justifyContent: "center",
-    borderBottomColor: "rgb(30, 144, 255)",
-    borderBottomWidth: 4,
-    borderRadius: 35,
+    borderBottomColor: "#B39AE7",
+    borderTopColor: "#B39AE7",
+    borderLeftColor: "#7B68A9",
+    borderRightColor: "#7B68A9",
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    borderLeftWidth: 0.3,
+    borderRightWidth: 0.5,
+    borderRadius: 15,
   },
   login_butontext: {
     fontSize: 20,
-    color: "white",
-    fontWeight: "bold",
+    color: "#DED3F4",
+    fontStyle: "normal",
   },
   login_button_container: {
     alignItems: "center",
   },
   login_containerhelp: {
-    marginTop: 20,
-    height: 90,
-    alignItems: "center",
+    marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "center",
   },
   login_parrafohelp: {
-    padding: 5,
-    color: "white",
-
+    color: "#282056",
     marginTop: 8,
-    textAlign: "center",
+    margin: 5,
+  },
+  login_parrafohelp_finish: {
+    color: "#06D6DD",
+    marginTop: 8,
   },
 });
 
