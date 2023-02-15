@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import TermsAndConditions from "../components/TermsAndConditions";
 import { RootStackScreenProps } from "../types";
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
@@ -16,7 +17,6 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
       </View>
       <View style={styles.login_container_ov}>
         <Text style={styles.login_subtitle_orientacion}>ORIENTACIÓN</Text>
-
         <Text style={styles.login_subtitle_vocacional}>VOCACIONAL</Text>
       </View>
 
@@ -34,15 +34,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
           <Text style={styles.login_butontext}> Registrarte </Text>
         </Pressable>
       </View>
-
-      <View style={styles.login_containerhelp}>
-        <Text style={styles.login_parrafohelp}>
-          By continuing you agree to the
-        </Text>
-        <Text style={styles.login_parrafohelp_finish}>
-          terms and Conditions
-        </Text>
-      </View>
+     <TermsAndConditions />
     </View>
   );
 };
@@ -71,7 +63,6 @@ const styles = StyleSheet.create({
   login_subtitle_text: {
     fontSize: 60,
     color: "#DED3F4",
-    fontWeight: "bold",
   },
   login_container_ov: {
     justifyContent: "center",
@@ -92,14 +83,8 @@ const styles = StyleSheet.create({
     height: 54,
     alignItems: "center",
     justifyContent: "center",
-    borderBottomColor: "#B39AE7",
-    borderTopColor: "#B39AE7",
-    borderLeftColor: "#7B68A9",
-    borderRightColor: "#7B68A9",
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    borderLeftWidth: 0.3,
-    borderRightWidth: 0.5,
+    borderColor: "#7B68A9",
+    borderWidth: 1,
     borderRadius: 15,
   },
   login_butontext: {
@@ -116,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   login_parrafohelp: {
-    color: "#282056",
+    color: "#5f52ab",
     marginTop: 8,
     margin: 5,
   },
