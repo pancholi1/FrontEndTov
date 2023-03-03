@@ -188,7 +188,7 @@ function BottomTabNavigator() {
 
       <BottomTab.Screen
         name="Resultados"
-        component={ResultadosScreen}
+        component={Psicotecnico}
         options={({ navigation }: RootTabScreenProps<"Resultados">) => ({
           title: "Resultados",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,

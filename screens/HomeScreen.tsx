@@ -68,7 +68,9 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
             style={styles.img_test}
           />
           <View style={styles.contenedor_text}>
-            <Text style={styles.personalidad_title}>Entrevista</Text>
+            <Pressable onPress={() => navigation.navigate("Calendar")}>
+              <Text style={styles.personalidad_title}>Entrevista</Text>
+            </Pressable>
             <Text style={styles.text_entrevista}>
               Agenda una entrevista con un profesional capacitado
             </Text>
