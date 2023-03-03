@@ -124,7 +124,7 @@ function RootNavigator() {
           name="SingUp"
           component={SingUpScreen}
           options={({ navigation }: RootTabScreenProps<"SingUp">) => ({
-            title: "Registrarte",
+            title: "",
 
             headerLeft: () => (
               <Pressable
