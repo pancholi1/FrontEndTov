@@ -2,6 +2,8 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import TermsAndConditions from "../components/TermsAndConditions";
 import { RootStackScreenProps } from "../types";
+import { LinearGradient } from "expo-linear-gradient";
+import { gradients } from "../constants/Gradients";
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
   return (
@@ -25,16 +27,42 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
           onPress={() => navigation.navigate("Login")}
           style={styles.login_button}
         >
-          <Text style={styles.login_butontext}> Ingresa a TOV </Text>
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{
+              borderRadius: 15,
+              width: "100%",
+              height: 54,
+              alignItems: "center",
+              justifyContent: "center",
+              borderColor: "#7B68A9",
+              borderWidth: 1,
+            }}
+          >
+            <Text style={styles.login_butontext}> Ingresa a TOV </Text>
+          </LinearGradient>
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate("SingUp")}
           style={styles.login_button}
         >
-          <Text style={styles.login_butontext}> Registrarte </Text>
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{
+              borderRadius: 15,
+              width: "100%",
+              height: 54,
+              alignItems: "center",
+              justifyContent: "center",
+              borderColor: "#7B68A9",
+              borderWidth: 1,
+            }}
+          >
+            <Text style={styles.login_butontext}> Registrarte </Text>
+          </LinearGradient>
         </Pressable>
       </View>
-     <TermsAndConditions />
+      <TermsAndConditions />
     </View>
   );
 };
@@ -43,14 +71,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#130C34",
-    marginTop: 5,
   },
   image: {
     flex: 1,
   },
   img_logo: {
-    width: 404,
-    height: 450,
+    width: 380,
+    height: 400,
   },
   img_logo_container: {
     paddingTop: 20,
@@ -58,6 +85,7 @@ const styles = StyleSheet.create({
   },
   login_container_text: {
     alignItems: "center",
+    width: "100%",
   },
 
   login_subtitle_text: {
@@ -77,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   login_button: {
-    marginTop: 35,
+    marginTop: 25,
     backgroundColor: "#282056",
     width: "75%",
     height: 54,
@@ -95,20 +123,7 @@ const styles = StyleSheet.create({
   login_button_container: {
     alignItems: "center",
   },
-  login_containerhelp: {
-    marginTop: 10,
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  login_parrafohelp: {
-    color: "#5f52ab",
-    marginTop: 8,
-    margin: 5,
-  },
-  login_parrafohelp_finish: {
-    color: "#06D6DD",
-    marginTop: 8,
-  },
+
 });
 
 export default Mainscreen;
