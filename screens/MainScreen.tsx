@@ -3,8 +3,7 @@ import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import TermsAndConditions from "../components/TermsAndConditions";
 import { RootStackScreenProps } from "../types";
 import { LinearGradient } from "expo-linear-gradient";
-
-const gradientColorsInput = ["#282056", "#B39AE7"];
+import { gradients } from "../constants/Gradients";
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
   return (
@@ -29,7 +28,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
           style={styles.login_button}
         >
           <LinearGradient
-            colors={gradientColorsInput}
+            colors={gradients.inputs}
             style={{
               borderRadius: 15,
               width: "100%",
@@ -48,7 +47,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
           style={styles.login_button}
         >
           <LinearGradient
-            colors={gradientColorsInput}
+            colors={gradients.inputs}
             style={{
               borderRadius: 15,
               width: "100%",
