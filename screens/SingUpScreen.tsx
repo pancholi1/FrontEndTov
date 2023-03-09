@@ -11,10 +11,14 @@ import {
 import PopUp from "../components/PopUp";
 import TermsAndConditions from "../components/TermsAndConditions";
 import { RootStackScreenProps } from "../types";
+import { LinearGradient } from "expo-linear-gradient";
+import { gradients } from "../constants/Gradients";
+import { patterns } from "../constants/Patterns";
 
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isFormDisabled, setIsFormDisabled] = useState(true);
+  const [errors, setErrors] = useState({ password: false, date: false });
 
   const [input, setInput] = React.useState({
     name: "",
@@ -22,6 +26,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     email: "",
     password: "",
     school: "",
+    date: "",
   });
 
   const sendInfo = () => {
@@ -36,13 +41,34 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     navigation.navigate("Login");
   };
 
+  const onDateChange = (value) => {
+    setInput({ ...input, date: value });
+
+    if (patterns.date.test(value)) {
+      setErrors({ ...errors, date: false });
+    } else {
+      setErrors({ ...errors, date: true });
+    }
+  };
+
+  const onPasswordChange = (value) => {
+    setInput({ ...input, password: value });
+
+    input.password.length < 6
+      ? setErrors({ ...errors, password: true })
+      : setErrors({ ...errors, password: false });
+  };
+
   useEffect(() => {
     const isDisabled =
       !input.name ||
       !input.apellido ||
       !input.email ||
       !input.password ||
-      !input.school;
+      !input.school ||
+      !input.date ||
+      errors.password ||
+      errors.date;
 
     isFormDisabled !== isDisabled && setIsFormDisabled(isDisabled);
   }, [input]);
@@ -57,76 +83,115 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       <ScrollView style={styles.container_panel}>
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Nombre</Text>
-          <TextInput
-            style={styles.input_nombre}
-            placeholder="Nombre"
-            placeholderTextColor="white"
-            onChangeText={(value) => {
-              setInput({ ...input, name: value });
-            }}
-          />
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{ borderRadius: 15 }}
+          >
+            <TextInput
+              style={styles.input_nombre}
+              placeholder="Nombre"
+              cursorColor={"white"}
+              placeholderTextColor="#B39AE7"
+              onChangeText={(value) => {
+                setInput({ ...input, name: value });
+              }}
+            />
+          </LinearGradient>
         </View>
 
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Apellido</Text>
-          <TextInput
-            placeholder="Apellido"
-            style={styles.input_nombre}
-            placeholderTextColor="white"
-            onChangeText={(value) => {
-              setInput({ ...input, apellido: value });
-            }}
-          />
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{ borderRadius: 15 }}
+          >
+            <TextInput
+              placeholder="Apellido"
+              style={styles.input_nombre}
+              placeholderTextColor="#B39AE7"
+              onChangeText={(value) => {
+                setInput({ ...input, apellido: value });
+              }}
+            />
+          </LinearGradient>
         </View>
 
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Email</Text>
-          <TextInput
-            placeholder="Email"
-            style={styles.input_nombre}
-            keyboardType="email-address"
-            placeholderTextColor="white"
-            onChangeText={(value) => {
-              setInput({ ...input, email: value });
-            }}
-          />
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{ borderRadius: 15 }}
+          >
+            <TextInput
+              placeholder="Email"
+              style={styles.input_nombre}
+              keyboardType="email-address"
+              placeholderTextColor="#B39AE7"
+              onChangeText={(value) => {
+                setInput({ ...input, email: value });
+              }}
+            />
+          </LinearGradient>
         </View>
 
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Contraseña</Text>
-          <TextInput
-            placeholder="Contraseña"
-            secureTextEntry={true}
-            style={styles.input_nombre}
-            placeholderTextColor="#B39AE7"
-            onChangeText={(value) => {
-              setInput({ ...input, password: value });
-            }}
-          />
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{ borderRadius: 15 }}
+          >
+            <TextInput
+              placeholder="Contraseña"
+              secureTextEntry={true}
+              style={styles.input_nombre}
+              placeholderTextColor="#B39AE7"
+              onChangeText={onPasswordChange}
+            />
+          </LinearGradient>
+          {errors.password && (
+            <Text style={styles.error}>
+              La contraseña tiene que tener al menos 6 caracteres
+            </Text>
+          )}
         </View>
 
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Fecha de Nacimiento</Text>
-          <TextInput
-            placeholder="Fecha de Nacimiento"
-            keyboardType="numeric"
-            placeholderTextColor="#B39AE7"
-            style={styles.input_nombre}
-          />
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{ borderRadius: 15 }}
+          >
+            <TextInput
+              placeholder="Fecha de Nacimiento"
+              secureTextEntry={false}
+              placeholderTextColor="#B39AE7"
+              style={styles.input_nombre}
+              onChangeText={onDateChange}
+            />
+          </LinearGradient>
+          {errors.date && (
+            <Text style={styles.error}>
+              La fecha ingresada tiene que tener el formato YYYY-MM-DD
+            </Text>
+          )}
         </View>
 
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Escuela</Text>
-          <TextInput
-            placeholder="Escuela"
-            style={styles.input_nombre}
-            placeholderTextColor="white"
-            onChangeText={(value) => {
-              setInput({ ...input, school: value });
-            }}
-          />
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{ borderRadius: 15 }}
+          >
+            <TextInput
+              placeholder="Escuela"
+              style={styles.input_nombre}
+              placeholderTextColor="#B39AE7"
+              onChangeText={(value) => {
+                setInput({ ...input, school: value });
+              }}
+            />
+          </LinearGradient>
         </View>
-
         <Pressable
           onPress={sendInfo}
           style={
@@ -138,8 +203,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
         >
           <Text style={styles.text_button}>Registrate</Text>
         </Pressable>
-
-        <Text style={styles.text_bottom}>Ya está registrado?</Text>
         <TermsAndConditions />
       </ScrollView>
     </View>
@@ -151,23 +214,16 @@ export default SingUpScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#130C34",
     alignItems: "center",
     flexDirection: "column",
+    paddingTop: 25,
+    backgroundColor: "#130C34",
   },
   container_panel: {
     width: "95%",
     height: "95%",
     marginTop: 20,
     borderRadius: 20,
-  },
-  title: {
-    fontWeight: "700",
-    fontSize: 30,
-    backgroundColor: "black",
-    marginTop: 15,
-    marginLeft: "29%",
-    color: "white",
   },
   container_input_name: {
     width: "90%",
@@ -176,38 +232,46 @@ const styles = StyleSheet.create({
   },
   text_input_name: {
     fontWeight: "600",
-    fontSize: 20,
+    fontSize: 18,
     marginBottom: 10,
-    color: "white",
+    color: "#B39AE7",
   },
+
   input_nombre: {
-    borderColor: "#edebeb",
+    flex: 1,
+    borderColor: "#B39AE7",
     borderWidth: 2,
-    borderRadius: 10,
-    padding: 10,
+    borderRadius: 15,
+    padding: 14,
     color: "white",
+    opacity: 2,
+  },
+  error: {
+    paddingVertical: 10,
+    color: "red",
   },
   button_signup: {
-    backgroundColor: "#F5F5F9",
-    margin: 10,
-    padding: 10,
-    borderRadius: 10,
-    width: "90%",
-    marginLeft: "5%",
+    backgroundColor: "#06D6DD",
+    margin: 30,
+    padding: 15,
+    borderRadius: 15,
+    marginLeft: "8%",
+    width: "84%",
   },
   button_signup_disabled: {
-    backgroundColor: "#F5F5F9",
-    margin: 10,
-    padding: 10,
-    borderRadius: 10,
-    width: "90%",
-    marginLeft: "5%",
+    backgroundColor: "#06D6DD",
+    margin: 30,
+    padding: 15,
+    borderRadius: 15,
+    marginLeft: "8%",
+    width: "84%",
     opacity: 0.3,
   },
   text_button: {
     fontWeight: "500",
-    fontSize: 15,
+    fontSize: 20,
     textAlign: "center",
+    color: "white",
   },
   text_bottom: {
     width: "90%",

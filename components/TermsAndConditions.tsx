@@ -14,18 +14,19 @@ const TermsAndConditions = () => {
 
 const styles = StyleSheet.create({
   login_containerhelp: {
-    marginTop: 10,
+    marginBottom: 10,
     flexDirection: "row",
     justifyContent: "center",
+    
   },
   login_parrafohelp: {
     color: "#5f52ab",
-    marginTop: 8,
+    marginTop: 15,
     margin: 5,
   },
   login_parrafohelp_finish: {
     color: "#06D6DD",
-    marginTop: 8,
+    marginTop: 15,
   },
 });
 
