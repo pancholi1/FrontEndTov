@@ -1,46 +1,81 @@
-import { StyleSheet } from "react-native";
+import React from "react";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { RootStackScreenProps } from "../types";
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
-import { Pressable } from "react-native";
-
-export default function TabOneScreen({
+export const ResultadosScreen = ({
   navigation,
-}: RootTabScreenProps<"Resultados">) {
+}: RootStackScreenProps<"Resultados">) => {
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={() => navigation.navigate("HomeScreen")}
-        style={({ pressed }) => ({
-          opacity: pressed ? 0.5 : 1,
-        })}
-      >
-        <Text style={styles.title}>Tab One</Text>
-      </Pressable>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <View style={styles.test_personalidad}>
+        <View style={styles.img_3DContainer}>
+          <Image
+            style={styles.img_3D}
+            source={require("../assets/images/HomeScreen/testPersonalidad.png")}
+          />
+        </View>
+        <View style={styles.contenedor_text}>
+          <Pressable onPress={() => navigation.navigate("Personality")}>
+            <Text style={styles.personalidad_title}>Test de personalidad</Text>
+          </Pressable>
+
+          <Text style={styles.textCard}>
+            Toma menos de 12 minutos. Responde honestamente
+          </Text>
+        </View>
+      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#130C34",
+    width: "100%",
+    flexDirection: "column",
+    paddingLeft: "8%",
+    paddingRight: "8%",
   },
-  title: {
+  contenedor_text: {
+    flexDirection: "column",
+    width: "100%",
+  },
+
+  test_personalidad: {
+    backgroundColor: "#282056",
+    borderRadius: 15,
+    display: "flex",
+    flexDirection: "row",
+    marginTop: 20,
+    fontWeight: "500",
+  },
+  img_3DContainer: {
+    width: "25%",
+    height: 90,
+    position: "relative",
+  },
+  img_3D: {
+    position: "absolute",
+    right: 4,
+    bottom: -15,
+  },
+  personalidad_title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily: "Poppins_ExtraBold",
+    color: "#DED3F4",
+    fontWeight: "600",
+    fontStyle: "normal",
+    lineHeight: 30,
+    marginTop: 5,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  textCard: {
+    fontFamily: "Poppins_Regular",
+    fontStyle: "normal",
+    color: "#DED3F4",
+    fontWeight: "700",
+    fontSize: 14,
+    width: "70%",
   },
 });

@@ -1,6 +1,9 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import TermsAndConditions from "../components/TermsAndConditions";
 import { RootStackScreenProps } from "../types";
+import { LinearGradient } from "expo-linear-gradient";
+import { gradients } from "../constants/Gradients";
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
   return (
@@ -8,34 +11,58 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
       <View style={styles.img_logo_container}>
         <Image
           style={styles.img_logo}
-          source={require("../assets/images/Login/logoInicio.webp")}
+          source={require("../assets/images/Login/loginInicio.png")}
         ></Image>
-        <View style={styles.login_subtitle_container}>
-          <Text style={styles.login_subtitle}>
-            Test de orientacion vocacional
-          </Text>
-        </View>
-        <View></View>
       </View>
+      <View style={styles.login_container_text}>
+        <Text style={styles.login_subtitle_text}>TEST</Text>
+      </View>
+      <View style={styles.login_container_ov}>
+        <Text style={styles.login_subtitle_orientacion}>ORIENTACIÓN</Text>
+        <Text style={styles.login_subtitle_vocacional}>VOCACIONAL</Text>
+      </View>
+
       <View style={styles.login_button_container}>
         <Pressable
           onPress={() => navigation.navigate("Login")}
           style={styles.login_button}
         >
-          <Text style={styles.login_butontext}> Ingresa a TOV </Text>
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{
+              borderRadius: 15,
+              width: "100%",
+              height: 54,
+              alignItems: "center",
+              justifyContent: "center",
+              borderColor: "#7B68A9",
+              borderWidth: 1,
+            }}
+          >
+            <Text style={styles.login_butontext}> Ingresa a TOV </Text>
+          </LinearGradient>
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate("SingUp")}
           style={styles.login_button}
         >
-          <Text style={styles.login_butontext}> Registrate </Text>
+          <LinearGradient
+            colors={gradients.inputs}
+            style={{
+              borderRadius: 15,
+              width: "100%",
+              height: 54,
+              alignItems: "center",
+              justifyContent: "center",
+              borderColor: "#7B68A9",
+              borderWidth: 1,
+            }}
+          >
+            <Text style={styles.login_butontext}> Registrarte </Text>
+          </LinearGradient>
         </Pressable>
       </View>
-      <View style={styles.login_containerhelp}>
-        <Text style={styles.login_parrafohelp}>
-          By continuing you agree to the Terms and Conditions
-        </Text>
-      </View>
+      <TermsAndConditions />
     </View>
   );
 };
@@ -43,63 +70,60 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
-    marginTop: 50,
+    backgroundColor: "#130C34",
   },
   image: {
     flex: 1,
   },
   img_logo: {
-    width: 300,
-    height: 300,
+    width: 380,
+    height: 400,
   },
   img_logo_container: {
     paddingTop: 20,
     alignItems: "center",
   },
-
-  login_subtitle: {
-    fontWeight: "900",
-    fontSize: 35,
-    marginTop: 30,
-    marginBottom: 30,
-    color: "white",
+  login_container_text: {
+    alignItems: "center",
+    width: "100%",
   },
 
-  login_subtitle_container: {
-    width: 300,
+  login_subtitle_text: {
+    fontSize: 60,
+    color: "#DED3F4",
+  },
+  login_container_ov: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  login_subtitle_orientacion: {
+    color: "#06D6DD",
+    fontSize: 33,
+  },
+  login_subtitle_vocacional: {
+    color: "#06D6DD",
+    fontSize: 30,
   },
   login_button: {
-    marginTop: 35,
-    backgroundColor: "rgb(30, 144, 255)",
-    width: "90%",
+    marginTop: 25,
+    backgroundColor: "#282056",
+    width: "75%",
     height: 54,
     alignItems: "center",
     justifyContent: "center",
-    borderBottomColor: "rgb(30, 144, 255)",
-    borderBottomWidth: 4,
-    borderRadius: 35,
+    borderColor: "#7B68A9",
+    borderWidth: 1,
+    borderRadius: 15,
   },
   login_butontext: {
     fontSize: 20,
-    color: "white",
-    fontWeight: "bold",
+    color: "#DED3F4",
+    fontStyle: "normal",
   },
   login_button_container: {
     alignItems: "center",
   },
-  login_containerhelp: {
-    marginTop: 20,
-    height: 90,
-    alignItems: "center",
-  },
-  login_parrafohelp: {
-    padding: 5,
-    color: "white",
 
-    marginTop: 8,
-    textAlign: "center",
-  },
 });
 
 export default Mainscreen;

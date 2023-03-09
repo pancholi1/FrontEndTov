@@ -12,8 +12,12 @@ import {
 } from "react-native";
 import { RootStackScreenProps } from "../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Formik } from "formik";
 import * as yup from 'yup';
+import { Formik } from 'formik';
+
+import { LinearGradient } from "expo-linear-gradient";
+import { gradients } from "../constants/Gradients";
+import { patterns } from "../constants/Patterns";
 
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
@@ -87,16 +91,30 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
         >
           {(props) => (
         <View style={styles.login_containerInput}>
-          <TextInput
-            style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
-            value={props.values.email}
-            onChangeText={props.handleChange('email')}
-            onBlur={props.handleBlur('email')}
-            placeholder="Email"
-            placeholderTextColor="#B39AE7"
-            />
-            {props.errors.email && props.touched.email ? <Text style={styles.errors}>{props.errors.email}</Text> : null}
 
+          <LinearGradient
+            colors={gradients.inputs}
+            //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
+            style={{borderRadius:15}}
+            >
+
+            <TextInput
+              style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
+              value={props.values.email}
+              onChangeText={props.handleChange('email')}
+              onBlur={props.handleBlur('email')}
+              placeholder="Email"
+              placeholderTextColor="#B39AE7"
+              />
+          </LinearGradient>
+              {props.errors.email && props.touched.email ? <Text style={styles.errors}>{props.errors.email}</Text> : null}
+
+
+              <LinearGradient
+            colors={gradients.inputs}
+            //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
+            style={{borderRadius:15, marginTop:"3%"}}
+            >
           <TextInput
             secureTextEntry={true}
             style={props.errors.password && props.touched.password ? styles.input_error : styles.input}
@@ -107,6 +125,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
             selectionColor="white"
             placeholderTextColor="#B39AE7"
             />
+            </LinearGradient>
             {props.errors.password && props.touched.password ? <Text style={styles.errors}>{props.errors.password}</Text> : null}
 
             <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
@@ -118,6 +137,8 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
           )}
         </Formik>
 
+      <View style={styles.login_containerInput}>
+
 
         <View style={styles.login_containerhelp}>
           <Text style={styles.login_titlehelp}>¿Necesitas ayuda?</Text>
@@ -126,6 +147,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
             o escríbenos por Whatsapp al +52 55 4169 1994.
           </Text>
         </View>
+      </View>
 
       </View>
     </ScrollView>
@@ -140,36 +162,38 @@ const styles = StyleSheet.create({
   img_logo:{
     width:"45%",
     padding:"15%",
-    marginTop:"6%",
+    marginTop:"3%",
     marginRight:"45%"
   },
   img_login:{
     width:"55%",
-    padding:"25%",
-    marginBottom:"9%"
+    padding:"24%",
+    marginBottom:"2%"
   },
   login_containerInput: {
-    width: "100%",
-    alignItems: "center",
+    width: "80%",
   },
   input: {
-    backgroundColor: "linear-gradient(121.86deg, rgba(255, 255, 255, 0.18) 14.21%, rgba(255, 255, 255, 0.05) 78.99%)",
-    margin: 12,
-    width: "80%",
-    borderWidth: 1,
+    //flex: 1,
+    width:"100%",
+    borderColor: "#B39AE7",
+    borderWidth: 2,
     borderRadius: 15,
-    padding: "4%",
+    padding: 14,
+    color: "white",
+    opacity: 2,
   },
   text: {
     width: "80%",
-    fontSize: 12,
+    fontSize: 15,
+    fontWeight: "600",
     color: "#B39AE7",
-    fontWeight: "bold",
+    marginTop:"3%"
   },
 
   login_button: {
     marginTop: 35,
-    width: "70%",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
@@ -184,7 +208,7 @@ const styles = StyleSheet.create({
 
   login_containerhelp: {
     marginTop: "10%",
-    width: "90%",
+    width: "100%",
     alignItems: "center",
     padding: 5,
     borderRadius: 10,
@@ -210,13 +234,13 @@ const styles = StyleSheet.create({
     paddingBottom:10
   },
   input_error:{
-    backgroundColor: "linear-gradient(121.86deg, rgba(255, 255, 255, 0.18) 14.21%, rgba(255, 255, 255, 0.05) 78.99%)",
-    margin: 12,
-    width: "80%",
-    borderWidth: 1,
+    borderColor:"red",
+    flex: 1,
+    borderWidth: 2,
     borderRadius: 15,
-    padding: "4%",
-    borderColor:"red"
+    padding: 14,
+    color: "white",
+    opacity: 2,
   }
 });
 
