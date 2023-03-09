@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import TermsAndConditions from "../components/TermsAndConditions";
 import { RootStackScreenProps } from "../types";
 
-const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
+const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
   return (
     <View style={styles.container}>
       <View style={styles.img_logo_container}>
@@ -34,7 +34,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"MainScreen">) => {
           <Text style={styles.login_butontext}> Registrarte </Text>
         </Pressable>
       </View>
-     <TermsAndConditions />
+      <TermsAndConditions />
     </View>
   );
 };

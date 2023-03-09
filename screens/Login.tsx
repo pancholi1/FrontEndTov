@@ -22,7 +22,6 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem("@storage_Key", jsonValue);
       const data = await AsyncStorage.getItem("@storage_Key");
-      console.log("leyendo data", data);
     } catch (error) {
       console.log(error);
     }
@@ -31,49 +30,46 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
 
   return (
     <View style={styles.container}>
-      
-        <Text style={styles.login_title}>TovLogo</Text>
-        <View>
-          <Text style={styles.login_subtitle}>¡Bienvenido a Tov!</Text>
-          <Text style={styles.login_introduction}>
-            Introduce tu email de la escuela y tu contraseña.
-          </Text>
+      <Text style={styles.login_title}>TovLogo</Text>
+      <View>
+        <Text style={styles.login_subtitle}>¡Bienvenido a Tov!</Text>
+        <Text style={styles.login_introduction}>
+          Introduce tu email de la escuela y tu contraseña.
+        </Text>
+      </View>
+
+      <View style={styles.login_containerInput}>
+        <TextInput
+          style={styles.input}
+          placeholder="Juan@gmail.com"
+          onChangeText={onChangeText}
+          placeholderTextColor="#636262"
+        />
+        <TextInput
+          secureTextEntry={true}
+          style={styles.input}
+          placeholder="Contraseña"
+          keyboardType="numeric"
+          selectionColor="white"
+          onChangeText={onChangeNumber}
+          placeholderTextColor="#636262"
+        />
+
+        <View style={styles.login_container_forgotPassword}>
+          <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
         </View>
+      </View>
+      <Pressable onPress={() => inUserFuction()} style={styles.login_button}>
+        <Text style={styles.login_butontext}> Cambiar de pantalla</Text>
+      </Pressable>
 
-        <View style={styles.login_containerInput}>
-          <TextInput
-            style={styles.input}
-            placeholder="Juan@gmail.com"
-            onChangeText={onChangeText}
-            placeholderTextColor="#636262"
-          />
-          <TextInput
-            secureTextEntry={true}
-            style={styles.input}
-            placeholder="Contraseña"
-            keyboardType="numeric"
-            selectionColor="white"
-            onChangeText={onChangeNumber}
-            placeholderTextColor="#636262"
-          />
-
-          <View style={styles.login_container_forgotPassword}>
-            <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
-          </View>
-        </View>
-        <Pressable onPress={() => inUserFuction()} style={styles.login_button}>
-          <Text style={styles.login_butontext}> Cambiar de pantalla</Text>
-        </Pressable>
-
-
-        <View style={styles.login_containerhelp}>
-          <Text style={styles.login_titlehelp}>¿Necesitas ayuda?</Text>
-          <Text style={styles.login_parrafohelp}>
-            Mándanos un correo a soporte@tov.com o escríbenos por Whatsapp al
-            +52 55 4169 1994.
-          </Text>
-        </View>
-
+      <View style={styles.login_containerhelp}>
+        <Text style={styles.login_titlehelp}>¿Necesitas ayuda?</Text>
+        <Text style={styles.login_parrafohelp}>
+          Mándanos un correo a soporte@tov.com o escríbenos por Whatsapp al +52
+          55 4169 1994.
+        </Text>
+      </View>
     </View>
   );
 };
@@ -82,7 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor:"black"
+    backgroundColor: "black",
   },
   image: {
     flex: 1,

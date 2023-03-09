@@ -12,10 +12,14 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import {
+  ColorSchemeName,
+  Pressable,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
 import Login from "../screens/Login";
 
@@ -23,7 +27,6 @@ import ModalScreen from "../screens/ProfileScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import SingUpScreen from "../screens/SingUpScreen";
 import Personality from "../screens/Personality";
-import ResultadosScreen from "../screens/ResultadosScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -33,7 +36,9 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import PlanesScreen from "../screens/PlanesScreen";
 import MainScreen from "../screens/MainScreen";
 import CalendarInterviewScreen from "../screens/CalendarInterviewScreen";
-import { Psicotecnico } from "../screens/Psicotecnico";
+import { ResultadosScreen } from "../screens/ResultadosScreen";
+import { Avatar } from "react-native-paper";
+import { Image } from "react-native";
 
 export default function Navigation({
   colorScheme,
@@ -72,13 +77,23 @@ function RootNavigator() {
         <Stack.Screen
           name="Profile"
           component={ModalScreen}
-          options={{ title: "Perfil!" }}
+          options={{
+            title: "Perfil",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
         />
       </Stack.Group>
       <Stack.Group>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Psicotecnico" component={Psicotecnico} />
+        <Stack.Screen name="Resultados" component={ResultadosScreen} />
         <Stack.Screen
           options={{
             headerShown: false,
@@ -150,62 +165,46 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarStyle: {
+          backgroundColor: "#130C34",
+          borderTopWidth: 0,
+        },
       }}
     >
       <BottomTab.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<"HomeScreen">) => ({
-          title: "Test",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="university" color={color} />
+          tabBarLabel: "Inicio",
+          headerTitle: "",
+          tabBarIcon: () => (
+            <Image source={require("../assets/images/home.png")} />
           ),
-
+          headerStyle: {
+            backgroundColor: "#130C34",
+          },
           headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Profile")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="user"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
+            <View style={styles.containerHeaederRight}>
+              <Image
+                source={require("../assets/images/ISO.png")}
+                style={styles.logoHeaederRight}
               />
-            </Pressable>
-          ),
-        })}
-      />
-
-      <BottomTab.Screen
-        name="Resultados"
-        component={Psicotecnico}
-        options={({ navigation }: RootTabScreenProps<"Resultados">) => ({
-          title: "Resultados",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Profile")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="user"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+              <Pressable
+                onPress={() => navigation.navigate("Profile")}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <Avatar.Image
+                  size={34}
+                  source={require("../assets/images/pancho.jpeg")}
+                />
+              </Pressable>
+            </View>
           ),
         })}
       />
@@ -215,7 +214,9 @@ function BottomTabNavigator() {
         component={PlanesScreen}
         options={({ navigation }: RootTabScreenProps<"Planes">) => ({
           title: "Planes",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: () => (
+            <Image source={require("../assets/images/planes.png")} />
+          ),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Profile")}
@@ -223,13 +224,51 @@ function BottomTabNavigator() {
                 opacity: pressed ? 0.5 : 1,
               })}
             >
-              <FontAwesome
-                name="user"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
+              <Avatar.Image
+                size={24}
+                source={require("../assets/images/pancho.jpeg")}
               />
             </Pressable>
+          ),
+        })}
+      />
+
+      <BottomTab.Screen
+        name="Resultados"
+        component={ResultadosScreen}
+        options={({ navigation }: RootTabScreenProps<"Resultados">) => ({
+          title: "Resultados",
+          tabBarLabel: "Resultados",
+
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+          tabBarIcon: () => (
+            <Image source={require("../assets/images/resultados.png")} />
+          ),
+          headerRight: () => (
+            <View style={styles.containerHeaederRight}>
+              {/* <Image
+                source={require("../assets/images/ISO.png")}
+                style={styles.logoHeaederRight}
+              /> */}
+              <Pressable
+                onPress={() => navigation.navigate("Profile")}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <Avatar.Image
+                  size={34}
+                  source={require("../assets/images/pancho.jpeg")}
+                />
+              </Pressable>
+            </View>
           ),
         })}
       />
@@ -246,3 +285,14 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
+
+const styles = StyleSheet.create({
+  containerHeaederRight: {
+    display: "flex",
+    flexDirection: "row",
+    padding: 9,
+  },
+  logoHeaederRight: {
+    marginRight: 15,
+  },
+});
