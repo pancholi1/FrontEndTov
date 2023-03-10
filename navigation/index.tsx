@@ -191,19 +191,23 @@ function BottomTabNavigator() {
         component={ResultadosScreen}
         options={({ navigation }: RootTabScreenProps<"Resultados">) => ({
           title: "Resultados",
+          
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Profile")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
+                
               })}
             >
+
               <FontAwesome
                 name="user"
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
+                
               />
             </Pressable>
           ),

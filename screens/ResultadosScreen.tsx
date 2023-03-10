@@ -1,46 +1,42 @@
-import { StyleSheet } from "react-native";
-
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
+import CardResult from "../components/CardResult";
 import { RootTabScreenProps } from "../types";
-import { Pressable } from "react-native";
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<"Resultados">) {
+
   return (
-    <View style={styles.container}>
-      <Pressable
-        onPress={() => navigation.navigate("HomeScreen")}
-        style={({ pressed }) => ({
-          opacity: pressed ? 0.5 : 1,
-        })}
-      >
-        <Text style={styles.title}>Tab One</Text>
-      </Pressable>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
+    <>
+      <CardResult
+        image={require("../assets/images/Results/result1.png")}
+        title={"Test CHASIDE"}
+        description={"Toma menos de 12 minutos. Responde honestamente."}
       />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
-    </View>
+      <CardResult
+        image={require("../assets/images/Results/result2.png")}
+        title={"Test MM & MG"}
+        description={"Comprueba cuáles son las áreas ocupacionales que se ajustan a \ntu perfil."}
+      />
+        <CardResult
+        image={require("../assets/images/Results/result4.png")}
+        title={"Test Los 5 Grandes"}
+        description={"Conocé más sobre tu personalidad y capacidades."}
+      />
+      <CardResult
+        image={require("../assets/images/Results/result3.png")}
+        title={"Entrevista"}
+        description={"Agenda una entrevista con un profesional capacitado."}
+      />
+      <CardResult
+        image={require("../assets/images/Results/result4.png")}
+        title={"Resultado Final"}
+        description={"Conoce cual es tu resultado final y comienza a planificar."}
+      />
+    
+
+    </>
+    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-});
+
