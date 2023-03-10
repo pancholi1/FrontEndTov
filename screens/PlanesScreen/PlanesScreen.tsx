@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import PlanesCard from "../components/PlanesCard";
+import PlanesCard from "../../components/PlanesCard";
 import Carousel from "react-native-anchor-carousel";
 const { width: windowWidth } = Dimensions.get("window");
 const PlanesScreen = () => {

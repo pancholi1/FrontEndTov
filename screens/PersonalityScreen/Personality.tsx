@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 
-import { arrayForm } from "../constants/DateMock";
+import { arrayForm } from "../../constants/DateMock";
 import { SafeAreaView } from "react-native-safe-area-context";
 interface PropsQuestionsInput {
   id: number;

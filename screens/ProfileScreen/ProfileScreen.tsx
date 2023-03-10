@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Image } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import { Avatar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -17,7 +16,7 @@ export default function ModalScreen() {
         >
           <Avatar.Image
             size={85}
-            source={require("../assets/images/pancho.jpeg")}
+            source={require("../../assets/images/pancho.jpeg")}
           />
           <View style={styles.containerText}>
             <Text style={styles.name}>Francisco Porta</Text>
@@ -33,7 +32,7 @@ export default function ModalScreen() {
           <View style={styles.img_3DContainer}>
             <Image
               style={styles.img_3D}
-              source={require("../assets/images/ProfileScreen/cerebro.png")}
+              source={require("../../assets/images/ProfileScreen/cerebro.png")}
             />
           </View>
           <View style={styles.containerText}>
@@ -77,7 +76,7 @@ export default function ModalScreen() {
           >
             <Text style={styles.textTerminos}> Terminos y condiciones </Text>
             <Image
-              source={require("../assets/images/ProfileScreen/Arrow.png")}
+              source={require("../../assets/images/ProfileScreen/Arrow.png")}
             />
           </LinearGradient>
         </Pressable>
@@ -97,7 +96,7 @@ export default function ModalScreen() {
           >
             <Text style={styles.textTerminos}> Privacidad</Text>
             <Image
-              source={require("../assets/images/ProfileScreen/Arrow.png")}
+              source={require("../../assets/images/ProfileScreen/Arrow.png")}
             />
           </LinearGradient>
         </Pressable>

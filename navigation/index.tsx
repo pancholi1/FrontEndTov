@@ -12,33 +12,29 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import {
-  ColorSchemeName,
-  Pressable,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { ColorSchemeName, Pressable, View, StyleSheet } from "react-native";
 
-import HomeScreen from "../screens/HomeScreen";
-import Login from "../screens/Login";
-
-import ModalScreen from "../screens/ProfileScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import SingUpScreen from "../screens/SingUpScreen";
-import Personality from "../screens/Personality";
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import PlanesScreen from "../screens/PlanesScreen";
-import MainScreen from "../screens/MainScreen";
-import CalendarInterviewScreen from "../screens/CalendarInterviewScreen";
-import { ResultadosScreen } from "../screens/ResultadosScreen";
+import PlanesScreen from "../screens/PlanesScreen/PlanesScreen";
+import CalendarInterviewScreen from "../screens/CalendarInterviewScreen/CalendarInterviewScreen";
 import { Avatar } from "react-native-paper";
 import { Image } from "react-native";
+import {
+  HomeScreen,
+  LoginScreen,
+  MainScreen,
+  NotFoundScreen,
+  PersonalityScreen,
+  ProfileScreen,
+  ResultadosScreen,
+  ResultTestScreen,
+  SingUpScreen,
+} from "../screens";
 
 export default function Navigation({
   colorScheme,
@@ -75,8 +71,8 @@ function RootNavigator() {
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
-          name="Profile"
-          component={ModalScreen}
+          name="ProfileScreen"
+          component={ProfileScreen}
           options={{
             title: "Perfil",
             headerTitleAlign: "center",
@@ -92,7 +88,8 @@ function RootNavigator() {
       </Stack.Group>
       <Stack.Group>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
         <Stack.Screen name="Resultados" component={ResultadosScreen} />
         <Stack.Screen
           options={{
@@ -103,7 +100,7 @@ function RootNavigator() {
         />
         <Stack.Screen
           name="Personality"
-          component={Personality}
+          component={PersonalityScreen}
           options={({ navigation }: RootTabScreenProps<"Personality">) => ({
             title: "Personalidad",
             headerLeft: () => (
@@ -194,7 +191,7 @@ function BottomTabNavigator() {
                 style={styles.logoHeaederRight}
               />
               <Pressable
-                onPress={() => navigation.navigate("Profile")}
+                onPress={() => navigation.navigate("ProfileScreen")}
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}
@@ -219,7 +216,7 @@ function BottomTabNavigator() {
           ),
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("Profile")}
+              onPress={() => navigation.navigate("ProfileScreen")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
@@ -258,7 +255,7 @@ function BottomTabNavigator() {
                 style={styles.logoHeaederRight}
               /> */}
               <Pressable
-                onPress={() => navigation.navigate("Profile")}
+                onPress={() => navigation.navigate("ProfileScreen")}
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}

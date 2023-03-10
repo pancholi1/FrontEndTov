@@ -8,12 +8,12 @@ import {
   TextInput,
   View,
 } from "react-native";
-import PopUp from "../components/PopUp";
-import TermsAndConditions from "../components/TermsAndConditions";
-import { RootStackScreenProps } from "../types";
+import PopUp from "../../components/PopUp";
+import TermsAndConditions from "../../components/TermsAndConditions";
+import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../constants/Gradients";
-import { patterns } from "../constants/Patterns";
+import { gradients } from "../../constants/Gradients";
+import { patterns } from "../../constants/Patterns";
 
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
