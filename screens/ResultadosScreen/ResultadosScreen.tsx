@@ -1,12 +1,42 @@
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import CardResult from "../../components/CardResult";
 import { RootStackScreenProps } from "../../types";
 
 const ResultadosScreen = ({
   navigation,
 }: RootStackScreenProps<"Resultados">) => {
   return (
-    <View style={styles.container}>
+    <>
+      <CardResult
+        image={require("../assets/images/Results/result1.png")}
+        title={"Test CHASIDE"}
+        description={"Toma menos de 12 minutos. Responde honestamente."}
+      />
+      <CardResult
+        image={require("../assets/images/Results/result2.png")}
+        title={"Test MM & MG"}
+        description={"Comprueba cuáles son las áreas ocupacionales que se ajustan a \ntu perfil."}
+      />
+        <CardResult
+        image={require("../assets/images/Results/result4.png")}
+        title={"Test Los 5 Grandes"}
+        description={"Conocé más sobre tu personalidad y capacidades."}
+      />
+      <CardResult
+        image={require("../assets/images/Results/result3.png")}
+        title={"Entrevista"}
+        description={"Agenda una entrevista con un profesional capacitado."}
+      />
+      <CardResult
+        image={require("../assets/images/Results/result4.png")}
+        title={"Resultado Final"}
+        description={"Conoce cual es tu resultado final y comienza a planificar."}
+      />
+    
+
+    </>
+   /*  <View style={styles.container}>
       <View style={styles.test_personalidad}>
         <View style={styles.img_3DContainer}>
           <Image
@@ -24,13 +54,13 @@ const ResultadosScreen = ({
           </Text>
         </View>
       </View>
-    </View>
+    </View> */
   );
 };
 
 export default ResultadosScreen;
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#130C34",
@@ -79,4 +109,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     width: "70%",
   },
-});
+}); */
