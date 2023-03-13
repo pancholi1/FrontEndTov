@@ -8,5 +8,5 @@ export * from "./PlanesScreen";
 export * from "./PrivacidadScreen";
 export * from "./ProfileScreen";
 export * from "./ResultadosScreen";
-export * from "./ResultTestScreen";
+export * from "./ResultChasideScreen";
 export * from "./SingUpScreen";
