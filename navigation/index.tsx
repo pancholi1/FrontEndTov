@@ -92,7 +92,21 @@ function RootNavigator() {
       </Stack.Group>
       <Stack.Group>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen 
+        name="Login" 
+        component={Login}
+        options={{
+          title: "Login",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
+         />
         <Stack.Screen name="Resultados" component={ResultadosScreen} />
         <Stack.Screen
           options={{
@@ -104,19 +118,31 @@ function RootNavigator() {
         <Stack.Screen
           name="Personality"
           component={Personality}
-          options={({ navigation }: RootTabScreenProps<"Personality">) => ({
-            title: "Personalidad",
-            headerLeft: () => (
-              <Pressable
-                onPress={() => navigation.goBack()}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                })}
-              >
-                <TabBarIcon name="arrow-left" color={"white"} />
-              </Pressable>
-            ),
-          })}
+          options={{
+            title: "Test de Personalidad",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
+          // options={({ navigation }: RootTabScreenProps<"Personality">) => ({
+          //   title: "Personalidad",
+          //   headerLeft: () => (
+          //     <Pressable
+          //       onPress={() => navigation.goBack()}
+          //       style={({ pressed }) => ({
+          //         opacity: pressed ? 0.5 : 1,
+          //       })}
+          //     >
+          //       <TabBarIcon name="arrow-left" color={"white"} />
+          //     </Pressable>
+          //   ),
+            
+          // })}
         />
         <Stack.Screen
           name="Calendar"

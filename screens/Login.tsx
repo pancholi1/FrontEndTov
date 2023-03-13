@@ -17,7 +17,6 @@ import { Formik } from 'formik';
 
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients } from "../constants/Gradients";
-import { patterns } from "../constants/Patterns";
 
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
