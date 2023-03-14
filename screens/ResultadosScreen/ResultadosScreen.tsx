@@ -16,7 +16,9 @@ const ResultadosScreen = ({
       <CardResult
         image={require("../../assets/images/Results/result2.png")}
         title={"Test MM & MG"}
-        description={"Comprueba cuáles son las áreas ocupacionales que se ajustan a \ntu perfil."}
+        description={
+          "Comprueba cuáles son las áreas ocupacionales que se ajustan a \ntu perfil."
+        }
       />
         <CardResult
         image={require("../../assets/images/Results/result4.png")}
@@ -31,12 +33,12 @@ const ResultadosScreen = ({
       <CardResult
         image={require("../../assets/images/Results/result4.png")}
         title={"Resultado Final"}
-        description={"Conoce cual es tu resultado final y comienza a planificar."}
+        description={
+          "Conoce cual es tu resultado final y comienza a planificar."
+        }
       />
-    
-
     </>
-   /*  <View style={styles.container}>
+    /*  <View style={styles.container}>
       <View style={styles.test_personalidad}>
         <View style={styles.img_3DContainer}>
           <Image
