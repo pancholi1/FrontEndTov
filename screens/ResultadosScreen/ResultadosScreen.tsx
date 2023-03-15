@@ -20,7 +20,7 @@ const ResultadosScreen = ({
           "Comprueba cuáles son las áreas ocupacionales que se ajustan a \ntu perfil."
         }
       />
-      <CardResult
+        <CardResult
         image={require("../../assets/images/Results/result4.png")}
         title={"Test Los 5 Grandes"}
         description={"Conocé más sobre tu personalidad y capacidades."}
