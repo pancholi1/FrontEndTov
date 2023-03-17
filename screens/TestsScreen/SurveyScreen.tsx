@@ -195,7 +195,7 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
             </View>
             <View style={styles.container_test}>
                 <Text style={styles.title}>HABILIDADES</Text>
-                <Text style={styles.thankYou}>Su area con mayor votos por habilidad es {msjHabilidad}</Text>
+                <Text style={styles.thankYou}>Su area con mayor votos por habilidad es: {msjHabilidad}</Text>
                 <Text style={styles.thankYou}>{textCarreraHabilidad}</Text>
                 <Pressable style={styles.button} onPress={() => carrerasPosibles(propiedadMayorHabilidades, propiedadMayorIntereses, 'habilidad')}>
                     <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
@@ -240,7 +240,8 @@ const styles = StyleSheet.create({
     fontSize:14,
     width:"85%",
     alignItems: 'center',
-    margin:"3%"
+    margin:"3%",
+    fontFamily:'Poppins_Regular'
   },
   title:{
     color:"rgba(222, 211, 244, 1)",
@@ -249,20 +250,22 @@ const styles = StyleSheet.create({
     width:"85%",
     alignItems: 'center',
     marginTop:'5%',
-    marginBottom:'2%'
+    marginBottom:'2%',
+    fontFamily:'Poppins_Regular'
   },
   button:{
     //marginTop: 35,
     width: "80%",
     alignItems: "center",
     borderRadius: 15,
-    backgroundColor: "linear-gradient(180deg, rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100%)",
+    backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) ",
     padding:"3%",
     marginBottom:"3%"
   },
   text_button:{
     fontSize: 18,
-    color:"#DED3F4"
+    color:"#DED3F4",
+    fontFamily:'Poppins_ExtraBold'
   }
 });
 

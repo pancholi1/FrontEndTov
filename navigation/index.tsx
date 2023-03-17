@@ -279,35 +279,6 @@ function BottomTabNavigator() {
         })}
       />
 
-      <BottomTab.Screen
-      name="Personality"
-      component={Personality}
-      options={({ navigation }: RootTabScreenProps<"Personality">) => ({
-        title:"Test de Personalidad",
-        tabBarLabel: "Personality",
-
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerRight: () => (
-          <View style={styles.containerHeaederRight}>
-            {/* <Image
-              source={require("../assets/images/ISO.png")}
-              style={styles.logoHeaederRight}
-            /> */}
-
-              <Avatar.Image
-                size={34}
-                source={require("../assets/images/pancho.jpeg")}
-              />
-
-          </View>
-        ),
-      })}/>
 
 
       <BottomTab.Screen

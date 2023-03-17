@@ -10,7 +10,6 @@ interface SurveyProps {
 
 const Survey: React.FC<SurveyProps> = ({ id, question, resultado, onAnswered }) => {
     const [answer, setAnswer] = useState<boolean | null>(null);
-
   const handleYes = () => {
     setAnswer(true);
     onAnswered(true);
@@ -73,14 +72,14 @@ const styles = StyleSheet.create({
         marginTop: "10%",
         alignItems: "center",
         borderRadius: 15,
-        backgroundColor: "linear-gradient(180deg, rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100",
+        backgroundColor: " rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) ",
         padding:"5%",
     },
     button2:{
         width:"60%",
         alignItems: "center",
         borderRadius: 15,
-        backgroundColor: "linear-gradient(180deg, rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100%)",
+        backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100%",
         padding:"5%",
         margin:"10%"
     },
