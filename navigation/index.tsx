@@ -92,22 +92,21 @@ function RootNavigator() {
       </Stack.Group>
       <Stack.Group>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen 
-        name="Login" 
-        component={Login}
-        options={{
-          title: "Login",
-          headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "#130C34" },
-          headerTitleStyle: {
-            color: "white",
-            fontFamily: "Poppins_ExtraBold",
-            fontSize: 20,
-          },
-          headerTintColor: "#06D6DD",
-        }}
-         />
-        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            title: "Login",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
+        />
         <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
         <Stack.Screen name="Resultados" component={ResultadosScreen} />
         <Stack.Screen
@@ -260,6 +259,7 @@ function BottomTabNavigator() {
         component={PlanesScreen}
         options={({ navigation }: RootTabScreenProps<"Planes">) => ({
           title: "Planes",
+
           tabBarIcon: () => (
             <Image source={require("../assets/images/planes.png")} />
           ),
