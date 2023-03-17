@@ -1,9 +1,9 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
-import TermsAndConditions from "../components/TermsAndConditions";
-import { RootStackScreenProps } from "../types";
+import TermsAndConditions from "../../components/TermsAndConditions";
+import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
   return (
@@ -11,7 +11,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
       <View style={styles.img_logo_container}>
         <Image
           style={styles.img_logo}
-          source={require("../assets/images/Login/loginInicio.png")}
+          source={require("../../assets/images/Login/loginInicio.png")}
         ></Image>
       </View>
       <View style={styles.login_container_text}>
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
   login_button_container: {
     alignItems: "center",
   },
-
 });
 
 export default Mainscreen;

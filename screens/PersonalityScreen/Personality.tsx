@@ -6,29 +6,27 @@ import {
   Pressable,
 } from "react-native";
 import React from "react";
+import { RootStackScreenProps } from "../../types";
 
 
-import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../constants/Gradients";
-import { patterns } from "../constants/Patterns";
-
-
-const Personality = () => {
+const Personality = ({ navigation }: RootStackScreenProps<"Personality">) => {
   return(
     <View style={styles.container}>
 
       <ScrollView style={{ width: '90%',    marginTop:"10%"}}>
-      <LinearGradient
-                  colors={gradients.inputs}
-                  style={{borderRadius:15, }}>
+
                     <View style={styles.contenedor_test}>
                       <Text style={styles.name_test}>Test de Personalidad</Text>
                       <Text style={styles.text_test}>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam debitis repellendus minima earum sint error sapiente eum vel, quidem atque veritatis, dolore ad enim similique, aliquam ducimus consequuntur itaque quibusdam!
+                        Este primer test consta de un total de 98 preguntas que deberán ser respondidas con “SI” o con “NO” dependiendo como te veas frente a diversas situaciones.
+                        Una vez seleccionada la respuesta, las preguntas se irán pasando automáticamente. A pesar de que parezca que son muchas, el test es muy sencillo y lleva solo unos pocos minutos.
+                        Con esta herramienta lograremos ayudarte a conocer cuál sería la decisión más acertada partiendo de tus intereses, habilidades y/o preferencias, conocerás cual es el área ocupacional más acertada con tus elecciones.
+
                       </Text>
                     </View>
-      </LinearGradient>
-      <Pressable style={styles.button}><Text style={styles.text_button}>COMENZAR TEST</Text></Pressable>
+      <Pressable 
+      onPress={() => navigation.navigate("SurveyScreen")}
+      style={styles.button}><Text style={styles.text_button}>COMENZAR TEST</Text></Pressable>
       </ScrollView>
     </View>
   )
@@ -46,16 +44,20 @@ const styles = StyleSheet.create({
    width:"100%",
    alignItems:"center",
    textAlign:"center",
+   backgroundColor:"rgb(40, 32, 86)",
+   borderRadius:15,
   },
   name_test:{
-    fontWeight:"600",
+    fontWeight:"700",
+    fontSize:16,
     color: "#DED3F4",
     padding:"4%"
   },
   text_test:{
     width:"85%",
     alignItems: 'center',
-    paddingBottom:"5%"
+    paddingBottom:"5%",
+    color:"linear-gradient( rgba(222, 211, 244, 1))"
   },
   button:{
     marginTop: 35,

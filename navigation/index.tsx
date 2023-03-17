@@ -12,33 +12,33 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import {
-  ColorSchemeName,
-  Pressable,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { ColorSchemeName, Pressable, View, StyleSheet } from "react-native";
 
-import HomeScreen from "../screens/HomeScreen";
-import Login from "../screens/Login";
-
-import ModalScreen from "../screens/ProfileScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import SingUpScreen from "../screens/SingUpScreen";
-import Personality from "../screens/Personality";
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import PlanesScreen from "../screens/PlanesScreen";
-import MainScreen from "../screens/MainScreen";
-import CalendarInterviewScreen from "../screens/CalendarInterviewScreen";
-import { ResultadosScreen } from "../screens/ResultadosScreen";
+import PlanesScreen from "../screens/PlanesScreen/PlanesScreen";
+import CalendarInterviewScreen from "../screens/CalendarInterviewScreen/CalendarInterviewScreen";
 import { Avatar } from "react-native-paper";
 import { Image } from "react-native";
+import {
+  HomeScreen,
+  LoginScreen,
+  MainScreen,
+  NotFoundScreen,
+  PersonalityScreen,
+  ProfileScreen,
+  ResultadosScreen,
+  ResultTestScreen,
+  SingUpScreen,
+} from "../screens";
+import Login from "../screens/Login";
+import Personality from "../screens/PersonalityScreen/Personality";
+import CarrerasScreen from "../screens/CarrerasScreen/CarrerasScreen";
+import SurveyScreen from "../screens/TestsScreen/SurveyScreen";
 
 export default function Navigation({
   colorScheme,
@@ -75,8 +75,8 @@ function RootNavigator() {
 
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
-          name="Profile"
-          component={ModalScreen}
+          name="ProfileScreen"
+          component={ProfileScreen}
           options={{
             title: "Perfil",
             headerTitleAlign: "center",
@@ -107,6 +107,8 @@ function RootNavigator() {
           headerTintColor: "#06D6DD",
         }}
          />
+        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+        <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
         <Stack.Screen name="Resultados" component={ResultadosScreen} />
         <Stack.Screen
           options={{
@@ -115,6 +117,8 @@ function RootNavigator() {
           name="BottomTabNavigator"
           component={BottomTabNavigator}
         />
+
+
         <Stack.Screen
           name="Personality"
           component={Personality}
@@ -129,21 +133,23 @@ function RootNavigator() {
             },
             headerTintColor: "#06D6DD",
           }}
-          // options={({ navigation }: RootTabScreenProps<"Personality">) => ({
-          //   title: "Personalidad",
-          //   headerLeft: () => (
-          //     <Pressable
-          //       onPress={() => navigation.goBack()}
-          //       style={({ pressed }) => ({
-          //         opacity: pressed ? 0.5 : 1,
-          //       })}
-          //     >
-          //       <TabBarIcon name="arrow-left" color={"white"} />
-          //     </Pressable>
-          //   ),
-            
-          // })}
         />
+        <Stack.Screen
+             name="SurveyScreen"
+             component={SurveyScreen}
+             options={{
+               title: "Test",
+               headerTitleAlign: "center",
+               headerStyle: { backgroundColor: "#130C34" },
+               headerTitleStyle: {
+                 color: "white",
+                 fontFamily: "Poppins_ExtraBold",
+                 fontSize: 20,
+               },
+               headerTintColor: "#06D6DD",
+             }}
+        />
+
         <Stack.Screen
           name="Calendar"
           component={CalendarInterviewScreen}
@@ -180,6 +186,21 @@ function RootNavigator() {
           })}
         />
       </Stack.Group>
+      <Stack.Screen 
+      name='CarrerasScreen'
+      component={CarrerasScreen}
+      options={{
+        title: "Carreras",
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#130C34" },
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "Poppins_ExtraBold",
+          fontSize: 20,
+        },
+        headerTintColor: "#06D6DD",
+      }}
+      />
     </Stack.Navigator>
   );
 }
@@ -220,7 +241,7 @@ function BottomTabNavigator() {
                 style={styles.logoHeaederRight}
               />
               <Pressable
-                onPress={() => navigation.navigate("Profile")}
+                onPress={() => navigation.navigate("ProfileScreen")}
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}
@@ -234,7 +255,6 @@ function BottomTabNavigator() {
           ),
         })}
       />
-
       <BottomTab.Screen
         name="Planes"
         component={PlanesScreen}
@@ -245,7 +265,7 @@ function BottomTabNavigator() {
           ),
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("Profile")}
+              onPress={() => navigation.navigate("ProfileScreen")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
@@ -258,6 +278,37 @@ function BottomTabNavigator() {
           ),
         })}
       />
+
+      <BottomTab.Screen
+      name="Personality"
+      component={Personality}
+      options={({ navigation }: RootTabScreenProps<"Personality">) => ({
+        title:"Test de Personalidad",
+        tabBarLabel: "Personality",
+
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#130C34" },
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "Poppins_ExtraBold",
+          fontSize: 20,
+        },
+        headerRight: () => (
+          <View style={styles.containerHeaederRight}>
+            {/* <Image
+              source={require("../assets/images/ISO.png")}
+              style={styles.logoHeaederRight}
+            /> */}
+
+              <Avatar.Image
+                size={34}
+                source={require("../assets/images/pancho.jpeg")}
+              />
+
+          </View>
+        ),
+      })}/>
+
 
       <BottomTab.Screen
         name="Resultados"
@@ -284,7 +335,7 @@ function BottomTabNavigator() {
                 style={styles.logoHeaederRight}
               /> */}
               <Pressable
-                onPress={() => navigation.navigate("Profile")}
+                onPress={() => navigation.navigate("ProfileScreen")}
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}

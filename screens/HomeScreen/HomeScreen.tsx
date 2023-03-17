@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
-import { RootStackScreenProps } from "../types";
+import { RootStackScreenProps } from "../../types";
 import { ProgressBar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -30,7 +30,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
         <View style={styles.img_3DContainer}>
           <Image
             style={styles.img_3D}
-            source={require("../assets/images/HomeScreen/testPersonalidad.png")}
+            source={require("../../assets/images/HomeScreen/testPersonalidad.png")}
           />
         </View>
         <View style={styles.contenedor_text}>
@@ -47,7 +47,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
       <View style={styles.test_personalidad}>
         <View style={styles.img_3DContainer}>
           <Image
-            source={require("../assets/images/HomeScreen/testPsicotécnico.png")}
+            source={require("../../assets/images/HomeScreen/testPsicotécnico.png")}
             style={styles.img_3D}
           />
         </View>
@@ -65,7 +65,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
       <View style={styles.test_personalidad}>
         <View style={styles.img_3DContainer}>
           <Image
-            source={require("../assets/images/HomeScreen/entrevista.png")}
+            source={require("../../assets/images/HomeScreen/entrevista.png")}
             style={styles.img_3D}
           />
         </View>

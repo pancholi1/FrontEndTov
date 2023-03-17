@@ -1,9 +1,8 @@
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { RootStackScreenProps } from "../types";
+import { RootStackScreenProps } from "../../types";
 
-export const ResultadosScreen = ({
+const ResultadosScreen = ({
   navigation,
 }: RootStackScreenProps<"Resultados">) => {
   return (
@@ -12,7 +11,7 @@ export const ResultadosScreen = ({
         <View style={styles.img_3DContainer}>
           <Image
             style={styles.img_3D}
-            source={require("../assets/images/HomeScreen/testPersonalidad.png")}
+            source={require("../../assets/images/HomeScreen/testPersonalidad.png")}
           />
         </View>
         <View style={styles.contenedor_text}>
@@ -28,6 +27,8 @@ export const ResultadosScreen = ({
     </View>
   );
 };
+
+export default ResultadosScreen;
 
 const styles = StyleSheet.create({
   container: {
