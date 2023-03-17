@@ -51,25 +51,28 @@ const styles = StyleSheet.create({
     fontWeight:"700",
     fontSize:16,
     color: "#DED3F4",
-    padding:"4%"
+    padding:"4%",
+    fontFamily: "Poppins_Regular"
   },
   text_test:{
     width:"85%",
     alignItems: 'center',
     paddingBottom:"5%",
-    color:"linear-gradient( rgba(222, 211, 244, 1))"
+    color:"rgba(222, 211, 244, 1)",
+    fontFamily: "Poppins_Regular"
   },
   button:{
     marginTop: 35,
     width: "80%",
     alignItems: "center",
     borderRadius: 15,
-    backgroundColor: "linear-gradient(180deg, rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100%)",
+    backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08)",
     padding:"3%",
     marginLeft:"10%"
   },
   text_button:{
     fontSize: 18,
-    color:"#DED3F4"
+    color:"#DED3F4",
+    fontFamily:'Poppins_ExtraBold'
   }
 });

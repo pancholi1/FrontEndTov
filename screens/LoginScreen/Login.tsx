@@ -205,14 +205,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
-    backgroundColor:
-      "linear-gradient(180deg, rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100%)",
+    backgroundColor:"rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08)",
     padding: "3%",
   },
 
   login_butontext: {
     fontSize: 18,
     color: "#DED3F4",
+    fontFamily:'Poppins_ExtraBold'
   },
 
   login_containerhelp: {
