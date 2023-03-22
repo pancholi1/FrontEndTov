@@ -19,6 +19,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
       </View>
       <View style={styles.login_container_ov}>
         <Text style={styles.login_subtitle_orientacion}>ORIENTACIÓN</Text>
+
         <Text style={styles.login_subtitle_vocacional}>VOCACIONAL</Text>
       </View>
 
@@ -29,6 +30,8 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
         >
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{
               borderRadius: 15,
               width: "100%",
@@ -48,6 +51,8 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
         >
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{
               borderRadius: 15,
               width: "100%",
@@ -85,12 +90,13 @@ const styles = StyleSheet.create({
   },
   login_container_text: {
     alignItems: "center",
-    width: "100%",
   },
 
   login_subtitle_text: {
     fontSize: 60,
     color: "#DED3F4",
+    fontFamily: "poppins",
+
   },
   login_container_ov: {
     justifyContent: "center",
@@ -99,10 +105,14 @@ const styles = StyleSheet.create({
   login_subtitle_orientacion: {
     color: "#06D6DD",
     fontSize: 33,
+    fontWeight: "600",
   },
   login_subtitle_vocacional: {
     color: "#06D6DD",
     fontSize: 30,
+    fontWeight: "600",
+    
+
   },
   login_button: {
     marginTop: 25,
@@ -118,7 +128,8 @@ const styles = StyleSheet.create({
   login_butontext: {
     fontSize: 20,
     color: "#DED3F4",
-    fontStyle: "normal",
+    fontFamily: "Poppins_Regular",
+
   },
   login_button_container: {
     alignItems: "center",

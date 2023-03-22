@@ -12,7 +12,7 @@ import PopUp from "../../components/PopUp";
 import TermsAndConditions from "../../components/TermsAndConditions";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+import { gradients, gradientsButton } from "../../constants/Gradients";
 import { patterns } from "../../constants/Patterns";
 
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
@@ -85,6 +85,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           <Text style={styles.text_input_name}>Nombre</Text>
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
             <TextInput
@@ -103,6 +105,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           <Text style={styles.text_input_name}>Apellido</Text>
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
             <TextInput
@@ -120,6 +124,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           <Text style={styles.text_input_name}>Email</Text>
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
             <TextInput
@@ -138,6 +144,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           <Text style={styles.text_input_name}>Contraseña</Text>
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
             <TextInput
@@ -159,6 +167,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           <Text style={styles.text_input_name}>Fecha de Nacimiento</Text>
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
             <TextInput
@@ -180,6 +190,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           <Text style={styles.text_input_name}>Escuela</Text>
           <LinearGradient
             colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
             <TextInput
@@ -192,17 +204,28 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             />
           </LinearGradient>
         </View>
-        <Pressable
-          onPress={sendInfo}
-          style={
-            isFormDisabled
-              ? styles.button_signup_disabled
-              : styles.button_signup
-          }
-          disabled={isFormDisabled}
-        >
-          <Text style={styles.text_button}>Registrate</Text>
-        </Pressable>
+        <View style={styles.buttonContainer}>
+          <LinearGradient
+            colors={gradientsButton.inputs}
+            style={
+              isFormDisabled
+                ? styles.button_gradient_disable
+                : styles.button_gradient
+            }
+          >
+            <Pressable
+              onPress={sendInfo}
+              style={
+                isFormDisabled
+                  ? styles.button_signup_disabled
+                  : styles.button_signup
+              }
+              disabled={isFormDisabled}
+            >
+              <Text style={styles.text_button}>Registrate</Text>
+            </Pressable>
+          </LinearGradient>
+        </View>
         <TermsAndConditions />
       </ScrollView>
     </View>
@@ -232,9 +255,12 @@ const styles = StyleSheet.create({
   },
   text_input_name: {
     fontWeight: "600",
-    fontSize: 18,
+    fontSize: 15,
     marginBottom: 10,
     color: "#B39AE7",
+    fontFamily: "Poppins_Regular",
+    lineHeight: 21,
+    fontStyle: "semibold",
   },
 
   input_nombre: {
@@ -244,34 +270,50 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 14,
     color: "white",
-    opacity: 2,
+    opacity: 1,
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
   },
   error: {
     paddingVertical: 10,
     color: "red",
   },
   button_signup: {
-    backgroundColor: "#06D6DD",
-    margin: 30,
-    padding: 15,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "4%",
+    borderBottomWidth: 0.5,
+    borderColor: "#036B6E",
     borderRadius: 15,
-    marginLeft: "8%",
-    width: "84%",
+    borderRightWidth: 3,
+    borderTopWidth: 1,
   },
   button_signup_disabled: {
-    backgroundColor: "#06D6DD",
-    margin: 30,
-    padding: 15,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "4%",
+    borderBottomWidth: 0.5,
+    borderColor: "#036B6E",
     borderRadius: 15,
-    marginLeft: "8%",
-    width: "84%",
+    borderRightWidth: 3,
+    borderTopWidth: 1,
+  },
+  button_gradient: {
+    opacity: 1,
+    borderRadius: 15,
+  },
+  button_gradient_disable: {
     opacity: 0.3,
+    borderRadius: 15,
   },
   text_button: {
     fontWeight: "500",
     fontSize: 20,
     textAlign: "center",
     color: "white",
+    fontFamily: "Poppins_Regular",
   },
   text_bottom: {
     width: "90%",
@@ -282,5 +324,8 @@ const styles = StyleSheet.create({
     marginTop: "3%",
     marginBottom: "5%",
     textAlign: "center",
+  },
+  buttonContainer: {
+    padding: 30,
   },
 });
