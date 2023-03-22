@@ -81,7 +81,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
             </View>
 
             <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Personality")}>
+              <Pressable onPress={() => navigation.navigate("TestMMYMGScreen")}>
                 <Text style={styles.personalidad_title}>Test MM & MG</Text>
               </Pressable>
 
@@ -110,7 +110,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
             </View>
 
             <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Resultados")}>
+              <Pressable onPress={() => navigation.navigate("Test5GrandesScreen")}>
                 <Text style={styles.personalidad_title}>
                   Test de los 5 Grandes
                 </Text>
@@ -284,3 +284,4 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+

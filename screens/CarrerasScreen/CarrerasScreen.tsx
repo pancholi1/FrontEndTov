@@ -8,12 +8,11 @@ type CarrerasScreenProps = {
   route: RouteProp<RootStackParamList, 'CarrerasScreen'>;
 };
 
-function CarrerasScreen({ route }: CarrerasScreenProps) {
+function CarrerasTest2({ route }: CarrerasScreenProps) {
     let msjHabilidad: string = '';
     let msjInteres: string = '';
 
     const { habilidad, intereses, area } = route.params;
-    console.log(habilidad, intereses, 'asd');
 
 
     if(habilidad === 'C'){
@@ -97,4 +96,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CarrerasScreen
+export default CarrerasTest2

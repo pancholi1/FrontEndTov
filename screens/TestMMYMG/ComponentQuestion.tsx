@@ -1,38 +1,34 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 
-interface SurveyProps {
-  id: number;
-  question: string;
-  resultado: string;
-  onAnswered: (answer: boolean) => void;
-}
 
-const Survey: React.FC<SurveyProps> = ({ id, question, resultado, onAnswered }) => {
+const ComponentQuestion = ({id ,question ,onAnswered}) => {
+
     const [answer, setAnswer] = useState<boolean | null>(null);
-  const handleYes = () => {
-    setAnswer(true);
-    onAnswered(true);
-  };
 
-  const handleNo = () => {
-    setAnswer(false);
-    onAnswered(false);
-  };
+    const handleYes = () => {
+        setAnswer(true);
+        onAnswered(true);
+      };
+    
+      const handleNo = () => {
+        setAnswer(false);
+        onAnswered(false);
+      };
 
   return (
-        <View style={styles.container}>
-            <View style={styles.container_test}>
-                <Text style={styles.numero_test}>{id}/98</Text>
-                <Text style={styles.text_test}>{question}</Text>
-                <Pressable style={styles.button} onPress={handleYes}><Text style={styles.button_text}>SI</Text></Pressable>
-                <Pressable style={styles.button2} onPress={handleNo}><Text style={styles.button_text}>NO</Text></Pressable>
-            </View>
- 
+      <View style={styles.container}>
+    <View style={styles.container_test}>
+        <Text style={styles.numero_test}>{id}/80</Text>
+        <Text style={styles.text_test}>{question}</Text>
+        <Pressable style={styles.button} onPress={handleYes}><Text style={styles.button_text}>ME INTERESA</Text></Pressable>
+        <Pressable style={styles.button2} onPress={handleNo}><Text style={styles.button_text}>NO ME INTERESA</Text></Pressable>
     </View>
-
-  );
+</View>
+  )
 };
+
+export default ComponentQuestion
 
 const styles = StyleSheet.create({
     container:{
@@ -89,5 +85,3 @@ const styles = StyleSheet.create({
         fontFamily:"Poppins_ExtraBold",
     },
 });
-
-export default Survey;
