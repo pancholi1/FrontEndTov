@@ -52,7 +52,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           />
         </View>
         <View style={styles.contenedor_text}>
-          <Pressable onPress={() => navigation.navigate("Resultados")}>
+          <Pressable onPress={() => navigation.navigate("TestMMYMGScreen")}>
             <Text style={styles.personalidad_title}>Test psicotécnico</Text>
           </Pressable>
           <Text style={styles.textCard} numberOfLines={3}>

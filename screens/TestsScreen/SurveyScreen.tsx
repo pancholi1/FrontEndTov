@@ -171,7 +171,6 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
       
 
       const carrerasPosibles = (propiedadMayorHabilidades:string, propiedadMayorIntereses:string, area:string) => {
-        console.log(propiedadMayorHabilidades, propiedadMayorIntereses);
         navigation.navigate('CarrerasScreen', {
           habilidad:propiedadMayorHabilidades,
           intereses: propiedadMayorIntereses,
