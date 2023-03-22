@@ -23,10 +23,17 @@ const styles = StyleSheet.create({
     color: "#5f52ab",
     marginTop: 15,
     margin: 5,
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
+    lineHeight: 18,
+
   },
   login_parrafohelp_finish: {
     color: "#06D6DD",
     marginTop: 15,
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
+    lineHeight: 18,
   },
 });
 

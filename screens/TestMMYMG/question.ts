@@ -4,7 +4,7 @@ interface QuestionData {
     area: string;
 }
 
-export const questions: QuestionData[]= [
+export const questions2: QuestionData[]= [
     {
         id:1,
         question:'Diseñar programas de computación y explorar nuevas aplicaciones tecnológicas para el uso de internet.',

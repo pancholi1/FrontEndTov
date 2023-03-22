@@ -225,6 +225,7 @@ function RootNavigator() {
           component={SingUpScreen}
           options={({ navigation }: RootTabScreenProps<"SingUp">) => ({
             title: "",
+            headerStyle: { backgroundColor: "#130C34" },
 
             headerLeft: () => (
               <Pressable

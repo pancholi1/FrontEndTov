@@ -16,7 +16,7 @@ const Personality = ({ navigation }: RootStackScreenProps<"Personality">) => {
       <ScrollView style={{ width: '90%',    marginTop:"10%"}}>
 
                     <View style={styles.contenedor_test}>
-                      <Text style={styles.name_test}>Test de Personalidad</Text>
+                      <Text style={styles.name_test}>Test Chaside</Text>
                       <Text style={styles.text_test}>
                         Este primer test consta de un total de 98 preguntas que deberán ser respondidas con “SI” o con “NO” dependiendo como te veas frente a diversas situaciones.
                         Una vez seleccionada la respuesta, las preguntas se irán pasando automáticamente. A pesar de que parezca que son muchas, el test es muy sencillo y lleva solo unos pocos minutos.

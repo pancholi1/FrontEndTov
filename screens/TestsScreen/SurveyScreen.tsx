@@ -8,7 +8,7 @@ import { RootStackScreenProps } from "../../types";
 const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
     const [answers, setAnswers] = useState<boolean[]>([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [sumaAreasIntereses, setSumaAreasIntereses] = useState({//VER SI ME CONVIENE HACER UN ARRAY DE OBJ PARA DESP RECORRERLO
+    const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
         C:0,
         H:0,
         A:0,
@@ -17,7 +17,7 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
         D:0,
         E:0
     })
-    const [sumaAreasHabilidades, setSumaAreasHabilidades] = useState({//VER SI ME CONVIENE HACER UN ARRAY DE OBJ PARA DESP RECORRERLO
+    const [sumaAreasHabilidades, setSumaAreasHabilidades] = useState({
         C:0,
         H:0,
         A:0,
@@ -253,7 +253,6 @@ const styles = StyleSheet.create({
     fontFamily:'Poppins_Regular'
   },
   button:{
-    //marginTop: 35,
     width: "80%",
     alignItems: "center",
     borderRadius: 15,

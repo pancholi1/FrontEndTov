@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { RootStackScreenProps } from '../../types';
 import ComponentQuestion from './ComponentQuestion';
-import { questions } from './question';
+import { questions2 } from './question';
 
 
 
@@ -27,19 +27,19 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
         setCurrentQuestion(currentQuestion + 1);
 
         if(answer === true){
-            if(questions[currentQuestion].area === 'Ciencias Sociales y Humanística'){
+            if(questions2[currentQuestion].area === 'Ciencias Sociales y Humanística'){
                 setCountQuestion({...countQuestion, CSH:countQuestion.CSH + 1})
             }
-            if(questions[currentQuestion].area === 'Económica, Administrativa y Financiera'){
+            if(questions2[currentQuestion].area === 'Económica, Administrativa y Financiera'){
                 setCountQuestion({...countQuestion, EAF:countQuestion.EAF + 1})
             }
-            if(questions[currentQuestion].area === 'Ciencia y Tecnología'){
+            if(questions2[currentQuestion].area === 'Ciencia y Tecnología'){
                 setCountQuestion({...countQuestion, CT:countQuestion.CT + 1})
             }
-            if(questions[currentQuestion].area === 'Arte y Creatividad'){
+            if(questions2[currentQuestion].area === 'Arte y Creatividad'){
                 setCountQuestion({...countQuestion, AC:countQuestion.AC + 1})
             }
-            if(questions[currentQuestion].area === 'Ciencias Ecológicas, Biológicas y de la Salud'){
+            if(questions2[currentQuestion].area === 'Ciencias Ecológicas, Biológicas y de la Salud'){
                 setCountQuestion({...countQuestion, CB:countQuestion.CB + 1})
             }
         }
@@ -109,7 +109,7 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
         })
     }
 
-    if(currentQuestion >= questions.length){
+    if(currentQuestion >= questions2.length){
         console.log('estado', countQuestion)
         
         return(
@@ -138,8 +138,8 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
   return (
         <View style={styles.container}>
             <ComponentQuestion
-            id={questions[currentQuestion].id}
-            question={questions[currentQuestion].question}
+            id={questions2[currentQuestion].id}
+            question={questions2[currentQuestion].question}
             onAnswered={handleAnswered}/>
         </View>
   )
@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins_Regular'
       },
       button:{
-        //marginTop: 35,
         width: "80%",
         alignItems: "center",
         borderRadius: 15,
