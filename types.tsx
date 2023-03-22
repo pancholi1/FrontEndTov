@@ -30,6 +30,10 @@ export type RootStackParamList = {
   Login: undefined;
   Calendar: undefined;
   ResultTestScreen: undefined;
+  Test: undefined;
+  TarjetaTest: undefined;
+  CarrerasScreen: {habilidad: string, intereses:string, area:string};
+  SurveyScreen: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -47,6 +51,9 @@ export type RootTabParamList = {
   MainScreen: undefined;
   Login: undefined;
   Calendar: undefined;
+  TarjetaTest: undefined;
+  CarrerasScreen: {habilidad: string, intereses:string, area:string};
+  SurveyScreen: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =

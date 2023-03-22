@@ -35,6 +35,10 @@ import {
   ResultTestScreen,
   SingUpScreen,
 } from "../screens";
+import Login from "../screens/Login";
+import Personality from "../screens/PersonalityScreen/Personality";
+import CarrerasScreen from "../screens/CarrerasScreen/CarrerasScreen";
+import SurveyScreen from "../screens/TestsScreen/SurveyScreen";
 
 export default function Navigation({
   colorScheme,
@@ -112,23 +116,39 @@ function RootNavigator() {
           name="BottomTabNavigator"
           component={BottomTabNavigator}
         />
+
+
         <Stack.Screen
           name="Personality"
-          component={PersonalityScreen}
-          options={({ navigation }: RootTabScreenProps<"Personality">) => ({
-            title: "Personalidad",
-            headerLeft: () => (
-              <Pressable
-                onPress={() => navigation.goBack()}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                })}
-              >
-                <TabBarIcon name="arrow-left" color={"white"} />
-              </Pressable>
-            ),
-          })}
+          component={Personality}
+          options={{
+            title: "Test de Personalidad",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
         />
+        <Stack.Screen
+             name="SurveyScreen"
+             component={SurveyScreen}
+             options={{
+               title: "Test",
+               headerTitleAlign: "center",
+               headerStyle: { backgroundColor: "#130C34" },
+               headerTitleStyle: {
+                 color: "white",
+                 fontFamily: "Poppins_ExtraBold",
+                 fontSize: 20,
+               },
+               headerTintColor: "#06D6DD",
+             }}
+        />
+
         <Stack.Screen
           name="Calendar"
           component={CalendarInterviewScreen}
@@ -166,6 +186,21 @@ function RootNavigator() {
           })}
         />
       </Stack.Group>
+      <Stack.Screen 
+      name='CarrerasScreen'
+      component={CarrerasScreen}
+      options={{
+        title: "Carreras",
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#130C34" },
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "Poppins_ExtraBold",
+          fontSize: 20,
+        },
+        headerTintColor: "#06D6DD",
+      }}
+      />
     </Stack.Navigator>
   );
 }
@@ -220,7 +255,6 @@ function BottomTabNavigator() {
           ),
         })}
       />
-
       <BottomTab.Screen
         name="Planes"
         component={PlanesScreen}
@@ -245,6 +279,8 @@ function BottomTabNavigator() {
           ),
         })}
       />
+
+
 
       <BottomTab.Screen
         name="Resultados"

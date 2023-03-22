@@ -3,105 +3,76 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
-  StatusBar,
+  Pressable,
 } from "react-native";
 import React from "react";
+import { RootStackScreenProps } from "../../types";
 
-import { arrayForm } from "../../constants/DateMock";
-import { SafeAreaView } from "react-native-safe-area-context";
-interface PropsQuestionsInput {
-  id: number;
-  answers: { id: number };
-}
 
-const Personality = () => {
-  const [questionInput, setQuestionInput] = React.useState<
-    PropsQuestionsInput[]
-  >([]);
+const Personality = ({ navigation }: RootStackScreenProps<"Personality">) => {
+  return(
+    <View style={styles.container}>
 
-  const mostrarAsk = arrayForm.map((ask, i) => {
-    const mostrarAnswers = ask.answers.map((answer, e) => {
-      return (
-        <Text key={e}>
-          {e + 1}. {answer.answer}
-          <TouchableOpacity
-            style={[
-              styles.button,
-              {
-                backgroundColor: questionInput.some(
-                  (question) =>
-                    ask.id === question.id && answer.id === question.answers.id
-                )
-                  ? "#6200ee"
-                  : "white",
-              },
-            ]}
-            onPress={() => {
-              const newQuestion = {
-                id: ask.id,
-                answers: { id: answer.id },
-              };
-              const removeQuestionInput = questionInput.filter((question) => {
-                return question.id !== newQuestion.id;
-              });
-              setQuestionInput([...removeQuestionInput, newQuestion]);
-            }}
-          ></TouchableOpacity>
-        </Text>
-      );
-    });
-    return (
-      <View key={i}>
-        <Text style={styles.login_title}>
-          {i}. {ask.ask}
-        </Text>
-        {mostrarAnswers}
-      </View>
-    );
-  });
+      <ScrollView style={{ width: '90%',    marginTop:"10%"}}>
 
-  return (
-    <View style={styles.container_answer_row}>
-      <Text style={styles.login_title}>Formulario de Personalidad</Text>
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>{mostrarAsk}</ScrollView>
-      </SafeAreaView>
+                    <View style={styles.contenedor_test}>
+                      <Text style={styles.name_test}>Test de Personalidad</Text>
+                      <Text style={styles.text_test}>
+                        Este primer test consta de un total de 98 preguntas que deberán ser respondidas con “SI” o con “NO” dependiendo como te veas frente a diversas situaciones.
+                        Una vez seleccionada la respuesta, las preguntas se irán pasando automáticamente. A pesar de que parezca que son muchas, el test es muy sencillo y lleva solo unos pocos minutos.
+                        Con esta herramienta lograremos ayudarte a conocer cuál sería la decisión más acertada partiendo de tus intereses, habilidades y/o preferencias, conocerás cual es el área ocupacional más acertada con tus elecciones.
+
+                      </Text>
+                    </View>
+      <Pressable 
+      onPress={() => navigation.navigate("SurveyScreen")}
+      style={styles.button}><Text style={styles.text_button}>COMENZAR TEST</Text></Pressable>
+      </ScrollView>
     </View>
-  );
+  )
 };
 
 export default Personality;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
+  container:{
+    flex:1,
+    backgroundColor: "#130C34",
+    alignItems:"center",
   },
-  scrollView: {
-    backgroundColor: "#f9f9f9",
+  contenedor_test:{
+   width:"100%",
+   alignItems:"center",
+   textAlign:"center",
+   backgroundColor:"rgb(40, 32, 86)",
+   borderRadius:15,
   },
-
-  container_answer_row: {
-    flex: 1,
-    backgroundColor: "white",
-    padding: 10,
+  name_test:{
+    fontWeight:"700",
+    fontSize:16,
+    color: "#DED3F4",
+    padding:"4%",
+    fontFamily: "Poppins_Regular"
   },
-  login_title: {
-    marginTop: 30,
-
-    fontWeight: "800",
-    padding: 10,
-    color: "#ca8941",
+  text_test:{
+    width:"85%",
+    alignItems: 'center',
+    paddingBottom:"5%",
+    color:"rgba(222, 211, 244, 1)",
+    fontFamily: "Poppins_Regular"
   },
-  button: {
-    padding: 15,
-    margin: 10,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: "#6200ee",
-    backgroundColor: "white",
+  button:{
+    marginTop: 35,
+    width: "80%",
     alignItems: "center",
-    justifyContent: "center",
+    borderRadius: 15,
+    backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08)",
+    padding:"3%",
+    marginLeft:"10%"
   },
+  text_button:{
+    fontSize: 18,
+    color:"#DED3F4",
+    fontFamily:'Poppins_ExtraBold'
+  }
 });
