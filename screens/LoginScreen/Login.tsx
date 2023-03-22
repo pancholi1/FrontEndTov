@@ -17,6 +17,7 @@ import { Formik } from "formik";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients } from "../../constants/Gradients";
+import { gradientsButton } from "../../constants/Gradients";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const submit = async (props) => {
@@ -93,6 +94,8 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
             <View style={styles.login_containerInput}>
               <LinearGradient
                 colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
                 //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
                 style={{ borderRadius: 15 }}
               >
@@ -115,6 +118,8 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
 
               <LinearGradient
                 colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
                 //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
                 style={{ borderRadius: 15, marginTop: "3%" }}
               >
@@ -136,14 +141,21 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               {props.errors.password && props.touched.password ? (
                 <Text style={styles.errors}>{props.errors.password}</Text>
               ) : null}
-
               <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
-              <Pressable
-                style={styles.login_button}
-                onPress={() => props.handleSubmit()}
-              >
-                <Text style={styles.login_butontext}> Ingresar </Text>
-              </Pressable>
+
+              <View>
+                <LinearGradient
+                  colors={gradientsButton.inputs}
+                  style={{ borderRadius: 15 }}
+                >
+                  <Pressable
+                    style={styles.login_button}
+                    onPress={() => props.handleSubmit()}
+                  >
+                    <Text style={styles.login_butontext}> Ingresar </Text>
+                  </Pressable>
+                </LinearGradient>
+              </View>
             </View>
           )}
         </Formik>
@@ -182,7 +194,6 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    //flex: 1,
     width: "100%",
     borderColor: "#B39AE7",
     borderWidth: 2,
@@ -190,33 +201,40 @@ const styles = StyleSheet.create({
     padding: 14,
     color: "white",
     opacity: 2,
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
   },
   text: {
     width: "80%",
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: "600",
     color: "#B39AE7",
     marginTop: "3%",
+    paddingBottom: 25,
+    fontFamily: "Poppins_Regular",
   },
 
   login_button: {
-    marginTop: 35,
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    padding: "4%",
+    borderBottomWidth: 0.5,
+    borderColor: "#036B6E",
     borderRadius: 15,
-    backgroundColor:
-      "linear-gradient(180deg, rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100%)",
-    padding: "3%",
+    borderRightWidth: 3,
+    borderTopWidth: 1,
   },
 
   login_butontext: {
-    fontSize: 18,
-    color: "#DED3F4",
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold",
+    fontFamily: "Poppins_Regular",
   },
 
   login_containerhelp: {
-    marginTop: "10%",
+    marginTop: 8,
     width: "100%",
     alignItems: "center",
     padding: 5,
@@ -224,13 +242,13 @@ const styles = StyleSheet.create({
   },
   login_titlehelp: {
     textAlign: "center",
+    fontFamily: "Poppins_Regular",
 
     fontWeight: "600",
     fontSize: 17,
     color: "rgba(6, 214, 221, 0.6)",
   },
   login_parrafohelp: {
-    padding: 5,
     color: "rgba(6, 214, 221, 0.4)",
     marginTop: 8,
     textAlign: "center",
