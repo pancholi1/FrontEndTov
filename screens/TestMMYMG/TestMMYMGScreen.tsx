@@ -2,17 +2,47 @@ import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { RootStackScreenProps } from '../../types'
 
+import { LinearGradient } from "expo-linear-gradient";
+import { gradients } from "../../constants/Gradients";
+
 const TestMMYMGScreen = ({ navigation }: RootStackScreenProps<"TestMMYMGScreen">) => {
   return (
     <View style={styles.container}>
       <View style={styles.contenedor_test}>
+      <LinearGradient
+          colors={gradients.inputs}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          style={{  width:"90%",
+          alignItems:"center",
+          borderRadius:15,}}
+        >
         <Text style={styles.name_test}>Test MM Y MG</Text>
         <Text style={styles.text_test}>El segundo test consta de un total de 80 preguntas que deberán ser respondidas con “ME INTERESA” o con “NO ME INTERESA” dependiendo como te veas frente a diversas situaciones.
         Una vez seleccionada la respuesta, las preguntas se irán pasando automáticamente. No existen respuestas correctas o incorrectas; lo importante es que contestes con sinceridad y confianza para que puedas conocer mejor tus intereses vocacionales.
         De acuerdo a tus respuestas, obtendrás un resultado con las dos categorías o áreas de conocimiento que más se adapten a tí. </Text>
 
+      </LinearGradient>
       </View>
-        <Pressable style={styles.button} onPress={() => navigation.navigate('TestMMYMG')}><Text style={styles.text_button}>COMENZAR TEST </Text></Pressable>
+        <Pressable style={styles.button} onPress={() => navigation.navigate('TestMMYMG')}>
+          <LinearGradient
+                    colors={gradients.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      borderRadius: 15,
+                      width: "100%",
+                      height: 54,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderColor: "#7B68A9",
+                      borderWidth: 1,
+                    }}
+                  >
+                    <Text style={styles.text_button}>COMENZAR TEST </Text>
+                  </LinearGradient>
+                </Pressable>
+
     </View>
   )
 }
@@ -30,7 +60,6 @@ const styles = StyleSheet.create({
     width:"90%",
     alignItems:"center",
     textAlign:"center",
-    backgroundColor:"rgb(40, 32, 86)",
     borderRadius:15,
     marginTop:'10%'
    },
@@ -38,9 +67,6 @@ const styles = StyleSheet.create({
     marginTop: 35,
     width: "80%",
     alignItems: "center",
-    borderRadius: 15,
-    backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08)",
-    padding:"3%",
   },
   text_button:{
     fontSize: 18,
