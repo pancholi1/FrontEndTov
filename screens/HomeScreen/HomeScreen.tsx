@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     borderEndWidth:4,
   },
   title_progreso: {
-    fontFamily: "Poppins_Regular",
+    fontFamily: "Poppins_SemiBold",
     fontStyle: "normal",
     lineHeight: 38,
     color: "#DED3F4",
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     margin: 8,
     fontWeight: "700",
     fontSize: 20,
-    fontFamily: "Poppins_Regular",
+    fontFamily: "Poppins_SemiBold",
   },
   test_personalidad: {
     borderRadius: 15,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
 
   personalidad_title: {
     fontSize: 20,
-    fontFamily: "Poppins_Regular",
+    fontFamily: "Poppins_SemiBold",
     color: "#DED3F4",
     fontWeight: "600",
     lineHeight: 30,
@@ -272,11 +272,12 @@ const styles = StyleSheet.create({
   },
   textCard: {
     fontFamily: "Poppins_Regular",
-    fontStyle: "normal",
     color: "#DED3F4",
-    fontWeight: "700",
-    fontSize: 14,
+    fontSize: 15,
     width: "70%",
+    lineHeight: 17.5,
+
+    
   },
 
   contenedor_text: {
