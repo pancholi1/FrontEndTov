@@ -4,6 +4,9 @@ import { RootStackScreenProps } from '../../types';
 import ComponentQuestion from './ComponentQuestion';
 import { questions2 } from './question';
 
+import { LinearGradient } from "expo-linear-gradient";
+import { gradients } from "../../constants/Gradients";
+
 
 
 
@@ -110,25 +113,68 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
     }
 
     if(currentQuestion >= questions2.length){
-        console.log('estado', countQuestion)
-        
+
         return(
             <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
             <View style={styles.container}>
                 <View style={styles.container_test}>
-                    <Text style={styles.title}>1ER ÁREA OCUPACIONAL</Text>
+                <LinearGradient
+                    colors={gradients.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={styles.container_test}
+                    >
+                    <Text style={styles.title}>1ER ÁREA OCUPACIONAL:</Text>
                     <Text style={styles.thankYou}>{msjArea1}</Text>
                     <Pressable style={styles.button} >
+                    <LinearGradient
+                    colors={gradients.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      borderRadius: 15,
+                      width: "100%",
+                      height: 54,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderColor: "#7B68A9",
+                      borderWidth: 1,
+                    }}
+                  >
                         <Text style={styles.text_button} onPress={() => carrerasPosibles(area1, area2,'areaUno')}>CARRERAS POSIBLES</Text>
+                        </LinearGradient>
                     </Pressable>
+                    </LinearGradient>
                 </View>
                 <View style={styles.container_test}>
-                    <Text style={styles.title}>2DA ÁREA OCUPACIONAL</Text>
+                <LinearGradient
+                    colors={gradients.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={styles.container_test}
+                    >
+                    <Text style={styles.title}>2DA ÁREA OCUPACIONAL:</Text>
                     <Text style={styles.thankYou}>{msjArea2} </Text>
                     <Text style={styles.thankYou}></Text>
                     <Pressable style={styles.button} >
+                    <LinearGradient
+                    colors={gradients.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      borderRadius: 15,
+                      width: "100%",
+                      height: 54,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderColor: "#7B68A9",
+                      borderWidth: 1,
+                    }}
+                  >
                         <Text style={styles.text_button} onPress={() => carrerasPosibles(area1, area2, 'areaDos')}>CARRERAS POSIBLES</Text>
+                        </LinearGradient>
                     </Pressable>
+                    </LinearGradient>
                 </View>
             </View>
           </ScrollView>
@@ -153,12 +199,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#130C34',
       },
       container_test:{
-        marginTop:"8%",
+        marginTop:"4%",
         borderRadius:15,
         width:"90%",
         alignItems:"center",
         textAlign:"center",
-        backgroundColor:"rgb(40, 32, 86)",
     },
       thankYou: {
         color:"rgba(222, 211, 244, 1)",
@@ -183,8 +228,6 @@ const styles = StyleSheet.create({
         width: "80%",
         alignItems: "center",
         borderRadius: 15,
-        backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) ",
-        padding:"3%",
         marginBottom:"3%"
       },
       text_button:{
