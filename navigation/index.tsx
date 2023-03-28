@@ -46,8 +46,6 @@ import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
 import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
 import QuestionTest from "../screens/Test5Grandes/QuestionTest";
 
-
-
 export default function Navigation({
   colorScheme,
 }: {
@@ -125,7 +123,6 @@ function RootNavigator() {
           component={BottomTabNavigator}
         />
 
-
         <Stack.Screen
           name="Personality"
           component={Personality}
@@ -142,67 +139,66 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
-             name="SurveyScreen"
-             component={SurveyScreen}
-             options={{
-               title: "Test",
-               headerTitleAlign: "center",
-               headerStyle: { backgroundColor: "#130C34" },
-               headerTitleStyle: {
-                 color: "white",
-                 fontFamily: "Poppins_ExtraBold",
-                 fontSize: 20,
-               },
-               headerTintColor: "#06D6DD",
-             }}
+          name="SurveyScreen"
+          component={SurveyScreen}
+          options={{
+            title: "Test",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
         />
 
-
         <Stack.Screen
-             name="TestMMYMG"
-             component={TestMMYMG}
-             options={{
-               title: "TestMMYMG",
-               headerTitleAlign: "center",
-               headerStyle: { backgroundColor: "#130C34" },
-               headerTitleStyle: {
-                 color: "white",
-                 fontFamily: "Poppins_ExtraBold",
-                 fontSize: 20,
-               },
-               headerTintColor: "#06D6DD",
-             }}
+          name="TestMMYMG"
+          component={TestMMYMG}
+          options={{
+            title: "TestMMYMG",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
         />
         <Stack.Screen
-             name="TestMMYMGScreen"
-             component={TestMMYMGScreen}
-             options={{
-               title: "TestMMYMG",
-               headerTitleAlign: "center",
-               headerStyle: { backgroundColor: "#130C34" },
-               headerTitleStyle: {
-                 color: "white",
-                 fontFamily: "Poppins_ExtraBold",
-                 fontSize: 20,
-               },
-               headerTintColor: "#06D6DD",
-             }}
-             />
-               <Stack.Screen 
-               name='CarrerasTest2'
-               component={CarrerasTest2}
-               options={{
-                 title: "Carreras",
-                 headerTitleAlign: "center",
-                 headerStyle: { backgroundColor: "#130C34" },
-                 headerTitleStyle: {
-                   color: "white",
-                   fontFamily: "Poppins_ExtraBold",
-                   fontSize: 20,
-                 },
-                 headerTintColor: "#06D6DD",
-               }}
-               />
+          name="TestMMYMGScreen"
+          component={TestMMYMGScreen}
+          options={{
+            title: "TestMMYMG",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
+        />
+        <Stack.Screen
+          name="CarrerasTest2"
+          component={CarrerasTest2}
+          options={{
+            title: "Carreras",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
+        />
         <Stack.Screen
           name="Calendar"
           component={CalendarInterviewScreen}
@@ -240,66 +236,51 @@ function RootNavigator() {
           })}
         />
       </Stack.Group>
-      <Stack.Screen 
-      name='CarrerasScreen'
-      component={CarrerasScreen}
-      options={{
-        title: "Carreras",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerTintColor: "#06D6DD",
-      }}
+      <Stack.Screen
+        name="CarrerasScreen"
+        component={CarrerasScreen}
+        options={{
+          title: "Carreras",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
       />
-      
-      <Stack.Screen 
-      name='Test5Grandes'
-      component={Test5Grandes}
-      options={{
-        title: "Carreras",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerTintColor: "#06D6DD",
-      }}
+
+      <Stack.Screen
+        name="Test5Grandes"
+        component={Test5Grandes}
+        options={{
+          title: "Carreras",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
       />
-      <Stack.Screen 
-      name='Test5GrandesScreen'
-      component={Test5GrandesScreen}
-      options={{
-        title: "Carreras",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerTintColor: "#06D6DD",
-      }}
-      />
-      <Stack.Screen 
-      name='QuestionTest'
-      component={QuestionTest}
-      options={{
-        title: "Carreras",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerTintColor: "#06D6DD",
-      }}
+      <Stack.Screen
+        name="Test5GrandesScreen"
+        component={Test5GrandesScreen}
+        options={{
+          title: "Carreras",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
       />
     </Stack.Navigator>
   );
@@ -379,8 +360,6 @@ function BottomTabNavigator() {
           ),
         })}
       />
-
-
 
       <BottomTab.Screen
         name="Resultados"
