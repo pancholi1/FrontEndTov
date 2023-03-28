@@ -19,6 +19,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { gradients } from "../../constants/Gradients";
 import { gradientsButton } from "../../constants/Gradients";
 
+
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const submit = async (props) => {
     const value = true;
@@ -144,17 +145,28 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
 
               <View>
-                <LinearGradient
-                  colors={gradientsButton.inputs}
-                  style={{ borderRadius: 15 }}
-                >
+
                   <Pressable
                     style={styles.login_button}
                     onPress={() => props.handleSubmit()}
-                  >
+                  >                  
+                  <LinearGradient
+                  colors={gradients.inputs}
+                  start={{ x: 1, y: 1 }}
+                  end={{ x: 0, y: 0 }}
+                  style={{
+                    borderRadius: 15,
+                    width: "100%",
+                    height: 54,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderColor: "#7B68A9",
+                    borderWidth: 1,
+                  }}
+                >
                     <Text style={styles.login_butontext}> Ingresar </Text>
-                  </Pressable>
                 </LinearGradient>
+                  </Pressable>
               </View>
             </View>
           )}
@@ -218,12 +230,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    padding: "4%",
     borderBottomWidth: 0.5,
-    borderColor: "#036B6E",
-    borderRadius: 15,
-    borderRightWidth: 3,
-    borderTopWidth: 1,
   },
 
   login_butontext: {

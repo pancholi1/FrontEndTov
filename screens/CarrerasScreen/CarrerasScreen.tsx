@@ -2,18 +2,19 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
+import { LinearGradient } from 'expo-linear-gradient';
+import { gradients } from '../../constants/Gradients';
 
 
 type CarrerasScreenProps = {
   route: RouteProp<RootStackParamList, 'CarrerasScreen'>;
 };
 
-function CarrerasScreen({ route }: CarrerasScreenProps) {
+function CarrerasTest2({ route }: CarrerasScreenProps) {
     let msjHabilidad: string = '';
     let msjInteres: string = '';
 
     const { habilidad, intereses, area } = route.params;
-    console.log(habilidad, intereses, 'asd');
 
 
     if(habilidad === 'C'){
@@ -64,8 +65,15 @@ function CarrerasScreen({ route }: CarrerasScreenProps) {
   return (
     <View style={styles.container}>
         <View style={styles.container_area}>
+        <LinearGradient
+          colors={gradients.inputs}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          style={styles.container_area}
+        >
             <Text style={styles.text}>Listado de posibles carreras dentro de ese area.</Text>
-            {area === 'habilidad'? <Text style={styles.text}>{msjHabilidad}</Text> : <Text style={styles.text}>{msjInteres}</Text>}
+            {area === 'habilidad'? <Text style={styles.text2}>{msjHabilidad}</Text> : <Text style={styles.text2}>{msjInteres}</Text>}
+            </LinearGradient>
         </View>
     </View>
   )
@@ -84,17 +92,28 @@ const styles = StyleSheet.create({
         width:"90%",
         alignItems:"center",
         textAlign:"center",
-        backgroundColor:"rgb(40, 32, 86)",
+        height:300
     },
     text:{
         color:"rgba(222, 211, 244, 1)",
         fontWeight:"600",
-        fontSize:17,
+        fontSize:20,
         width:"85%",
         alignItems: 'center',
         marginTop:'5%',
-        marginBottom:'2%'
+        marginBottom:'2%',
+        fontFamily: "Poppins_Regular"
+    },
+    text2:{
+        color:"rgba(222, 211, 244, 1)",
+        fontWeight:"600",
+        fontSize:16,
+        width:"85%",
+        alignItems: 'center',
+        marginTop:'5%',
+        marginBottom:'2%',
+        fontFamily: "Poppins_Regular"
     },
 })
 
-export default CarrerasScreen
+export default CarrerasTest2

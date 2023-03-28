@@ -4,11 +4,14 @@ import Survey from './QuestionComponent';
 import surveyData from './questions'
 import { RootStackScreenProps } from "../../types";
 
+import { LinearGradient } from "expo-linear-gradient";
+import { gradients } from "../../constants/Gradients";
+
 
 const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
     const [answers, setAnswers] = useState<boolean[]>([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [sumaAreasIntereses, setSumaAreasIntereses] = useState({//VER SI ME CONVIENE HACER UN ARRAY DE OBJ PARA DESP RECORRERLO
+    const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
         C:0,
         H:0,
         A:0,
@@ -17,7 +20,7 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
         D:0,
         E:0
     })
-    const [sumaAreasHabilidades, setSumaAreasHabilidades] = useState({//VER SI ME CONVIENE HACER UN ARRAY DE OBJ PARA DESP RECORRERLO
+    const [sumaAreasHabilidades, setSumaAreasHabilidades] = useState({
         C:0,
         H:0,
         A:0,
@@ -171,7 +174,6 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
       
 
       const carrerasPosibles = (propiedadMayorHabilidades:string, propiedadMayorIntereses:string, area:string) => {
-        console.log(propiedadMayorHabilidades, propiedadMayorIntereses);
         navigation.navigate('CarrerasScreen', {
           habilidad:propiedadMayorHabilidades,
           intereses: propiedadMayorIntereses,
@@ -185,22 +187,72 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
     return (
       <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>
+        <LinearGradient
+          colors={gradients.inputs}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          style={{marginTop:"8%",
+          borderRadius:15,
+          width:"90%",
+          alignItems:"center",}}
+        >
             <View style={styles.container_test}>
                 <Text style={styles.title}>Intereses</Text>
                 <Text style={styles.thankYou}>Su area con mayor votos por interes es {msjInteres}</Text>
                 <Text style={styles.thankYou}>{textCarreraInteres}</Text>
                 <Pressable style={styles.button} onPress={() => carrerasPosibles(propiedadMayorHabilidades, propiedadMayorIntereses, 'interes')}>
+                  <LinearGradient
+                    colors={gradients.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      borderRadius: 15,
+                      width: "100%",
+                      height: 54,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderColor: "#7B68A9",
+                      borderWidth: 1,
+                    }}
+                  >
                     <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+                    </LinearGradient>
                 </Pressable>
             </View>
+            </LinearGradient>
+            <LinearGradient
+              colors={gradients.inputs}
+              start={{ x: 1, y: 1 }}
+              end={{ x: 0, y: 0 }}
+              style={{marginTop:"8%",
+              borderRadius:15,
+              width:"90%",
+              alignItems:"center",}}
+            >
             <View style={styles.container_test}>
                 <Text style={styles.title}>HABILIDADES</Text>
                 <Text style={styles.thankYou}>Su area con mayor votos por habilidad es: {msjHabilidad}</Text>
                 <Text style={styles.thankYou}>{textCarreraHabilidad}</Text>
                 <Pressable style={styles.button} onPress={() => carrerasPosibles(propiedadMayorHabilidades, propiedadMayorIntereses, 'habilidad')}>
+                <LinearGradient
+                    colors={gradients.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      borderRadius: 15,
+                      width: "100%",
+                      height: 54,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderColor: "#7B68A9",
+                      borderWidth: 1,
+                    }}
+                  >
                     <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+                    </LinearGradient>
                 </Pressable>
             </View>
+            </LinearGradient>
         </View>
       </ScrollView>
     );
@@ -227,12 +279,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#130C34',
   },
   container_test:{
-    marginTop:"8%",
+    marginTop:"4%",
     borderRadius:15,
     width:"90%",
     alignItems:"center",
     textAlign:"center",
-    backgroundColor:"rgb(40, 32, 86)",
+    //backgroundColor:"rgb(40, 32, 86)",
 },
   thankYou: {
     color:"rgba(222, 211, 244, 1)",
@@ -254,12 +306,10 @@ const styles = StyleSheet.create({
     fontFamily:'Poppins_Regular'
   },
   button:{
-    //marginTop: 35,
     width: "80%",
     alignItems: "center",
     borderRadius: 15,
-    backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) ",
-    padding:"3%",
+    margin:'3%',
     marginBottom:"3%"
   },
   text_button:{
