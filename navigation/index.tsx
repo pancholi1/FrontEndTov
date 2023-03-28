@@ -106,8 +106,8 @@ function RootNavigator() {
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
             headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
+              fontFamily: "Poppins_Regular",
+              color: "#06D6DD",
               fontSize: 20,
             },
             headerTintColor: "#06D6DD",
@@ -371,8 +371,8 @@ function BottomTabNavigator() {
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
-            color: "white",
-            fontFamily: "Poppins_ExtraBold",
+            color: "#06D6DD",
+            fontFamily: "Poppins_Regular",
             fontSize: 20,
           },
           headerTintColor: "#06D6DD",
