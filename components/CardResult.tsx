@@ -6,11 +6,12 @@ import { gradients } from "../constants/Gradients";
 export default function CardResult({ image, title, description }) {
   return (
     <View style={styles.container}>
-      <LinearGradient colors={gradients.inputs} style={{ borderRadius: 15 }}>
+      <LinearGradient colors={gradients.inputs}
+        start={{ x: 1, y: 1 }}
+        end={{ x: 0, y: 0 }}
+      style={{ borderRadius: 15 }}>
         <View style={styles.container_chart}>
-          <View style={styles.container_image}>
-            {image && <Image style={styles.img_card} source={image} />}
-          </View>
+          {image && <Image style={styles.img_card} source={image} />}
           <View>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.description}>{description}</Text>
@@ -27,7 +28,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#130C34",
-
   },
   container_chart: {
     padding: 15,
@@ -36,33 +36,29 @@ const styles = StyleSheet.create({
     height: 101,
     borderColor: "#B39AE7",
     borderWidth: 2,
-    opacity: 2,
     flexDirection: "row",
-
   },
   img_card: {
     height: 134,
     width: 107,
     marginLeft: -40,
     marginTop: -30,
-    
+  },
+
+  title: {
+    fontFamily: "Poppins_SemiBold",
+    color: "#DED3F4",
+    fontSize: 20,
+    fontWeight: "bold",
 
   },
-  container_image: {
- 
-  },
-  title: {
-    color: "#DED3F4",
-    fontWeight: "bold",
-    fontSize: 20,
-    lineHeight: 20,
-    marginBottom: 3,
-  },
+
   description: {
     color: "#DED3F4",
     width: "57%",
     textAlign: "left",
-    fontSize: 14,
-    fontWeight: "bold",
+    fontSize: 15,
+    lineHeight: 17.5,
+
   },
 });

@@ -14,6 +14,7 @@ export default function App() {
     await Font.loadAsync({
       Poppins_Regular: require("./assets/fonts/Poppins-Regular.ttf"),
       Poppins_ExtraBold: require("./assets/fonts/Poppins-ExtraBold.ttf"),
+      Poppins_SemiBold: require("./assets/fonts/Poppins-SemiBold.ttf"),
     });
   }
 
