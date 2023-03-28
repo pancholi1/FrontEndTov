@@ -117,7 +117,6 @@ function RootNavigator() {
           component={BottomTabNavigator}
         />
 
-
         <Stack.Screen
           name="Personality"
           component={Personality}
@@ -134,19 +133,19 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
-             name="SurveyScreen"
-             component={SurveyScreen}
-             options={{
-               title: "Test",
-               headerTitleAlign: "center",
-               headerStyle: { backgroundColor: "#130C34" },
-               headerTitleStyle: {
-                 color: "white",
-                 fontFamily: "Poppins_ExtraBold",
-                 fontSize: 20,
-               },
-               headerTintColor: "#06D6DD",
-             }}
+          name="SurveyScreen"
+          component={SurveyScreen}
+          options={{
+            title: "Test",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
         />
 
         <Stack.Screen
@@ -186,20 +185,20 @@ function RootNavigator() {
           })}
         />
       </Stack.Group>
-      <Stack.Screen 
-      name='CarrerasScreen'
-      component={CarrerasScreen}
-      options={{
-        title: "Carreras",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerTintColor: "#06D6DD",
-      }}
+      <Stack.Screen
+        name="CarrerasScreen"
+        component={CarrerasScreen}
+        options={{
+          title: "Carreras",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
       />
     </Stack.Navigator>
   );
@@ -219,7 +218,6 @@ function BottomTabNavigator() {
         tabBarStyle: {
           backgroundColor: "#130C34",
           borderTopWidth: 0,
-          
         },
       }}
     >
@@ -280,8 +278,6 @@ function BottomTabNavigator() {
           ),
         })}
       />
-
-
 
       <BottomTab.Screen
         name="Resultados"
