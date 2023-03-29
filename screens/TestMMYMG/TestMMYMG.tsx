@@ -5,7 +5,7 @@ import ComponentQuestion from './ComponentQuestion';
 import { questions2 } from './question';
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+import { gradients, gradientsButton } from "../../constants/Gradients";
 
 
 
@@ -61,23 +61,23 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
 
     if(area1 === 'CSH'){
         msjArea1 = 'Ciencias Sociales y Humanística',
-        carrerasArea1 ='Psicología, trabajo social, idiomas, educación internacional, historia y geografía, periodismo, periodismo digital, derecho, ciencias políticas, sociología, antropología, arqueología, gestión social y desarrollo, consejería familiar, comunicación y publicidad, administración educativa, educación especial, psicopedagogía, estimulación temprana, traducción simultánea, lingüística, educación de párvulos, bibliotecología, museología, relaciones internacionales y diplomacia, comunicación social con énfasis en márquetin y gestión de empresas, redacción creativa y publicitaria, relaciones públicas y comunicación organizacional, hotelería y turismo, teología, institución sacerdotal.'
+        carrerasArea1 =' • Psicología, • Trabajo Social, • Idiomas, • Educación Internacional, • Historia y Geografía, • Periodismo, • Periodismo Digital, • Derecho, • Ciencias Políticas, • Sociología, • Antropología, • Arqueología, • Gestión Social y Desarrollo, • Consejería Familiar, • Comunicación y Publicidad, • Administración Educativa, • Educación Especial, • Psicopedagogía, • Estimulación Temprana, • Traducción Simultánea, • Lingüística, • Educación de Párvulos, • Bibliotecología, • Museología, • Relaciones Internacionales y Diplomacia, • Comunicación Social con énfasis en márquetin y gestión de empresas, • Redacción Creativa y Publicitaria, • Relaciones públicas y comunicación organizacional, • Hotelería y turismo, • Teología, • Institución sacerdotal.'
     }
     if(area1 === 'EAF'){
         msjArea1 = 'Económica, Administrativa y Financiera',
-        carrerasArea1='Administración de empresas, contabilidad, auditoría, ventas, márquetin estratégico, gestión y negocios internacionales, gestión empresarial, gestión financiera, ingeniería comercial, comercio exterior, banca y finanzas, gestión de recursos humanos, comunicaciones integradas en márquetin, administración de empresas ecoturísticas y de hospitalidad, ciencias económicas y financieras, administración y ciencias políticas, ciencias empresariales, comercio electrónico, emprendimiento, gestión de organismos públicos (municipios, ministerios, etc.), gestión de centros educativos.'
+        carrerasArea1=' • Administración de empresas, • Contabilidad, • Auditoría, • Ventas, • Márquetin estratégico, • Gestión y negocios internacionales, • Gestión empresarial, • Gestión financiera, • Ingeniería comercial, • Comercio exterior, • Banca y finanzas, • Gestión de recursos humanos,• Comunicaciones integradas en márquetin, • Administración de empresas ecoturísticas y de hospitalidad, • Ciencias económicas y financieras, • Administración y ciencias políticas, • Ciencias empresariales, • Comercio electrónico, • Emprendimiento, • Gestión de organismos públicos (municipios, ministerios, etc.), • Gestión de centros educativos.'
     }
     if(area1 === 'CT'){
         msjArea1 = 'Ciencia y Tecnología',
-        carrerasArea1= 'Ingeniería en sistemas computacionales, geología, ingeniería civil, arquitectura, electrónica, telemática, telecomunicaciones, ingeniería mecatrónica (robótica), imagen y sonido, minas, petróleo y metalurgia, ingeniería mecánica, ingeniería industrial, física, matemáticas aplicadas, ingeniería en estadística, ingeniería automotriz, biotecnología ambiental, ingeniería geográfica, carreras militares (marina, aviación, ejército), ingeniería en costas y obras portuarias, estadística informática, programación y desarrollo de sistemas, tecnología en informática educativa, astronomía, ingeniería en ciencias geográficas y desarrollo sustentable.'
+        carrerasArea1= ' • Ingeniería en sistemas computacionales, • Geología, • Ingeniería civil, • Arquitectura, • Electrónica, • Telemática, • Telecomunicaciones, • Ingeniería mecatrónica (robótica), • Imagen y sonido, • Minas, • Petróleo y metalurgia, • Ingeniería mecánica, • Ingeniería industrial, • Física, • Matemáticas aplicadas, • Ingeniería en estadística, • Ingeniería automotriz, • Biotecnología ambiental, • Ingeniería geográfica, • Carreras militares (marina, aviación, ejército), • Ingeniería en costas y obras portuarias, • Estadística informática, • Programación y desarrollo de sistemas, • Tecnología en informática educativa, • Astronomía, • Ingeniería en ciencias geográficas y desarrollo sustentable.'
     }
     if(area1 === 'AC'){
         msjArea1 = 'Arte y Creatividad',
-        carrerasArea1='Diseño gráfico, diseño y decoración de interiores, diseño de jardines, diseño de modas, diseño de joyas, artes plásticas (pintura, escultura, danza, teatro, artesanía, cerámica), dibujo publicitario, restauración y museología, modelaje, fotografía, gestión gráfica y publicitaria, locución y publicidad, actuación, camarografía, arte industrial, producción audiovisual y multimedia, comunicación y producción en radio y televisión, diseño del paisaje, cine y video, comunicación escénica para televisión, música.'
+        carrerasArea1=' • Diseño gráfico, diseño y decoración de interiores, • Diseño de jardines, • Diseño de modas, • Diseño de joyas, • Artes plásticas (pintura, escultura, danza, teatro, artesanía, cerámica), • Dibujo publicitario, • Eestauración y museología, • Modelaje, • Fotografía, • Gestión gráfica y publicitaria, • Locución y publicidad, • Actuación, • Camarografía, • Arte industrial, • Producción audiovisual y multimedia, • Comunicación y producción en radio y televisión, • Diseño del paisaje, cine y video, • Comunicación escénica para televisión, • Música.'
     }
     if(area1 === 'CB'){
         msjArea1 = 'Ciencias Ecológicas, Biológicas y de la Salud',
-        carrerasArea1='Biología, bioquímica, farmacia, biología marina, bioanálisis, biotecnología, ciencias ambientales, zootecnia, veterinaria, nutrición y estética, cosmetología, dietética y estética, medicina, obstetricia, urgencias médicas, odontología, enfermería, tecnología, oceanografía y ciencias ambientales, agronomía, horticultura y fruticultura, ingeniería de alimentos, gastronomía, cultura física, deportes y rehabilitación, gestión ambiental, ingeniería ambiental, optometría, homeopatía, reflexología.'
+        carrerasArea1=' • Biología, bioquímica, • Farmacia, • Biología marina, • Bioanálisis, • Biotecnología, • Ciencias ambientales, • Zootecnia, • Veterinaria, • Nutrición y estética, • Cosmetología, • Dietética y estética, • Medicina, • Obstetricia, • Urgencias médicas, • Odontología, • Enfermería, • Tecnología, • Eceanografía y ciencias ambientales, • Agronomía, • Horticultura y fruticultura, • Ingeniería de alimentos, • Gastronomía, • Cultura física, • Deportes y rehabilitación, • Gestión ambiental, • Ingeniería ambiental, • Optometría, • Homeopatía, • Reflexología.'
     }
  
     let msjArea2 
@@ -85,23 +85,23 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
 
     if(area2 === 'CSH'){
         msjArea2 = 'Ciencias Sociales y Humanística',
-        carrerasArea2='Psicología, trabajo social, idiomas, educación internacional, historia y geografía, periodismo, periodismo digital, derecho, ciencias políticas, sociología, antropología, arqueología, gestión social y desarrollo, consejería familiar, comunicación y publicidad, administración educativa, educación especial, psicopedagogía, estimulación temprana, traducción simultánea, lingüística, educación de párvulos, bibliotecología, museología, relaciones internacionales y diplomacia, comunicación social con énfasis en márquetin y gestión de empresas, redacción creativa y publicitaria, relaciones públicas y comunicación organizacional, hotelería y turismo, teología, institución sacerdotal.'
+        carrerasArea2=' • Psicología, • Trabajo Social, • Idiomas, • Educación Internacional, • Historia y Geografía, • Periodismo, • Periodismo Digital, • Derecho, • Ciencias Políticas, • Sociología, • Antropología, • Arqueología, • Gestión Social y Desarrollo, • Consejería Familiar, • Comunicación y Publicidad, • Administración Educativa, • Educación Especial, • Psicopedagogía, • Estimulación Temprana, • Traducción Simultánea, • Lingüística, • Educación de Párvulos, • Bibliotecología, • Museología, • Relaciones Internacionales y Diplomacia, • Comunicación Social con énfasis en márquetin y gestión de empresas, • Redacción Creativa y Publicitaria, • Relaciones públicas y comunicación organizacional, • Hotelería y turismo, • Teología, • Institución sacerdotal.'
     }
     if(area2 === 'EAF'){
         msjArea2 = 'Económica, Administrativa y Financiera',
-        carrerasArea2='Administración de empresas, contabilidad, auditoría, ventas, márquetin estratégico, gestión y negocios internacionales, gestión empresarial, gestión financiera, ingeniería comercial, comercio exterior, banca y finanzas, gestión de recursos humanos, comunicaciones integradas en márquetin, administración de empresas ecoturísticas y de hospitalidad, ciencias económicas y financieras, administración y ciencias políticas, ciencias empresariales, comercio electrónico, emprendimiento, gestión de organismos públicos (municipios, ministerios, etc.), gestión de centros educativos.'
+        carrerasArea2=' • Administración de empresas, • Contabilidad, • Auditoría, • Ventas, • Márquetin estratégico, • Gestión y negocios internacionales, • Gestión empresarial, • Gestión financiera, • Ingeniería comercial, • Comercio exterior, • Banca y finanzas, • Gestión de recursos humanos,• Comunicaciones integradas en márquetin, • Administración de empresas ecoturísticas y de hospitalidad, • Ciencias económicas y financieras, • Administración y ciencias políticas, • Ciencias empresariales, • Comercio electrónico, • Emprendimiento, • Gestión de organismos públicos (municipios, ministerios, etc.), • Gestión de centros educativos.'
     }
     if(area2 === 'CT'){
         msjArea2 = 'Ciencia y Tecnología',
-        carrerasArea2='Ingeniería en sistemas computacionales, geología, ingeniería civil, arquitectura, electrónica, telemática, telecomunicaciones, ingeniería mecatrónica (robótica), imagen y sonido, minas, petróleo y metalurgia, ingeniería mecánica, ingeniería industrial, física, matemáticas aplicadas, ingeniería en estadística, ingeniería automotriz, biotecnología ambiental, ingeniería geográfica, carreras militares (marina, aviación, ejército), ingeniería en costas y obras portuarias, estadística informática, programación y desarrollo de sistemas, tecnología en informática educativa, astronomía, ingeniería en ciencias geográficas y desarrollo sustentable.'
+        carrerasArea2=' • Ingeniería en sistemas computacionales, • Geología, • Ingeniería civil, • Arquitectura, • Electrónica, • Telemática, • Telecomunicaciones, • Ingeniería mecatrónica (robótica), • Imagen y sonido, • Minas, • Petróleo y metalurgia, • Ingeniería mecánica, • Ingeniería industrial, • Física, • Matemáticas aplicadas, • Ingeniería en estadística, • Ingeniería automotriz, • Biotecnología ambiental, • Ingeniería geográfica, • Carreras militares (marina, aviación, ejército), • Ingeniería en costas y obras portuarias, • Estadística informática, • Programación y desarrollo de sistemas, • Tecnología en informática educativa, • Astronomía, • Ingeniería en ciencias geográficas y desarrollo sustentable.'
     }
     if(area2 === 'AC'){
         msjArea2 = 'Arte y Creatividad',
-        carrerasArea2='Diseño gráfico, diseño y decoración de interiores, diseño de jardines, diseño de modas, diseño de joyas, artes plásticas (pintura, escultura, danza, teatro, artesanía, cerámica), dibujo publicitario, restauración y museología, modelaje, fotografía, gestión gráfica y publicitaria, locución y publicidad, actuación, camarografía, arte industrial, producción audiovisual y multimedia, comunicación y producción en radio y televisión, diseño del paisaje, cine y video, comunicación escénica para televisión, música.'
+        carrerasArea2=' • Diseño gráfico, • Diseño y decoración de interiores, • Diseño de jardines, • Diseño de modas, • Diseño de joyas, • Artes plásticas (pintura, escultura, danza, teatro, artesanía, cerámica), • Dibujo publicitario, • Eestauración y museología, • Modelaje, • Fotografía, • Gestión gráfica y publicitaria, • Locución y publicidad, • Actuación, • Camarografía, • Arte industrial, • Producción audiovisual y multimedia, • Comunicación y producción en radio y televisión, • Diseño del paisaje, cine y video, • Comunicación escénica para televisión, • Música.'
     }
     if(area2 === 'CB'){
         msjArea2 = 'Ciencias Ecológicas, Biológicas y de la Salud',
-        carrerasArea2='Biología, bioquímica, farmacia, biología marina, bioanálisis, biotecnología, ciencias ambientales, zootecnia, veterinaria, nutrición y estética, cosmetología, dietética y estética, medicina, obstetricia, urgencias médicas, odontología, enfermería, tecnología, oceanografía y ciencias ambientales, agronomía, horticultura y fruticultura, ingeniería de alimentos, gastronomía, cultura física, deportes y rehabilitación, gestión ambiental, ingeniería ambiental, optometría, homeopatía, reflexología.'
+        carrerasArea2=' • Biología, • Bioquímica, • Farmacia, • Biología marina, • Bioanálisis, • Biotecnología, • Ciencias ambientales, • Zootecnia, • Veterinaria, • Nutrición y estética, • Cosmetología, • Dietética y estética, • Medicina, • Obstetricia, • Urgencias médicas, • Odontología, • Enfermería, • Tecnología, • Eceanografía y ciencias ambientales, • Agronomía, • Horticultura y fruticultura, • Ingeniería de alimentos, • Gastronomía, • Cultura física, • Deportes y rehabilitación, • Gestión ambiental, • Ingeniería ambiental, • Optometría, • Homeopatía, • Reflexología.'
     }
 
     const carrerasPosibles= (areaUno: string, areaDos: string, prop:string) => {
@@ -116,70 +116,70 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
 
         return(
             <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
-            <View style={styles.container}>
+             <View style={styles.container}>
                 <View style={styles.container_test}>
-                <LinearGradient
-                    colors={gradients.inputs}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 0, y: 0 }}
-                    style={styles.container_test}
-                    >
-                    <Text style={styles.title}>1ER ÁREA OCUPACIONAL:</Text>
-                    <Text style={styles.thankYou}>{msjArea1}</Text>
-                    <Pressable style={styles.button} >
                     <LinearGradient
-                    colors={gradients.inputs}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 0, y: 0 }}
-                    style={{
-                      borderRadius: 15,
-                      width: "100%",
-                      height: 54,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
-                    }}
-                  >
-                        <Text style={styles.text_button} onPress={() => carrerasPosibles(area1, area2,'areaUno')}>CARRERAS POSIBLES</Text>
-                        </LinearGradient>
-                    </Pressable>
-                    </LinearGradient>
-                </View>
-                <View style={styles.container_test}>
-                <LinearGradient
-                    colors={gradients.inputs}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 0, y: 0 }}
-                    style={styles.container_test}
+                        colors={gradients.inputs}
+                        start={{ x: 1, y: 1 }}
+                        end={{ x: 0, y: 0 }}
+                        style={styles.container_test}
                     >
-                    <Text style={styles.title}>2DA ÁREA OCUPACIONAL:</Text>
-                    <Text style={styles.thankYou}>{msjArea2} </Text>
-                    <Text style={styles.thankYou}></Text>
-                    <Pressable style={styles.button} >
-                    <LinearGradient
-                    colors={gradients.inputs}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 0, y: 0 }}
-                    style={{
-                      borderRadius: 15,
-                      width: "100%",
-                      height: 54,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
-                    }}
-                  >
-                        <Text style={styles.text_button} onPress={() => carrerasPosibles(area1, area2, 'areaDos')}>CARRERAS POSIBLES</Text>
-                        </LinearGradient>
-                    </Pressable>
-                    </LinearGradient>
-                </View>
-            </View>
-          </ScrollView>
-        )
-    }
+                        <Text style={styles.title}>1ER ÁREA OCUPACIONAL:</Text>
+                        <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
+                        <Text style={styles.thankYou}>({msjArea1})</Text>
+                        <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2,'areaUno')}>
+                            <LinearGradient
+                            colors={gradientsButton.inputs}
+                            start={{ x: 1, y: 1 }}
+                            end={{ x: 0, y: 0 }}
+                            style={{
+                                borderRadius: 15,
+                                width: "100%",
+                                height: 45,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                margin:'6%'
+                            }}
+                            >
+                                <Text style={styles.text_button} >CARRERAS POSIBLES</Text>
+                                </LinearGradient>
+                                </Pressable>
+                                </LinearGradient>
+                                </View>
+                                <View style={styles.container_test}>
+                                    <LinearGradient
+                                    colors={gradients.inputs}
+                                    start={{ x: 1, y: 1 }}
+                                    end={{ x: 0, y: 0 }}
+                                    style={styles.container_test}
+                                    >
+                                        <Text style={styles.title}>2DA ÁREA OCUPACIONAL:</Text>
+                                        <Text style={styles.thankYou}>RESPUESTA DEL GRUPO </Text>
+                                        <Text style={styles.thankYou}>({msjArea2}) </Text>
+                                        <Text style={styles.thankYou}></Text>
+                                        <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2, 'areaDos')}>
+                                            <LinearGradient
+                                            colors={gradientsButton.inputs}
+                                            start={{ x: 1, y: 1 }}
+                                            end={{ x: 0, y: 0 }}
+                                            style={{
+                                                borderRadius: 15,
+                                                width: "100%",
+                                                height: 45,
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                margin:'6%'
+                                            }}
+                                            >
+                                                <Text style={styles.text_button} >CARRERAS POSIBLES</Text>
+                                                </LinearGradient>
+                                                </Pressable>
+                                                </LinearGradient>
+                                                </View>
+                                                </View>
+                                                </ScrollView>
+                                                )
+                                            }
 
   return (
         <View style={styles.container}>
@@ -206,29 +206,29 @@ const styles = StyleSheet.create({
         textAlign:"center",
     },
       thankYou: {
-        color:"rgba(222, 211, 244, 1)",
+        color:"#06D6DD",
         fontWeight:"600",
-        fontSize:14,
+        fontSize:15,
         width:"85%",
         alignItems: 'center',
-        margin:"3%",
         fontFamily:'Poppins_Regular'
       },
       title:{
-        color:"rgba(222, 211, 244, 1)",
+        color:"#DED3F4",
         fontWeight:"600",
-        fontSize:17,
+        fontSize:20,
         width:"85%",
         alignItems: 'center',
         marginTop:'5%',
-        marginBottom:'2%',
-        fontFamily:'Poppins_Regular'
+        marginBottom:'5%',
+        fontFamily:'Poppins_ExtraBold'
       },
       button:{
         width: "80%",
         alignItems: "center",
         borderRadius: 15,
-        marginBottom:"3%"
+        margin:'1%',
+        marginBottom:"5%"
       },
       text_button:{
         fontSize: 18,

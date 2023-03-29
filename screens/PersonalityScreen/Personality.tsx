@@ -10,7 +10,7 @@ import { RootStackScreenProps } from "../../types";
 
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+import { gradients, gradientsButton } from "../../constants/Gradients";
 
 
 const Personality = ({ navigation }: RootStackScreenProps<"Personality">) => {
@@ -34,20 +34,18 @@ const Personality = ({ navigation }: RootStackScreenProps<"Personality">) => {
                       </LinearGradient>
                     </View>
       <Pressable 
-      onPress={() => navigation.navigate("SurveyScreen")}
+      onPress={() => navigation.navigate("TestChaside")}
       style={styles.button}>
                           <LinearGradient
-                    colors={gradients.inputs}
+                    colors={gradientsButton.inputs}
                     start={{ x: 1, y: 1 }}
                     end={{ x: 0, y: 0 }}
                     style={{
                       borderRadius: 15,
-                      width: "100%",
-                      height: 54,
+                      width: "90%",
+                      height: 45,
                       alignItems: "center",
                       justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
                     }}
                   >
 
@@ -85,7 +83,7 @@ const styles = StyleSheet.create({
     width:"85%",
     alignItems: 'center',
     paddingBottom:"5%",
-    color:"rgba(222, 211, 244, 1)",
+    color:"#DED3F4",
     fontFamily: "Poppins_Regular",
     fontSize:14,
   },

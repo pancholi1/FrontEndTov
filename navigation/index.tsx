@@ -29,7 +29,6 @@ import {
   LoginScreen,
   MainScreen,
   NotFoundScreen,
-  PersonalityScreen,
   ProfileScreen,
   ResultadosScreen,
   ResultTestScreen,
@@ -37,14 +36,13 @@ import {
 } from "../screens";
 
 import Personality from "../screens/PersonalityScreen/Personality";
-import CarrerasScreen from "../screens/CarrerasScreen/CarrerasScreen";
-import SurveyScreen from "../screens/TestsScreen/SurveyScreen";
+import CarrerasScreen from "../screens/TestChaside/CarrerasScreen";
+import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
 import TestMMYMGScreen from "../screens/TestMMYMG/TestMMYMGScreen";
 import CarrerasTest2 from "../screens/TestMMYMG/CarrerasTest2";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
 import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
-import QuestionTest from "../screens/Test5Grandes/QuestionTest";
 
 export default function Navigation({
   colorScheme,
@@ -139,8 +137,8 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
-          name="SurveyScreen"
-          component={SurveyScreen}
+          name="TestChaside"
+          component={TestChaside}
           options={{
             title: "Test",
             headerTitleAlign: "center",

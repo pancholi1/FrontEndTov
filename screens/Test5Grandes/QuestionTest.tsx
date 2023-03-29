@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+import { gradients, gradientsButton } from "../../constants/Gradients";
 
 const QuestionTest = ({id, question, onAnswered, dimension}) => {
 
@@ -142,7 +142,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
         <Text style={styles.text_test}>{question}</Text>
         <Pressable style={styles.button} onPress={handleYes}>
         <LinearGradient
-                  colors={gradients.inputs}
+                  colors={gradientsButton.inputs}
                   start={{ x: 1, y: 1 }}
                   end={{ x: 0, y: 0 }}
                   style={{
@@ -151,8 +151,6 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     height: 58,
                     alignItems: "center",
                     justifyContent: "center",
-                    borderColor: "#7B68A9",
-                    borderWidth: 1,
                   }}
                 >
           <Text style={styles.button_text}>EN DESACUERDO</Text>
@@ -160,7 +158,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
           </Pressable>
         <Pressable style={styles.button} onPress={handleYes2}>
         <LinearGradient
-                  colors={gradients.inputs}
+                  colors={gradientsButton.inputs}
                   start={{ x: 1, y: 1 }}
                   end={{ x: 0, y: 0 }}
                   style={{
@@ -169,8 +167,6 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     height: 58,
                     alignItems: "center",
                     justifyContent: "center",
-                    borderColor: "#7B68A9",
-                    borderWidth: 1,
                   }}
                 >
           <Text style={styles.button_text}>LEVEMENTE EN DESACUERDO</Text>
@@ -178,7 +174,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
           </Pressable>
         <Pressable style={styles.button} onPress={handleYes3}>
         <LinearGradient
-                  colors={gradients.inputs}
+                  colors={gradientsButton.inputs}
                   start={{ x: 1, y: 1 }}
                   end={{ x: 0, y: 0 }}
                   style={{
@@ -187,8 +183,6 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     height: 58,
                     alignItems: "center",
                     justifyContent: "center",
-                    borderColor: "#7B68A9",
-                    borderWidth: 1,
                   }}
                 >
           <Text style={styles.button_text}>NEUTRAL</Text>
@@ -196,7 +190,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
           </Pressable>
         <Pressable style={styles.button} onPress={handleYes4}>
         <LinearGradient
-                  colors={gradients.inputs}
+                  colors={gradientsButton.inputs}
                   start={{ x: 1, y: 1 }}
                   end={{ x: 0, y: 0 }}
                   style={{
@@ -205,8 +199,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     height: 58,
                     alignItems: "center",
                     justifyContent: "center",
-                    borderColor: "#7B68A9",
-                    borderWidth: 1,
+
                   }}
                 >
           <Text style={styles.button_text}>LEVEMENTE DE ACUERDO</Text>
@@ -214,7 +207,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
           </Pressable>
         <Pressable style={styles.button} onPress={handleYes5}>
         <LinearGradient
-                  colors={gradients.inputs}
+                  colors={gradientsButton.inputs}
                   start={{ x: 1, y: 1 }}
                   end={{ x: 0, y: 0 }}
                   style={{
@@ -223,8 +216,6 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     height: 58,
                     alignItems: "center",
                     justifyContent: "center",
-                    borderColor: "#7B68A9",
-                    borderWidth: 1,
                   }}
                 >
           <Text style={styles.button_text}>DE ACUERDO</Text>
@@ -250,7 +241,6 @@ const styles = StyleSheet.create({
       width:"95%",
       alignItems:"center",
       textAlign:"center",
-      //backgroundColor:"rgb(40, 32, 86)",
       height:'95%'
   },
   numero_test:{
@@ -268,21 +258,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       height:50,
       fontFamily: "Poppins_Regular"
-      //margin:"10%"
   },
   button:{
-      width:"60%",
+      width:"90%",
       marginTop: "8%",
-
-      //padding:"3%",
-  },
-  button2:{
-      width:"60%",
-      alignItems: "center",
-      borderRadius: 15,
-      backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08) 100%",
-      padding:"3%",
-      margin:"3%"
+      borderRadius:15
   },
   button_text:{
       fontSize: 20,
