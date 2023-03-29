@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
       fontSize:14,
       width:"85%",
       alignItems: 'center',
-      height:60,
+      height:100,
       fontFamily: "Poppins_Regular"
     },
     button:{
