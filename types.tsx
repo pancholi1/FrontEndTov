@@ -33,7 +33,7 @@ export type RootStackParamList = {
   Test: undefined;
   TarjetaTest: undefined;
   CarrerasScreen: {habilidad: string, intereses:string, area:string};
-  SurveyScreen: undefined;
+  TestChaside: undefined;
   TestMMYMG: undefined;
   TestMMYMGScreen: undefined;
   CarrerasTest2: {areaUno: string, areaDos: string, prop:string};
@@ -59,7 +59,7 @@ export type RootTabParamList = {
   Calendar: undefined;
   TarjetaTest: undefined;
   CarrerasScreen: {habilidad: string, intereses:string, area:string};
-  SurveyScreen: undefined;
+  TestChaside: undefined;
   TestMMYMG: undefined;
   TestMMYMGScreen: undefined;
   CarrerasTest2: {areaUno: string, areaDos: string, prop:string};

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+import { gradients, gradientsButton } from "../../constants/Gradients";
 
 interface SurveyProps {
   id: number;
@@ -33,48 +33,45 @@ const Survey: React.FC<SurveyProps> = ({ id, question, resultado, onAnswered }) 
                   borderRadius:15,
                   width:"90%",
                   alignItems:"center",
-                  //backgroundColor:"rgb(40, 32, 86)",
-                  height:350}}
+                  height:400}}
                   >
             <View style={styles.container_test}>
                 <Text style={styles.numero_test}>{id}/98</Text>
                 <Text style={styles.text_test}>{question}</Text>
-                <Pressable style={styles.button} onPress={handleYes}>
                 <LinearGradient
-                  colors={gradients.inputs}
+                  colors={gradientsButton.inputs}
                   start={{ x: 1, y: 1 }}
                   end={{ x: 0, y: 0 }}
                   style={{
                     borderRadius: 15,
-                    width: "100%",
-                    height: 50,
+                    width: "70%",
+                    height: 63,
                     alignItems: "center",
                     justifyContent: "center",
-                    borderColor: "#7B68A9",
-                    borderWidth: 1,
+                    marginBottom:'10%',
+                    marginTop:'13%'
                   }}
                 >
+                <Pressable style={styles.button} onPress={handleYes}>
                   <Text style={styles.button_text}>SI</Text>
-                  </LinearGradient>
                   </Pressable>
-                <Pressable style={styles.button2} onPress={handleNo}>
+                  </LinearGradient>
                   <LinearGradient
-                    colors={gradients.inputs}
+                    colors={gradientsButton.inputs}
                     start={{ x: 1, y: 1 }}
                     end={{ x: 0, y: 0 }}
                     style={{
                       borderRadius: 15,
-                      width: "100%",
-                      height: 50,
+                      width: "70%",
+                      height: 63,
                       alignItems: "center",
                       justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
                     }}
                   >
+                <Pressable style={styles.button} onPress={handleNo}>
                     <Text style={styles.button_text}>NO</Text>
-                  </LinearGradient>
                 </Pressable>
+                  </LinearGradient>
             </View>
                 </LinearGradient>
  
@@ -96,15 +93,14 @@ const styles = StyleSheet.create({
         width:"90%",
         alignItems:"center",
         textAlign:"center",
-        //backgroundColor:"rgb(40, 32, 86)",
         height:350
     },
     numero_test:{
         color:"#DED3F4",
         fontWeight:"600",
         fontSize:20,
-        //padding:"3%",
-        fontFamily: "Poppins_Regular"
+        fontFamily: "Poppins_Regular",
+        marginBottom:'4%'
     },
     text_test:{
         color:"#DED3F4",
@@ -112,13 +108,15 @@ const styles = StyleSheet.create({
         fontSize:14,
         width:"85%",
         alignItems: 'center',
-        height:100,
+        height:60,
         fontFamily: "Poppins_Regular"
     },
     button:{
-        width:"50%",
-        margin: "5%",
+        width:"100%",
         alignItems: "center",
+        height:65,
+        justifyContent: "center",
+        borderRadius:15
     },
     button2:{
         width:"50%",

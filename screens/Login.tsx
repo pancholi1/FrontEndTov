@@ -93,7 +93,6 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
 
           <LinearGradient
             colors={gradients.inputs}
-            //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
             style={{borderRadius:15}}
             >
 
@@ -108,10 +107,8 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
           </LinearGradient>
               {props.errors.email && props.touched.email ? <Text style={styles.errors}>{props.errors.email}</Text> : null}
 
-
               <LinearGradient
             colors={gradients.inputs}
-            //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
             style={{borderRadius:15, marginTop:"3%"}}
             >
           <TextInput
@@ -128,10 +125,12 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
             {props.errors.password && props.touched.password ? <Text style={styles.errors}>{props.errors.password}</Text> : null}
 
             <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
+       
         <Pressable style={styles.login_button}
         onPress={() => props.handleSubmit()}>
-          <Text style={styles.login_butontext}> Ingresar </Text>
+          <Text style={styles.login_butontext}> HOLA </Text>
         </Pressable>
+
         </View>
           )}
         </Formik>
@@ -173,7 +172,6 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    //flex: 1,
     width:"100%",
     borderColor: "#B39AE7",
     borderWidth: 2,

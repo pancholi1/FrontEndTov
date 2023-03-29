@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+import { gradients, gradientsButton } from "../../constants/Gradients";
 
 
 const ComponentQuestion = ({id ,question ,onAnswered}) => {
@@ -25,51 +25,49 @@ const ComponentQuestion = ({id ,question ,onAnswered}) => {
             colors={gradients.inputs}
             start={{ x: 1, y: 1 }}
             end={{ x: 0, y: 0 }}
-            style={{        marginTop:"10%",
+            style={{        marginTop:"13%",
             borderRadius:15,
             width:"90%",
             alignItems:"center",
-            height:350}}
+            height:400}}
           >
     <View style={styles.container_test}>
         <Text style={styles.numero_test}>{id}/80</Text>
         <Text style={styles.text_test}>{question}</Text>
+        <LinearGradient
+                    colors={gradientsButton.inputs}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 0 }}
+                    style={{
+                      borderRadius: 15,
+                      width: "70%",
+                      height: 63,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom:'10%',
+                      marginTop:'13%'
+                    }}
+                  >
         <Pressable style={styles.button} onPress={handleYes}>
-        <LinearGradient
-                    colors={gradients.inputs}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 0, y: 0 }}
-                    style={{
-                      borderRadius: 15,
-                      width: "100%",
-                      height: 54,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
-                    }}
-                  >
             <Text style={styles.button_text}>ME INTERESA</Text>
-            </LinearGradient>
             </Pressable>
-        <Pressable style={styles.button2} onPress={handleNo}>
+            </LinearGradient>
         <LinearGradient
-                    colors={gradients.inputs}
+                    colors={gradientsButton.inputs}
                     start={{ x: 1, y: 1 }}
                     end={{ x: 0, y: 0 }}
                     style={{
                       borderRadius: 15,
-                      width: "100%",
-                      height: 54,
+                      width: "70%",
+                      height: 63,
                       alignItems: "center",
                       justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
                     }}
                   >
+        <Pressable style={styles.button2} onPress={handleNo}>
             <Text style={styles.button_text}>NO ME INTERESA</Text>
-            </LinearGradient>
             </Pressable>
+            </LinearGradient>
     </View>
             </LinearGradient>
 </View>
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
       width:'100%',
     },
     container_test:{
-      marginTop:'3%',
+      marginTop:'5%',
         borderRadius:15,
         width:"90%",
         alignItems:"center",
@@ -94,31 +92,34 @@ const styles = StyleSheet.create({
         height:350
     },
     numero_test:{
-        color:"#DED3F4",
+      color:"#DED3F4",
         fontWeight:"600",
         fontSize:20,
-        padding:"3%",
-        fontFamily: "Poppins_Regular"
+        fontFamily: "Poppins_Regular",
+        marginBottom:'4%'
     },
     text_test:{
-        color:"#DED3F4",
-        fontWeight:"600",
-        fontSize:14,
-        width:"85%",
-        alignItems: 'center',
-        height:100,
-        fontFamily: "Poppins_Regular"
-        //margin:"10%"
+      color:"#DED3F4",
+      fontWeight:"600",
+      fontSize:14,
+      width:"85%",
+      alignItems: 'center',
+      height:60,
+      fontFamily: "Poppins_Regular"
     },
     button:{
-        width:"60%",
-        marginTop: "10%",
-        alignItems: "center",
+      width:"100%",
+      alignItems: "center",
+      height:65,
+      justifyContent: "center",
+      borderRadius:15
     },
     button2:{
-        width:"60%",
-        alignItems: "center",
-        margin:"10%"
+      height:63,
+      width:"100%",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius:15,
     },
     button_text:{
         fontSize: 20,
