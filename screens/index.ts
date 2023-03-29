@@ -3,7 +3,6 @@ export * from "./HomeScreen";
 export * from "./LoginScreen";
 export * from "./MainScreen";
 export * from "./NotFoundScreen";
-export * from "./PersonalityScreen";
 export * from "./PlanesScreen";
 export * from "./PrivacidadScreen";
 export * from "./ProfileScreen";

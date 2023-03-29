@@ -38,116 +38,119 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
 
       <ScrollView>
         <View style={styles.container_card_chaside}>
-        <LinearGradient
-          colors={greenChaside}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={{ borderRadius: 15 }}
-        >
-          <View style={styles.test_chaside}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                style={styles.img_3D}
-                source={require("../../assets/images/HomeScreen/testPersonalidad.png")}
-              />
-            </View>
+          <LinearGradient
+            colors={greenChaside}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={{ borderRadius: 15 }}
+          >
+            <View style={styles.test_chaside}>
+              <View style={styles.img_3DContainer}>
+                <Image
+                  style={styles.img_3D}
+                  source={require("../../assets/images/HomeScreen/testPersonalidad.png")}
+                />
+              </View>
 
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Personality")}>
-                <Text style={styles.personalidad_title}>Test CHASIDE</Text>
-              </Pressable>
+              <View style={styles.contenedor_text}>
+                <Pressable
+                  onPress={() => navigation.navigate("DescriptionScreen")}
+                >
+                  <Text style={styles.personalidad_title}>Test CHASIDE</Text>
+                </Pressable>
 
-              <Text style={styles.textCard}>
-                Toma menos de 12 minutos. Responde honestamente
-              </Text>
-            </View>
-          </View>
-        </LinearGradient>
-        </View>
-        <View style={styles.container_card}>
-
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={{ borderRadius: 15 }}
-        >
-          <View style={styles.test_personalidad}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                style={styles.img_3D}
-                source={require("../../assets/images/HomeScreen/testPsicotécnico.png")}
-              />
-            </View>
-
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("TestMMYMGScreen")}>
-                <Text style={styles.personalidad_title}>Test MM & MG</Text>
-              </Pressable>
-
-              <Text style={styles.textCard}>
-                Comprueba cuáles son las áreas ocupacionales que se ajustan a tu
-                perfil.
-              </Text>
-            </View>
-          </View>
-        </LinearGradient>
-        </View>
-        <View style={styles.container_card}>
-
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={{ borderRadius: 15 }}
-        >
-          <View style={styles.test_personalidad}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                source={require("../../assets/images/HomeScreen/test5grandes.png")}
-                style={styles.img_3D}
-              />
-            </View>
-
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Test5GrandesScreen")}>
-                <Text style={styles.personalidad_title}>
-                  Test de los 5 Grandes
+                <Text style={styles.textCard}>
+                  Toma menos de 12 minutos. Responde honestamente
                 </Text>
-              </Pressable>
-              <Text style={styles.textCard} numberOfLines={3}>
-                Conocé más sobre tu personalidad y capacidades.
-              </Text>
+              </View>
             </View>
-          </View>
-        </LinearGradient>
+          </LinearGradient>
         </View>
         <View style={styles.container_card}>
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={{ borderRadius: 15 }}
-        >
-          <View style={styles.test_personalidad}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                source={require("../../assets/images/HomeScreen/entrevista.png")}
-                style={styles.img_3D}
-              />
-            </View>
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Calendar")}>
-                <Text style={styles.personalidad_title}>Entrevista</Text>
-              </Pressable>
-              <Text style={styles.textCard}>
-                Agenda una entrevista con un profesional capacitado
-              </Text>
-            </View>
-          </View>
-        </LinearGradient>
-        </View>
+          <LinearGradient
+            colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
+            style={{ borderRadius: 15 }}
+          >
+            <View style={styles.test_personalidad}>
+              <View style={styles.img_3DContainer}>
+                <Image
+                  style={styles.img_3D}
+                  source={require("../../assets/images/HomeScreen/testPsicotécnico.png")}
+                />
+              </View>
 
+              <View style={styles.contenedor_text}>
+                <Pressable
+                  onPress={() => navigation.navigate("TestMMYMGScreen")}
+                >
+                  <Text style={styles.personalidad_title}>Test MM & MG</Text>
+                </Pressable>
+
+                <Text style={styles.textCard}>
+                  Comprueba cuáles son las áreas ocupacionales que se ajustan a
+                  tu perfil.
+                </Text>
+              </View>
+            </View>
+          </LinearGradient>
+        </View>
+        <View style={styles.container_card}>
+          <LinearGradient
+            colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
+            style={{ borderRadius: 15 }}
+          >
+            <View style={styles.test_personalidad}>
+              <View style={styles.img_3DContainer}>
+                <Image
+                  source={require("../../assets/images/HomeScreen/test5grandes.png")}
+                  style={styles.img_3D}
+                />
+              </View>
+
+              <View style={styles.contenedor_text}>
+                <Pressable
+                  onPress={() => navigation.navigate("Test5GrandesScreen")}
+                >
+                  <Text style={styles.personalidad_title}>
+                    Test de los 5 Grandes
+                  </Text>
+                </Pressable>
+                <Text style={styles.textCard} numberOfLines={3}>
+                  Conocé más sobre tu personalidad y capacidades.
+                </Text>
+              </View>
+            </View>
+          </LinearGradient>
+        </View>
+        <View style={styles.container_card}>
+          <LinearGradient
+            colors={gradients.inputs}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0 }}
+            style={{ borderRadius: 15 }}
+          >
+            <View style={styles.test_personalidad}>
+              <View style={styles.img_3DContainer}>
+                <Image
+                  source={require("../../assets/images/HomeScreen/entrevista.png")}
+                  style={styles.img_3D}
+                />
+              </View>
+              <View style={styles.contenedor_text}>
+                <Pressable onPress={() => navigation.navigate("Calendar")}>
+                  <Text style={styles.personalidad_title}>Entrevista</Text>
+                </Pressable>
+                <Text style={styles.textCard}>
+                  Agenda una entrevista con un profesional capacitado
+                </Text>
+              </View>
+            </View>
+          </LinearGradient>
+        </View>
       </ScrollView>
     </View>
   );
@@ -189,24 +192,20 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderColor: "#524c77",
     borderWidth: 1,
-
- 
   },
-  container_card:{
+  container_card: {
     marginBottom: 15,
     borderColor: "#524c77",
     borderRadius: 15,
     borderWidth: 1,
-        marginTop: 5,
-
-
+    marginTop: 5,
   },
-  container_card_chaside:{
+  container_card_chaside: {
     marginBottom: 15,
     borderColor: "#025558",
     borderRadius: 19,
     borderWidth: 1,
-    borderEndWidth:4,
+    borderEndWidth: 4,
   },
   title_progreso: {
     fontFamily: "Poppins_SemiBold",
@@ -238,7 +237,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 10,
     fontWeight: "500",
-    
   },
   test_chaside: {
     borderRadius: 15,
@@ -246,7 +244,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 10,
     fontWeight: "500",
-
   },
   img_3DContainer: {
     width: "25%",
@@ -258,7 +255,7 @@ const styles = StyleSheet.create({
     bottom: -15,
     width: "100%",
     height: 134,
-    zIndex: 111111111111
+    zIndex: 111111111111,
   },
 
   personalidad_title: {
@@ -268,7 +265,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     lineHeight: 30,
     marginTop: 5,
-    
   },
   textCard: {
     fontFamily: "Poppins_Regular",
@@ -276,8 +272,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     width: "70%",
     lineHeight: 17.5,
-
-    
   },
 
   contenedor_text: {
@@ -285,4 +279,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-

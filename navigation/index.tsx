@@ -35,7 +35,6 @@ import {
   SingUpScreen,
 } from "../screens";
 
-import Personality from "../screens/PersonalityScreen/Personality";
 import CarrerasScreen from "../screens/TestChaside/CarrerasScreen";
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
@@ -43,6 +42,7 @@ import TestMMYMGScreen from "../screens/TestMMYMG/TestMMYMGScreen";
 import CarrerasTest2 from "../screens/TestMMYMG/CarrerasTest2";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
 import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
+import DescriptionScreen from "../screens/TestChaside/DescriptionScreen/DescriptionScreen";
 
 export default function Navigation({
   colorScheme,
@@ -122,10 +122,10 @@ function RootNavigator() {
         />
 
         <Stack.Screen
-          name="Personality"
-          component={Personality}
+          name="DescriptionScreen"
+          component={DescriptionScreen}
           options={{
-            title: "Test de Personalidad",
+            title: "Test Chaside",
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
             headerTitleStyle: {
