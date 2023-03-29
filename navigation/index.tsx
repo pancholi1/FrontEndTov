@@ -106,8 +106,8 @@ function RootNavigator() {
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
             headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
+              fontFamily: "Poppins_Regular",
+              color: "#06D6DD",
               fontSize: 20,
             },
             headerTintColor: "#06D6DD",
@@ -122,7 +122,6 @@ function RootNavigator() {
           name="BottomTabNavigator"
           component={BottomTabNavigator}
         />
-
 
         <Stack.Screen
           name="Personality"
@@ -238,20 +237,20 @@ function RootNavigator() {
           })}
         />
       </Stack.Group>
-      <Stack.Screen 
-      name='CarrerasScreen'
-      component={CarrerasScreen}
-      options={{
-        title: "Carreras",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerTintColor: "#06D6DD",
-      }}
+      <Stack.Screen
+        name="CarrerasScreen"
+        component={CarrerasScreen}
+        options={{
+          title: "Carreras",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
       />
       
       <Stack.Screen 
@@ -364,8 +363,6 @@ function BottomTabNavigator() {
         })}
       />
 
-
-
       <BottomTab.Screen
         name="Resultados"
         component={ResultadosScreen}
@@ -376,8 +373,8 @@ function BottomTabNavigator() {
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
-            color: "white",
-            fontFamily: "Poppins_ExtraBold",
+            color: "#06D6DD",
+            fontFamily: "Poppins_Regular",
             fontSize: 20,
           },
           headerTintColor: "#06D6DD",

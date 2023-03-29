@@ -260,7 +260,6 @@ const styles = StyleSheet.create({
     color: "#B39AE7",
     fontFamily: "Poppins_Regular",
     lineHeight: 21,
-    fontStyle: "semibold",
   },
 
   input_nombre: {
