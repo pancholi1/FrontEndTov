@@ -29,7 +29,6 @@ import {
   LoginScreen,
   MainScreen,
   NotFoundScreen,
-  PersonalityScreen,
   ProfileScreen,
   ResultadosScreen,
   ResultTestScreen,
@@ -37,14 +36,13 @@ import {
 } from "../screens";
 
 import Personality from "../screens/PersonalityScreen/Personality";
-import CarrerasScreen from "../screens/CarrerasScreen/CarrerasScreen";
-import SurveyScreen from "../screens/TestsScreen/SurveyScreen";
+import CarrerasScreen from "../screens/TestChaside/CarrerasScreen";
+import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
 import TestMMYMGScreen from "../screens/TestMMYMG/TestMMYMGScreen";
 import CarrerasTest2 from "../screens/TestMMYMG/CarrerasTest2";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
 import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
-import QuestionTest from "../screens/Test5Grandes/QuestionTest";
 
 
 
@@ -141,19 +139,19 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
-          name="SurveyScreen"
-          component={SurveyScreen}
-          options={{
-            title: "Test",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
+             name="TestChaside"
+             component={TestChaside}
+             options={{
+               title: "Test",
+               headerTitleAlign: "center",
+               headerStyle: { backgroundColor: "#130C34" },
+               headerTitleStyle: {
+                 color: "white",
+                 fontFamily: "Poppins_ExtraBold",
+                 fontSize: 20,
+               },
+               headerTintColor: "#06D6DD",
+             }}
         />
 
 
@@ -285,21 +283,7 @@ function RootNavigator() {
         headerTintColor: "#06D6DD",
       }}
       />
-      <Stack.Screen 
-      name='QuestionTest'
-      component={QuestionTest}
-      options={{
-        title: "Carreras",
-        headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "#130C34" },
-        headerTitleStyle: {
-          color: "white",
-          fontFamily: "Poppins_ExtraBold",
-          fontSize: 20,
-        },
-        headerTintColor: "#06D6DD",
-      }}
-      />
+      
     </Stack.Navigator>
   );
 }

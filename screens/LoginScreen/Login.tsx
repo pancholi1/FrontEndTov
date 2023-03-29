@@ -151,17 +151,16 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                     onPress={() => props.handleSubmit()}
                   >                  
                   <LinearGradient
-                  colors={gradients.inputs}
+                  colors={gradientsButton.inputs}
                   start={{ x: 1, y: 1 }}
                   end={{ x: 0, y: 0 }}
                   style={{
                     borderRadius: 15,
-                    width: "100%",
+                    width: "95%",
                     height: 54,
                     alignItems: "center",
                     justifyContent: "center",
-                    borderColor: "#7B68A9",
-                    borderWidth: 1,
+                    marginLeft:'3%'
                   }}
                 >
                     <Text style={styles.login_butontext}> Ingresar </Text>
@@ -227,10 +226,10 @@ const styles = StyleSheet.create({
   },
 
   login_button: {
-    width: "100%",
-    alignItems: "center",
     justifyContent: "center",
     borderBottomWidth: 0.5,
+    fontFamily:'Poppins_ExtraBold',
+
   },
 
   login_butontext: {
