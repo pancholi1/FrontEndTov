@@ -1,133 +1,128 @@
-import React, { useState } from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients, gradientsButton } from "../../constants/Gradients";
 
-const QuestionTest = ({id, question, onAnswered, dimension}) => {
-
-
-
+const QuestionTest = ({ id, question, onAnswered, dimension }) => {
   const [count, setCount] = useState({
-    O:0,//APERTURA
-    E:0,//EXTROVISION
-    A:0,//AMABILIDAD
-    N:0,//NEUROCITICISMO
-    C:0,//ESCRUPULOSIDAD
-  })
+    O: 0, //APERTURA
+    E: 0, //EXTROVISION
+    A: 0, //AMABILIDAD
+    N: 0, //NEUROCITICISMO
+    C: 0, //ESCRUPULOSIDAD
+  });
 
-  
   const handleYes = () => {
-   if(dimension === 'Apertura a la experiencia'){
-    setCount({...count, O:count.O + 1})
-    onAnswered(count)
-   }
-   if(dimension === 'Escrupulosidad'){
-    setCount({...count, C:count.C + 1})
-    onAnswered(count)
-   }
-   if(dimension === 'Neuroticismo'){
-    setCount({...count, N:count.N + 1})
-    onAnswered(count)
-   }
-   if(dimension === 'Amabilidad'){
-    setCount({...count, A:count.A + 1})
-    onAnswered(count)
-   }
-   if(dimension === 'Extraversión'){
-    setCount({...count, E:count.E + 1})
-    onAnswered(count)
-   }
+    if (dimension === "Apertura a la experiencia") {
+      setCount({ ...count, O: count.O + 1 });
+      onAnswered(count);
+    }
+    if (dimension === "Escrupulosidad") {
+      setCount({ ...count, C: count.C + 1 });
+      onAnswered(count);
+    }
+    if (dimension === "Neuroticismo") {
+      setCount({ ...count, N: count.N + 1 });
+      onAnswered(count);
+    }
+    if (dimension === "Amabilidad") {
+      setCount({ ...count, A: count.A + 1 });
+      onAnswered(count);
+    }
+    if (dimension === "Extraversión") {
+      setCount({ ...count, E: count.E + 1 });
+      onAnswered(count);
+    }
   };
   const handleYes2 = () => {
-   if(dimension === 'Apertura a la experiencia'){
-    setCount({...count, O:count.O + 2})
-    onAnswered(count)
-   }
-   if(dimension === 'Escrupulosidad'){
-    setCount({...count, C:count.C + 2})
-    onAnswered(count)
-   }
-   if(dimension === 'Neuroticismo'){
-    setCount({...count, N:count.N + 2})
-    onAnswered(count)
-   }
-   if(dimension === 'Amabilidad'){
-    setCount({...count, A:count.A + 2})
-    onAnswered(count)
-   }
-   if(dimension === 'Extraversión'){
-    setCount({...count, E:count.E + 2})
-    onAnswered(count)
-   }
+    if (dimension === "Apertura a la experiencia") {
+      setCount({ ...count, O: count.O + 2 });
+      onAnswered(count);
+    }
+    if (dimension === "Escrupulosidad") {
+      setCount({ ...count, C: count.C + 2 });
+      onAnswered(count);
+    }
+    if (dimension === "Neuroticismo") {
+      setCount({ ...count, N: count.N + 2 });
+      onAnswered(count);
+    }
+    if (dimension === "Amabilidad") {
+      setCount({ ...count, A: count.A + 2 });
+      onAnswered(count);
+    }
+    if (dimension === "Extraversión") {
+      setCount({ ...count, E: count.E + 2 });
+      onAnswered(count);
+    }
   };
   const handleYes3 = () => {
-   if(dimension === 'Apertura a la experiencia'){
-    setCount({...count, O:count.O + 3})
-    onAnswered(count)
-   }
-   if(dimension === 'Escrupulosidad'){
-    setCount({...count, C:count.C + 3})
-    onAnswered(count)
-   }
-   if(dimension === 'Neuroticismo'){
-    setCount({...count, N:count.N + 3})
-    onAnswered(count)
-   }
-   if(dimension === 'Amabilidad'){
-    setCount({...count, A:count.A + 3})
-    onAnswered(count)
-   }
-   if(dimension === 'Extraversión'){
-    setCount({...count, E:count.E + 3})
-    onAnswered(count)
-   }
+    if (dimension === "Apertura a la experiencia") {
+      setCount({ ...count, O: count.O + 3 });
+      onAnswered(count);
+    }
+    if (dimension === "Escrupulosidad") {
+      setCount({ ...count, C: count.C + 3 });
+      onAnswered(count);
+    }
+    if (dimension === "Neuroticismo") {
+      setCount({ ...count, N: count.N + 3 });
+      onAnswered(count);
+    }
+    if (dimension === "Amabilidad") {
+      setCount({ ...count, A: count.A + 3 });
+      onAnswered(count);
+    }
+    if (dimension === "Extraversión") {
+      setCount({ ...count, E: count.E + 3 });
+      onAnswered(count);
+    }
   };
   const handleYes4 = () => {
-   if(dimension === 'Apertura a la experiencia'){
-    setCount({...count, O:count.O + 4})
-    onAnswered(count)
-   }
-   if(dimension === 'Escrupulosidad'){
-    setCount({...count, C:count.C + 4})
-    onAnswered(count)
-   }
-   if(dimension === 'Neuroticismo'){
-    setCount({...count, N:count.N + 4})
-    onAnswered(count)
-   }
-   if(dimension === 'Amabilidad'){
-    setCount({...count, A:count.A + 4})
-    onAnswered(count)
-   }
-   if(dimension === 'Extraversión'){
-    setCount({...count, E:count.E + 4})
-    onAnswered(count)
-   }
+    if (dimension === "Apertura a la experiencia") {
+      setCount({ ...count, O: count.O + 4 });
+      onAnswered(count);
+    }
+    if (dimension === "Escrupulosidad") {
+      setCount({ ...count, C: count.C + 4 });
+      onAnswered(count);
+    }
+    if (dimension === "Neuroticismo") {
+      setCount({ ...count, N: count.N + 4 });
+      onAnswered(count);
+    }
+    if (dimension === "Amabilidad") {
+      setCount({ ...count, A: count.A + 4 });
+      onAnswered(count);
+    }
+    if (dimension === "Extraversión") {
+      setCount({ ...count, E: count.E + 4 });
+      onAnswered(count);
+    }
   };
   const handleYes5 = () => {
-   if(dimension === 'Apertura a la experiencia'){
-    setCount({...count, O:count.O + 5})
-    onAnswered(count)
-   }
-   if(dimension === 'Escrupulosidad'){
-    setCount({...count, C:count.C + 5})
-    onAnswered(count)
-   }
-   if(dimension === 'Neuroticismo'){
-    setCount({...count, N:count.N + 5})
-    onAnswered(count)
-   }
-   if(dimension === 'Amabilidad'){
-    setCount({...count, A:count.A + 5})
-    onAnswered(count)
-   }
-   if(dimension === 'Extraversión'){
-    setCount({...count, E:count.E + 5})
-    onAnswered(count)
-   }
+    if (dimension === "Apertura a la experiencia") {
+      setCount({ ...count, O: count.O + 5 });
+      onAnswered(count);
+    }
+    if (dimension === "Escrupulosidad") {
+      setCount({ ...count, C: count.C + 5 });
+      onAnswered(count);
+    }
+    if (dimension === "Neuroticismo") {
+      setCount({ ...count, N: count.N + 5 });
+      onAnswered(count);
+    }
+    if (dimension === "Amabilidad") {
+      setCount({ ...count, A: count.A + 5 });
+      onAnswered(count);
+    }
+    if (dimension === "Extraversión") {
+      setCount({ ...count, E: count.E + 5 });
+      onAnswered(count);
+    }
   };
-  
 
   return (
     <View style={styles.container}>
@@ -148,7 +143,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                   style={{
                     borderRadius: 15,
                     width: "100%",
-                    height: 58,
+                    height: 65,
                     alignItems: "flex-start",
                     justifyContent: "center",
                   }}
@@ -164,7 +159,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                   style={{
                     borderRadius: 15,
                     width: "100%",
-                    height: 58,
+                    height: 65,
                     alignItems: "center",
                     justifyContent: "center",
                   }}
@@ -180,7 +175,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                   style={{
                     borderRadius: 15,
                     width: "100%",
-                    height: 58,
+                    height: 65,
                     alignItems: "flex-start",
                     justifyContent: "center",
                   }}
@@ -196,14 +191,13 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                   style={{
                     borderRadius: 15,
                     width: "100%",
-                    height: 58,
+                    height: 65,
                     alignItems: "flex-start",
                     justifyContent: "center",
-
-                  }}
-                >
-          <Text style={styles.button_text}>LEVEMENTE DE ACUERDO</Text>
-          </LinearGradient>
+              }}
+            >
+              <Text style={styles.button_text}>LEVEMENTE DE ACUERDO</Text>
+            </LinearGradient>
           </Pressable>
         <Pressable style={styles.button} onPress={handleYes5}>
         <LinearGradient
@@ -213,7 +207,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                   style={{
                     borderRadius: 15,
                     width: "100%",
-                    height: 58,
+                    height: 65,
                     alignItems: "flex-start",
                     justifyContent: "center",
                   }}
@@ -221,19 +215,18 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
           <Text style={styles.button_text}>DE ACUERDO</Text>
           </LinearGradient>
           </Pressable>
-      </View>
-          </LinearGradient>
+        </View>
+      </LinearGradient>
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
+  container: {
+    flex: 1,
     backgroundColor: "#130C34",
-    alignItems:"center",
-    width:'100%',
+    alignItems: "center",
+    width: "100%",
   },
   container_test:{
       marginTop:"10%",
@@ -277,4 +270,4 @@ const styles = StyleSheet.create({
       
   },
 });
-export default QuestionTest
+export default QuestionTest;
