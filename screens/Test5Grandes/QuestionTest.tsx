@@ -149,7 +149,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     borderRadius: 15,
                     width: "100%",
                     height: 58,
-                    alignItems: "center",
+                    alignItems: "flex-start",
                     justifyContent: "center",
                   }}
                 >
@@ -169,7 +169,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     justifyContent: "center",
                   }}
                 >
-          <Text style={styles.button_text}>LEVEMENTE EN DESACUERDO</Text>
+          <Text style={styles.button_text2}>LEVEMENTE EN DESACUERDO</Text>
           </LinearGradient>
           </Pressable>
         <Pressable style={styles.button} onPress={handleYes3}>
@@ -181,7 +181,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     borderRadius: 15,
                     width: "100%",
                     height: 58,
-                    alignItems: "center",
+                    alignItems: "flex-start",
                     justifyContent: "center",
                   }}
                 >
@@ -197,7 +197,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     borderRadius: 15,
                     width: "100%",
                     height: 58,
-                    alignItems: "center",
+                    alignItems: "flex-start",
                     justifyContent: "center",
 
                   }}
@@ -214,7 +214,7 @@ const QuestionTest = ({id, question, onAnswered, dimension}) => {
                     borderRadius: 15,
                     width: "100%",
                     height: 58,
-                    alignItems: "center",
+                    alignItems: "flex-start",
                     justifyContent: "center",
                   }}
                 >
@@ -236,18 +236,18 @@ const styles = StyleSheet.create({
     width:'100%',
   },
   container_test:{
-      marginTop:"5%",
+      marginTop:"10%",
       borderRadius:15,
-      width:"95%",
+      width:"88%",
       alignItems:"center",
       textAlign:"center",
-      height:'95%'
+      height:'88%'
   },
   numero_test:{
       color:"#DED3F4",
       fontWeight:"600",
       fontSize:20,
-      padding:"3%",
+      paddingBottom:"5%",
       fontFamily: "Poppins_Regular"
   },
   text_test:{
@@ -256,18 +256,25 @@ const styles = StyleSheet.create({
       fontSize:14,
       width:"85%",
       alignItems: 'center',
-      height:50,
-      fontFamily: "Poppins_Regular"
+       height:100,
+      fontFamily: "Poppins_Regular",
   },
   button:{
-      width:"90%",
+      width:"100%",
       marginTop: "8%",
       borderRadius:15
   },
   button_text:{
-      fontSize: 20,
+      fontSize: 18,
       color:"#DED3F4",
       fontFamily:"Poppins_ExtraBold",
+      marginLeft:20
+  },
+  button_text2:{
+      fontSize: 18,
+      color:"#DED3F4",
+      fontFamily:"Poppins_ExtraBold",
+      
   },
 });
 export default QuestionTest

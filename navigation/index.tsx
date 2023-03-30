@@ -34,15 +34,17 @@ import {
   ResultTestScreen,
   SingUpScreen,
 } from "../screens";
-
-import CarrerasScreen from "../screens/TestChaside/CarrerasScreen";
+import { DescriptionScreen } from "../screens/TestChaside/DescriptionScreen";
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
 import TestMMYMGScreen from "../screens/TestMMYMG/TestMMYMGScreen";
 import CarrerasTest2 from "../screens/TestMMYMG/CarrerasTest2";
+import CarrerasChaside from "../screens/TestChaside/CarrerasScreen";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
 import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
-import DescriptionScreen from "../screens/TestChaside/DescriptionScreen/DescriptionScreen";
+
+
+
 
 export default function Navigation({
   colorScheme,
@@ -236,7 +238,7 @@ function RootNavigator() {
       </Stack.Group>
       <Stack.Screen
         name="CarrerasScreen"
-        component={CarrerasScreen}
+        component={CarrerasChaside}
         options={{
           title: "Carreras",
           headerTitleAlign: "center",
