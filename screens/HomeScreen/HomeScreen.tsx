@@ -21,9 +21,9 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
       <Text style={styles.name}>SOFIA FERRARI</Text>
 
       <LinearGradient
-        colors={gradients.inputs}
-        start={{ x: 1, y: 1 }}
-        end={{ x: 0, y: 0 }}
+        colors={["#3d3758", "#1e173e"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
         style={styles.container_progreso}
       >
         <Text style={styles.title_progreso}>Progreso</Text>
@@ -176,11 +176,9 @@ const styles = StyleSheet.create({
   },
   name: {
     marginBottom: 10,
-    fontFamily: "Poppins_Regular",
-    fontStyle: "normal",
+    fontFamily: "Poppins_ExtraBold",
     fontWeight: "600",
     fontSize: 30,
-    lineHeight: 34,
     color: "#06D6DD",
   },
   container_progreso: {
