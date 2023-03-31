@@ -1,64 +1,132 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import { gradients } from "../constants/Gradients";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { gradients, greenChaside } from "../constants/Gradients";
 
-export default function CardResult({ image, title, description }) {
+export default function CardResult({
+  image,
+  title,
+  description,
+  route,
+  navigation,
+  selected,
+}) {
   return (
-    <View style={styles.container}>
-      <LinearGradient colors={gradients.inputs}
+    <CardContainer route={route} navigation={navigation} selected={selected}>
+      {image && <Image style={styles.img_card} source={image} />}
+      <LinearGradient
+        colors={selected ? greenChaside : gradients.inputs}
         start={{ x: 1, y: 1 }}
         end={{ x: 0, y: 0 }}
-      style={{ borderRadius: 15 }}>
-        <View style={styles.container_chart}>
-          {image && <Image style={styles.img_card} source={image} />}
-          <View>
+        style={{ borderRadius: 15 }}
+      >
+        <View
+          style={
+            selected ? styles.container_chart_selected : styles.container_chart
+          }
+        >
+          <View style={styles.img_space} />
+          <View style={styles.text_container}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.description}>{description}</Text>
           </View>
         </View>
       </LinearGradient>
-    </View>
+    </CardContainer>
   );
 }
 
+const CardContainer = ({ route, children, navigation, selected }) => {
+  return route && navigation ? (
+    <Pressable
+      style={
+        selected
+          ? styles.card_result_container_selected
+          : styles.card_result_container
+      }
+      onPress={() => navigation.navigate(route)}
+    >
+      {children}
+    </Pressable>
+  ) : (
+    <View
+      style={
+        selected
+          ? styles.card_result_container_selected
+          : styles.card_result_container
+      }
+    >
+      {children}
+    </View>
+  );
+};
+
+CardResult.defaultProps = {
+  route: null,
+  navigation: null,
+  containerStyles: null,
+  selected: false,
+  image: null,
+};
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  card_result_container: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#130C34",
+  },
+  card_result_container_selected: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "#025558",
   },
   container_chart: {
     padding: 15,
     borderRadius: 15,
     width: 313,
-    height: 101,
+    height: 115,
     borderColor: "#B39AE7",
     borderWidth: 2,
     flexDirection: "row",
   },
-  img_card: {
+  container_chart_selected: {
+    padding: 15,
+    borderRadius: 15,
+    width: 313,
+    height: 115,
+    borderColor: "#025558",
+    borderWidth: 1,
+    borderEndWidth: 4,
+    flexDirection: "row",
+  },
+  img_space: {
     height: 134,
     width: 107,
     marginLeft: -40,
     marginTop: -30,
   },
-
+  img_card: {
+    position: "absolute",
+    zIndex: 1,
+    height: 130,
+    width: 107,
+    left: 20,
+    top: -10,
+  },
+  text_container: {
+    width: "80%",
+    paddingRight: 5,
+  },
   title: {
     fontFamily: "Poppins_SemiBold",
     color: "#DED3F4",
     fontSize: 20,
     fontWeight: "bold",
-
   },
 
   description: {
     color: "#DED3F4",
-    width: "57%",
     textAlign: "left",
     fontSize: 15,
     lineHeight: 17.5,
-
   },
 });
