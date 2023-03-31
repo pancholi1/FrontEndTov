@@ -5,9 +5,7 @@ import { RootStackScreenProps } from "../../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients, gradientsButton } from "../../../constants/Gradients";
 
-const DescriptionScreen = ({
-  navigation,
-}: RootStackScreenProps<"DescriptionScreen">) => {
+const DescriptionScreen = ({navigation}: RootStackScreenProps<"DescriptionScreen">) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ width: "90%", marginTop: "10%" }}>
