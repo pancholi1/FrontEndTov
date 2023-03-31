@@ -10,7 +10,7 @@ type CarrerasScreenProps = {
   route: RouteProp<RootStackParamList, 'CarrerasScreen'>;
 };
 
-function CarrerasChaside({ route }: CarrerasScreenProps) {
+const CarrerasChaside = ({ route }: CarrerasScreenProps) => {
     let msjHabilidad: string = '';
     let msjInteres: string = '';
 
