@@ -25,6 +25,8 @@ import CalendarInterviewScreen from "../screens/CalendarInterviewScreen/Calendar
 import { Avatar } from "react-native-paper";
 import { Image } from "react-native";
 import {
+  CarrerasChasideScreen,
+  DescriptionChasideScreen,
   HomeScreen,
   LoginScreen,
   MainScreen,
@@ -34,12 +36,10 @@ import {
   ResultTestScreen,
   SingUpScreen,
 } from "../screens";
-import { DescriptionScreen } from "../screens/TestChaside/DescriptionScreen";
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
 import TestMMYMGScreen from "../screens/TestMMYMG/TestMMYMGScreen";
 import CarrerasTest2 from "../screens/TestMMYMG/CarrerasTest2";
-import CarrerasChaside from "../screens/TestChaside/CarrerasScreen";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
 import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
 
@@ -113,8 +113,8 @@ function RootNavigator() {
         />
 
         <Stack.Screen
-          name="DescriptionScreen"
-          component={DescriptionScreen}
+          name="DescriptionChasideScreen"
+          component={DescriptionChasideScreen}
           options={{
             title: "Test Chaside",
             headerTitleAlign: "center",
@@ -226,8 +226,8 @@ function RootNavigator() {
         />
       </Stack.Group>
       <Stack.Screen
-        name="CarrerasScreen"
-        component={CarrerasChaside}
+        name="CarrerasChasideScreen"
+        component={CarrerasChasideScreen}
         options={{
           title: "Carreras",
           headerTitleAlign: "center",

@@ -9,3 +9,5 @@ export * from "./ProfileScreen";
 export * from "./ResultadosScreen";
 export * from "./ResultChasideScreen";
 export * from "./SingUpScreen";
+export * from "./DescriptionChasideScreen";
+export * from "./CarrerasChasideScreen";

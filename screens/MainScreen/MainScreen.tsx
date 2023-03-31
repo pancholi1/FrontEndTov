@@ -101,12 +101,12 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_ExtraBold",
   },
   login_subtitle_orientacion: {
-    color: "#06D6DD",
+    color: "#00BBC2",
     fontSize: 33,
     fontWeight: "600",
   },
   login_subtitle_vocacional: {
-    color: "#06D6DD",
+    color: "#00BBC2",
     fontSize: 30,
     fontWeight: "600",
   },

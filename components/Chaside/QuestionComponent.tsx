@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients, gradientsButton } from "../../constants/Gradients";
 
-const ComponentQuestion = ({ id, question, onAnswered }) => {
-  const [answer, setAnswer] = useState<boolean | null>(null);
+interface SurveyProps {
+  id: number;
+  question: string;
+  resultado: string;
+  onAnswered: (answer: boolean) => void;
+}
 
+const Survey: React.FC<SurveyProps> = ({
+  id,
+  question,
+  resultado,
+  onAnswered,
+}) => {
+  const [answer, setAnswer] = useState<boolean | null>(null);
   const handleYes = () => {
     setAnswer(true);
     onAnswered(true);
@@ -31,10 +43,10 @@ const ComponentQuestion = ({ id, question, onAnswered }) => {
         }}
       >
         <View style={styles.container_test}>
-          <Text style={styles.numero_test}>{id}/80</Text>
+          <Text style={styles.numero_test}>{id}/98</Text>
           <Text style={styles.text_test}>{question}</Text>
           <LinearGradient
-            colors={["#0995a6", "#112044"]}
+            colors={["#0995a6", "#197189", "#112044"]}
             style={{
               borderRadius: 15,
               width: "70%",
@@ -42,14 +54,15 @@ const ComponentQuestion = ({ id, question, onAnswered }) => {
               alignItems: "center",
               justifyContent: "center",
               marginBottom: "10%",
+              marginTop: "13%",
             }}
           >
             <Pressable style={styles.button} onPress={handleYes}>
-              <Text style={styles.button_text}>ME INTERESA</Text>
+              <Text style={styles.button_text}>SI</Text>
             </Pressable>
           </LinearGradient>
           <LinearGradient
-            colors={["#0995a6", "#112044"]}
+            colors={["#0995a6", "#197189", "#112044"]}
             style={{
               borderRadius: 15,
               width: "70%",
@@ -58,8 +71,8 @@ const ComponentQuestion = ({ id, question, onAnswered }) => {
               justifyContent: "center",
             }}
           >
-            <Pressable style={styles.button2} onPress={handleNo}>
-              <Text style={styles.button_text}>NO ME INTERESA</Text>
+            <Pressable style={styles.button} onPress={handleNo}>
+              <Text style={styles.button_text}>NO</Text>
             </Pressable>
           </LinearGradient>
         </View>
@@ -67,8 +80,6 @@ const ComponentQuestion = ({ id, question, onAnswered }) => {
     </View>
   );
 };
-
-export default ComponentQuestion;
 
 const styles = StyleSheet.create({
   container: {
@@ -83,7 +94,6 @@ const styles = StyleSheet.create({
     width: "90%",
     alignItems: "center",
     textAlign: "center",
-    justifyContent: "space-around",
     height: 350,
   },
   numero_test: {
@@ -99,7 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     width: "85%",
     alignItems: "center",
-    height: 100,
+    textAlign: "center",
     fontFamily: "Poppins_ExtraBold",
   },
   button: {
@@ -110,11 +120,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   button2: {
-    height: 63,
-    width: "100%",
+    width: "50%",
     alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 15,
+    marginTop: 20,
   },
   button_text: {
     fontSize: 20,
@@ -122,3 +130,5 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_ExtraBold",
   },
 });
+
+export default Survey;
