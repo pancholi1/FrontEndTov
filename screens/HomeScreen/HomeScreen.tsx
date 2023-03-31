@@ -120,10 +120,8 @@ const styles = StyleSheet.create({
     borderColor: "#025558",
     borderWidth: 1,
     borderEndWidth: 4,
-
     padding: 15,
     borderRadius: 15,
-
     width: 345,
     height: 115,
     flexDirection: "row",
@@ -163,14 +161,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
   },
-
   container_styles: {
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#130C34",
   },
-
   img_space: {
     height: 134,
     width: 107,
@@ -185,14 +181,12 @@ const styles = StyleSheet.create({
     left: 25,
     top: -3,
   },
-
   title: {
     fontFamily: "Poppins_SemiBold",
     color: "#DED3F4",
     fontSize: 20,
     fontWeight: "bold",
   },
-
   description: {
     color: "#DED3F4",
     width: "57%",

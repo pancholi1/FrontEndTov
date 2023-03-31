@@ -5,10 +5,10 @@ import surveyData from './questions'
 import { RootStackScreenProps } from "../../types";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+import { gradients, gradientsButton, gradientsChaside, gradientsConteinerChaside, greenChaside } from "../../constants/Gradients";
 
 
-const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
+const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     const [answers, setAnswers] = useState<boolean[]>([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
@@ -188,7 +188,7 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
       <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>
         <LinearGradient
-          colors={gradients.inputs}
+          colors={gradientsConteinerChaside}
           start={{ x: 1, y: 1 }}
           end={{ x: 0, y: 0 }}
           style={{marginTop:"8%",
@@ -197,22 +197,22 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
           alignItems:"center",}}
         >
             <View style={styles.container_test}>
-                <Text style={styles.title}>Intereses</Text>
-                <Text style={styles.thankYou}>Su area con mayor votos por interes es {msjInteres}</Text>
-                <Text style={styles.thankYou}>{textCarreraInteres}</Text>
+                <Text style={styles.title}>INTERESES</Text>
+                <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
+                <Text style={styles.thankYou}>({msjInteres})</Text>
+                <Text style={styles.thankYou2}>{textCarreraInteres}</Text>
                 <Pressable style={styles.button} onPress={() => carrerasPosibles(propiedadMayorHabilidades, propiedadMayorIntereses, 'interes')}>
                   <LinearGradient
-                    colors={gradients.inputs}
+                    colors={gradientsButton.inputs}
                     start={{ x: 1, y: 1 }}
                     end={{ x: 0, y: 0 }}
                     style={{
                       borderRadius: 15,
                       width: "100%",
-                      height: 54,
+                      height: 45,
                       alignItems: "center",
                       justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
+                      margin:'4%'
                     }}
                   >
                     <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
@@ -231,8 +231,9 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
             >
             <View style={styles.container_test}>
                 <Text style={styles.title}>HABILIDADES</Text>
-                <Text style={styles.thankYou}>Su area con mayor votos por habilidad es: {msjHabilidad}</Text>
-                <Text style={styles.thankYou}>{textCarreraHabilidad}</Text>
+                <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
+                <Text style={styles.thankYou}>({msjHabilidad})</Text>
+                <Text style={styles.thankYou2}>{textCarreraHabilidad}</Text>
                 <Pressable style={styles.button} onPress={() => carrerasPosibles(propiedadMayorHabilidades, propiedadMayorIntereses, 'habilidad')}>
                 <LinearGradient
                     colors={gradients.inputs}
@@ -241,14 +242,26 @@ const SurveyScreen = ({ navigation }: RootStackScreenProps<"SurveyScreen">) => {
                     style={{
                       borderRadius: 15,
                       width: "100%",
-                      height: 54,
+                      height: 50,
                       alignItems: "center",
                       justifyContent: "center",
-                      borderColor: "#7B68A9",
-                      borderWidth: 1,
                     }}
                   >
-                    <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+                    <LinearGradient
+                                        colors={gradientsButton.inputs}
+                                        start={{ x: 1, y: 1 }}
+                                        end={{ x: 0, y: 0 }}
+                                        style={{
+                                          borderRadius: 15,
+                                          width: "100%",
+                                          height: 45,
+                                          alignItems: "center",
+                                          justifyContent: "center",
+                                          margin:'4%'
+                                        }}>
+
+                      <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+                    </LinearGradient>
                     </LinearGradient>
                 </Pressable>
             </View>
@@ -284,33 +297,41 @@ const styles = StyleSheet.create({
     width:"90%",
     alignItems:"center",
     textAlign:"center",
-    //backgroundColor:"rgb(40, 32, 86)",
 },
   thankYou: {
-    color:"rgba(222, 211, 244, 1)",
+    color:"#06D6DD",
+    fontWeight:"600",
+    fontSize:15,
+    width:"85%",
+    alignItems: 'center',
+    fontFamily:'Poppins_Regular'
+  },
+  thankYou2: {
+    color:"#DED3F4",
     fontWeight:"600",
     fontSize:14,
     width:"85%",
     alignItems: 'center',
-    margin:"3%",
-    fontFamily:'Poppins_Regular'
+    fontFamily:'Poppins_Regular',
+    margin:'8%'
   },
   title:{
-    color:"rgba(222, 211, 244, 1)",
+    color:"#DED3F4",
     fontWeight:"600",
-    fontSize:17,
+    fontSize:20,
     width:"85%",
     alignItems: 'center',
-    marginTop:'5%',
+    marginTop:'3%',
     marginBottom:'2%',
-    fontFamily:'Poppins_Regular'
+    fontFamily:'Poppins_ExtraBold',
+    textAlign:"center",
   },
   button:{
     width: "80%",
     alignItems: "center",
     borderRadius: 15,
-    margin:'3%',
-    marginBottom:"3%"
+    margin:'1%',
+    marginBottom:"5%"
   },
   text_button:{
     fontSize: 18,
@@ -319,4 +340,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SurveyScreen;
+export default TestChaside;

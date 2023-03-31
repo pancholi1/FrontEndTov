@@ -21,7 +21,7 @@ export type RootStackParamList = {
   ProfileScreen: undefined;
   NotFound: undefined;
   HomeScreen: undefined;
-  Personality: undefined;
+  DescriptionScreen: undefined;
   BottomTabNavigator: undefined;
   SingUp: undefined;
   Resultados: undefined;
@@ -32,14 +32,14 @@ export type RootStackParamList = {
   ResultTestScreen: undefined;
   Test: undefined;
   TarjetaTest: undefined;
-  CarrerasScreen: {habilidad: string, intereses:string, area:string};
-  SurveyScreen: undefined;
+  CarrerasScreen: { habilidad: string; intereses: string; area: string };
+  TestChaside: undefined;
   TestMMYMG: undefined;
   TestMMYMGScreen: undefined;
-  CarrerasTest2: {areaUno: string, areaDos: string, prop:string};
+  CarrerasTest2: { areaUno: string; areaDos: string; prop: string };
   Test5Grandes: undefined;
   Test5GrandesScreen: undefined;
-  QuestionTest:undefined;
+  QuestionTest: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -48,7 +48,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   ResultTestScreen: undefined;
   HomeScreen: undefined;
-  Personality: undefined;
+  DescriptionScreen: undefined;
   ProfileScreen: undefined;
   BottomTabNavigator: undefined;
   SingUp: undefined;
@@ -58,14 +58,14 @@ export type RootTabParamList = {
   Login: undefined;
   Calendar: undefined;
   TarjetaTest: undefined;
-  CarrerasScreen: {habilidad: string, intereses:string, area:string};
-  SurveyScreen: undefined;
+  CarrerasScreen: { habilidad: string; intereses: string; area: string };
+  TestChaside: undefined;
   TestMMYMG: undefined;
   TestMMYMGScreen: undefined;
-  CarrerasTest2: {areaUno: string, areaDos: string, prop:string};
-  Test5Grandes: undefined,
-  Test5GrandesScreen: undefined,
-  QuestionTest:undefined;
+  CarrerasTest2: { areaUno: string; areaDos: string; prop: string };
+  Test5Grandes: undefined;
+  Test5GrandesScreen: undefined;
+  QuestionTest: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
