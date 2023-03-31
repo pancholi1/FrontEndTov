@@ -1,153 +1,73 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-  ScrollView,
-} from "react-native";
-import React from "react";
-import { RootStackScreenProps } from "../../types";
-import { ProgressBar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ProgressBar } from "react-native-paper";
+import { RootStackScreenProps } from "../../types";
 
+import CardResult from "../../components/CardResult";
 import { gradients } from "../../constants/Gradients";
-import { greenChaside } from "../../constants/Gradients";
+import Spacer from "../../components/Spacer";
 
 const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hola</Text>
-      <Text style={styles.name}>SOFIA FERRARI</Text>
-
-      <LinearGradient
-        colors={gradients.inputs}
-        start={{ x: 1, y: 1 }}
-        end={{ x: 0, y: 0 }}
-        style={styles.container_progreso}
-      >
-        <Text style={styles.title_progreso}>Progreso</Text>
-        <Text style={styles.text_progreso}>
-          Realiza el 100% de los test para obtener el resultado final
-        </Text>
-        <Text style={styles.title_progreso}>33%</Text>
-        <ProgressBar progress={0.33} color={"#06D6DD"} />
-      </LinearGradient>
-
-      <Text style={styles.text_test}>¡COMENCEMOS!</Text>
-
-      <ScrollView>
-        <View style={styles.container_card_chaside}>
-        <LinearGradient
-          colors={greenChaside}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={{ borderRadius: 15 }}
-        >
-          <View style={styles.test_chaside}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                style={styles.img_3D}
-                source={require("../../assets/images/HomeScreen/testPersonalidad.png")}
-              />
-            </View>
-
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Personality")}>
-                <Text style={styles.personalidad_title}>Test CHASIDE</Text>
-              </Pressable>
-
-              <Text style={styles.textCard}>
-                Toma menos de 12 minutos. Responde honestamente
-              </Text>
-            </View>
-          </View>
-        </LinearGradient>
-        </View>
-        <View style={styles.container_card}>
+      <View style={styles.header_container}>
+        <Text style={styles.title_hello}>Hola</Text>
+        <Text style={styles.name}>SOFIA FERRARI</Text>
 
         <LinearGradient
           colors={gradients.inputs}
           start={{ x: 1, y: 1 }}
           end={{ x: 0, y: 0 }}
-          style={{ borderRadius: 15 }}
+          style={styles.container_progreso}
         >
-          <View style={styles.test_personalidad}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                style={styles.img_3D}
-                source={require("../../assets/images/HomeScreen/testPsicotécnico.png")}
-              />
-            </View>
-
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("TestMMYMGScreen")}>
-                <Text style={styles.personalidad_title}>Test MM & MG</Text>
-              </Pressable>
-
-              <Text style={styles.textCard}>
-                Comprueba cuáles son las áreas ocupacionales que se ajustan a tu
-                perfil.
-              </Text>
-            </View>
-          </View>
+          <Text style={styles.title_progreso}>Progreso</Text>
+          <Text style={styles.text_progreso}>
+            Realiza el 100% de los test para obtener el resultado final
+          </Text>
+          <Text style={styles.title_progreso}>33%</Text>
+          <ProgressBar progress={0.33} color={"#06D6DD"} />
         </LinearGradient>
-        </View>
-        <View style={styles.container_card}>
 
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={{ borderRadius: 15 }}
-        >
-          <View style={styles.test_personalidad}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                source={require("../../assets/images/HomeScreen/test5grandes.png")}
-                style={styles.img_3D}
-              />
-            </View>
+        <Text style={styles.text_test}>¡COMENCEMOS!</Text>
+      </View>
+      <Spacer height={10} />
 
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Test5GrandesScreen")}>
-                <Text style={styles.personalidad_title}>
-                  Test de los 5 Grandes
-                </Text>
-              </Pressable>
-              <Text style={styles.textCard} numberOfLines={3}>
-                Conocé más sobre tu personalidad y capacidades.
-              </Text>
-            </View>
-          </View>
-        </LinearGradient>
-        </View>
-        <View style={styles.container_card}>
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={{ borderRadius: 15 }}
-        >
-          <View style={styles.test_personalidad}>
-            <View style={styles.img_3DContainer}>
-              <Image
-                source={require("../../assets/images/HomeScreen/entrevista.png")}
-                style={styles.img_3D}
-              />
-            </View>
-            <View style={styles.contenedor_text}>
-              <Pressable onPress={() => navigation.navigate("Calendar")}>
-                <Text style={styles.personalidad_title}>Entrevista</Text>
-              </Pressable>
-              <Text style={styles.textCard}>
-                Agenda una entrevista con un profesional capacitado
-              </Text>
-            </View>
-          </View>
-        </LinearGradient>
-        </View>
-
+      <ScrollView style={styles.scroll_container}>
+        <CardResult
+          image={require("../../assets/images/HomeScreen/testPersonalidad.png")}
+          title={"Test CHASIDE"}
+          description={"Toma menos de 12 minutos. Responde honestamente."}
+          navigation={navigation}
+          route={"Personality"}
+          selected
+        />
+        <Spacer height={20} />
+        <CardResult
+          image={require("../../assets/images/HomeScreen/testPsicotécnico.png")}
+          title={"Test MM & MG"}
+          description={
+            "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
+          }
+          navigation={navigation}
+          route={"TestMMYMGScreen"}
+        />
+        <Spacer height={20} />
+        <CardResult
+          image={require("../../assets/images/HomeScreen/test5grandes.png")}
+          title={"Test de los 5 Grandes"}
+          description={"Conocé más sobre tu personalidad y capacidades."}
+          navigation={navigation}
+          route={"Test5GrandesScreen"}
+        />
+        <Spacer height={20} />
+        <CardResult
+          image={require("../../assets/images/HomeScreen/entrevista.png")}
+          title={"Entrevista"}
+          description={"Agenda una entrevista con un profesional capacitado."}
+          navigation={navigation}
+          route={"Calendar"}
+        />
       </ScrollView>
     </View>
   );
@@ -160,10 +80,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#130C34",
+  },
+  header_container: {
     paddingLeft: "8%",
     paddingRight: "8%",
   },
-  title: {
+  scroll_container: {
+    width: "100%",
+  },
+  title_hello: {
     fontFamily: "Poppins_ExtraBold",
     fontStyle: "normal",
     fontWeight: "800",
@@ -189,24 +114,19 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderColor: "#524c77",
     borderWidth: 1,
-
- 
   },
-  container_card:{
-    marginBottom: 15,
-    borderColor: "#524c77",
-    borderRadius: 15,
-    borderWidth: 1,
-        marginTop: 5,
-
-
-  },
-  container_card_chaside:{
+  container_card_chaside: {
     marginBottom: 15,
     borderColor: "#025558",
-    borderRadius: 19,
     borderWidth: 1,
-    borderEndWidth:4,
+    borderEndWidth: 4,
+
+    padding: 15,
+    borderRadius: 15,
+
+    width: 345,
+    height: 115,
+    flexDirection: "row",
   },
   title_progreso: {
     fontFamily: "Poppins_SemiBold",
@@ -232,57 +152,52 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "Poppins_SemiBold",
   },
-  test_personalidad: {
-    borderRadius: 15,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 10,
-    fontWeight: "500",
-    
-  },
   test_chaside: {
     borderRadius: 15,
     display: "flex",
     flexDirection: "row",
     marginTop: 10,
     fontWeight: "500",
-
   },
-  img_3DContainer: {
-    width: "25%",
-    height: 90,
-  },
-  img_3D: {
-    position: "absolute",
-    left: -15,
-    bottom: -15,
-    width: "100%",
-    height: 134,
-    zIndex: 111111111111
-  },
-
-  personalidad_title: {
-    fontSize: 20,
-    fontFamily: "Poppins_SemiBold",
-    color: "#DED3F4",
-    fontWeight: "600",
-    lineHeight: 30,
-    marginTop: 5,
-    
-  },
-  textCard: {
-    fontFamily: "Poppins_Regular",
-    color: "#DED3F4",
-    fontSize: 15,
-    width: "70%",
-    lineHeight: 17.5,
-
-    
-  },
-
   contenedor_text: {
     flexDirection: "column",
     width: "100%",
   },
-});
 
+  container_styles: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#130C34",
+  },
+
+  img_space: {
+    height: 134,
+    width: 107,
+    marginLeft: -40,
+    marginTop: -30,
+  },
+  img_card: {
+    position: "absolute",
+    zIndex: 1,
+    height: 134,
+    width: 107,
+    left: 25,
+    top: -3,
+  },
+
+  title: {
+    fontFamily: "Poppins_SemiBold",
+    color: "#DED3F4",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
+  description: {
+    color: "#DED3F4",
+    width: "57%",
+    textAlign: "left",
+    fontSize: 15,
+    lineHeight: 17.5,
+  },
+});
