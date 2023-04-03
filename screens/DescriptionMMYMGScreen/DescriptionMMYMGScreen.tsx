@@ -3,11 +3,11 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { RootStackScreenProps } from "../../types";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients, gradientsButton } from "../../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
 
-const TestMMYMGScreen = ({
+const DescriptionMMYMGScreen = ({
   navigation,
-}: RootStackScreenProps<"TestMMYMGScreen">) => {
+}: RootStackScreenProps<"DescriptionMMYMGScreen">) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ width: "90%", marginTop: "10%" }}>
@@ -54,7 +54,7 @@ const TestMMYMGScreen = ({
   );
 };
 
-export default TestMMYMGScreen;
+export default DescriptionMMYMGScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -85,15 +85,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#DED3F4",
     padding: "4%",
-    fontFamily: "Poppins_Regular",
+    fontFamily: "Poppins_ExtraBold",
   },
   text_test: {
     width: "85%",
     alignItems: "center",
-    textAlign: "center",
     paddingBottom: "5%",
     color: "#DED3F4",
-    fontFamily: "Poppins_Regular",
+    fontFamily: "Poppins_ExtraBold",
+    textAlign: "center",
     fontSize: 14,
   },
 });

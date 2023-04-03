@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { RootStackScreenProps } from '../../types';
-import ComponentQuestion from './ComponentQuestion';
+import ComponentQuestion from '../../components/MMYMG/ComponentQuestion';
 import { questions2 } from './question';
 
 import { LinearGradient } from "expo-linear-gradient";
@@ -105,7 +105,7 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
     }
 
     const carrerasPosibles= (areaUno: string, areaDos: string, prop:string) => {
-        navigation.navigate('CarrerasTest2',{
+        navigation.navigate('CarrerasMMYMGScreen',{
             areaUno: carrerasArea1,
             areaDos: carrerasArea2,
             prop

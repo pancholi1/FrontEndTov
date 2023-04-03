@@ -235,6 +235,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#DED3F4",
     fontFamily: "Poppins_ExtraBold",
+    marginLeft: 20,
   },
 });
 export default QuestionTest;

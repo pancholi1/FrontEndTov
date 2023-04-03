@@ -35,10 +35,10 @@ export type RootStackParamList = {
   CarrerasChasideScreen: { habilidad: string; intereses: string; area: string };
   TestChaside: undefined;
   TestMMYMG: undefined;
-  TestMMYMGScreen: undefined;
-  CarrerasTest2: { areaUno: string; areaDos: string; prop: string };
+  DescriptionMMYMGScreen: undefined;
+  CarrerasMMYMGScreen: { areaUno: string; areaDos: string; prop: string };
   Test5Grandes: undefined;
-  Test5GrandesScreen: undefined;
+  Description5GrandesScreen: undefined;
   QuestionTest: undefined;
 };
 
@@ -61,10 +61,10 @@ export type RootTabParamList = {
   CarrerasChasideScreen: { habilidad: string; intereses: string; area: string };
   TestChaside: undefined;
   TestMMYMG: undefined;
-  TestMMYMGScreen: undefined;
-  CarrerasTest2: { areaUno: string; areaDos: string; prop: string };
+  DescriptionMMYMGScreen: undefined;
+  CarrerasMMYMGScreen: { areaUno: string; areaDos: string; prop: string };
   Test5Grandes: undefined;
-  Test5GrandesScreen: undefined;
+  Description5GrandesScreen: undefined;
   QuestionTest: undefined;
 };
 

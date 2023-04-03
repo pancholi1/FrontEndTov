@@ -1,14 +1,13 @@
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import Navigation from "../../navigation";
 import { RootStackScreenProps } from "../../types";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients, gradientsButton } from "../../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
 
-const Test5GrandesScreen = ({
+const Description5GrandesScreen = ({
   navigation,
-}: RootStackScreenProps<"Test5GrandesScreen">) => {
+}: RootStackScreenProps<"Description5GrandesScreen">) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ width: "90%", marginTop: "10%" }}>
@@ -80,9 +79,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: "5%",
     color: "#DED3F4",
-    fontFamily: "Poppins_Regular",
-    fontSize: 14,
+    fontFamily: "Poppins_ExtraBold",
     textAlign: "center",
+    fontSize: 14,
   },
   button: {
     marginTop: 35,
@@ -97,4 +96,4 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_ExtraBold",
   },
 });
-export default Test5GrandesScreen;
+export default Description5GrandesScreen;

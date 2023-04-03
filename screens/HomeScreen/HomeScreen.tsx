@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
             "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
           }
           navigation={navigation}
-          route={"TestMMYMGScreen"}
+          route={"DescriptionMMYMGScreen"}
         />
         <Spacer height={20} />
         <CardResult
@@ -58,7 +58,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           title={"Test de los 5 Grandes"}
           description={"Conocé más sobre tu personalidad y capacidades."}
           navigation={navigation}
-          route={"Test5GrandesScreen"}
+          route={"Description5GrandesScreen"}
         />
         <Spacer height={20} />
         <CardResult

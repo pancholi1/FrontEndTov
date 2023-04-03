@@ -26,7 +26,10 @@ import { Avatar } from "react-native-paper";
 import { Image } from "react-native";
 import {
   CarrerasChasideScreen,
+  CarrerasMMYMGScreen,
+  Description5GrandesScreen,
   DescriptionChasideScreen,
+  DescriptionMMYMGScreen,
   HomeScreen,
   LoginScreen,
   MainScreen,
@@ -38,10 +41,10 @@ import {
 } from "../screens";
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
-import TestMMYMGScreen from "../screens/TestMMYMG/TestMMYMGScreen";
-import CarrerasTest2 from "../screens/TestMMYMG/CarrerasTest2";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
-import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
+
+
+
 
 export default function Navigation({
   colorScheme,
@@ -157,10 +160,10 @@ function RootNavigator() {
             },
             headerTintColor: "#06D6DD",
           }}
-        />
+        /> 
         <Stack.Screen
-          name="TestMMYMGScreen"
-          component={TestMMYMGScreen}
+          name="DescriptionMMYMGScreen"
+          component={DescriptionMMYMGScreen}
           options={{
             title: "TestMMYMG",
             headerTitleAlign: "center",
@@ -174,8 +177,8 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
-          name="CarrerasTest2"
-          component={CarrerasTest2}
+          name="CarrerasMMYMGScreen"
+          component={CarrerasMMYMGScreen}
           options={{
             title: "Carreras",
             headerTitleAlign: "center",
@@ -257,8 +260,8 @@ function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name="Test5GrandesScreen"
-        component={Test5GrandesScreen}
+        name="Description5GrandesScreen"
+        component={Description5GrandesScreen}
         options={{
           title: "Carreras",
           headerTitleAlign: "center",

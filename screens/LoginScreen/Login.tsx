@@ -178,11 +178,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   img_logo: {
-    width: "45%",
+    width: "41%",
     marginRight: "45%",
+    marginTop:'3%',
+    padding:'11%'
   },
   img_login: {
-    width: "55%",
+    width: "60%",
+    padding:'25%'
   },
   login_containerInput: {
     width: "80%",
