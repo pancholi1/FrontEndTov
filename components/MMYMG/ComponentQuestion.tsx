@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients, gradientsButton } from "../../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
 
 const ComponentQuestion = ({ id, question, onAnswered }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);

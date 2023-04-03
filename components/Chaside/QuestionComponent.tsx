@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     fontFamily: "Poppins_ExtraBold",
+    height:100
   },
   button: {
     width: "100%",

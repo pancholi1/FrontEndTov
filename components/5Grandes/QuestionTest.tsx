@@ -210,7 +210,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
     alignItems: "center",
-
     fontFamily: "Poppins_ExtraBold",
   },
   gradientBoton: {
