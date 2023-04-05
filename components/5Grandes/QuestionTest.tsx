@@ -4,7 +4,8 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients, gradientsButton } from "../../constants/Gradients";
 
-const QuestionTest = ({ id, question, onAnswered, dimension }) => {
+const QuestionTest = ({ id, question, onAnswered, dimension, dimensiones }) => {
+
   const [count, setCount] = useState({
     O: 0, //APERTURA
     E: 0, //EXTROVISION
@@ -14,114 +15,39 @@ const QuestionTest = ({ id, question, onAnswered, dimension }) => {
   });
 
   const handleYes = () => {
-    if (dimension === "Apertura a la experiencia") {
-      setCount({ ...count, O: count.O + 1 });
-      onAnswered(count);
-    }
-    if (dimension === "Escrupulosidad") {
-      setCount({ ...count, C: count.C + 1 });
-      onAnswered(count);
-    }
-    if (dimension === "Neuroticismo") {
-      setCount({ ...count, N: count.N + 1 });
-      onAnswered(count);
-    }
-    if (dimension === "Amabilidad") {
-      setCount({ ...count, A: count.A + 1 });
-      onAnswered(count);
-    }
-    if (dimension === "Extraversión") {
-      setCount({ ...count, E: count.E + 1 });
-      onAnswered(count);
-    }
+  const updatedCount = {
+      ...count,
+    [dimensiones]: count[dimensiones] + 2}
+    setCount(updatedCount)
+    onAnswered(updatedCount);
   };
   const handleYes2 = () => {
-    if (dimension === "Apertura a la experiencia") {
-      setCount({ ...count, O: count.O + 2 });
-      onAnswered(count);
-    }
-    if (dimension === "Escrupulosidad") {
-      setCount({ ...count, C: count.C + 2 });
-      onAnswered(count);
-    }
-    if (dimension === "Neuroticismo") {
-      setCount({ ...count, N: count.N + 2 });
-      onAnswered(count);
-    }
-    if (dimension === "Amabilidad") {
-      setCount({ ...count, A: count.A + 2 });
-      onAnswered(count);
-    }
-    if (dimension === "Extraversión") {
-      setCount({ ...count, E: count.E + 2 });
-      onAnswered(count);
-    }
+    const updatedCount = {
+      ...count,
+    [dimensiones]: count[dimensiones] + 2}
+    setCount(updatedCount)
+    onAnswered(updatedCount);
   };
   const handleYes3 = () => {
-    if (dimension === "Apertura a la experiencia") {
-      setCount({ ...count, O: count.O + 3 });
-      onAnswered(count);
-    }
-    if (dimension === "Escrupulosidad") {
-      setCount({ ...count, C: count.C + 3 });
-      onAnswered(count);
-    }
-    if (dimension === "Neuroticismo") {
-      setCount({ ...count, N: count.N + 3 });
-      onAnswered(count);
-    }
-    if (dimension === "Amabilidad") {
-      setCount({ ...count, A: count.A + 3 });
-      onAnswered(count);
-    }
-    if (dimension === "Extraversión") {
-      setCount({ ...count, E: count.E + 3 });
-      onAnswered(count);
-    }
+    const updatedCount = {
+      ...count,
+    [dimensiones]: count[dimensiones] + 3}
+    setCount(updatedCount)
+    onAnswered(updatedCount);
   };
   const handleYes4 = () => {
-    if (dimension === "Apertura a la experiencia") {
-      setCount({ ...count, O: count.O + 4 });
-      onAnswered(count);
-    }
-    if (dimension === "Escrupulosidad") {
-      setCount({ ...count, C: count.C + 4 });
-      onAnswered(count);
-    }
-    if (dimension === "Neuroticismo") {
-      setCount({ ...count, N: count.N + 4 });
-      onAnswered(count);
-    }
-    if (dimension === "Amabilidad") {
-      setCount({ ...count, A: count.A + 4 });
-      onAnswered(count);
-    }
-    if (dimension === "Extraversión") {
-      setCount({ ...count, E: count.E + 4 });
-      onAnswered(count);
-    }
+    const updatedCount = {
+      ...count,
+    [dimensiones]: count[dimensiones] + 4}
+    setCount(updatedCount)
+    onAnswered(updatedCount);
   };
   const handleYes5 = () => {
-    if (dimension === "Apertura a la experiencia") {
-      setCount({ ...count, O: count.O + 5 });
-      onAnswered(count);
-    }
-    if (dimension === "Escrupulosidad") {
-      setCount({ ...count, C: count.C + 5 });
-      onAnswered(count);
-    }
-    if (dimension === "Neuroticismo") {
-      setCount({ ...count, N: count.N + 5 });
-      onAnswered(count);
-    }
-    if (dimension === "Amabilidad") {
-      setCount({ ...count, A: count.A + 5 });
-      onAnswered(count);
-    }
-    if (dimension === "Extraversión") {
-      setCount({ ...count, E: count.E + 5 });
-      onAnswered(count);
-    }
+    const updatedCount = {
+      ...count,
+    [dimensiones]: count[dimensiones] + 5}
+    setCount(updatedCount)
+    onAnswered(updatedCount);
   };
 
   return (
