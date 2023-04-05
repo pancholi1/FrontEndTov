@@ -16,10 +16,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
       </View>
       <View style={styles.login_container_text}>
         <Text style={styles.login_subtitle_text}>TEST</Text>
-      </View>
-      <View style={styles.login_container_ov}>
         <Text style={styles.login_subtitle_orientacion}>ORIENTACIÓN</Text>
-
         <Text style={styles.login_subtitle_vocacional}>VOCACIONAL</Text>
       </View>
 
@@ -29,9 +26,9 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
           style={styles.login_button}
         >
           <LinearGradient
-            colors={gradients.inputs}
-            start={{ x: 1, y: 1 }}
-            end={{ x: 0, y: 0 }}
+            colors={["#3d3758", "#1e173e"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
             style={{
               borderRadius: 15,
               width: "100%",
@@ -39,7 +36,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
               alignItems: "center",
               justifyContent: "center",
               borderColor: "#7B68A9",
-              borderWidth: 1,
+              borderWidth: 0.7,
             }}
           >
             <Text style={styles.login_butontext}> Ingresa a TOV </Text>
@@ -50,9 +47,9 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
           style={styles.login_button}
         >
           <LinearGradient
-            colors={gradients.inputs}
-            start={{ x: 1, y: 1 }}
-            end={{ x: 0, y: 0 }}
+            colors={["#3d3758", "#1e173e"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
             style={{
               borderRadius: 15,
               width: "100%",
@@ -60,7 +57,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
               alignItems: "center",
               justifyContent: "center",
               borderColor: "#7B68A9",
-              borderWidth: 1,
+              borderWidth: 0.7,
             }}
           >
             <Text style={styles.login_butontext}> Registrarte </Text>
@@ -73,19 +70,24 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
 };
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
   container: {
     flex: 1,
     backgroundColor: "#130C34",
+    justifyContent: "space-around",
   },
   image: {
     flex: 1,
   },
   img_logo: {
-    width: 380,
-    height: 400,
+    width: 350,
+    height: 360,
   },
   img_logo_container: {
-    paddingTop: 20,
     alignItems: "center",
   },
   login_container_text: {
@@ -95,41 +97,33 @@ const styles = StyleSheet.create({
   login_subtitle_text: {
     fontSize: 60,
     color: "#DED3F4",
-    fontFamily: "poppins",
-
-  },
-  login_container_ov: {
-    justifyContent: "center",
-    alignItems: "center",
+    fontWeight: "800",
+    fontFamily: "Poppins_ExtraBold",
   },
   login_subtitle_orientacion: {
-    color: "#06D6DD",
+    color: "#00BBC2",
     fontSize: 33,
     fontWeight: "600",
   },
   login_subtitle_vocacional: {
-    color: "#06D6DD",
+    color: "#00BBC2",
     fontSize: 30,
     fontWeight: "600",
-    
-
   },
   login_button: {
     marginTop: 25,
     backgroundColor: "#282056",
-    width: "75%",
-    height: 54,
+    width: "85%",
+    height: 47,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "#7B68A9",
-    borderWidth: 1,
     borderRadius: 15,
   },
   login_butontext: {
     fontSize: 20,
     color: "#DED3F4",
     fontFamily: "Poppins_Regular",
-
+    fontWeight: "500",
   },
   login_button_container: {
     alignItems: "center",

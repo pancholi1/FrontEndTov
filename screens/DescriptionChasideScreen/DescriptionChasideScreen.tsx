@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import React from "react";
-import { RootStackScreenProps } from "../../../types";
+import { RootStackScreenProps } from "../../types";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients, gradientsButton } from "../../../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
 
-const DescriptionScreen = ({navigation}: RootStackScreenProps<"DescriptionScreen">) => {
+const DescriptionChasideScreen = ({
+  navigation,
+}: RootStackScreenProps<"DescriptionChasideScreen">) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ width: "90%", marginTop: "10%" }}>
@@ -35,9 +37,7 @@ const DescriptionScreen = ({navigation}: RootStackScreenProps<"DescriptionScreen
           style={styles.button}
         >
           <LinearGradient
-            colors={gradientsButton.inputs}
-            start={{ x: 1, y: 1 }}
-            end={{ x: 0, y: 0 }}
+            colors={["#0995a6", "#197189", "#112044"]}
             style={{
               borderRadius: 15,
               width: "90%",
@@ -54,7 +54,7 @@ const DescriptionScreen = ({navigation}: RootStackScreenProps<"DescriptionScreen
   );
 };
 
-export default DescriptionScreen;
+export default DescriptionChasideScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -74,14 +74,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#DED3F4",
     padding: "4%",
-    fontFamily: "Poppins_Regular",
+    fontFamily: "Poppins_ExtraBold",
   },
   text_test: {
     width: "85%",
     alignItems: "center",
     paddingBottom: "5%",
     color: "#DED3F4",
-    fontFamily: "Poppins_Regular",
+    fontFamily: "Poppins_ExtraBold",
+    textAlign: "center",
     fontSize: 14,
   },
   button: {

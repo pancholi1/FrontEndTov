@@ -6,11 +6,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { gradients } from '../../constants/Gradients';
 
 type CarrerasTestProps = {
-    route: RouteProp<RootStackParamList, 'CarrerasTest2'>;
+    route: RouteProp<RootStackParamList, 'CarrerasMMYMGScreen'>;
 }
 
 
-const CarrerasTest2 = ({route}: CarrerasTestProps) => {
+const CarrerasMMYMGScreen = ({route}: CarrerasTestProps) => {
 
 
     const {areaUno, areaDos, prop} = route.params
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CarrerasTest2
+export default CarrerasMMYMGScreen;
