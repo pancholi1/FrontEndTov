@@ -10,71 +10,10 @@ type CarrerasScreenProps = {
 };
 
 const CarrerasChasideScreen = ({ route }: CarrerasScreenProps) => {
-  let msjHabilidad: string = "";
-  let msjInteres: string = "";
-
   const { habilidad, intereses, area } = route.params;
 
-  if (habilidad === "C") {
-    msjHabilidad =
-      " • Administración - • Bancos y Seguros - • Comercio Exterior - • Contaduría - • Economía - • Marketing - • Recursos Humanos - • Relaciones Públicas";
-  }
-  if (habilidad === "H") {
-    msjHabilidad =
-      " • Abogacía y Escribanía - • Antropología y Arqueología - • Bibliotecología y Museología - • Deporte y Actividad Física - • Educacionales y Pedagógicas - • Filosofía y Teología - • Historia - • Idiomas - • Letras - • Periodismo y Locución Radio, Cine y TV - • Sociología y Ciencias Políticas - • Gastronomía, Hotelería y Turismo";
-  }
-  if (habilidad === "A") {
-    msjHabilidad =
-      " • Arquitectura - • Artes - • Diseños - • Música y Canto - • Teatro y Danza - • Publicidad";
-  }
-  if (habilidad === "S") {
-    msjHabilidad =
-      " • Enfermería y Técnicas de la Salud - • Farmacia y Bioquímica - • Fonoaudiología - • Kinesiología y Terapia Física - • Medicina - • Nutrición - • Odontología - • Psicología - • Servicio Social";
-  }
-  if (habilidad === "I") {
-    msjHabilidad =
-      " • Informática - • Electricidad y Electrónica - • Bioingeniería - • Ingeniería Civil y Construcciones - • Industrias - • Mecánica - • Geociencias y Petróleo - • Naval y Pesca - • Textil - • Telecomunicaciones - • Transporte y Logística";
-  }
-  if (habilidad === "D") {
-    msjHabilidad =
-      " • Seguridad y Fuerzas Armadas - • Aeronavegación - • Criminalística";
-  }
-  if (habilidad === "E") {
-    msjHabilidad =
-      " • Matemática y Estadística - • Química Física y Astronomía - • Ecología y Seguridad Industrial - • Agronomía y Veterinaria - • Alimentos - • Biología y Genética";
-  }
-
-  if (intereses === "C") {
-    msjInteres =
-      " • Administración - • Bancos y Seguros - • Comercio Exterior - • Contaduría - • Economía - • Marketing - • Recursos Humanos - • Relaciones Públicas";
-  }
-  if (intereses === "H") {
-    msjInteres =
-      " • Abogacía y Escribanía - • Antropología y Arqueología - • Bibliotecología y Museología - • Deporte y Actividad Física - • Educacionales y Pedagógicas - • Filosofía y Teología - • Historia - • Idiomas - • Letras - • Periodismo y Locución Radio, Cine y TV - • Sociología y Ciencias Políticas - • Gastronomía, Hotelería y Turismo";
-  }
-  if (intereses === "A") {
-    msjInteres =
-      " • Arquitectura - • Artes - • Diseños - • Música y Canto - • Teatro y Danza - • Publicidad";
-  }
-  if (intereses === "S") {
-    msjInteres =
-      " • Enfermería y Técnicas de la Salud - • Farmacia y Bioquímica - • Fonoaudiología - • Kinesiología y Terapia Física - • Medicina - • Nutrición - • Odontología - • Psicología - • Servicio Social";
-  }
-  if (intereses === "I") {
-    msjInteres =
-      " • Informática - • Electricidad y Electrónica - • Bioingeniería - • Ingeniería Civil y Construcciones - • Industrias - • Mecánica - • Geociencias y Petróleo - • Naval y Pesca - • Textil - • Telecomunicaciones - • Transporte y Logística";
-  }
-  if (intereses === "D") {
-    msjInteres =
-      " • Seguridad y Fuerzas Armadas - • Aeronavegación - • Criminalística";
-  }
-  if (intereses === "E") {
-    msjInteres =
-      " • Matemática y Estadística - • Química Física y Astronomía - • Ecología y Seguridad Industrial - • Agronomía y Veterinaria - • Alimentos - • Biología y Genética";
-  }
-
-  const txtHabilidad = msjHabilidad?.split("-").join("\n");
-  const txtInteres = msjInteres?.split("-").join("\n");
+  const txtHabilidad = habilidad?.split("-").join("\n");
+  const txtInteres = intereses?.split("-").join("\n");
 
   return (
     <View style={styles.container}>
@@ -90,9 +29,9 @@ const CarrerasChasideScreen = ({ route }: CarrerasScreenProps) => {
             Listado de posibles carreras dentro de ese area.{" "}
           </Text>
           {area === "habilidad" ? (
-            <Text style={styles.text2}>{txtHabilidad}</Text>
-          ) : (
             <Text style={styles.text2}>{txtInteres}</Text>
+          ) : (
+            <Text style={styles.text2}>{txtHabilidad}</Text>
           )}
         </LinearGradient>
       </View>
@@ -112,7 +51,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: "95%",
     alignItems: "center",
-    //height:'95%'
   },
   text: {
     color: "#DED3F4",

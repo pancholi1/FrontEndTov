@@ -29,22 +29,26 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
         setAnswers(newAnswers);
         setCurrentQuestion(currentQuestion + 1);
 
+        const currentArea = questions2[currentQuestion].area;
+
+
         if(answer === true){
-            if(questions2[currentQuestion].area === 'Ciencias Sociales y Humanística'){
-                setCountQuestion({...countQuestion, CSH:countQuestion.CSH + 1})
-            }
-            if(questions2[currentQuestion].area === 'Económica, Administrativa y Financiera'){
-                setCountQuestion({...countQuestion, EAF:countQuestion.EAF + 1})
-            }
-            if(questions2[currentQuestion].area === 'Ciencia y Tecnología'){
-                setCountQuestion({...countQuestion, CT:countQuestion.CT + 1})
-            }
-            if(questions2[currentQuestion].area === 'Arte y Creatividad'){
-                setCountQuestion({...countQuestion, AC:countQuestion.AC + 1})
-            }
-            if(questions2[currentQuestion].area === 'Ciencias Ecológicas, Biológicas y de la Salud'){
-                setCountQuestion({...countQuestion, CB:countQuestion.CB + 1})
-            }
+            
+            // if(questions2[currentQuestion].area === 'Ciencias Sociales y Humanística'){
+            //     setCountQuestion({...countQuestion, CSH:countQuestion.CSH + 1})
+            // }
+            // if(questions2[currentQuestion].area === 'Económica, Administrativa y Financiera'){
+            //     setCountQuestion({...countQuestion, EAF:countQuestion.EAF + 1})
+            // }
+            // if(questions2[currentQuestion].area === 'Ciencia y Tecnología'){
+            //     setCountQuestion({...countQuestion, CT:countQuestion.CT + 1})
+            // }
+            // if(questions2[currentQuestion].area === 'Arte y Creatividad'){
+            //     setCountQuestion({...countQuestion, AC:countQuestion.AC + 1})
+            // }
+            // if(questions2[currentQuestion].area === 'Ciencias Ecológicas, Biológicas y de la Salud'){
+            //     setCountQuestion({...countQuestion, CB:countQuestion.CB + 1})
+            // }
         }
         
     }

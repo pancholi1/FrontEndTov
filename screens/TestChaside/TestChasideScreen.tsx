@@ -12,6 +12,10 @@ import {
 } from "../../constants/Gradients";
 import { QuestionComponent } from "../../components/Chaside";
 
+import {msjAreaC, msjAreaH, msjAreaA, msjAreaS, msjAreaI, msjAreaD, msjAreaE, textCarreraC, textCarreraH, textCarreraA, textCarreraS, textCarreraI,textCarreraD, textCarreraE, areaC, areaH, areaA, areaS, areaI, areaD, areaE } from '../../constants/infoChaside'
+
+
+
 const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -33,210 +37,74 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     D: 0,
     E: 0,
   });
-
+  
   const handleAnswered = (answer: boolean) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
     setCurrentQuestion(currentQuestion + 1);
-
+    
     if (answer === true) {
-      if (surveyData[currentQuestion].area === "C") {
-        if (surveyData[currentQuestion].resultado === "intereses") {
-          setSumaAreasIntereses({
-            ...sumaAreasIntereses,
-            C: sumaAreasIntereses.C + 1,
-          });
-        }
-        if (surveyData[currentQuestion].resultado === "habilidades") {
-          setSumaAreasHabilidades({
-            ...sumaAreasHabilidades,
-            C: sumaAreasHabilidades.C + 1,
-          });
-        }
+      const currentArea = surveyData[currentQuestion].area;
+      const currentResult = surveyData[currentQuestion].resultado;
+      
+      if (currentResult === "intereses") {
+        setSumaAreasIntereses({
+          ...sumaAreasIntereses,
+          [currentArea]: sumaAreasIntereses[currentArea] + 1,
+        });
       }
-      if (surveyData[currentQuestion].area === "H") {
-        if (surveyData[currentQuestion].resultado === "intereses") {
-          setSumaAreasIntereses({
-            ...sumaAreasIntereses,
-            H: sumaAreasIntereses.H + 1,
-          });
-        }
-        if (surveyData[currentQuestion].resultado === "habilidades") {
-          setSumaAreasHabilidades({
-            ...sumaAreasHabilidades,
-            H: sumaAreasHabilidades.H + 1,
-          });
-        }
-      }
-      if (surveyData[currentQuestion].area === "A") {
-        if (surveyData[currentQuestion].resultado === "intereses") {
-          setSumaAreasIntereses({
-            ...sumaAreasIntereses,
-            A: sumaAreasIntereses.A + 1,
-          });
-        }
-        if (surveyData[currentQuestion].resultado === "habilidades") {
-          setSumaAreasHabilidades({
-            ...sumaAreasHabilidades,
-            A: sumaAreasHabilidades.A + 1,
-          });
-        }
-      }
-      if (surveyData[currentQuestion].area === "S") {
-        if (surveyData[currentQuestion].resultado === "intereses") {
-          setSumaAreasIntereses({
-            ...sumaAreasIntereses,
-            S: sumaAreasIntereses.S + 1,
-          });
-        }
-        if (surveyData[currentQuestion].resultado === "habilidades") {
-          setSumaAreasHabilidades({
-            ...sumaAreasHabilidades,
-            S: sumaAreasHabilidades.S + 1,
-          });
-        }
-      }
-      if (surveyData[currentQuestion].area === "I") {
-        if (surveyData[currentQuestion].resultado === "intereses") {
-          setSumaAreasIntereses({
-            ...sumaAreasIntereses,
-            I: sumaAreasIntereses.I + 1,
-          });
-        }
-        if (surveyData[currentQuestion].resultado === "habilidades") {
-          setSumaAreasHabilidades({
-            ...sumaAreasHabilidades,
-            I: sumaAreasHabilidades.I + 1,
-          });
-        }
-      }
-      if (surveyData[currentQuestion].area === "D") {
-        if (surveyData[currentQuestion].resultado === "intereses") {
-          setSumaAreasIntereses({
-            ...sumaAreasIntereses,
-            D: sumaAreasIntereses.D + 1,
-          });
-        }
-        if (surveyData[currentQuestion].resultado === "habilidades") {
-          setSumaAreasHabilidades({
-            ...sumaAreasHabilidades,
-            D: sumaAreasHabilidades.D + 1,
-          });
-        }
-      }
-      if (surveyData[currentQuestion].area === "E") {
-        if (surveyData[currentQuestion].resultado === "intereses") {
-          setSumaAreasIntereses({
-            ...sumaAreasIntereses,
-            E: sumaAreasIntereses.E + 1,
-          });
-        }
-        if (surveyData[currentQuestion].resultado === "habilidades") {
-          setSumaAreasHabilidades({
-            ...sumaAreasHabilidades,
-            E: sumaAreasHabilidades.E + 1,
-          });
-        }
+      if (currentResult === "habilidades") {
+        setSumaAreasHabilidades({
+          ...sumaAreasHabilidades,//aca me estoy haciendo una copia de todo el objeto
+          [currentArea]: sumaAreasHabilidades[currentArea] + 1,
+          //aca estoy entrando a una propiedad(que me llega mediante currentArea), quedaria sumaAreasHabilidades[currentArea] , seria igual a C = sumaAreasHabilidades.C + 1 pq currentArea es C
+        });
       }
     }
   };
 
-  let propiedadMayorIntereses = "";
-  let mayorNumeroIntereses = -Infinity;
-
-  let propiedadMayorHabilidades = "";
-  let mayorNumeroHabilidades = -Infinity;
-
-  let msjInteres;
-  let textCarreraInteres;
-
-  for (let propiedad in sumaAreasIntereses) {
-    // Compara el valor actual con el valor mayor registrado hasta el momento
-    if (sumaAreasIntereses[propiedad] > mayorNumeroIntereses) {
-      mayorNumeroIntereses = sumaAreasIntereses[propiedad];
-      propiedadMayorIntereses = propiedad;
+  const areas = {
+    C: { msjArea: msjAreaC, textCarrera: textCarreraC, area: areaC },
+    H: { msjArea: msjAreaH, textCarrera: textCarreraH, area: areaH },
+    A: { msjArea: msjAreaA, textCarrera: textCarreraA, area: areaA },
+    S: { msjArea: msjAreaS, textCarrera: textCarreraS, area: areaS },
+    I: { msjArea: msjAreaI, textCarrera: textCarreraI, area: areaI },
+    D: { msjArea: msjAreaD, textCarrera: textCarreraD, area: areaD },
+    E: { msjArea: msjAreaE, textCarrera: textCarreraE, area: areaE }
+  };
+  
+  function obtenerPropiedadMayor(objeto: object) {
+    let propiedadMayor = "";
+    let mayorNumero = -Infinity;
+    
+    for (let propiedad in objeto) {
+      if (objeto[propiedad] > mayorNumero) {
+        mayorNumero = objeto[propiedad];
+        propiedadMayor = propiedad;
+      }
     }
+    
+    return { propiedad: propiedadMayor};
   }
-
-  if (propiedadMayorIntereses === "C") {
-    msjInteres = "Ciencias Exactas, Administrativas y Contables";
-    textCarreraInteres =
-      "Carreras que involucran la organización, supervisión, orden, análisis y síntesis, colaboración y cálculo. Contás con aptitudes como la persuasión, objetividad, practicidad, tolerancia, responsabilidad y ambición.";
-  } else if (propiedadMayorIntereses === "H") {
-    msjInteres = "Humanística y Ciencias Sociales";
-    textCarreraInteres =
-      "Carreras que involucran la precisión verbal, organización, relación de hechos, lingüística, orden y justicia. Contás con aptitudes como la responsabilidad, justicia, conciliación, persuasión, sagacidad e imaginación.";
-  } else if (propiedadMayorIntereses === "A") {
-    msjInteres = "Artísticas";
-    textCarreraInteres =
-      "Carreras que involucran lo estético, armónico, manual, visual y auditivo. Contás con aptitudes como la sensibilidad, imaginación, creatividad, detalle, innovación e intuición.";
-  } else if (propiedadMayorIntereses === "S") {
-    msjInteres = "Ciencias de la Salud y Medicina";
-    textCarreraInteres =
-      "Carreras que involucran la asistencia, investigación, precisión, percepción, análisis y ayuda. Contás con aptitudes como el altruismo, solidaridad, paciencia, comprensión, respeto y persuasión.";
-  } else if (propiedadMayorIntereses === "I") {
-    msjInteres = "Ingenierías y Computación";
-    textCarreraInteres =
-      "Carreras que involucran el cálculo, la ciencia, lo manual, exactitud y planificación. Contás con aptitudes como la precisión, practicidad, crítica, análisis y rigidez.";
-  } else if (propiedadMayorIntereses === "D") {
-    msjInteres = "Defensa y Seguridad";
-    textCarreraInteres =
-      "Carreras que involucran la justicia, equidad, colaboración, espíritu de equipo y liderazgo. Contás con aptitudes como la búsqueda de riesgos, solidaridad, valentía, agresividad y persuasión.";
-  } else if (propiedadMayorIntereses === "E") {
-    msjInteres = "Ciencias Agrarias y Naturales";
-    textCarreraInteres =
-      "Carreras que involucran la clasificación, numeración, análisis y síntesis, organización, orden e investigación. Contás con aptitudes como método, análisis, observación, introversión, paciencia y seguridad.";
-  }
-
-  let msjHabilidad;
-  let textCarreraHabilidad;
-
-  for (let propiedad in sumaAreasHabilidades) {
-    // Compara el valor actual con el valor mayor registrado hasta el momento
-    if (sumaAreasHabilidades[propiedad] > mayorNumeroHabilidades) {
-      mayorNumeroHabilidades = sumaAreasHabilidades[propiedad];
-      propiedadMayorHabilidades = propiedad;
-    }
-  }
-  if (propiedadMayorHabilidades === "C") {
-    msjHabilidad = "Ciencias Exactas, Administrativas y Contables";
-    textCarreraHabilidad =
-      "Carreras que involucran la organización, supervisión, orden, análisis y síntesis, colaboración y cálculo. Contás con aptitudes como la persuasión, objetividad, practicidad, tolerancia, responsabilidad y ambición.";
-  } else if (propiedadMayorHabilidades === "H") {
-    msjHabilidad = "Humanística y Ciencias Sociales";
-    textCarreraHabilidad =
-      "Carreras que involucran la precisión verbal, organización, relación de hechos, lingüística, orden y justicia. Contás con aptitudes como la responsabilidad, justicia, conciliación, persuasión, sagacidad e imaginación.";
-  } else if (propiedadMayorHabilidades === "A") {
-    msjHabilidad = "Artísticas";
-    textCarreraHabilidad =
-      "Carreras que involucran lo estético, armónico, manual, visual y auditivo. Contás con aptitudes como la sensibilidad, imaginación, creatividad, detalle, innovación e intuición.";
-  } else if (propiedadMayorHabilidades === "S") {
-    msjHabilidad = "Ciencias de la Salud y Medicina";
-    textCarreraHabilidad =
-      "Carreras que involucran la asistencia, investigación, precisión, percepción, análisis y ayuda. Contás con aptitudes como el altruismo, solidaridad, paciencia, comprensión, respeto y persuasión.";
-  } else if (propiedadMayorHabilidades === "I") {
-    msjHabilidad = "Ingenierías y Computación";
-    textCarreraHabilidad =
-      "Carreras que involucran el cálculo, la ciencia, lo manual, exactitud y planificación. Contás con aptitudes como la precisión, practicidad, crítica, análisis y rigidez.";
-  } else if (propiedadMayorHabilidades === "D") {
-    msjHabilidad = "Defensa y Seguridad";
-    textCarreraHabilidad =
-      "Carreras que involucran la justicia, equidad, colaboración, espíritu de equipo y liderazgo. Contás con aptitudes como la búsqueda de riesgos, solidaridad, valentía, agresividad y persuasión.";
-  } else if (propiedadMayorHabilidades === "E") {
-    msjHabilidad = "Ciencias Agrarias y Naturales";
-    textCarreraHabilidad =
-      "Carreras que involucran la clasificación, numeración, análisis y síntesis, organización, orden e investigación. Contás con aptitudes como método, análisis, observación, introversión, paciencia y seguridad.";
-  }
+  
+  const { propiedad: propiedadMayorIntereses } = obtenerPropiedadMayor(sumaAreasIntereses);
+  //estoy haciendo que propiedadMayorIntereses sea igual a lo que retorna la funcion
+  const { msjArea: msjInteres, textCarrera: textCarreraInteres, area: areaInteres } = areas[propiedadMayorIntereses];
+  
+  const { propiedad: propiedadMayorHabilidades } = obtenerPropiedadMayor(sumaAreasHabilidades);
+  
+  const { msjArea: msjHabilidad, textCarrera: textCarreraHabilidad, area: areaHabilidad } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
+  
 
   const carrerasPosibles = (
-    propiedadMayorHabilidades: string,
-    propiedadMayorIntereses: string,
+    areaHabilidad: string,
+    areaInteres: string,
     area: string
   ) => {
     navigation.navigate("CarrerasChasideScreen", {
-      habilidad: propiedadMayorHabilidades,
-      intereses: propiedadMayorIntereses,
+      habilidad: areaHabilidad,
+      intereses: areaInteres,
       area,
     });
   };
@@ -266,8 +134,8 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
                 style={styles.button}
                 onPress={() =>
                   carrerasPosibles(
-                    propiedadMayorHabilidades,
-                    propiedadMayorIntereses,
+                    areaInteres,
+                    areaHabilidad,
                     "interes"
                   )
                 }
@@ -310,8 +178,8 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
                 style={styles.button}
                 onPress={() =>
                   carrerasPosibles(
-                    propiedadMayorHabilidades,
-                    propiedadMayorIntereses,
+                    areaInteres,
+                    areaHabilidad,
                     "habilidad"
                   )
                 }
