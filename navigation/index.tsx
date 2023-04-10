@@ -25,6 +25,11 @@ import CalendarInterviewScreen from "../screens/CalendarInterviewScreen/Calendar
 import { Avatar } from "react-native-paper";
 import { Image } from "react-native";
 import {
+  CarrerasChasideScreen,
+  CarrerasMMYMGScreen,
+  Description5GrandesScreen,
+  DescriptionChasideScreen,
+  DescriptionMMYMGScreen,
   HomeScreen,
   LoginScreen,
   MainScreen,
@@ -34,16 +39,19 @@ import {
   ResultTestScreen,
   SingUpScreen,
 } from "../screens";
-import { DescriptionScreen } from "../screens/TestChaside/DescriptionScreen";
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
-import TestMMYMGScreen from "../screens/TestMMYMG/TestMMYMGScreen";
-import CarrerasTest2 from "../screens/TestMMYMG/CarrerasTest2";
-import CarrerasChaside from "../screens/TestChaside/CarrerasScreen";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
+<<<<<<< HEAD
 import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
 import Terms from "../screens/Terms&Conditions/Terms";
 import TermsAndConditions from "../components/TermsAndConditions";
+=======
+
+
+
+
+>>>>>>> main
 
 export default function Navigation({
   colorScheme,
@@ -101,15 +109,7 @@ function RootNavigator() {
           name="Login"
           component={LoginScreen}
           options={{
-            title: "Login",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              fontFamily: "Poppins_Regular",
-              color: "#06D6DD",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
+            headerShown: false,
           }}
         />
         <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
@@ -123,8 +123,8 @@ function RootNavigator() {
         />
 
         <Stack.Screen
-          name="DescriptionScreen"
-          component={DescriptionScreen}
+          name="DescriptionChasideScreen"
+          component={DescriptionChasideScreen}
           options={{
             title: "Test Chaside",
             headerTitleAlign: "center",
@@ -167,10 +167,10 @@ function RootNavigator() {
             },
             headerTintColor: "#06D6DD",
           }}
-        />
+        /> 
         <Stack.Screen
-          name="TestMMYMGScreen"
-          component={TestMMYMGScreen}
+          name="DescriptionMMYMGScreen"
+          component={DescriptionMMYMGScreen}
           options={{
             title: "TestMMYMG",
             headerTitleAlign: "center",
@@ -184,8 +184,8 @@ function RootNavigator() {
           }}
         />
         <Stack.Screen
-          name="CarrerasTest2"
-          component={CarrerasTest2}
+          name="CarrerasMMYMGScreen"
+          component={CarrerasMMYMGScreen}
           options={{
             title: "Carreras",
             headerTitleAlign: "center",
@@ -236,8 +236,8 @@ function RootNavigator() {
         />
       </Stack.Group>
       <Stack.Screen
-        name="CarrerasScreen"
-        component={CarrerasChaside}
+        name="CarrerasChasideScreen"
+        component={CarrerasChasideScreen}
         options={{
           title: "Carreras",
           headerTitleAlign: "center",
@@ -267,8 +267,8 @@ function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name="Test5GrandesScreen"
-        component={Test5GrandesScreen}
+        name="Description5GrandesScreen"
+        component={Description5GrandesScreen}
         options={{
           title: "Carreras",
           headerTitleAlign: "center",
@@ -335,7 +335,7 @@ function BottomTabNavigator() {
           headerRight: () => (
             <View style={styles.containerHeaederRight}>
               <Image
-                source={require("../assets/images/ISO.png")}
+                source={require("../assets/images/HomeScreen/logo.png")}
                 style={styles.logoHeaederRight}
               />
               <Pressable
@@ -345,6 +345,7 @@ function BottomTabNavigator() {
                 })}
               >
                 <Avatar.Image
+                  style={{ marginTop: 3 }}
                   size={34}
                   source={require("../assets/images/pancho.jpeg")}
                 />
@@ -398,10 +399,6 @@ function BottomTabNavigator() {
           ),
           headerRight: () => (
             <View style={styles.containerHeaederRight}>
-              {/* <Image
-                source={require("../assets/images/ISO.png")}
-                style={styles.logoHeaederRight}
-              /> */}
               <Pressable
                 onPress={() => navigation.navigate("ProfileScreen")}
                 style={({ pressed }) => ({

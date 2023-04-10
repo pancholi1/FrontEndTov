@@ -14,12 +14,7 @@ export default function CardResult({
   return (
     <CardContainer route={route} navigation={navigation} selected={selected}>
       {image && <Image style={styles.img_card} source={image} />}
-      <LinearGradient
-        colors={selected ? greenChaside : gradients.inputs}
-        start={{ x: 1, y: 1 }}
-        end={{ x: 0, y: 0 }}
-        style={{ borderRadius: 15 }}
-      >
+      {selected ? (
         <View
           style={
             selected ? styles.container_chart_selected : styles.container_chart
@@ -31,7 +26,28 @@ export default function CardResult({
             <Text style={styles.description}>{description}</Text>
           </View>
         </View>
-      </LinearGradient>
+      ) : (
+        <LinearGradient
+          colors={selected ? greenChaside : gradients.inputs}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          style={{ borderRadius: 15 }}
+        >
+          <View
+            style={
+              selected
+                ? styles.container_chart_selected
+                : styles.container_chart
+            }
+          >
+            <View style={styles.img_space} />
+            <View style={styles.text_container}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.description}>{description}</Text>
+            </View>
+          </View>
+        </LinearGradient>
+      )}
     </CardContainer>
   );
 }
@@ -85,17 +101,19 @@ const styles = StyleSheet.create({
     width: 313,
     height: 115,
     borderColor: "#B39AE7",
-    borderWidth: 2,
+    borderWidth: 0.6,
     flexDirection: "row",
   },
   container_chart_selected: {
     padding: 15,
     borderRadius: 15,
+    backgroundColor: "#103456",
     width: 313,
     height: 115,
-    borderColor: "#025558",
-    borderWidth: 1,
-    borderEndWidth: 4,
+    borderColor: "#0b7189",
+    borderWidth: 0.9,
+
+    opacity: 1.2,
     flexDirection: "row",
   },
   img_space: {
@@ -109,7 +127,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     height: 130,
     width: 107,
-    left: 20,
+    left: 8,
     top: -10,
   },
   text_container: {

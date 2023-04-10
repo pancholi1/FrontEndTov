@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: "row",
     justifyContent: "center",
-    
   },
   login_parrafohelp: {
     color: "#5f52ab",
@@ -33,7 +32,6 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_Regular",
     fontSize: 12,
     lineHeight: 18,
-
   },
   login_parrafohelp_finish: {
     color: "#06D6DD",

@@ -10,36 +10,36 @@ import Spacer from "../../components/Spacer";
 
 const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.header_container}>
-        <Text style={styles.title_hello}>Hola</Text>
-        <Text style={styles.name}>SOFIA FERRARI</Text>
+    <ScrollView style={styles.scroll_container}>
+      <View style={styles.container}>
+        <View style={styles.header_container}>
+          <Text style={styles.title_hello}>Hola</Text>
+          <Text style={styles.name}>SOFIA FERRARI</Text>
 
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={styles.container_progreso}
-        >
-          <Text style={styles.title_progreso}>Progreso</Text>
-          <Text style={styles.text_progreso}>
-            Realiza el 100% de los test para obtener el resultado final
-          </Text>
-          <Text style={styles.title_progreso}>33%</Text>
-          <ProgressBar progress={0.33} color={"#06D6DD"} />
-        </LinearGradient>
+          <LinearGradient
+            colors={["#524c77", "#3d3758", "#1e173e"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.container_progreso}
+          >
+            <Text style={styles.title_progreso}>Progreso</Text>
+            <Text style={styles.text_progreso}>
+              Realiza el 100% de los test para obtener el resultado final
+            </Text>
+            <Text style={styles.title_progreso}>33%</Text>
+            <ProgressBar progress={0.33} color={"#06D6DD"} />
+          </LinearGradient>
 
-        <Text style={styles.text_test}>¡COMENCEMOS!</Text>
-      </View>
-      <Spacer height={10} />
+          <Text style={styles.text_test}>¡COMENCEMOS!</Text>
+        </View>
+        <Spacer height={10} />
 
-      <ScrollView style={styles.scroll_container}>
         <CardResult
           image={require("../../assets/images/HomeScreen/testPersonalidad.png")}
           title={"Test CHASIDE"}
           description={"Toma menos de 12 minutos. Responde honestamente."}
           navigation={navigation}
-          route={"Personality"}
+          route={"DescriptionChasideScreen"}
           selected
         />
         <Spacer height={20} />
@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
             "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
           }
           navigation={navigation}
-          route={"TestMMYMGScreen"}
+          route={"DescriptionMMYMGScreen"}
         />
         <Spacer height={20} />
         <CardResult
@@ -58,7 +58,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           title={"Test de los 5 Grandes"}
           description={"Conocé más sobre tu personalidad y capacidades."}
           navigation={navigation}
-          route={"Test5GrandesScreen"}
+          route={"Description5GrandesScreen"}
         />
         <Spacer height={20} />
         <CardResult
@@ -68,8 +68,8 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           navigation={navigation}
           route={"Calendar"}
         />
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -98,12 +98,10 @@ const styles = StyleSheet.create({
   },
   name: {
     marginBottom: 10,
-    fontFamily: "Poppins_Regular",
-    fontStyle: "normal",
+    fontFamily: "Poppins_ExtraBold",
     fontWeight: "600",
     fontSize: 30,
-    lineHeight: 34,
-    color: "#06D6DD",
+    color: "#00BBC2",
   },
   container_progreso: {
     borderRadius: 15,
@@ -143,7 +141,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   text_test: {
-    color: "#06D6DD",
+    color: "#00BBC2",
     marginLeft: 5,
     margin: 8,
     fontWeight: "700",

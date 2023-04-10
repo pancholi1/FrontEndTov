@@ -1,9 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { QuestionTest } from '../../components/5Grandes';
 import { gradients } from '../../constants/Gradients';
 import { data } from './question5Grandes';
-import QuestionTest from './QuestionTest'
 
 
 const Test5Grandes = () => {

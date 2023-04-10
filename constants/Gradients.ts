@@ -1,4 +1,5 @@
-const violetGradient = ["#282056", "#3d3666", "#524c77"];
+const violetGradient = ["#1e173e", "#3d3758", "#524c77"];
+// ["#282056", "#3d3666", "#524c77"];
 
 export const gradients = {
   inputs: violetGradient,

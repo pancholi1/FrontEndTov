@@ -19,7 +19,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { gradients } from "../../constants/Gradients";
 import { gradientsButton } from "../../constants/Gradients";
 
-
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const submit = async (props) => {
     const value = true;
@@ -94,9 +93,9 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
           {(props) => (
             <View style={styles.login_containerInput}>
               <LinearGradient
-                colors={gradients.inputs}
-                start={{ x: 1, y: 1 }}
-                end={{ x: 0, y: 0 }}
+                colors={["#3d3758", "#1e173e"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
                 style={{ borderRadius: 15 }}
               >
@@ -118,9 +117,9 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               ) : null}
 
               <LinearGradient
-                colors={gradients.inputs}
-                start={{ x: 1, y: 1 }}
-                end={{ x: 0, y: 0 }}
+                colors={["#3d3758", "#1e173e"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
                 //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
                 style={{ borderRadius: 15, marginTop: "3%" }}
               >
@@ -145,27 +144,14 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
 
               <View>
-
-                  <Pressable
-                    style={styles.login_button}
-                    onPress={() => props.handleSubmit()}
-                  >                  
+                <Pressable onPress={() => props.handleSubmit()}>
                   <LinearGradient
-                  colors={gradientsButton.inputs}
-                  start={{ x: 1, y: 1 }}
-                  end={{ x: 0, y: 0 }}
-                  style={{
-                    borderRadius: 15,
-                    width: "95%",
-                    height: 54,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginLeft:'3%'
-                  }}
-                >
+                    colors={["#0995a6", "#112044"]}
+                    style={styles.login_button}
+                  >
                     <Text style={styles.login_butontext}> Ingresar </Text>
-                </LinearGradient>
-                  </Pressable>
+                  </LinearGradient>
+                </Pressable>
               </View>
             </View>
           )}
@@ -189,17 +175,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "space-around",
   },
   img_logo: {
-    width: "45%",
-    padding: "15%",
-    marginTop: "3%",
+    width: "41%",
     marginRight: "45%",
+    marginTop:'3%',
+    padding:'11%'
   },
   img_login: {
-    width: "55%",
-    padding: "24%",
-    marginBottom: "2%",
+    width: "60%",
+    padding:'25%'
   },
   login_containerInput: {
     width: "80%",
@@ -207,9 +193,9 @@ const styles = StyleSheet.create({
   input: {
     width: "100%",
     borderColor: "#B39AE7",
-    borderWidth: 2,
+    borderWidth: 0.7,
     borderRadius: 15,
-    padding: 14,
+    padding: 12,
     color: "white",
     opacity: 2,
     fontFamily: "Poppins_Regular",
@@ -226,17 +212,18 @@ const styles = StyleSheet.create({
   },
 
   login_button: {
+    width: "100%",
+    alignItems: "center",
     justifyContent: "center",
-    borderBottomWidth: 0.5,
-    fontFamily:'Poppins_ExtraBold',
-
+    borderRadius: 15,
+    backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08)",
+    padding: "3%",
   },
 
   login_butontext: {
-    fontSize: 20,
-    color: "white",
-    fontWeight: "bold",
-    fontFamily: "Poppins_Regular",
+    fontSize: 18,
+    color: "#DED3F4",
+    fontFamily: "Poppins_ExtraBold",
   },
 
   login_containerhelp: {
