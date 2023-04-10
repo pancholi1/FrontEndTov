@@ -37,7 +37,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     D: 0,
     E: 0,
   });
-  
+
   const handleAnswered = (answer: boolean) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
@@ -49,17 +49,17 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
       const currentResult = surveyData[currentQuestion].resultado;
       
       if (currentResult === "intereses") {
-        setSumaAreasIntereses({
-          ...sumaAreasIntereses,
-          [currentArea]: sumaAreasIntereses[currentArea] + 1,
-        });
+        const updateCount= {...sumaAreasIntereses,
+          [currentArea]: sumaAreasIntereses[currentArea] + 1,}
+        setSumaAreasIntereses(updateCount);
       }
       if (currentResult === "habilidades") {
-        setSumaAreasHabilidades({
+        const updateCount = {
           ...sumaAreasHabilidades,//aca me estoy haciendo una copia de todo el objeto
           [currentArea]: sumaAreasHabilidades[currentArea] + 1,
           //aca estoy entrando a una propiedad(que me llega mediante currentArea), quedaria sumaAreasHabilidades[currentArea] , seria igual a C = sumaAreasHabilidades.C + 1 pq currentArea es C
-        });
+        }
+        setSumaAreasHabilidades(updateCount);
       }
     }
   };
@@ -115,7 +115,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
       <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>
           <LinearGradient
-            colors={gradientsConteinerChaside}
+            colors={gradients.inputs}
             start={{ x: 1, y: 1 }}
             end={{ x: 0, y: 0 }}
             style={{
