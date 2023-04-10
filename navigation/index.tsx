@@ -42,10 +42,16 @@ import {
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
+<<<<<<< HEAD
+import Test5GrandesScreen from "../screens/Test5Grandes/Test5GrandesScreen";
+import Terms from "../screens/Terms&Conditions/Terms";
+import TermsAndConditions from "../components/TermsAndConditions";
+=======
 
 
 
 
+>>>>>>> main
 
 export default function Navigation({
   colorScheme,
@@ -274,6 +280,24 @@ function RootNavigator() {
           },
           headerTintColor: "#06D6DD",
         }}
+      />
+      <Stack.Screen
+        name="Terms"
+        component={Terms}
+        options={({ navigation }: RootTabScreenProps<"Terms">) => ({
+          title: "T&C",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            fontFamily: "Poppins_Regular",
+            color: "#06D6DD",
+            fontSize: 20,
+          },
+
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.goBack()}></Pressable>
+          ),
+        })}
       />
     </Stack.Navigator>
   );
