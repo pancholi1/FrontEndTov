@@ -11,7 +11,8 @@ interface Props {
 
 
 const CarrerasScreen = ({argumento1, argumento2, area}) => {
-    
+    console.log('argumento1', argumento1)
+    console.log(argumento2)
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>

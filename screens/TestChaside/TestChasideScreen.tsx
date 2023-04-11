@@ -8,7 +8,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import {
   gradients,
   gradientsButton,
-  gradientsConteinerChaside,
 } from "../../constants/Gradients";
 import { QuestionComponent } from "../../components/Chaside";
 
@@ -63,6 +62,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
       }
     }
   };
+  
 
   const areas = {
     C: { msjArea: msjAreaC, textCarrera: textCarreraC, area: areaC },
@@ -108,7 +108,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   };
 
   if (currentQuestion >= surveyData.length) {
-    // La encuesta ha terminado, muestra un mensaje de gracias
     return (
       <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>

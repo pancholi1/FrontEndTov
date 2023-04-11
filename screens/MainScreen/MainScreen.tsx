@@ -64,7 +64,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
           </LinearGradient>
         </Pressable>
       </View>
-      <TermsAndConditions />
+      <TermsAndConditions navigation={navigation} route={"../../screens/Terms&Conditions/Terms.tsx"}/>
     </View>
   );
 };
