@@ -31,16 +31,14 @@ const Test5Grandes = () => {
  
       return(
         <ScrollView style={{ width: '100%', backgroundColor:"#130C34" }}>
-
           <View >
           <LinearGradient
           colors={gradients.inputs}
           start={{ x: 2, y: 2 }}
           end={{ x: 0, y: 0 }}
           style={styles.container_general}
-        >
+          >
             <Text style={styles.title}>APERTURA A LA EXPERIENCIA</Text>
-  
             <Text style={styles.porcentaje}>{hola[0]}</Text>
             <Text style={styles.text}> Buscar nuevas experiencias y habilidades intelectuales, interesarse por distintos temas, apreciar el arte y ser sensibles a la belleza. Son originales e imaginativos, curiosos por el medio externo e interno, interesados por ideas nuevas y valores no convencionales.
             </Text>
@@ -108,6 +106,7 @@ const Test5Grandes = () => {
                question={data[currentQuestion].question}
                onAnswered={handleAnswered}
                dimension={data[currentQuestion].dimension}
+               dimensiones={data[currentQuestion].dimensiones}
                />
 
     </View>
