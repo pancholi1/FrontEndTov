@@ -1,0 +1,3 @@
+export let title='Test MM Y MG';
+export let description='El segundo test consta de un total de 80 preguntas que deberán ser respondidas con “ME INTERESA” o con “NO ME INTERESA” dependiendo como te veas frente a diversas situaciones. Una vez seleccionada la respuesta, las preguntas se irán pasando automáticamente. No existen respuestas correctas o incorrectas; lo importante es que contestes con sinceridad y confianza para que puedas conocer mejor tus intereses vocacionales. De acuerdo a tus respuestas, obtendrás un resultado con las dos categorías o áreas de conocimiento que más se adapten a tí.';
+export let name ='navigation.navigate("TestMMYMG")'

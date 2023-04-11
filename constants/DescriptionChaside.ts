@@ -1,0 +1,3 @@
+export let title='Test Chaside';
+export let description='Este primer test consta de un total de 98 preguntas que deberán ser respondidas con “SI” o con “NO” dependiendo como te veas frente a diversas situaciones. Una vez seleccionada la respuesta, las preguntas se irán pasando automáticamente. A pesar de que parezca que son muchas, el test es muy sencillo y lleva solo unos pocos minutos. Con esta herramienta lograremos ayudarte a conocer cuál sería la decisión más acertada partiendo de tus intereses, habilidades y/o preferencias, conocerás cual es el área ocupacional más acertada con tus elecciones.';
+export let name ='TestChaside';

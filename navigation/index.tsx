@@ -42,9 +42,8 @@ import {
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
-import Test5GrandesScreen from "../screens/Description5GrandesScreen/Description5GrandesScreen";
 import Terms from "../screens/Terms&Conditions/Terms";
-import TermsAndConditions from "../components/TermsAndConditions";
+
 
 export default function Navigation({
   colorScheme,
