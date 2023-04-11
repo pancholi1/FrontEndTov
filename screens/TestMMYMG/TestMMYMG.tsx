@@ -83,7 +83,7 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
                         <Text style={styles.title}>1ER ÁREA OCUPACIONAL:</Text>
                         <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
                         <Text style={styles.thankYou}>({msjArea1})</Text>
-                        <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2,'areaUno')}>
+                        <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2,'habilidad')}>
                             <LinearGradient
                             colors={gradientsButton.inputs}
                             start={{ x: 1, y: 1 }}
@@ -113,7 +113,7 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
                                         <Text style={styles.thankYou}>RESPUESTA DEL GRUPO </Text>
                                         <Text style={styles.thankYou}>({msjArea2}) </Text>
                                         <Text style={styles.thankYou}></Text>
-                                        <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2, 'areaDos')}>
+                                        <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2, 'interes')}>
                                             <LinearGradient
                                             colors={gradientsButton.inputs}
                                             start={{ x: 1, y: 1 }}

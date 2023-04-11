@@ -42,6 +42,7 @@ import {
 import TestChaside from "../screens/TestChaside/TestChasideScreen";
 import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
 import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
+import { DescriptionTests } from "../components/DescriptionTests";
 
 
 

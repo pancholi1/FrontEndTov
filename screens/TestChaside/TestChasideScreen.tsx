@@ -84,7 +84,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
         propiedadMayor = propiedad;
       }
     }
-    
     return { propiedad: propiedadMayor};
   }
   
@@ -95,7 +94,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const { propiedad: propiedadMayorHabilidades } = obtenerPropiedadMayor(sumaAreasHabilidades);
   
   const { msjArea: msjHabilidad, textCarrera: textCarreraHabilidad, area: areaHabilidad } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
-  
 
   const carrerasPosibles = (
     areaHabilidad: string,

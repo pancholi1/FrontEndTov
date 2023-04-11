@@ -40,6 +40,7 @@ export type RootStackParamList = {
   Test5Grandes: undefined;
   Description5GrandesScreen: undefined;
   QuestionTest: undefined;
+  DescriptionTests: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -66,6 +67,7 @@ export type RootTabParamList = {
   Test5Grandes: undefined;
   Description5GrandesScreen: undefined;
   QuestionTest: undefined;
+  DescriptionTests: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
