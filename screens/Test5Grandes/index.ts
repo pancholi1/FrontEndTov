@@ -1,0 +1,1 @@
+export { default as Test5Grandes } from "./Test5Grandes";

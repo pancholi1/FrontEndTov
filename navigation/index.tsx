@@ -38,11 +38,13 @@ import {
   ResultadosScreen,
   ResultTestScreen,
   SingUpScreen,
+  Terms,
+  Test5Grandes,
+  TestChasideScreen,
+  TestMMYMG,
 } from "../screens";
-import TestChaside from "../screens/TestChaside/TestChasideScreen";
-import TestMMYMG from "../screens/TestMMYMG/TestMMYMG";
-import Test5Grandes from "../screens/Test5Grandes/Test5Grandes";
-import Terms from "../screens/Terms&Conditions/Terms";
+
+
 
 
 export default function Navigation({
@@ -131,7 +133,7 @@ function RootNavigator() {
         />
         <Stack.Screen
           name="TestChaside"
-          component={TestChaside}
+          component={TestChasideScreen}
           options={{
             title: "Test",
             headerTitleAlign: "center",

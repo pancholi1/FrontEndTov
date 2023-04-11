@@ -17,3 +17,9 @@ export * from "./CarrerasMMYMGScreen";
 export * from "./DescriptionMMYMGScreen";
 
 export * from "./Description5GrandesScreen"
+
+export * from "./TestChaside"
+export * from "./TestMMYMG"
+export * from "./Test5Grandes"
+
+export * from "./Terms&Conditions"
