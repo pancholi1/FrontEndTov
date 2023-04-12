@@ -138,9 +138,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
                 }
               >
                 <LinearGradient
-                  colors={gradientsButton.inputs}
-                  start={{ x: 1, y: 1 }}
-                  end={{ x: 0, y: 0 }}
+                  colors={["#0995a6", "#197189", "#112044"]}
                   style={{
                     borderRadius: 15,
                     width: "100%",
@@ -178,37 +176,21 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
                     areaInteres,
                     areaHabilidad,
                     "habilidad"
-                  )
-                }
-              >
+                  )}
+                  >
                 <LinearGradient
-                  colors={gradients.inputs}
-                  start={{ x: 1, y: 1 }}
-                  end={{ x: 0, y: 0 }}
+                  colors={["#0995a6", "#197189", "#112044"]}
                   style={{
                     borderRadius: 15,
                     width: "100%",
-                    height: 50,
+                    height: 45,
                     alignItems: "center",
                     justifyContent: "center",
+                    margin: "4%",
                   }}
                 >
-                  <LinearGradient
-                    colors={gradientsButton.inputs}
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 0, y: 0 }}
-                    style={{
-                      borderRadius: 15,
-                      width: "100%",
-                      height: 45,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      margin: "4%",
-                    }}
-                  >
                     <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
                   </LinearGradient>
-                </LinearGradient>
               </Pressable>
             </View>
           </LinearGradient>
@@ -250,6 +232,7 @@ const styles = StyleSheet.create({
     width: "85%",
     alignItems: "center",
     fontFamily: "Poppins_Regular",
+    textAlign: "center",
   },
   thankYou2: {
     color: "#DED3F4",
@@ -259,6 +242,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontFamily: "Poppins_Regular",
     margin: "8%",
+    textAlign: "center",
   },
   title: {
     color: "#DED3F4",

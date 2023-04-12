@@ -30,12 +30,11 @@ const ResultadosScreen = ({
         description={"Conocé más sobre tu personalidad y capacidades."}
       />
       <Spacer height={20} />
-      <CardResult
+      {/* <CardResult
         image={require("../../assets/images/Results/result3.png")}
         title={"Entrevista"}
         description={"Agenda una entrevista con un profesional capacitado."}
-      />
-      <Spacer height={20} />
+      /> */}
       <CardResult
         image={require("../../assets/images/Results/result4.png")}
         title={"Resultado Final"}

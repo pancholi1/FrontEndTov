@@ -44,10 +44,11 @@ const styles = StyleSheet.create({
       backgroundColor: "#130C34",
     },
     container_area: {
-      marginTop: "4%",
+      marginTop: "2%",
       borderRadius: 15,
       width: "95%",
       alignItems: "center",
+      marginBottom:'2%'
     },
     text: {
       color: "#DED3F4",
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
       width: "85%",
       alignItems: "center",
       textAlign: "center",
-      marginTop: "5%",
+      marginTop: "3%",
       marginBottom: "2%",
       fontFamily: "Poppins_ExtraBold",
     },
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
       marginTop: "5%",
       marginBottom: "2%",
       fontFamily: "Poppins_Regular",
+      margin:5
     },
   });
 

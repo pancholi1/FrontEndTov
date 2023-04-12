@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
       text:{
         color:'#DED3F4',
         fontFamily:"Poppins_Regular",
-        fontSize:14
+        fontSize:14,
+        textAlign:"center",
       },
 })
 export default Test5Grandes

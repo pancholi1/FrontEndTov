@@ -12,7 +12,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable, View, StyleSheet } from "react-native";
+import { ColorSchemeName, Pressable, View, StyleSheet, Text } from "react-native";
 
 import {
   RootStackParamList,
@@ -98,12 +98,34 @@ function RootNavigator() {
         />
       </Stack.Group>
       <Stack.Group>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen 
+          name="HomeScreen" 
+          component={HomeScreen}
+          options={{
+            title: "Ingresa",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
+          />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{
-            headerShown: false,
+            title: "Ingresa",
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: "#130C34" },
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
           }}
         />
         <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
@@ -135,7 +157,7 @@ function RootNavigator() {
           name="TestChaside"
           component={TestChasideScreen}
           options={{
-            title: "Test",
+            title: "Test Chaside",
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
             headerTitleStyle: {
@@ -151,7 +173,7 @@ function RootNavigator() {
           name="TestMMYMG"
           component={TestMMYMG}
           options={{
-            title: "TestMMYMG",
+            title: "Test MM Y MG",
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
             headerTitleStyle: {
@@ -166,7 +188,7 @@ function RootNavigator() {
           name="DescriptionMMYMGScreen"
           component={DescriptionMMYMGScreen}
           options={{
-            title: "TestMMYMG",
+            title: "Test MM Y MG",
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
             headerTitleStyle: {
@@ -181,7 +203,7 @@ function RootNavigator() {
           name="CarrerasMMYMGScreen"
           component={CarrerasMMYMGScreen}
           options={{
-            title: "Carreras",
+            title: "Carreras MM Y MG",
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
             headerTitleStyle: {
@@ -212,28 +234,24 @@ function RootNavigator() {
         <Stack.Screen
           name="SingUp"
           component={SingUpScreen}
-          options={({ navigation }: RootTabScreenProps<"SingUp">) => ({
-            title: "",
+          options={{
+            title: "Registrate",
+            headerTitleAlign: "center",
             headerStyle: { backgroundColor: "#130C34" },
-
-            headerLeft: () => (
-              <Pressable
-                onPress={() => navigation.goBack()}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                })}
-              >
-                <TabBarIcon name="arrow-left" color={"white"} />
-              </Pressable>
-            ),
-          })}
+            headerTitleStyle: {
+              color: "white",
+              fontFamily: "Poppins_ExtraBold",
+              fontSize: 20,
+            },
+            headerTintColor: "#06D6DD",
+          }}
         />
       </Stack.Group>
       <Stack.Screen
         name="CarrerasChasideScreen"
         component={CarrerasChasideScreen}
         options={{
-          title: "Carreras",
+          title: "Carreras Chaside",
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
@@ -249,7 +267,7 @@ function RootNavigator() {
         name="Test5Grandes"
         component={Test5Grandes}
         options={{
-          title: "Carreras",
+          title: "Resultados Test 5 Grandes",
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
@@ -264,7 +282,7 @@ function RootNavigator() {
         name="Description5GrandesScreen"
         component={Description5GrandesScreen}
         options={{
-          title: "Carreras",
+          title: "Test 5 Grandes",
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
@@ -319,7 +337,27 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<"HomeScreen">) => ({
           tabBarLabel: "Inicio",
-          headerTitle: "",
+          headerTitle: "Inicio",
+          headerTitleAlign: "center",
+          
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+          
+          // headerLeft: () => (
+          //   <Pressable
+          //     onPress={() => navigation.goBack()}
+          //     style={styles.button}
+          //   >
+              
+          //     <TabBarIcon  name="chevron-left" color={'#06D6DD'} />
+          //     <Text style ={styles.text_button}>Back</Text>
+          //   </Pressable>
+          // ),
+          
           tabBarIcon: () => (
             <Image source={require("../assets/images/home.png")} />
           ),
@@ -339,8 +377,8 @@ function BottomTabNavigator() {
                 })}
               >
                 <Avatar.Image
-                  style={{ marginTop: 3 }}
-                  size={34}
+                  style={{ marginTop: 10 }}
+                  size={40}
                   source={require("../assets/images/pancho.jpeg")}
                 />
               </Pressable>
@@ -348,7 +386,7 @@ function BottomTabNavigator() {
           ),
         })}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Planes"
         component={PlanesScreen}
         options={({ navigation }: RootTabScreenProps<"Planes">) => ({
@@ -371,7 +409,7 @@ function BottomTabNavigator() {
             </Pressable>
           ),
         })}
-      />
+      /> */}
 
       <BottomTab.Screen
         name="Resultados"
@@ -419,7 +457,7 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={23} style={{ marginBottom: -3, marginLeft:6 }} className="fa-thin" {...props} />;
 }
 
 const styles = StyleSheet.create({
@@ -429,6 +467,14 @@ const styles = StyleSheet.create({
     padding: 9,
   },
   logoHeaederRight: {
-    marginRight: 15,
+    marginRight: 1,
+  },
+  button: {
+    flexDirection:'row'
+  },
+  text_button: {
+    fontSize: 17,
+    color:'#06D6DD',
+    marginLeft:5
   },
 });

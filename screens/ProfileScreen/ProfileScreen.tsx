@@ -46,7 +46,7 @@ export default function ModalScreen() {
         </LinearGradient>
       </View>
       <LinearGradient
-        colors={["#06D6DD", "#282056"]}
+       colors={["#0995a6", "#112044"]}
         style={styles.botonContainer}
       >
         <Pressable
@@ -176,12 +176,10 @@ const styles = StyleSheet.create({
   },
   botonContainer: { borderRadius: 15 },
   botonText: {
-    fontFamily: "Poppins_ExtraBold",
-    fontStyle: "normal",
-    fontWeight: "700",
-    color: "#DED3F4",
-    fontSize: 20,
     padding: 18,
+    fontSize: 20,
+    color: "#DED3F4",
+    fontFamily: "Poppins_ExtraBold",
   },
 
   containerTerminos: {

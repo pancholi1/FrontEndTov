@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { gradients } from "../../constants/Gradients";
 import { RootStackScreenProps, RootStackParamList } from "../../types";
 
-const Terms = ({}: RootStackScreenProps<"Terms">) => {
+const Terms = ({navigation}: RootStackScreenProps<"Terms">) => {
   return (
     <View style={styles.login_container_text}>
       <View
