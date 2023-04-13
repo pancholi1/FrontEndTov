@@ -2,8 +2,8 @@ import React from "react";
 import {
   Alert,
   Image,
-  ImageBackground,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -14,10 +14,8 @@ import { RootStackScreenProps } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as yup from "yup";
 import { Formik } from "formik";
-
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
-import { gradientsButton } from "../../constants/Gradients";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const submit = async (props) => {
@@ -70,8 +68,13 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
       .max(10, "Muy larga"),
   });
 
+
   return (
+
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
+      <KeyboardAwareScrollView>
+      <SafeAreaView style={{ width: "100%"}}>
+
       <View style={styles.container}>
         <Image
           source={require("../../assets/images/Login/tov.png")}
@@ -89,7 +92,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
             password: "",
           }}
           // validationSchema={reviewSchema}
-        >
+          >
           {(props) => (
             <View style={styles.login_containerInput}>
               <LinearGradient
@@ -104,40 +107,42 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                     props.errors.email && props.touched.email
                       ? styles.input_error
                       : styles.input
-                  }
-                  value={props.values.email}
-                  onChangeText={props.handleChange("email")}
+                    }
+                    value={props.values.email}
+                    onChangeText={props.handleChange("email")}
                   onBlur={props.handleBlur("email")}
                   placeholder="Email"
                   placeholderTextColor="#B39AE7"
-                />
+                  scrollEnabled={true}
+                  />
               </LinearGradient>
               {props.errors.email && props.touched.email ? (
                 <Text style={styles.errors}>{props.errors.email}</Text>
               ) : null}
+                  <LinearGradient
+                    colors={["#3d3758", "#1e173e"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
+                    style={{ borderRadius: 15, marginTop: "3%" }}
+                  >
 
-              <LinearGradient
-                colors={["#3d3758", "#1e173e"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
-                style={{ borderRadius: 15, marginTop: "3%" }}
-              >
-                <TextInput
-                  secureTextEntry={true}
-                  style={
-                    props.errors.password && props.touched.password
-                      ? styles.input_error
-                      : styles.input
-                  }
-                  value={props.values.password}
-                  onChangeText={props.handleChange("password")}
-                  placeholder="Contraseña"
-                  keyboardType="numeric"
-                  selectionColor="white"
-                  placeholderTextColor="#B39AE7"
-                />
-              </LinearGradient>
+                    <TextInput
+                      secureTextEntry={true}
+                      style={
+                        props.errors.password && props.touched.password
+                        ? styles.input_error
+                        : styles.input
+                      }
+                      value={props.values.password}
+                      onChangeText={props.handleChange("password")}
+                      placeholder="Contraseña"
+                      keyboardType="numeric"
+                      selectionColor="white"
+                      placeholderTextColor="#B39AE7"
+                      scrollEnabled={true}
+                      />
+                   </LinearGradient>
               {props.errors.password && props.touched.password ? (
                 <Text style={styles.errors}>{props.errors.password}</Text>
               ) : null}
@@ -148,7 +153,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                   <LinearGradient
                     colors={["#0995a6", "#112044"]}
                     style={styles.login_button}
-                  >
+                    >
                     <Text style={styles.login_butontext}> Ingresar </Text>
                   </LinearGradient>
                 </Pressable>
@@ -167,6 +172,8 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
           </View>
         </View>
       </View>
+      </SafeAreaView>
+        </KeyboardAwareScrollView>
     </ScrollView>
   );
 };
@@ -180,7 +187,6 @@ const styles = StyleSheet.create({
   img_logo: {
     width: "41%",
     marginRight: "45%",
-    marginTop:'3%',
     padding:'11%'
   },
   img_login: {
@@ -216,7 +222,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
-    backgroundColor: "rgba(6, 214, 221, 0.72) 0%, rgba(6, 214, 221, 0.08)",
     padding: "3%",
   },
 

@@ -7,13 +7,15 @@ import {
   Text,
   TextInput,
   View,
+ 
 } from "react-native";
 import PopUp from "../../components/PopUp";
-import TermsAndConditions from "../../components/TermsAndConditions";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients, gradientsButton } from "../../constants/Gradients";
 import { patterns } from "../../constants/Patterns";
+import TermsAndConditions from "../../components/TermsAndConditions";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -73,14 +75,18 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     isFormDisabled !== isDisabled && setIsFormDisabled(isDisabled);
   }, [input]);
 
+  const terminosNavegacion = () => navigation.navigate("Terms")
+
   return (
-    <View style={styles.container}>
+      <ScrollView style={{width:'100%', backgroundColor: "#130C34",}}>
+        <KeyboardAwareScrollView>
+
+        <View style={styles.container}>
       <PopUp
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         mesagge={"El registro ha fallado, vuelve a intentarlo"}
       />
-      <ScrollView style={styles.container_panel}>
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Nombre</Text>
           <LinearGradient
@@ -139,7 +145,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             />
           </LinearGradient>
         </View>
-
+        
         <View style={styles.container_input_name}>
           <Text style={styles.text_input_name}>Contraseña</Text>
           <LinearGradient
@@ -148,13 +154,15 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
+          
             <TextInput
               placeholder="Contraseña"
               secureTextEntry={true}
               style={styles.input_nombre}
               placeholderTextColor="#B39AE7"
               onChangeText={onPasswordChange}
-            />
+              />
+
           </LinearGradient>
           {errors.password && (
             <Text style={styles.error}>
@@ -171,13 +179,14 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             end={{ x: 0, y: 0 }}
             style={{ borderRadius: 15 }}
           >
+
             <TextInput
               placeholder="Fecha de Nacimiento"
               secureTextEntry={false}
               placeholderTextColor="#B39AE7"
               style={styles.input_nombre}
               onChangeText={onDateChange}
-            />
+              />
           </LinearGradient>
           {errors.date && (
             <Text style={styles.error}>
@@ -206,7 +215,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
         </View>
         <View style={styles.buttonContainer}>
           <LinearGradient
-            colors={gradientsButton.inputs}
+            colors={["#0995a6", "#112044"]}
             style={
               isFormDisabled
                 ? styles.button_gradient_disable
@@ -226,9 +235,10 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             </Pressable>
           </LinearGradient>
         </View>
-        <TermsAndConditions />
-      </ScrollView>
+        <TermsAndConditions terminosNav={terminosNavegacion}/>
     </View>
+        </KeyboardAwareScrollView>
+      </ScrollView>
   );
 };
 
@@ -237,15 +247,12 @@ export default SingUpScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    flexDirection: "column",
-    paddingTop: 25,
-    backgroundColor: "#130C34",
+    paddingTop: 10,
   },
   container_panel: {
     width: "95%",
     height: "95%",
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 20,
   },
   container_input_name: {
@@ -263,7 +270,6 @@ const styles = StyleSheet.create({
   },
 
   input_nombre: {
-    flex: 1,
     borderColor: "#B39AE7",
     borderWidth: 2,
     borderRadius: 15,
@@ -308,11 +314,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   text_button: {
-    fontWeight: "500",
     fontSize: 20,
-    textAlign: "center",
-    color: "white",
-    fontFamily: "Poppins_Regular",
+    color: "#DED3F4",
+    fontFamily: "Poppins_ExtraBold",
   },
   text_bottom: {
     width: "90%",
@@ -325,6 +329,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    padding: 30,
+    paddingTop: 20,
+    paddingLeft:30,
+    paddingRight:30
   },
 });
