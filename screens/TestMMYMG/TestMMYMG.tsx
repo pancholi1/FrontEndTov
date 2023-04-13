@@ -85,9 +85,7 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
                         <Text style={styles.thankYou}>({msjArea1})</Text>
                         <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2,'habilidad')}>
                             <LinearGradient
-                            colors={gradientsButton.inputs}
-                            start={{ x: 1, y: 1 }}
-                            end={{ x: 0, y: 0 }}
+                            colors={["#0995a6", "#197189", "#112044"]}
                             style={{
                                 borderRadius: 15,
                                 width: "100%",
@@ -115,27 +113,23 @@ const TestMMYMG = ({navigation}: RootStackScreenProps<"TestMMYMG">) => {
                                         <Text style={styles.thankYou}></Text>
                                         <Pressable style={styles.button} onPress={() => carrerasPosibles(area1, area2, 'interes')}>
                                             <LinearGradient
-                                            colors={gradientsButton.inputs}
-                                            start={{ x: 1, y: 1 }}
-                                            end={{ x: 0, y: 0 }}
+                                            colors={["#0995a6", "#197189", "#112044"]}
                                             style={{
                                                 borderRadius: 15,
                                                 width: "100%",
                                                 height: 45,
                                                 alignItems: "center",
                                                 justifyContent: "center",
-                                                margin:'6%'
-                                            }}
-                                            >
-                                                <Text style={styles.text_button} >CARRERAS POSIBLES</Text>
-                                                </LinearGradient>
-                                                </Pressable>
-                                                </LinearGradient>
-                                                </View>
-                                                </View>
-                                                </ScrollView>
-                                                )
-                                            }
+                                                margin:'6%'}}
+                                                >
+                                                    <Text style={styles.text_button} >CARRERAS POSIBLES</Text>
+                                                    </LinearGradient>
+                                                    </Pressable>
+                                                    </LinearGradient>
+                                                    </View>
+                                                    </View></ScrollView>
+                                                    )
+                                                }
 
   return (
         <View style={styles.container}>
@@ -167,17 +161,18 @@ const styles = StyleSheet.create({
         fontSize:15,
         width:"85%",
         alignItems: 'center',
-        fontFamily:'Poppins_Regular'
+        fontFamily:'Poppins_Regular',
+        textAlign:"center",
       },
       title:{
         color:"#DED3F4",
         fontWeight:"600",
         fontSize:20,
-        width:"85%",
-        alignItems: 'center',
+        width:"95%",
+        textAlign:"center",
         marginTop:'5%',
         marginBottom:'5%',
-        fontFamily:'Poppins_ExtraBold'
+        fontFamily:'Poppins_ExtraBold',
       },
       button:{
         width: "80%",

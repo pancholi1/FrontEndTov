@@ -1,12 +1,15 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import TermsAndConditions from "../../components/TermsAndConditions";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
+
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
+  const terminosNavegacion = () => navigation.navigate("Terms")
   return (
+    <ScrollView style={{width:'100%',     backgroundColor: "#130C34",}}>
+
     <View style={styles.container}>
       <View style={styles.img_logo_container}>
         <Image
@@ -24,7 +27,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
         <Pressable
           onPress={() => navigation.navigate("Login")}
           style={styles.login_button}
-        >
+          >
           <LinearGradient
             colors={["#3d3758", "#1e173e"]}
             start={{ x: 0, y: 0 }}
@@ -38,14 +41,14 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
               borderColor: "#7B68A9",
               borderWidth: 0.7,
             }}
-          >
+            >
             <Text style={styles.login_butontext}> Ingresa a TOV </Text>
           </LinearGradient>
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate("SingUp")}
           style={styles.login_button}
-        >
+          >
           <LinearGradient
             colors={["#3d3758", "#1e173e"]}
             start={{ x: 0, y: 0 }}
@@ -59,13 +62,14 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
               borderColor: "#7B68A9",
               borderWidth: 0.7,
             }}
-          >
+            >
             <Text style={styles.login_butontext}> Registrarte </Text>
           </LinearGradient>
         </Pressable>
       </View>
-      <TermsAndConditions navigation={navigation} route={"../../screens/Terms&Conditions/Terms.tsx"}/>
+      <TermsAndConditions terminosNav={terminosNavegacion}/>
     </View>
+    </ScrollView>
   );
 };
 
@@ -77,32 +81,31 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#130C34",
     justifyContent: "space-around",
   },
   image: {
     flex: 1,
   },
   img_logo: {
-    width: 350,
-    height: 360,
+    width: 330,
+    height: 320,
   },
   img_logo_container: {
     alignItems: "center",
   },
   login_container_text: {
     alignItems: "center",
+    marginBottom:'1%'
   },
-
   login_subtitle_text: {
-    fontSize: 60,
+    fontSize: 55,
     color: "#DED3F4",
     fontWeight: "800",
     fontFamily: "Poppins_ExtraBold",
   },
   login_subtitle_orientacion: {
     color: "#00BBC2",
-    fontSize: 33,
+    fontSize: 30,
     fontWeight: "600",
   },
   login_subtitle_vocacional: {

@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     justifyContent: "space-around",
-    paddingBottom: 20,
+    paddingBottom: 15,
   },
   numero_test: {
     color: "#DED3F4",
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     fontFamily: "Poppins_ExtraBold",
-    height:100
+    height:40
   },
   gradientBoton: {
     borderRadius: 15,

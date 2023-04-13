@@ -10,7 +10,7 @@ import Spacer from "../../components/Spacer";
 
 const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   return (
-    <ScrollView style={styles.scroll_container}>
+    <ScrollView style={{width:'100%', backgroundColor: "#130C34",}}>
       <View style={styles.container}>
         <View style={styles.header_container}>
           <Text style={styles.title_hello}>Hola</Text>
@@ -60,14 +60,14 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           navigation={navigation}
           route={"Description5GrandesScreen"}
         />
-        <Spacer height={20} />
+        {/* <Spacer height={20} />
         <CardResult
           image={require("../../assets/images/HomeScreen/entrevista.png")}
           title={"Entrevista"}
           description={"Agenda una entrevista con un profesional capacitado."}
           navigation={navigation}
           route={"Calendar"}
-        />
+        /> */}
       </View>
     </ScrollView>
   );
@@ -79,14 +79,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#130C34",
   },
   header_container: {
     paddingLeft: "8%",
     paddingRight: "8%",
-  },
-  scroll_container: {
-    width: "100%",
   },
   title_hello: {
     fontFamily: "Poppins_ExtraBold",
