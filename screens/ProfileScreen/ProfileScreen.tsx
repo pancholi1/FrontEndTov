@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-between",
     backgroundColor: "#130C34",
     width: "100%",
     padding: 15,
@@ -120,41 +119,41 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 20,
     marginTop: 21,
+    borderColor: "#7B68A9",
+    borderWidth: 0.7,
   },
 
   containerText: {
     marginLeft: 25,
   },
   name: {
-    fontFamily: "Poppins_ExtraBold",
-    fontStyle: "normal",
+    fontFamily: "Poppins_SemiBold",
     fontSize: 20,
     fontWeight: "700",
     color: "#06D6DD",
     marginTop: "2%",
   },
   colegio: {
-    width: "70%",
-    fontFamily: "Poppins_ExtraBold",
+    fontFamily: "Poppins_SemiBold",
     fontStyle: "normal",
     fontWeight: "600",
     color: "#DED3F4",
-    fontSize: 16,
+    fontSize: 14,
   },
 
   myAccount: {
-    fontFamily: "Poppins_ExtraBold",
-    fontStyle: "normal",
+    fontFamily: "Poppins_SemiBold",
     fontWeight: "600",
     color: "#DED3F4",
     fontSize: 20,
   },
   myEmail: {
-    fontFamily: "Poppins_ExtraBold",
+    fontFamily: "Poppins_SemiBold",
     fontStyle: "normal",
     fontWeight: "600",
     color: "#DED3F4",
-    fontSize: 14,
+    fontSize: 12,
+    width: "100%",
   },
   myPassword: {
     fontFamily: "Poppins_ExtraBold",
@@ -171,10 +170,14 @@ const styles = StyleSheet.create({
   },
   img_3D: {
     position: "absolute",
+    zIndex: 1,
     left: -60,
     top: -60,
   },
-  botonContainer: { borderRadius: 15 },
+  botonContainer: {
+    borderRadius: 15,
+    margin: 60,
+  },
   botonText: {
     fontFamily: "Poppins_ExtraBold",
     fontStyle: "normal",
@@ -191,12 +194,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   containerPrueba: {
-    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     borderRadius: 15,
-    padding: 20,
+    padding: 18,
     marginTop: 17,
+    alignItems: "center",
+    borderColor: "#7B68A9",
+    borderWidth: 0.7,
   },
   terminos_container: {
     width: "100%",
