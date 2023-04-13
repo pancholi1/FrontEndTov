@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import {
   Alert,
   Image,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { RootStackScreenProps } from "../../types";
@@ -18,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { LinearGradient } from "expo-linear-gradient";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const submit = async (props) => {
@@ -74,6 +72,9 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   return (
 
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
+      <KeyboardAwareScrollView>
+      <SafeAreaView style={{ width: "100%"}}>
+
       <View style={styles.container}>
         <Image
           source={require("../../assets/images/Login/tov.png")}
@@ -91,7 +92,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
             password: "",
           }}
           // validationSchema={reviewSchema}
-        >
+          >
           {(props) => (
             <View style={styles.login_containerInput}>
               <LinearGradient
@@ -106,14 +107,14 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                     props.errors.email && props.touched.email
                       ? styles.input_error
                       : styles.input
-                  }
-                  value={props.values.email}
-                  onChangeText={props.handleChange("email")}
+                    }
+                    value={props.values.email}
+                    onChangeText={props.handleChange("email")}
                   onBlur={props.handleBlur("email")}
                   placeholder="Email"
                   placeholderTextColor="#B39AE7"
                   scrollEnabled={true}
-                />
+                  />
               </LinearGradient>
               {props.errors.email && props.touched.email ? (
                 <Text style={styles.errors}>{props.errors.email}</Text>
@@ -171,6 +172,8 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
           </View>
         </View>
       </View>
+      </SafeAreaView>
+        </KeyboardAwareScrollView>
     </ScrollView>
   );
 };

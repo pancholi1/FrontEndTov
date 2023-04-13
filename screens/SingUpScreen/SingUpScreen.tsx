@@ -15,6 +15,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { gradients, gradientsButton } from "../../constants/Gradients";
 import { patterns } from "../../constants/Patterns";
 import TermsAndConditions from "../../components/TermsAndConditions";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -78,6 +79,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
 
   return (
       <ScrollView style={{width:'100%', backgroundColor: "#130C34",}}>
+        <KeyboardAwareScrollView>
+
         <View style={styles.container}>
       <PopUp
         modalVisible={modalVisible}
@@ -234,6 +237,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
         </View>
         <TermsAndConditions terminosNav={terminosNavegacion}/>
     </View>
+        </KeyboardAwareScrollView>
       </ScrollView>
   );
 };
@@ -325,6 +329,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer: {
-    padding: 30,
+    paddingTop: 20,
+    paddingLeft:30,
+    paddingRight:30
   },
 });
