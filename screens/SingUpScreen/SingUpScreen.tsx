@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -12,11 +10,11 @@ import {
  
 } from "react-native";
 import PopUp from "../../components/PopUp";
-import TermsAndConditions from "../../components/TermsAndConditions";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients, gradientsButton } from "../../constants/Gradients";
 import { patterns } from "../../constants/Patterns";
+import TermsAndConditions from "../../components/TermsAndConditions";
 
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -75,6 +73,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
 
     isFormDisabled !== isDisabled && setIsFormDisabled(isDisabled);
   }, [input]);
+
+  const terminosNavegacion = () => navigation.navigate("Terms")
 
   return (
       <ScrollView style={{width:'100%', backgroundColor: "#130C34",}}>
@@ -232,7 +232,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             </Pressable>
           </LinearGradient>
         </View>
-        <TermsAndConditions />
+        <TermsAndConditions terminosNav={terminosNavegacion}/>
     </View>
       </ScrollView>
   );

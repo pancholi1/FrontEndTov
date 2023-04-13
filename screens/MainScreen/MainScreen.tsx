@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
+  const terminosNavegacion = () => navigation.navigate("Terms")
   return (
     <ScrollView style={{width:'100%',     backgroundColor: "#130C34",}}>
 
@@ -66,7 +67,7 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
           </LinearGradient>
         </Pressable>
       </View>
-      <TermsAndConditions navigation={navigation} route={"../../screens/Terms&Conditions/Terms.tsx"}/>
+      <TermsAndConditions terminosNav={terminosNavegacion}/>
     </View>
     </ScrollView>
   );

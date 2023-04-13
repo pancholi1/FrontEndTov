@@ -2,15 +2,17 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { gradients } from "../../constants/Gradients";
-import { RootStackScreenProps, RootStackParamList } from "../../types";
+import { RootStackScreenProps } from "../../types";
 
 const Terms = ({navigation}: RootStackScreenProps<"Terms">) => {
   return (
+    <ScrollView style={{ width: "100%", backgroundColor: "#130C34",}}>
+
     <View style={styles.login_container_text}>
       <View
         style={{
           width: "90%",
-          marginTop: "10%",
+          marginTop: "5%",
           marginBottom: "20%",
           borderRadius: 15,
         }}
@@ -97,13 +99,13 @@ const Terms = ({navigation}: RootStackScreenProps<"Terms">) => {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   login_container_text: {
     flex: 1,
-    backgroundColor: "#130C34",
     alignItems: "center",
   },
   contenedor_test: {

@@ -12,7 +12,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable, View, StyleSheet, Text } from "react-native";
+import { ColorSchemeName, Pressable, View, StyleSheet } from "react-native";
 
 import {
   RootStackParamList,
@@ -20,7 +20,6 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import PlanesScreen from "../screens/PlanesScreen/PlanesScreen";
 import CalendarInterviewScreen from "../screens/CalendarInterviewScreen/CalendarInterviewScreen";
 import { Avatar } from "react-native-paper";
 import { Image } from "react-native";
