@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Image,
@@ -11,169 +11,112 @@ import {
   View,
 } from "react-native";
 import { RootStackScreenProps } from "../../types";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as yup from "yup";
-import { Formik } from "formik";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { firebaseConfig } from "../../firebase-config";
+import { initializeApp } from "firebase/app";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
-  const submit = async (props) => {
-    const value = true;
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState("");
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const handleCreateAccount = async () => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("@storage_Key", jsonValue);
-      const data = await AsyncStorage.getItem("@storage_Key");
-      console.log("data", data);
-      console.log("props", props);
-      if (data) {
-        navigation.navigate("BottomTabNavigator");
-      } else {
-        Alert.alert("Error", "El token es inválido");
-      }
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("account created");
     } catch (error) {
+      console.log("account created error");
       console.log(error);
     }
-    // .then(response => {
-    //   const token = response.data.token;
-    //   // Guardar el token en AsyncStorage
-    //   AsyncStorage.setItem('token', token)
-    //     .then(() => {
-    //       // Si el token es verdadero, redirigir a la página principal
-    //       // (aquí asumimos que tienes una función para la redirección) se combina con la parte de arriba
-    //       redirectToMainPage();
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //       // Si hay un error al guardar el token, mostrar un mensaje de error
-    //       alert('Error al guardar el token');
-    //     });
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    //   // Si la autenticación falla, mostrar un mensaje de error
-    //   alert('Nombre de usuario o contraseña incorrectos');
-    // });
+  };
+  const handleSingIn = async () => {
+    try {
+      console.log(auth, email, password);
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      console.log(user);
+      console.log("account entro");
+      Alert.alert("entro");
+    } catch (error) {
+      console.log("error al entrar");
+      console.log(error);
+    }
   };
 
-  const reviewSchema = yup.object({
-    email: yup
-      .string()
-      .required("Requiere un email")
-      .email("Tiene que tener formato email"),
-    password: yup
-      .string()
-      .required("Requiere una contraseña")
-      .min(4, "Muy corta!")
-      .max(10, "Muy larga"),
-  });
-
-
   return (
-
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <KeyboardAwareScrollView>
-      <SafeAreaView style={{ width: "100%"}}>
+        <SafeAreaView style={{ width: "100%" }}>
+          <View style={styles.container}>
+            <Image
+              source={require("../../assets/images/Login/tov.png")}
+              style={styles.img_logo}
+            />
+            <Image
+              source={require("../../assets/images/Login/logo1.png")}
+              style={styles.img_login}
+            />
 
-      <View style={styles.container}>
-        <Image
-          source={require("../../assets/images/Login/tov.png")}
-          style={styles.img_logo}
-        />
-        <Image
-          source={require("../../assets/images/Login/logo1.png")}
-          style={styles.img_login}
-        />
+            <LinearGradient
+              colors={["#3d3758", "#1e173e"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
+              style={{ borderRadius: 15 }}
+            >
+              <TextInput
+                style={styles.input}
+                onChangeText={setEmail}
+                placeholder="Email"
+                placeholderTextColor="#B39AE7"
+                scrollEnabled={true}
+              />
+            </LinearGradient>
+            <LinearGradient
+              colors={["#3d3758", "#1e173e"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={{ borderRadius: 15, marginTop: "3%" }}
+            >
+              <TextInput
+                secureTextEntry={true}
+                style={styles.input}
+                onChangeText={setPassword}
+                placeholder="Contraseña"
+                selectionColor="white"
+                placeholderTextColor="#B39AE7"
+                scrollEnabled={true}
+              />
+            </LinearGradient>
+            <View>
+              <Pressable onPress={() => handleSingIn()}>
+                <LinearGradient
+                  colors={["#0995a6", "#112044"]}
+                  style={styles.login_button}
+                >
+                  <Text style={styles.login_butontext}> Ingresar </Text>
+                </LinearGradient>
+              </Pressable>
+            </View>
 
-        <Formik
-          onSubmit={submit}
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          // validationSchema={reviewSchema}
-          >
-          {(props) => (
             <View style={styles.login_containerInput}>
-              <LinearGradient
-                colors={["#3d3758", "#1e173e"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
-                style={{ borderRadius: 15 }}
-              >
-                <TextInput
-                  style={
-                    props.errors.email && props.touched.email
-                      ? styles.input_error
-                      : styles.input
-                    }
-                    value={props.values.email}
-                    onChangeText={props.handleChange("email")}
-                  onBlur={props.handleBlur("email")}
-                  placeholder="Email"
-                  placeholderTextColor="#B39AE7"
-                  scrollEnabled={true}
-                  />
-              </LinearGradient>
-              {props.errors.email && props.touched.email ? (
-                <Text style={styles.errors}>{props.errors.email}</Text>
-              ) : null}
-                  <LinearGradient
-                    colors={["#3d3758", "#1e173e"]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
-                    style={{ borderRadius: 15, marginTop: "3%" }}
-                  >
-
-                    <TextInput
-                      secureTextEntry={true}
-                      style={
-                        props.errors.password && props.touched.password
-                        ? styles.input_error
-                        : styles.input
-                      }
-                      value={props.values.password}
-                      onChangeText={props.handleChange("password")}
-                      placeholder="Contraseña"
-                      keyboardType="numeric"
-                      selectionColor="white"
-                      placeholderTextColor="#B39AE7"
-                      scrollEnabled={true}
-                      />
-                   </LinearGradient>
-              {props.errors.password && props.touched.password ? (
-                <Text style={styles.errors}>{props.errors.password}</Text>
-              ) : null}
-              <Text style={styles.text}>¿Olvidaste tu contraseña?</Text>
-
-              <View>
-                <Pressable onPress={() => props.handleSubmit()}>
-                  <LinearGradient
-                    colors={["#0995a6", "#112044"]}
-                    style={styles.login_button}
-                    >
-                    <Text style={styles.login_butontext}> Ingresar </Text>
-                  </LinearGradient>
-                </Pressable>
+              <View style={styles.login_containerhelp}>
+                <Text style={styles.login_titlehelp}>¿Necesitas ayuda?</Text>
+                <Text style={styles.login_parrafohelp}>
+                  Mándanos un correo a soporte@tov.com o escríbenos por Whatsapp
+                  al +52 55 4169 1994.
+                </Text>
               </View>
             </View>
-          )}
-        </Formik>
-
-        <View style={styles.login_containerInput}>
-          <View style={styles.login_containerhelp}>
-            <Text style={styles.login_titlehelp}>¿Necesitas ayuda?</Text>
-            <Text style={styles.login_parrafohelp}>
-              Mándanos un correo a soporte@tov.com o escríbenos por Whatsapp al
-              +52 55 4169 1994.
-            </Text>
           </View>
-        </View>
-      </View>
-      </SafeAreaView>
-        </KeyboardAwareScrollView>
+        </SafeAreaView>
+      </KeyboardAwareScrollView>
     </ScrollView>
   );
 };
@@ -187,11 +130,11 @@ const styles = StyleSheet.create({
   img_logo: {
     width: "41%",
     marginRight: "45%",
-    padding:'11%'
+    padding: "11%",
   },
   img_login: {
     width: "60%",
-    padding:'25%'
+    padding: "25%",
   },
   login_containerInput: {
     width: "80%",
