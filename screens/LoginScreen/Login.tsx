@@ -27,22 +27,13 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  const handleCreateAccount = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      console.log("account created");
-    } catch (error) {
-      console.log("account created error");
-      console.log(error);
-    }
-  };
   const handleSingIn = async () => {
     try {
       console.log(auth, email, password);
       const user = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
       console.log("account entro");
-      Alert.alert("entro");
+      return navigation.navigate("HomeScreen");
     } catch (error) {
       console.log("error al entrar");
       console.log(error);
@@ -68,12 +59,12 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
-              style={{ borderRadius: 15 }}
+              style={{ borderRadius: 15, width: "80%" }}
             >
               <TextInput
                 style={styles.input}
                 onChangeText={setEmail}
-                placeholder="Email"
+                placeholder="Emails"
                 placeholderTextColor="#B39AE7"
                 scrollEnabled={true}
               />
@@ -82,7 +73,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               colors={["#3d3758", "#1e173e"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              style={{ borderRadius: 15, marginTop: "3%" }}
+              style={{ borderRadius: 15, marginTop: "3%", width: "80%" }}
             >
               <TextInput
                 secureTextEntry={true}
@@ -94,7 +85,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                 scrollEnabled={true}
               />
             </LinearGradient>
-            <View>
+            <View style={styles.container_buton}>
               <Pressable onPress={() => handleSingIn()}>
                 <LinearGradient
                   colors={["#0995a6", "#112044"]}
@@ -137,6 +128,10 @@ const styles = StyleSheet.create({
     padding: "25%",
   },
   login_containerInput: {
+    width: "80%",
+  },
+  container_buton: {
+    marginTop: 10,
     width: "80%",
   },
   input: {
