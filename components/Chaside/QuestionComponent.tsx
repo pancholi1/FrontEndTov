@@ -14,7 +14,6 @@ interface SurveyProps {
 const Survey: React.FC<SurveyProps> = ({
   id,
   question,
-  resultado,
   onAnswered,
 }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);

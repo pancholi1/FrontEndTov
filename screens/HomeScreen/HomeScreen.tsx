@@ -1,20 +1,45 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
 
 import CardResult from "../../components/CardResult";
-import { gradients } from "../../constants/Gradients";
 import Spacer from "../../components/Spacer";
 
+import { database } from "../../firebase-config";
+import { doc, getDoc, } from 'firebase/firestore'
+
+
 const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
+  
+
+  const [data, setData] = useState<any>({
+  });
+
+ 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const queryDoc = doc(database, 'people', '2WKULS88t9uGt7pcLe4t');
+        const info = await getDoc(queryDoc);
+        const name = info.data();
+        setData(name);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getData();
+  }, []);
+
+
   return (
+    
     <ScrollView style={{width:'100%', backgroundColor: "#130C34",}}>
       <View style={styles.container}>
         <View style={styles.header_container}>
           <Text style={styles.title_hello}>Hola</Text>
-          <Text style={styles.name}>SOFIA FERRARI</Text>
+          <Text style={styles.name}>{data.name}</Text>
 
           <LinearGradient
             colors={["#524c77", "#3d3758", "#1e173e"]}
@@ -60,16 +85,8 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           navigation={navigation}
           route={"Description5GrandesScreen"}
         />
-        {/* <Spacer height={20} />
-        <CardResult
-          image={require("../../assets/images/HomeScreen/entrevista.png")}
-          title={"Entrevista"}
-          description={"Agenda una entrevista con un profesional capacitado."}
-          navigation={navigation}
-          route={"Calendar"}
-        /> */}
       </View>
-    </ScrollView>
+    </ScrollView> 
   );
 };
 
