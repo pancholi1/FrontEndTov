@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   Alert,
@@ -12,13 +11,16 @@ import {
 import PopUp from "../../components/PopUp";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients, gradientsButton } from "../../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
 import { patterns } from "../../constants/Patterns";
 import TermsAndConditions from "../../components/TermsAndConditions";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../firebase-config";
+
+import { database } from "../../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
 
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,29 +35,31 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     password: "",
     school: "",
     date: "",
+    createdAt: new Date(),
   });
 
   const handleCreateAccount = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, input.email, input.password);
-      console.log("account created");
-      Alert.alert("Asd");
-    } catch (error) {
-      console.log("account created error");
-      console.log(error);
+    if(input.name && input.apellido && input.email && input.password && input.school && input.date && !errors.password && !errors.date){
+      try {
+        await createUserWithEmailAndPassword(auth, input.email, input.password);
+        await addDoc(collection(database, 'people'), input);
+        console.log("account created");
+        Alert.alert("Usuario creado con exito!");
+        setInput({
+          ...input,
+         name:'', apellido: '' , email:'' , password :'', school:'' , date:'', 
+        })
+        return navigation.navigate('Login')
+      } catch (error) {
+        console.log("account created error");
+        console.log(error);
+        Alert.alert('Algun dato es invalido')
+      }
+    } else {
+      Alert.alert('Faltan llenar campos')
     }
   };
-  const sendInfo = () => {
-    // axios
-    //   .post("API_URL")
-    //   .then((response) => {
-    //     navigation.navigate("Login")}
-    //   })
-    //   .catch((error) => {
-    //     setModalVisible(true);
-    //   });
-    navigation.navigate("Login");
-  };
+
 
   const onDateChange = (value) => {
     setInput({ ...input, date: value });

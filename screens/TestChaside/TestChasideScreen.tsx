@@ -13,9 +13,10 @@ import { QuestionComponent } from "../../components/Chaside";
 
 import {msjAreaC, msjAreaH, msjAreaA, msjAreaS, msjAreaI, msjAreaD, msjAreaE, textCarreraC, textCarreraH, textCarreraA, textCarreraS, textCarreraI,textCarreraD, textCarreraE, areaC, areaH, areaA, areaS, areaI, areaD, areaE } from '../../constants/infoChaside'
 
+import { database } from "../../firebase-config";
+import { doc, setDoc } from "firebase/firestore";
 
-
-const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
+const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
@@ -37,7 +38,13 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     E: 0,
   });
 
-  const handleAnswered = (answer: boolean) => {
+  const handleAnswered = async (answer: boolean) => {
+    const tablaPeople = doc(database,'people', "GENz5NAuQdHCHxX6HRbm", );
+    console.log('tablepeople', tablaPeople)
+    //const data = await setDoc(tablaPeople);
+    //console.log('data', data)
+
+
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
@@ -87,27 +94,30 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     return { propiedad: propiedadMayor};
   }
   
-  const { propiedad: propiedadMayorIntereses } = obtenerPropiedadMayor(sumaAreasIntereses);
-  //estoy haciendo que propiedadMayorIntereses sea igual a lo que retorna la funcion
-  const { msjArea: msjInteres, textCarrera: textCarreraInteres, area: areaInteres } = areas[propiedadMayorIntereses];
   
-  const { propiedad: propiedadMayorHabilidades } = obtenerPropiedadMayor(sumaAreasHabilidades);
-  
-  const { msjArea: msjHabilidad, textCarrera: textCarreraHabilidad, area: areaHabilidad } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
-
   const carrerasPosibles = (
     areaHabilidad: string,
     areaInteres: string,
     area: string
-  ) => {
-    navigation.navigate("CarrerasChasideScreen", {
-      habilidad: areaHabilidad,
-      intereses: areaInteres,
-      area,
-    });
-  };
+    ) => {
+      navigation.navigate("CarrerasChasideScreen", {
+        habilidad: areaHabilidad,
+        intereses: areaInteres,
+        area,
+      });
+    };
+    
+    if (currentQuestion >= surveyData.length) {
+    const { propiedad: propiedadMayorIntereses } = obtenerPropiedadMayor(sumaAreasIntereses);
+    //estoy haciendo que propiedadMayorIntereses sea igual a lo que retorna la funcion
+    const { msjArea: msjInteres, textCarrera: textCarreraInteres, area: areaInteres } = areas[propiedadMayorIntereses];
+    
+    const { propiedad: propiedadMayorHabilidades } = obtenerPropiedadMayor(sumaAreasHabilidades);
+    
+    const { msjArea: msjHabilidad, textCarrera: textCarreraHabilidad, area: areaHabilidad } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
+    //const queryDoc = doc(database, 'people', '2WKULS88t9uGt7pcLe4t');
 
-  if (currentQuestion >= surveyData.length) {
+      //await setDoc(doc(db, "cities", "new-city-id"), data);
     return (
       <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>
