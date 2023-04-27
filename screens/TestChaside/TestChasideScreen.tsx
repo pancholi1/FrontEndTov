@@ -41,8 +41,8 @@ const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const handleAnswered = async (answer: boolean) => {
     const tablaPeople = doc(database,'people', "GENz5NAuQdHCHxX6HRbm", );
     console.log('tablepeople', tablaPeople)
-    const data = await setDoc(tablaPeople,);
-    console.log('data', data)
+    //const data = await setDoc(tablaPeople);
+    //console.log('data', data)
 
 
     const newAnswers = [...answers];
