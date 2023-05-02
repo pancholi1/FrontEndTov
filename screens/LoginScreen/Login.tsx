@@ -15,11 +15,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { firebaseConfig } from "../../firebase-config";
+import { database, firebaseConfig } from "../../firebase-config";
 import { initializeApp } from "firebase/app";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const [email, setEmail] = useState<string>("");
@@ -30,10 +30,15 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const handleSingIn = async () => {
     try {
       console.log(auth, email, password);
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log(user);
+      const user  = await signInWithEmailAndPassword(auth, email, password);
+      const q = query(collection(database, 'people'), where('email', '==', email));
+      const qGet= await getDocs(q);
+      let data
+      qGet.forEach((doc) => {
+        data = doc.data()
+      })
       console.log("account entro");
-      return navigation.navigate("HomeScreen");
+      return navigation.navigate("HomeScreen", {info: data});
     } catch (error) {
       console.log("error al entrar");
       console.log(error);
