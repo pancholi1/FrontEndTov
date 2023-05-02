@@ -7,31 +7,19 @@ import { RootStackScreenProps } from "../../types";
 import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
 
-import { database } from "../../firebase-config";
-import { doc, getDoc, } from 'firebase/firestore'
 
 
-const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
+const HomeScreen = ({ route ,navigation }: RootStackScreenProps<"HomeScreen">) => {
   
+
+  const { info } = route.params
 
   const [data, setData] = useState<any>({
   });
-
  
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const queryDoc = doc(database, 'people', '2WKULS88t9uGt7pcLe4t');
-        const info = await getDoc(queryDoc);
-        const name = info.data();
-        setData(name);
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getData();
-  }, []);
-
+    setData(info)
+  }, [route.params]);
 
   return (
     
@@ -39,7 +27,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
       <View style={styles.container}>
         <View style={styles.header_container}>
           <Text style={styles.title_hello}>Hola</Text>
-          <Text style={styles.name}>{data.name}</Text>
+          <Text style={styles.name}>{data.name}{' ' + data.apellido}</Text>
 
           <LinearGradient
             colors={["#524c77", "#3d3758", "#1e173e"]}
