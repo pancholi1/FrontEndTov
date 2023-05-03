@@ -47,6 +47,26 @@ import { auth } from "../firebase-config";
 
 
 
+interface AuthenticatedUser {
+  user: any;
+  setUser: React.Dispatch<React.SetStateAction<any>>;
+}
+
+const AuthenticatedUserContext = React.createContext<AuthenticatedUser>({
+  user: null,
+  setUser: () => {}
+});
+
+
+const AuthenticatedUserProvider = ({ children }) => {
+  const [user, setUser] = React.useState(null);
+
+  return(
+    <AuthenticatedUserContext.Provider value={{user, setUser}}>
+      {children}
+    </AuthenticatedUserContext.Provider>
+  )
+};
 
 export default function Navigation({
   colorScheme,
@@ -85,26 +105,6 @@ export default function Navigation({
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-interface AuthenticatedUser {
-  user: any;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
-}
-
-const AuthenticatedUserContext = React.createContext<AuthenticatedUser>({
-  user: null,
-  setUser: () => {}
-});
-
-
-const AuthenticatedUserProvider = ({ children }) => {
-  const [user, setUser] = React.useState(null);
-
-  return(
-    <AuthenticatedUserContext.Provider value={{user, setUser}}>
-      {children}
-    </AuthenticatedUserContext.Provider>
-  )
-};
 
 
 function AuthStack(){ //aca ya tengo los botones que van a resgistrarse y para logearse
