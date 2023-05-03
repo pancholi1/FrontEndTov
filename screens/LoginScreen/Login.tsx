@@ -19,7 +19,7 @@ import {
 } from "firebase/auth";
 import { database, firebaseConfig } from "../../firebase-config";
 import { initializeApp } from "firebase/app";
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const [email, setEmail] = useState<string>("");
@@ -38,7 +38,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
         data = doc.data()
       })
       console.log("account entro");
-      return navigation.navigate("HomeScreen", {info: data});
+      return navigation.navigate("HomeScreen");
     } catch (error) {
       console.log("error al entrar");
       console.log(error);

@@ -21,7 +21,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import CalendarInterviewScreen from "../screens/CalendarInterviewScreen/CalendarInterviewScreen";
-import { Avatar } from "react-native-paper";
+import { ActivityIndicator, Avatar } from "react-native-paper";
 import { Image } from "react-native";
 import {
   CarrerasChasideScreen,
@@ -42,6 +42,8 @@ import {
   TestChasideScreen,
   TestMMYMG,
 } from "../screens";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase-config";
 
 
 
@@ -51,20 +53,63 @@ export default function Navigation({
 }: {
   colorScheme: ColorSchemeName;
 }) {
+  const {user, setUser} = React.useContext(AuthenticatedUserContext);
+  const [loading, setLoading] = React.useState(true);
+  console.log('user', user)
+  React.useEffect(() => {
+    const unSuscribe = onAuthStateChanged(auth, 
+      async authenticatedUser => {
+        authenticatedUser ? setUser(authenticatedUser) : setUser(null);
+        setLoading(false);
+      })
+      return () => unSuscribe();
+  }, [user]);
+  if(loading){
+    return(
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator size="large"/>
+      </View>
+    )
+  }
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      <AuthenticatedUserProvider>
+      { user ? <AppStack/> : <AuthStack/>}
+      </AuthenticatedUserProvider>
     </NavigationContainer>
   );
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
-  return (
+interface AuthenticatedUser {
+  user: any;
+  setUser: React.Dispatch<React.SetStateAction<any>>;
+}
+
+const AuthenticatedUserContext = React.createContext<AuthenticatedUser>({
+  user: null,
+  setUser: () => {}
+});
+
+
+const AuthenticatedUserProvider = ({ children }) => {
+  const [user, setUser] = React.useState(null);
+
+  return(
+    <AuthenticatedUserContext.Provider value={{user, setUser}}>
+      {children}
+    </AuthenticatedUserContext.Provider>
+  )
+};
+
+
+function AuthStack(){ //aca ya tengo los botones que van a resgistrarse y para logearse
+  return(
+    //defaultScreenOptions={MainScreen}
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
@@ -74,183 +119,111 @@ function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
+        name="Login"
+        component={LoginScreen}
+        options={{
+          title: "Ingresa",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
+      />
+      <Stack.Screen
+        name="SingUp"
+        component={SingUpScreen}
+        options={{
+          title: "Registrate",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
+        />
+    </Stack.Navigator>
+  )
+}
+
+function AppStack() {
+  return(
+    <Stack.Navigator>
+     <Stack.Screen
+      name="NotFound"
+      component={NotFoundScreen}
+      options={{ title: "Oops!" }}
+    />
+
+    <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          title: "Perfil",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
+      />
+    </Stack.Group>
+    <Stack.Group>
+      <Stack.Screen 
+        name="HomeScreen" 
+        component={HomeScreen}
+        options={{
+          title: "Ingresa",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
+        />
+      <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
+      <Stack.Screen name="Resultados" component={ResultadosScreen} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="BottomTabNavigator"
+        component={BottomTabNavigator}
       />
 
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
-          options={{
-            title: "Perfil",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-      </Stack.Group>
-      <Stack.Group>
-        <Stack.Screen 
-          name="HomeScreen" 
-          component={HomeScreen}
-          options={{
-            title: "Ingresa",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-          />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            title: "Ingresa",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
-        <Stack.Screen name="Resultados" component={ResultadosScreen} />
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="BottomTabNavigator"
-          component={BottomTabNavigator}
-        />
-
-        <Stack.Screen
-          name="DescriptionChasideScreen"
-          component={DescriptionChasideScreen}
-          options={{
-            title: "Test Chaside",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen
-          name="TestChaside"
-          component={TestChasideScreen}
-          options={{
-            title: "Test Chaside",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-
-        <Stack.Screen
-          name="TestMMYMG"
-          component={TestMMYMG}
-          options={{
-            title: "Test MM Y MG",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        /> 
-        <Stack.Screen
-          name="DescriptionMMYMGScreen"
-          component={DescriptionMMYMGScreen}
-          options={{
-            title: "Test MM Y MG",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen
-          name="CarrerasMMYMGScreen"
-          component={CarrerasMMYMGScreen}
-          options={{
-            title: "Carreras MM Y MG",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen
-          name="Calendar"
-          component={CalendarInterviewScreen}
-          options={({ navigation }: RootTabScreenProps<"Calendar">) => ({
-            title: "Calendario de Entrevista",
-            headerLeft: () => (
-              <Pressable
-                onPress={() => navigation.goBack()}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                })}
-              >
-                <TabBarIcon name="arrow-left" color={"white"} />
-              </Pressable>
-            ),
-          })}
-        />
-        <Stack.Screen
-          name="SingUp"
-          component={SingUpScreen}
-          options={{
-            title: "Registrate",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-      </Stack.Group>
       <Stack.Screen
-        name="CarrerasChasideScreen"
-        component={CarrerasChasideScreen}
+        name="DescriptionChasideScreen"
+        component={DescriptionChasideScreen}
         options={{
-          title: "Carreras Chaside",
+          title: "Test Chaside",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
+      />
+      <Stack.Screen
+        name="TestChaside"
+        component={TestChasideScreen}
+        options={{
+          title: "Test Chaside",
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
@@ -263,10 +236,25 @@ function RootNavigator() {
       />
 
       <Stack.Screen
-        name="Test5Grandes"
-        component={Test5Grandes}
+        name="TestMMYMG"
+        component={TestMMYMG}
         options={{
-          title: "Resultados Test 5 Grandes",
+          title: "Test MM Y MG",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#130C34" },
+          headerTitleStyle: {
+            color: "white",
+            fontFamily: "Poppins_ExtraBold",
+            fontSize: 20,
+          },
+          headerTintColor: "#06D6DD",
+        }}
+      /> 
+      <Stack.Screen
+        name="DescriptionMMYMGScreen"
+        component={DescriptionMMYMGScreen}
+        options={{
+          title: "Test MM Y MG",
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
@@ -278,10 +266,10 @@ function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name="Description5GrandesScreen"
-        component={Description5GrandesScreen}
+        name="CarrerasMMYMGScreen"
+        component={CarrerasMMYMGScreen}
         options={{
-          title: "Test 5 Grandes",
+          title: "Carreras MM Y MG",
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
@@ -293,26 +281,402 @@ function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name="Terms"
-        component={Terms}
-        options={({ navigation }: RootTabScreenProps<"Terms">) => ({
-          title: "T&C",
-          headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "#130C34" },
-          headerTitleStyle: {
-            fontFamily: "Poppins_Regular",
-            color: "#06D6DD",
-            fontSize: 20,
-          },
-
+        name="Calendar"
+        component={CalendarInterviewScreen}
+        options={({ navigation }: RootTabScreenProps<"Calendar">) => ({
+          title: "Calendario de Entrevista",
           headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}></Pressable>
+            <Pressable
+              onPress={() => navigation.goBack()}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <TabBarIcon name="arrow-left" color={"white"} />
+            </Pressable>
           ),
         })}
       />
-    </Stack.Navigator>
-  );
-}
+    </Stack.Group>
+    <Stack.Screen
+      name="CarrerasChasideScreen"
+      component={CarrerasChasideScreen}
+      options={{
+        title: "Carreras Chaside",
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#130C34" },
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "Poppins_ExtraBold",
+          fontSize: 20,
+        },
+        headerTintColor: "#06D6DD",
+      }}
+    />
+
+    <Stack.Screen
+      name="Test5Grandes"
+      component={Test5Grandes}
+      options={{
+        title: "Resultados Test 5 Grandes",
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#130C34" },
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "Poppins_ExtraBold",
+          fontSize: 20,
+        },
+        headerTintColor: "#06D6DD",
+      }}
+    />
+    <Stack.Screen
+      name="Description5GrandesScreen"
+      component={Description5GrandesScreen}
+      options={{
+        title: "Test 5 Grandes",
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#130C34" },
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "Poppins_ExtraBold",
+          fontSize: 20,
+        },
+        headerTintColor: "#06D6DD",
+      }}
+    />
+    <Stack.Screen
+      name="Terms"
+      component={Terms}
+      options={({ navigation }: RootTabScreenProps<"Terms">) => ({
+        title: "T&C",
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#130C34" },
+        headerTitleStyle: {
+          fontFamily: "Poppins_Regular",
+          color: "#06D6DD",
+          fontSize: 20,
+        },
+
+        headerLeft: () => (
+          <Pressable onPress={() => navigation.goBack()}></Pressable>
+        ),
+      })}
+    /> 
+</Stack.Navigator>
+  )
+};
+
+
+function RootNavigator() {
+  const {user, setUser} = React.useContext(AuthenticatedUserContext);
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    const unSuscribe = onAuthStateChanged(auth, 
+      async authenticatedUser => {
+        authenticatedUser ? setUser(authenticatedUser) : setUser(null);
+        setLoading(false);
+      })
+      return () => unSuscribe();
+  }, [user]);
+  if(loading){
+    return(
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator size="large"/>
+      </View>
+    )
+  }
+  return(
+    <NavigationContainer>
+      {user ? <AppStack/> : <AuthStack/>}
+    </NavigationContainer>
+  )
+  // return (
+  //     <Stack.Navigator>
+  //       {/* <Stack.Screen
+  //         name="Root"
+  //         component={MainScreen}
+  //         options={{
+  //           headerShown: false,
+  //         }}
+  //       /> */}
+  //         {/* <Stack.Screen
+  //       name="Root"
+  //       component={MainScreen}
+  //       options={{
+  //         headerShown: false,
+  //       }}
+  //     />
+  //     <Stack.Screen
+  //       name="Login"
+  //       component={LoginScreen}
+  //       options={{
+  //         title: "Ingresa",
+  //         headerTitleAlign: "center",
+  //         headerStyle: { backgroundColor: "#130C34" },
+  //         headerTitleStyle: {
+  //           color: "white",
+  //           fontFamily: "Poppins_ExtraBold",
+  //           fontSize: 20,
+  //         },
+  //         headerTintColor: "#06D6DD",
+  //       }}
+  //     />
+  //     <Stack.Screen
+  //       name="SingUp"
+  //       component={SingUpScreen}
+  //       options={{
+  //         title: "Registrate",
+  //         headerTitleAlign: "center",
+  //         headerStyle: { backgroundColor: "#130C34" },
+  //         headerTitleStyle: {
+  //           color: "white",
+  //           fontFamily: "Poppins_ExtraBold",
+  //           fontSize: 20,
+  //         },
+  //         headerTintColor: "#06D6DD",
+  //       }}
+  //       /> */}
+  //        <Stack.Screen
+  //         name="NotFound"
+  //         component={NotFoundScreen}
+  //         options={{ title: "Oops!" }}
+  //       />
+  
+  //       <Stack.Group screenOptions={{ presentation: "modal" }}>
+  //         <Stack.Screen
+  //           name="ProfileScreen"
+  //           component={ProfileScreen}
+  //           options={{
+  //             title: "Perfil",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         />
+  //       </Stack.Group>
+  //       <Stack.Group>
+  //         <Stack.Screen 
+  //           name="HomeScreen" 
+  //           component={HomeScreen}
+  //           options={{
+  //             title: "Ingresa",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //           />
+  //         {/* <Stack.Screen
+  //           name="Login"
+  //           component={LoginScreen}
+  //           options={{
+  //             title: "Ingresa",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         /> */}
+  //         <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
+  //         <Stack.Screen name="Resultados" component={ResultadosScreen} />
+  //         <Stack.Screen
+  //           options={{
+  //             headerShown: false,
+  //           }}
+  //           name="BottomTabNavigator"
+  //           component={BottomTabNavigator}
+  //         />
+  
+  //         <Stack.Screen
+  //           name="DescriptionChasideScreen"
+  //           component={DescriptionChasideScreen}
+  //           options={{
+  //             title: "Test Chaside",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         />
+  //         <Stack.Screen
+  //           name="TestChaside"
+  //           component={TestChasideScreen}
+  //           options={{
+  //             title: "Test Chaside",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         />
+  
+  //         <Stack.Screen
+  //           name="TestMMYMG"
+  //           component={TestMMYMG}
+  //           options={{
+  //             title: "Test MM Y MG",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         /> 
+  //         <Stack.Screen
+  //           name="DescriptionMMYMGScreen"
+  //           component={DescriptionMMYMGScreen}
+  //           options={{
+  //             title: "Test MM Y MG",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         />
+  //         <Stack.Screen
+  //           name="CarrerasMMYMGScreen"
+  //           component={CarrerasMMYMGScreen}
+  //           options={{
+  //             title: "Carreras MM Y MG",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         />
+  //         <Stack.Screen
+  //           name="Calendar"
+  //           component={CalendarInterviewScreen}
+  //           options={({ navigation }: RootTabScreenProps<"Calendar">) => ({
+  //             title: "Calendario de Entrevista",
+  //             headerLeft: () => (
+  //               <Pressable
+  //                 onPress={() => navigation.goBack()}
+  //                 style={({ pressed }) => ({
+  //                   opacity: pressed ? 0.5 : 1,
+  //                 })}
+  //               >
+  //                 <TabBarIcon name="arrow-left" color={"white"} />
+  //               </Pressable>
+  //             ),
+  //           })}
+  //         />
+  //         {/* <Stack.Screen
+  //           name="SingUp"
+  //           component={SingUpScreen}
+  //           options={{
+  //             title: "Registrate",
+  //             headerTitleAlign: "center",
+  //             headerStyle: { backgroundColor: "#130C34" },
+  //             headerTitleStyle: {
+  //               color: "white",
+  //               fontFamily: "Poppins_ExtraBold",
+  //               fontSize: 20,
+  //             },
+  //             headerTintColor: "#06D6DD",
+  //           }}
+  //         /> */}
+  //       </Stack.Group>
+  //       <Stack.Screen
+  //         name="CarrerasChasideScreen"
+  //         component={CarrerasChasideScreen}
+  //         options={{
+  //           title: "Carreras Chaside",
+  //           headerTitleAlign: "center",
+  //           headerStyle: { backgroundColor: "#130C34" },
+  //           headerTitleStyle: {
+  //             color: "white",
+  //             fontFamily: "Poppins_ExtraBold",
+  //             fontSize: 20,
+  //           },
+  //           headerTintColor: "#06D6DD",
+  //         }}
+  //       />
+  
+  //       <Stack.Screen
+  //         name="Test5Grandes"
+  //         component={Test5Grandes}
+  //         options={{
+  //           title: "Resultados Test 5 Grandes",
+  //           headerTitleAlign: "center",
+  //           headerStyle: { backgroundColor: "#130C34" },
+  //           headerTitleStyle: {
+  //             color: "white",
+  //             fontFamily: "Poppins_ExtraBold",
+  //             fontSize: 20,
+  //           },
+  //           headerTintColor: "#06D6DD",
+  //         }}
+  //       />
+  //       <Stack.Screen
+  //         name="Description5GrandesScreen"
+  //         component={Description5GrandesScreen}
+  //         options={{
+  //           title: "Test 5 Grandes",
+  //           headerTitleAlign: "center",
+  //           headerStyle: { backgroundColor: "#130C34" },
+  //           headerTitleStyle: {
+  //             color: "white",
+  //             fontFamily: "Poppins_ExtraBold",
+  //             fontSize: 20,
+  //           },
+  //           headerTintColor: "#06D6DD",
+  //         }}
+  //       />
+  //       <Stack.Screen
+  //         name="Terms"
+  //         component={Terms}
+  //         options={({ navigation }: RootTabScreenProps<"Terms">) => ({
+  //           title: "T&C",
+  //           headerTitleAlign: "center",
+  //           headerStyle: { backgroundColor: "#130C34" },
+  //           headerTitleStyle: {
+  //             fontFamily: "Poppins_Regular",
+  //             color: "#06D6DD",
+  //             fontSize: 20,
+  //           },
+  
+  //           headerLeft: () => (
+  //             <Pressable onPress={() => navigation.goBack()}></Pressable>
+  //           ),
+  //         })}
+  //       /> 
+  //   </Stack.Navigator>
+  // );
+};
+
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
