@@ -13,32 +13,35 @@ import {
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { database, firebaseConfig } from "../../firebase-config";
 import { initializeApp } from "firebase/app";
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { setUser } from "../../navigation/redux/slices/user";
+import { useAppDispatch } from "../../navigation/redux/hooks";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-
+  const dispatch = useAppDispatch();
   const handleSingIn = async () => {
     try {
-      console.log(auth, email, password);
-      const user  = await signInWithEmailAndPassword(auth, email, password);
-      const q = query(collection(database, 'people'), where('email', '==', email));
-      const qGet= await getDocs(q);
-      let data
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      const q = query(
+        collection(database, "people"),
+        where("email", "==", email)
+      );
+      const qGet = await getDocs(q);
+      let data;
       qGet.forEach((doc) => {
-        data = doc.data()
-      })
+        data = doc.data();
+      });
+      console.log(data);
+      dispatch(setUser({ email: data.email }));
       console.log("account entro");
-      return navigation.navigate("HomeScreen", {info: data});
+      return navigation.navigate("HomeScreen");
     } catch (error) {
       console.log("error al entrar");
       console.log(error);

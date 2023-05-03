@@ -6,28 +6,27 @@ import { RootStackScreenProps } from "../../types";
 
 import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
+import { auth } from "../../firebase-config";
 
+const HomeScreen = ({
+  route,
+  navigation,
+}: RootStackScreenProps<"HomeScreen">) => {
+  //const { info } = route.params
 
+  // const [data, setData] = useState<any>({
+  // });
 
-const HomeScreen = ({ route ,navigation }: RootStackScreenProps<"HomeScreen">) => {
-  
-
-  const { info } = route.params
-
-  const [data, setData] = useState<any>({
-  });
- 
-  useEffect(() => {
-    setData(info)
-  }, [route.params]);
+  // useEffect(() => {
+  //   setData(info)
+  // }, [route.params]);
 
   return (
-    
-    <ScrollView style={{width:'100%', backgroundColor: "#130C34",}}>
+    <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
         <View style={styles.header_container}>
           <Text style={styles.title_hello}>Hola</Text>
-          <Text style={styles.name}>{data.name}{' ' + data.apellido}</Text>
+          {/* <Text style={styles.name}>{data.name}{' ' + data.apellido}</Text> */}
 
           <LinearGradient
             colors={["#524c77", "#3d3758", "#1e173e"]}
@@ -74,7 +73,7 @@ const HomeScreen = ({ route ,navigation }: RootStackScreenProps<"HomeScreen">) =
           route={"Description5GrandesScreen"}
         />
       </View>
-    </ScrollView> 
+    </ScrollView>
   );
 };
 

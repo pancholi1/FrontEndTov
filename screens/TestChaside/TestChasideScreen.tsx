@@ -5,18 +5,37 @@ import surveyData from "./questions";
 import { RootStackScreenProps } from "../../types";
 
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  gradients,
-  gradientsButton,
-} from "../../constants/Gradients";
+import { gradients, gradientsButton } from "../../constants/Gradients";
 import { QuestionComponent } from "../../components/Chaside";
 
-import {msjAreaC, msjAreaH, msjAreaA, msjAreaS, msjAreaI, msjAreaD, msjAreaE, textCarreraC, textCarreraH, textCarreraA, textCarreraS, textCarreraI,textCarreraD, textCarreraE, areaC, areaH, areaA, areaS, areaI, areaD, areaE } from '../../constants/infoChaside'
+import {
+  msjAreaC,
+  msjAreaH,
+  msjAreaA,
+  msjAreaS,
+  msjAreaI,
+  msjAreaD,
+  msjAreaE,
+  textCarreraC,
+  textCarreraH,
+  textCarreraA,
+  textCarreraS,
+  textCarreraI,
+  textCarreraD,
+  textCarreraE,
+  areaC,
+  areaH,
+  areaA,
+  areaS,
+  areaI,
+  areaD,
+  areaE,
+} from "../../constants/infoChaside";
 
 import { database } from "../../firebase-config";
 import { doc, setDoc } from "firebase/firestore";
 
-const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
+const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
@@ -39,37 +58,34 @@ const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   });
 
   const handleAnswered = async (answer: boolean) => {
-    const tablaPeople = doc(database,'people', "GENz5NAuQdHCHxX6HRbm", );
-    console.log('tablepeople', tablaPeople)
-    //const data = await setDoc(tablaPeople);
-    //console.log('data', data)
-
+    const tablaPeople = doc(database, "people", "GENz5NAuQdHCHxX6HRbm");
 
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
     setCurrentQuestion(currentQuestion + 1);
-    
+
     if (answer === true) {
       const currentArea = surveyData[currentQuestion].area;
       const currentResult = surveyData[currentQuestion].resultado;
-      
+
       if (currentResult === "intereses") {
-        const updateCount= {...sumaAreasIntereses,
-          [currentArea]: sumaAreasIntereses[currentArea] + 1,}
+        const updateCount = {
+          ...sumaAreasIntereses,
+          [currentArea]: sumaAreasIntereses[currentArea] + 1,
+        };
         setSumaAreasIntereses(updateCount);
       }
       if (currentResult === "habilidades") {
         const updateCount = {
-          ...sumaAreasHabilidades,//aca me estoy haciendo una copia de todo el objeto
+          ...sumaAreasHabilidades, //aca me estoy haciendo una copia de todo el objeto
           [currentArea]: sumaAreasHabilidades[currentArea] + 1,
           //aca estoy entrando a una propiedad(que me llega mediante currentArea), quedaria sumaAreasHabilidades[currentArea] , seria igual a C = sumaAreasHabilidades.C + 1 pq currentArea es C
-        }
+        };
         setSumaAreasHabilidades(updateCount);
       }
     }
   };
-  
 
   const areas = {
     C: { msjArea: msjAreaC, textCarrera: textCarreraC, area: areaC },
@@ -78,46 +94,55 @@ const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     S: { msjArea: msjAreaS, textCarrera: textCarreraS, area: areaS },
     I: { msjArea: msjAreaI, textCarrera: textCarreraI, area: areaI },
     D: { msjArea: msjAreaD, textCarrera: textCarreraD, area: areaD },
-    E: { msjArea: msjAreaE, textCarrera: textCarreraE, area: areaE }
+    E: { msjArea: msjAreaE, textCarrera: textCarreraE, area: areaE },
   };
-  
+
   function obtenerPropiedadMayor(objeto: object) {
     let propiedadMayor = "";
     let mayorNumero = -Infinity;
-    
+
     for (let propiedad in objeto) {
       if (objeto[propiedad] > mayorNumero) {
         mayorNumero = objeto[propiedad];
         propiedadMayor = propiedad;
       }
     }
-    return { propiedad: propiedadMayor};
+    return { propiedad: propiedadMayor };
   }
-  
-  
+
   const carrerasPosibles = (
     areaHabilidad: string,
     areaInteres: string,
     area: string
-    ) => {
-      navigation.navigate("CarrerasChasideScreen", {
-        habilidad: areaHabilidad,
-        intereses: areaInteres,
-        area,
-      });
-    };
-    
-    if (currentQuestion >= surveyData.length) {
-    const { propiedad: propiedadMayorIntereses } = obtenerPropiedadMayor(sumaAreasIntereses);
+  ) => {
+    navigation.navigate("CarrerasChasideScreen", {
+      habilidad: areaHabilidad,
+      intereses: areaInteres,
+      area,
+    });
+  };
+
+  if (currentQuestion >= surveyData.length) {
+    const { propiedad: propiedadMayorIntereses } =
+      obtenerPropiedadMayor(sumaAreasIntereses);
     //estoy haciendo que propiedadMayorIntereses sea igual a lo que retorna la funcion
-    const { msjArea: msjInteres, textCarrera: textCarreraInteres, area: areaInteres } = areas[propiedadMayorIntereses];
-    
-    const { propiedad: propiedadMayorHabilidades } = obtenerPropiedadMayor(sumaAreasHabilidades);
-    
-    const { msjArea: msjHabilidad, textCarrera: textCarreraHabilidad, area: areaHabilidad } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
+    const {
+      msjArea: msjInteres,
+      textCarrera: textCarreraInteres,
+      area: areaInteres,
+    } = areas[propiedadMayorIntereses];
+
+    const { propiedad: propiedadMayorHabilidades } =
+      obtenerPropiedadMayor(sumaAreasHabilidades);
+
+    const {
+      msjArea: msjHabilidad,
+      textCarrera: textCarreraHabilidad,
+      area: areaHabilidad,
+    } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
     //const queryDoc = doc(database, 'people', '2WKULS88t9uGt7pcLe4t');
 
-      //await setDoc(doc(db, "cities", "new-city-id"), data);
+    //await setDoc(doc(db, "cities", "new-city-id"), data);
     return (
       <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>
@@ -140,11 +165,7 @@ const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
               <Pressable
                 style={styles.button}
                 onPress={() =>
-                  carrerasPosibles(
-                    areaInteres,
-                    areaHabilidad,
-                    "interes"
-                  )
+                  carrerasPosibles(areaInteres, areaHabilidad, "interes")
                 }
               >
                 <LinearGradient
@@ -182,12 +203,9 @@ const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
               <Pressable
                 style={styles.button}
                 onPress={() =>
-                  carrerasPosibles(
-                    areaInteres,
-                    areaHabilidad,
-                    "habilidad"
-                  )}
-                  >
+                  carrerasPosibles(areaInteres, areaHabilidad, "habilidad")
+                }
+              >
                 <LinearGradient
                   colors={["#0995a6", "#197189", "#112044"]}
                   style={{
@@ -199,8 +217,8 @@ const TestChaside =  ({ navigation }: RootStackScreenProps<"TestChaside">) => {
                     margin: "4%",
                   }}
                 >
-                    <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
-                  </LinearGradient>
+                  <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+                </LinearGradient>
               </Pressable>
             </View>
           </LinearGradient>

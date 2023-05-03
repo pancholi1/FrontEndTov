@@ -11,6 +11,8 @@ import TermsAndConditions from "../../components/TermsAndConditions";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 
+
+
 const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
   const terminosNavegacion = () => navigation.navigate("Terms");
   return (

@@ -42,20 +42,15 @@ import {
   TestChasideScreen,
   TestMMYMG,
 } from "../screens";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { onAuthStateChanged } from "firebase/auth";
+import { User } from "./redux/store/store";
+import { auth } from "../firebase-config";
+import { setUser } from "./redux/slices/user";
 
-
-
-
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName;
-}) {
+export default function Navigation() {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -64,252 +59,282 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const [loading, setLoading] = React.useState(true);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(User);
+
+  React.useEffect(() => {
+    // auth.signOut();
+    console.log("!");
+    const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
+      authenticatedUser
+        ? dispatch(setUser({ email: authenticatedUser.email }))
+        : dispatch(setUser(null));
+      setLoading(false);
+    });
+
+    return unSuscribe();
+  }, []);
+  console.log(user.user);
+
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Root"
-        component={MainScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
-
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
-          options={{
-            title: "Perfil",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-      </Stack.Group>
-      <Stack.Group>
-        <Stack.Screen 
-          name="HomeScreen" 
-          component={HomeScreen}
-          options={{
-            title: "Ingresa",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
+      {user.user && (
+        <>
+          <Stack.Screen
+            name="NotFound"
+            component={NotFoundScreen}
+            options={{ title: "Oops!" }}
           />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            title: "Ingresa",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen name="ResultTestScreen" component={ResultTestScreen} />
-        <Stack.Screen name="Resultados" component={ResultadosScreen} />
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="BottomTabNavigator"
-          component={BottomTabNavigator}
-        />
+          <Stack.Group screenOptions={{ presentation: "modal" }}>
+            <Stack.Screen
+              name="ProfileScreen"
+              component={ProfileScreen}
+              options={{
+                title: "Perfil",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
+            />
+          </Stack.Group>
+          <Stack.Group>
+            <Stack.Screen
+              name="HomeScreen"
+              component={HomeScreen}
+              options={{
+                title: "Ingresa",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
+            />
 
-        <Stack.Screen
-          name="DescriptionChasideScreen"
-          component={DescriptionChasideScreen}
-          options={{
-            title: "Test Chaside",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen
-          name="TestChaside"
-          component={TestChasideScreen}
-          options={{
-            title: "Test Chaside",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
+            <Stack.Screen
+              name="ResultTestScreen"
+              component={ResultTestScreen}
+            />
+            <Stack.Screen name="Resultados" component={ResultadosScreen} />
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="BottomTabNavigator"
+              component={BottomTabNavigator}
+            />
 
-        <Stack.Screen
-          name="TestMMYMG"
-          component={TestMMYMG}
-          options={{
-            title: "Test MM Y MG",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        /> 
-        <Stack.Screen
-          name="DescriptionMMYMGScreen"
-          component={DescriptionMMYMGScreen}
-          options={{
-            title: "Test MM Y MG",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen
-          name="CarrerasMMYMGScreen"
-          component={CarrerasMMYMGScreen}
-          options={{
-            title: "Carreras MM Y MG",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-        <Stack.Screen
-          name="Calendar"
-          component={CalendarInterviewScreen}
-          options={({ navigation }: RootTabScreenProps<"Calendar">) => ({
-            title: "Calendario de Entrevista",
-            headerLeft: () => (
-              <Pressable
-                onPress={() => navigation.goBack()}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                })}
-              >
-                <TabBarIcon name="arrow-left" color={"white"} />
-              </Pressable>
-            ),
-          })}
-        />
-        <Stack.Screen
-          name="SingUp"
-          component={SingUpScreen}
-          options={{
-            title: "Registrate",
-            headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#130C34" },
-            headerTitleStyle: {
-              color: "white",
-              fontFamily: "Poppins_ExtraBold",
-              fontSize: 20,
-            },
-            headerTintColor: "#06D6DD",
-          }}
-        />
-      </Stack.Group>
-      <Stack.Screen
-        name="CarrerasChasideScreen"
-        component={CarrerasChasideScreen}
-        options={{
-          title: "Carreras Chaside",
-          headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "#130C34" },
-          headerTitleStyle: {
-            color: "white",
-            fontFamily: "Poppins_ExtraBold",
-            fontSize: 20,
-          },
-          headerTintColor: "#06D6DD",
-        }}
-      />
+            <Stack.Screen
+              name="DescriptionChasideScreen"
+              component={DescriptionChasideScreen}
+              options={{
+                title: "Test Chaside",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
+            />
+            <Stack.Screen
+              name="TestChaside"
+              component={TestChasideScreen}
+              options={{
+                title: "Test Chaside",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
+            />
 
-      <Stack.Screen
-        name="Test5Grandes"
-        component={Test5Grandes}
-        options={{
-          title: "Resultados Test 5 Grandes",
-          headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "#130C34" },
-          headerTitleStyle: {
-            color: "white",
-            fontFamily: "Poppins_ExtraBold",
-            fontSize: 20,
-          },
-          headerTintColor: "#06D6DD",
-        }}
-      />
-      <Stack.Screen
-        name="Description5GrandesScreen"
-        component={Description5GrandesScreen}
-        options={{
-          title: "Test 5 Grandes",
-          headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "#130C34" },
-          headerTitleStyle: {
-            color: "white",
-            fontFamily: "Poppins_ExtraBold",
-            fontSize: 20,
-          },
-          headerTintColor: "#06D6DD",
-        }}
-      />
-      <Stack.Screen
-        name="Terms"
-        component={Terms}
-        options={({ navigation }: RootTabScreenProps<"Terms">) => ({
-          title: "T&C",
-          headerTitleAlign: "center",
-          headerStyle: { backgroundColor: "#130C34" },
-          headerTitleStyle: {
-            fontFamily: "Poppins_Regular",
-            color: "#06D6DD",
-            fontSize: 20,
-          },
+            <Stack.Screen
+              name="TestMMYMG"
+              component={TestMMYMG}
+              options={{
+                title: "Test MM Y MG",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
+            />
+            <Stack.Screen
+              name="DescriptionMMYMGScreen"
+              component={DescriptionMMYMGScreen}
+              options={{
+                title: "Test MM Y MG",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
+            />
+            <Stack.Screen
+              name="CarrerasMMYMGScreen"
+              component={CarrerasMMYMGScreen}
+              options={{
+                title: "Carreras MM Y MG",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
+            />
+            <Stack.Screen
+              name="Calendar"
+              component={CalendarInterviewScreen}
+              options={({ navigation }: RootTabScreenProps<"Calendar">) => ({
+                title: "Calendario de Entrevista",
+                headerLeft: () => (
+                  <Pressable
+                    onPress={() => navigation.goBack()}
+                    style={({ pressed }) => ({
+                      opacity: pressed ? 0.5 : 1,
+                    })}
+                  >
+                    <TabBarIcon name="arrow-left" color={"white"} />
+                  </Pressable>
+                ),
+              })}
+            />
+          </Stack.Group>
+          <Stack.Screen
+            name="CarrerasChasideScreen"
+            component={CarrerasChasideScreen}
+            options={{
+              title: "Carreras Chaside",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+          />
 
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}></Pressable>
-          ),
-        })}
-      />
+          <Stack.Screen
+            name="Test5Grandes"
+            component={Test5Grandes}
+            options={{
+              title: "Resultados Test 5 Grandes",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+          />
+          <Stack.Screen
+            name="Description5GrandesScreen"
+            component={Description5GrandesScreen}
+            options={{
+              title: "Test 5 Grandes",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+          />
+          <Stack.Screen
+            name="Terms"
+            component={Terms}
+            options={({ navigation }: RootTabScreenProps<"Terms">) => ({
+              title: "T&C",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                fontFamily: "Poppins_Regular",
+                color: "#06D6DD",
+                fontSize: 20,
+              },
+
+              headerLeft: () => (
+                <Pressable onPress={() => navigation.goBack()}></Pressable>
+              ),
+            })}
+          />
+        </>
+      )}
+      {!user.user && (
+        <>
+          <Stack.Screen
+            name="Root"
+            component={MainScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SingUp"
+            component={SingUpScreen}
+            options={{
+              title: "Registrate",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+          />
+
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              title: "Ingresa",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+          />
+        </>
+      )}
     </Stack.Navigator>
   );
 }
@@ -338,25 +363,25 @@ function BottomTabNavigator() {
           tabBarLabel: "Inicio",
           headerTitle: "Inicio",
           headerTitleAlign: "center",
-          
+
           headerTitleStyle: {
             color: "white",
             fontFamily: "Poppins_ExtraBold",
             fontSize: 20,
           },
           headerTintColor: "#06D6DD",
-          
+
           // headerLeft: () => (
           //   <Pressable
           //     onPress={() => navigation.goBack()}
           //     style={styles.button}
           //   >
-              
+
           //     <TabBarIcon  name="chevron-left" color={'#06D6DD'} />
           //     <Text style ={styles.text_button}>Back</Text>
           //   </Pressable>
           // ),
-          
+
           tabBarIcon: () => (
             <Image source={require("../assets/images/home.png")} />
           ),
@@ -456,7 +481,14 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <FontAwesome size={23} style={{ marginBottom: -3, marginLeft:6 }} className="fa-thin" {...props} />;
+  return (
+    <FontAwesome
+      size={23}
+      style={{ marginBottom: -3, marginLeft: 6 }}
+      className="fa-thin"
+      {...props}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
@@ -469,11 +501,11 @@ const styles = StyleSheet.create({
     marginRight: 1,
   },
   button: {
-    flexDirection:'row'
+    flexDirection: "row",
   },
   text_button: {
     fontSize: 17,
-    color:'#06D6DD',
-    marginLeft:5
+    color: "#06D6DD",
+    marginLeft: 5,
   },
 });
