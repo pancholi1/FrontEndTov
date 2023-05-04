@@ -26,21 +26,23 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const dispatch = useAppDispatch();
+
   const handleSingIn = async () => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      // const q = query(
-      //   collection(database, "people"),
-      //   where("email", "==", email)
-      // );
-      // const qGet = await getDocs(q);
-      // let data;
-      // qGet.forEach((doc) => {
-      //   data = doc.data();
-      // });
-      // console.log(data);
-      dispatch(setUser({ email: email }));
-      console.log("account entro");
+      const q = query(
+        collection(database, "people"),
+        where("email", "==", email)
+      );
+      const qGet = await getDocs(q);
+
+      qGet.forEach((doc) => {
+        let data = doc.data();
+        dispatch(setUser({ data }));
+        console.log("-----------------------------------------------");
+        console.log(data);
+        console.log("-----------------------------------------------");
+      });
       return navigation.navigate("HomeScreen");
     } catch (error) {
       console.log("error al entrar");
