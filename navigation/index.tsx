@@ -74,7 +74,7 @@ function RootNavigator() {
 
     return unSuscribe();
   }, []);
-  console.log(user.user);
+  //console.log(user.user);
 
   return (
     <Stack.Navigator>
