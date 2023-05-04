@@ -29,17 +29,17 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const handleSingIn = async () => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      const q = query(
-        collection(database, "people"),
-        where("email", "==", email)
-      );
-      const qGet = await getDocs(q);
-      let data;
-      qGet.forEach((doc) => {
-        data = doc.data();
-      });
-      console.log(data);
-      dispatch(setUser({ email: data.email }));
+      // const q = query(
+      //   collection(database, "people"),
+      //   where("email", "==", email)
+      // );
+      // const qGet = await getDocs(q);
+      // let data;
+      // qGet.forEach((doc) => {
+      //   data = doc.data();
+      // });
+      // console.log(data);
+      dispatch(setUser({ email: email }));
       console.log("account entro");
       return navigation.navigate("HomeScreen");
     } catch (error) {
