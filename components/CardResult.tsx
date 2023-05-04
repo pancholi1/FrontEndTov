@@ -2,6 +2,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { gradients, greenChaside } from "../constants/Gradients";
+import { auth } from "../firebase-config";
+import { useAppDispatch } from "../navigation/redux/hooks";
+import { setUser } from "../navigation/redux/slices/user";
 
 export default function CardResult({
   image,
@@ -53,6 +56,7 @@ export default function CardResult({
 }
 
 const CardContainer = ({ route, children, navigation, selected }) => {
+  const dispatch = useAppDispatch();
   return route && navigation ? (
     <Pressable
       style={
@@ -60,7 +64,11 @@ const CardContainer = ({ route, children, navigation, selected }) => {
           ? styles.card_result_container_selected
           : styles.card_result_container
       }
-      onPress={() => navigation.navigate(route)}
+      onPress={() => {
+        auth.signOut();
+        dispatch(setUser(null));
+      }}
+      // onPress={() => navigation.navigate(route)}
     >
       {children}
     </Pressable>
