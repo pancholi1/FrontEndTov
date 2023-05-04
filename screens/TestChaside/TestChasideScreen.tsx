@@ -32,10 +32,20 @@ import {
   areaE,
 } from "../../constants/infoChaside";
 
-import { database } from "../../firebase-config";
-import { doc, setDoc } from "firebase/firestore";
+
+
+import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
+import { User } from "../../navigation/redux/store/store";
+import { collection, doc, getDocs, query, setDoc, updateDoc, where,  } from "firebase/firestore";
+import { database, auth, app } from "../../firebase-config";
+
 
 const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
+
+  const user = useAppSelector(User);
+  const dispatch = useAppDispatch();
+  
+  
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
@@ -58,7 +68,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   });
 
   const handleAnswered = async (answer: boolean) => {
-    const tablaPeople = doc(database, "people", "GENz5NAuQdHCHxX6HRbm");
 
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
@@ -140,9 +149,32 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
       textCarrera: textCarreraHabilidad,
       area: areaHabilidad,
     } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
-    //const queryDoc = doc(database, 'people', '2WKULS88t9uGt7pcLe4t');
 
-    //await setDoc(doc(db, "cities", "new-city-id"), data);
+
+    const info = async () => {
+      if(user){
+        console.log('entre user')
+        const q = query(
+          collection(database, "people"),
+          where("email", "==", user.user.email)
+          );
+          const qGet = await getDocs(q);
+
+          if (!qGet.empty) {
+            const docs = qGet.docs[0];
+            const docId = docs.id;
+            const docData = docs.data();
+
+            await updateDoc(doc(database, 'people', docId),{
+              areaInteres: areaInteres,
+              areaHabilidad: areaHabilidad
+            });
+          }
+    }
+  };
+
+    info();
+
     return (
       <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
         <View style={styles.container}>

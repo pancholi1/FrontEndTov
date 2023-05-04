@@ -64,7 +64,6 @@ function RootNavigator() {
   const user = useAppSelector(User);
 
   React.useEffect(() => {
-    // auth.signOut();
     console.log("!");
     const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
       authenticatedUser
