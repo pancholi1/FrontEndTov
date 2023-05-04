@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import surveyData from "./questions";
@@ -44,8 +44,27 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
 
   const user = useAppSelector(User);
   const dispatch = useAppDispatch();
-  
-  
+
+  let [name, setName] = useState<any>({});
+
+  useEffect(() => {
+    const info = async () => {
+
+      const q = query(
+            collection(database, "people"),
+            where("email", "==", user.user.email)
+          );
+          const qGet = await getDocs(q);
+          qGet.forEach((doc) => {
+            setName(doc.data())
+          });
+    }
+    info();
+      },[user])
+
+  //console.log('name', name);
+
+
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
@@ -130,6 +149,8 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
       area,
     });
   };
+  
+  
 
   if (currentQuestion >= surveyData.length) {
     const { propiedad: propiedadMayorIntereses } =
@@ -163,11 +184,11 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
           if (!qGet.empty) {
             const docs = qGet.docs[0];
             const docId = docs.id;
-            const docData = docs.data();
+            //const docData = docs.data();
 
             await updateDoc(doc(database, 'people', docId),{
-              areaInteres: areaInteres,
-              areaHabilidad: areaHabilidad
+              areaInteres: sumaAreasIntereses,
+              areaHabilidad: sumaAreasHabilidades
             });
           }
     }
