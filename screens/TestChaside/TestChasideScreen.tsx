@@ -153,23 +153,13 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   
 
   if (currentQuestion >= surveyData.length) {
-    const { propiedad: propiedadMayorIntereses } =
-      obtenerPropiedadMayor(sumaAreasIntereses);
+    const { propiedad: propiedadMayorIntereses } = obtenerPropiedadMayor(sumaAreasIntereses);
     //estoy haciendo que propiedadMayorIntereses sea igual a lo que retorna la funcion
-    const {
-      msjArea: msjInteres,
-      textCarrera: textCarreraInteres,
-      area: areaInteres,
-    } = areas[propiedadMayorIntereses];
+    const {msjArea: msjInteres, textCarrera: textCarreraInteres, area: areaInteres } = areas[propiedadMayorIntereses];
 
-    const { propiedad: propiedadMayorHabilidades } =
-      obtenerPropiedadMayor(sumaAreasHabilidades);
+    const { propiedad: propiedadMayorHabilidades } = obtenerPropiedadMayor(sumaAreasHabilidades);
 
-    const {
-      msjArea: msjHabilidad,
-      textCarrera: textCarreraHabilidad,
-      area: areaHabilidad,
-    } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
+    const { msjArea: msjHabilidad, textCarrera: textCarreraHabilidad, area: areaHabilidad } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
 
 
     const info = async () => {
@@ -187,8 +177,8 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
             //const docData = docs.data();
 
             await updateDoc(doc(database, 'people', docId),{
-              areaInteres: sumaAreasIntereses,
-              areaHabilidad: sumaAreasHabilidades
+              areaInteres: propiedadMayorIntereses,
+              areaHabilidad: propiedadMayorHabilidades
             });
           }
     }
