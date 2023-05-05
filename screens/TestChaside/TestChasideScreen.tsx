@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import surveyData from "./questions";
 import { RootStackScreenProps } from "../../types";
@@ -32,38 +39,45 @@ import {
   areaE,
 } from "../../constants/infoChaside";
 
-
-
 import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
-import { collection, doc, getDocs, query, setDoc, updateDoc, where,  } from "firebase/firestore";
-import { database, auth, app } from "../../firebase-config";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { database } from "../../firebase-config";
+import { setUser } from "../../navigation/redux/slices/user";
 
+interface PropsAreas {
+  msjArea: string;
+  textCarrera: string;
+  area: string;
+}
 
 const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
-
   const user = useAppSelector(User);
   const dispatch = useAppDispatch();
 
-  let [name, setName] = useState<any>({});
+  const [name, setName] = useState<any>({});
+  const [habilidad, setHabilidad] = useState<PropsAreas>();
+  const [interes, setInteres] = useState<PropsAreas>();
 
   useEffect(() => {
-    const info = async () => {
-
-      const q = query(
-            collection(database, "people"),
-            where("email", "==", user.user.email)
-          );
-          const qGet = await getDocs(q);
-          qGet.forEach((doc) => {
-            setName(doc.data())
-          });
+    console.log(user.user);
+    if (user?.user?.data?.areaHabilidad) {
+      const AreaHabilidad = areas[user.user.data.areaHabilidad];
+      setHabilidad(AreaHabilidad);
     }
-    info();
-      },[user])
-
-  //console.log('name', name);
-
+    if (user?.user?.data?.areaInteres) {
+      const AreaHabilidad = areas[user.user.data.areaInteres];
+      setInteres(AreaHabilidad);
+    }
+  }, [user.user]);
 
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -87,7 +101,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   });
 
   const handleAnswered = async (answer: boolean) => {
-
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
@@ -128,7 +141,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   function obtenerPropiedadMayor(objeto: object) {
     let propiedadMayor = "";
     let mayorNumero = -Infinity;
-
     for (let propiedad in objeto) {
       if (objeto[propiedad] > mayorNumero) {
         mayorNumero = objeto[propiedad];
@@ -149,128 +161,128 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
       area,
     });
   };
-  
-  
 
   if (currentQuestion >= surveyData.length) {
-    const { propiedad: propiedadMayorIntereses } = obtenerPropiedadMayor(sumaAreasIntereses);
-    //estoy haciendo que propiedadMayorIntereses sea igual a lo que retorna la funcion
-    const {msjArea: msjInteres, textCarrera: textCarreraInteres, area: areaInteres } = areas[propiedadMayorIntereses];
-
-    const { propiedad: propiedadMayorHabilidades } = obtenerPropiedadMayor(sumaAreasHabilidades);
-
-    const { msjArea: msjHabilidad, textCarrera: textCarreraHabilidad, area: areaHabilidad } = areas[propiedadMayorHabilidades]; // con esto estoy destructurando lo que me llegue en areas[propiedadMayorHabilidades] y  estoy asginando a msjHabilidad, textCarreraHabilidad y areaHabilidad lo que tengo en esas variables
-
+    const { propiedad: propiedadMayorIntereses } =
+      obtenerPropiedadMayor(sumaAreasIntereses);
+    const { propiedad: propiedadMayorHabilidades } =
+      obtenerPropiedadMayor(sumaAreasHabilidades);
 
     const info = async () => {
-      if(user){
-        console.log('entre user')
+      Alert.alert('error')
+      if (user) {
+        console.log('buscando error', user.user.email)
         const q = query(
           collection(database, "people"),
           where("email", "==", user.user.email)
-          );
-          const qGet = await getDocs(q);
+        );
 
-          if (!qGet.empty) {
-            const docs = qGet.docs[0];
-            const docId = docs.id;
-            //const docData = docs.data();
+        const qGet = await getDocs(q);
+        if (!qGet.empty) {
+          const docs = qGet.docs[0];
+          const docId = docs.id;
+          await updateDoc(doc(database, "people", docId), {
+            areaInteres: propiedadMayorIntereses,
+            areaHabilidad: propiedadMayorHabilidades,
+          });
 
-            await updateDoc(doc(database, 'people', docId),{
+          dispatch(
+            setUser({
+              ...user,
               areaInteres: propiedadMayorIntereses,
-              areaHabilidad: propiedadMayorHabilidades
-            });
-          }
-    }
-  };
-
+              areaHabilidad: propiedadMayorHabilidades,
+            })
+          );
+          setHabilidad(areas[propiedadMayorHabilidades]);
+          setInteres(areas[propiedadMayorIntereses]);
+        }
+      }
+    };
     info();
-
-    return (
-      <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
-        <View style={styles.container}>
-          <LinearGradient
-            colors={gradients.inputs}
-            start={{ x: 1, y: 1 }}
-            end={{ x: 0, y: 0 }}
-            style={{
-              marginTop: "8%",
-              borderRadius: 15,
-              width: "90%",
-              alignItems: "center",
-            }}
-          >
-            <View style={styles.container_test}>
-              <Text style={styles.title}>INTERESES</Text>
-              <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
-              <Text style={styles.thankYou}>({msjInteres})</Text>
-              <Text style={styles.thankYou2}>{textCarreraInteres}</Text>
-              <Pressable
-                style={styles.button}
-                onPress={() =>
-                  carrerasPosibles(areaInteres, areaHabilidad, "interes")
-                }
-              >
-                <LinearGradient
-                  colors={["#0995a6", "#197189", "#112044"]}
-                  style={{
-                    borderRadius: 15,
-                    width: "100%",
-                    height: 45,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    margin: "4%",
-                  }}
-                >
-                  <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
-                </LinearGradient>
-              </Pressable>
-            </View>
-          </LinearGradient>
-          <LinearGradient
-            colors={gradients.inputs}
-            start={{ x: 1, y: 1 }}
-            end={{ x: 0, y: 0 }}
-            style={{
-              marginTop: "8%",
-              borderRadius: 15,
-              width: "90%",
-              alignItems: "center",
-            }}
-          >
-            <View style={styles.container_test}>
-              <Text style={styles.title}>HABILIDADES</Text>
-              <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
-              <Text style={styles.thankYou}>({msjHabilidad})</Text>
-              <Text style={styles.thankYou2}>{textCarreraHabilidad}</Text>
-              <Pressable
-                style={styles.button}
-                onPress={() =>
-                  carrerasPosibles(areaInteres, areaHabilidad, "habilidad")
-                }
-              >
-                <LinearGradient
-                  colors={["#0995a6", "#197189", "#112044"]}
-                  style={{
-                    borderRadius: 15,
-                    width: "100%",
-                    height: 45,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    margin: "4%",
-                  }}
-                >
-                  <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
-                </LinearGradient>
-              </Pressable>
-            </View>
-          </LinearGradient>
-        </View>
-      </ScrollView>
-    );
   }
 
-  return (
+  return user?.user?.data?.areaHabilidad && habilidad && interes ? (
+    <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
+      <View style={styles.container}>
+        <LinearGradient
+          colors={gradients.inputs}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          style={{
+            marginTop: "8%",
+            borderRadius: 15,
+            width: "90%",
+            alignItems: "center",
+          }}
+        >
+          <View style={styles.container_test}>
+            <Text style={styles.title}>INTERESES</Text>
+            <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
+            <Text style={styles.thankYou}>({interes?.msjArea})</Text>
+            <Text style={styles.thankYou2}>{interes?.textCarrera}</Text>
+            <Pressable
+              style={styles.button}
+              onPress={() =>
+                carrerasPosibles(interes?.area, habilidad.area, "interes")
+              }
+            >
+              <LinearGradient
+                colors={["#0995a6", "#197189", "#112044"]}
+                style={{
+                  borderRadius: 15,
+                  width: "100%",
+                  height: 45,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "4%",
+                }}
+              >
+                <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+              </LinearGradient>
+            </Pressable>
+          </View>
+        </LinearGradient>
+        <LinearGradient
+          colors={gradients.inputs}
+          start={{ x: 1, y: 1 }}
+          end={{ x: 0, y: 0 }}
+          style={{
+            marginTop: "8%",
+            borderRadius: 15,
+            width: "90%",
+            alignItems: "center",
+          }}
+        >
+          <View style={styles.container_test}>
+            <Text style={styles.title}>HABILIDADESHIJO de puta</Text>
+            <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
+            <Text style={styles.thankYou}>({habilidad.msjArea})</Text>
+            <Text style={styles.thankYou2}>{habilidad.textCarrera}</Text>
+            <Pressable
+              style={styles.button}
+              onPress={() =>
+                carrerasPosibles("asdas", habilidad.area, "habilidad")
+              }
+            >
+              <LinearGradient
+                colors={["#0995a6", "#197189", "#112044"]}
+                style={{
+                  borderRadius: 15,
+                  width: "100%",
+                  height: 45,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "4%",
+                }}
+              >
+                <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+              </LinearGradient>
+            </Pressable>
+          </View>
+        </LinearGradient>
+      </View>
+    </ScrollView>
+  ) : (
     <View style={styles.container}>
       <QuestionComponent
         id={surveyData[currentQuestion].id}

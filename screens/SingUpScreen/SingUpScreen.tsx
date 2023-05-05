@@ -35,7 +35,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     password: "",
     school: "",
     date: "",
-    createdAt: new Date(),
+    createdAt: new Date().toISOString(),
   });
 
   const handleCreateAccount = async () => {
@@ -60,6 +60,11 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     }
   };
 
+  // const setUserReducer = (state: UserState, action: { type: 'user/setUser', payload: User }) => {
+  //   const { payload: user } = action;
+  //   const serializedCreatedAt = user.data.createdAt.toISOString();
+  //   return { ...state, user: { ...user, data: { ...user.data, createdAt: serializedCreatedAt } } };
+  // }
 
   const onDateChange = (value) => {
     setInput({ ...input, date: value });

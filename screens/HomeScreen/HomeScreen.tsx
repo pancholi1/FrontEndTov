@@ -25,10 +25,9 @@ const HomeScreen = ({
 
   useEffect(() => {
     const info = async () => {
-
       const q = query(
             collection(database, "people"),
-            where("email", "==", user.user.email)
+            where("email", "==", user.user.data.email)
           );
           const qGet = await getDocs(q);
           qGet.forEach((doc) => {
