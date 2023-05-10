@@ -63,12 +63,10 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const user = useAppSelector(User);
   const dispatch = useAppDispatch();
 
-  const [name, setName] = useState<any>({});
   const [habilidad, setHabilidad] = useState<PropsAreas>();
   const [interes, setInteres] = useState<PropsAreas>();
 
   useEffect(() => {
-    console.log(user.user);
     if (user?.user?.data?.areaHabilidad) {
       const AreaHabilidad = areas[user.user.data.areaHabilidad];
       setHabilidad(AreaHabilidad);
@@ -163,29 +161,29 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   };
 
   if (currentQuestion >= surveyData.length) {
+
     const { propiedad: propiedadMayorIntereses } =
       obtenerPropiedadMayor(sumaAreasIntereses);
+
     const { propiedad: propiedadMayorHabilidades } =
       obtenerPropiedadMayor(sumaAreasHabilidades);
 
     const info = async () => {
       Alert.alert('error')
       if (user) {
-        console.log('buscando error', user.user.email)
         const q = query(
           collection(database, "people"),
-          where("email", "==", user.user.email)
-        );
-
-        const qGet = await getDocs(q);
-        if (!qGet.empty) {
-          const docs = qGet.docs[0];
+          where("email", "==", user.user.data.email)
+          );
+        const qGet = getDocs(q);
+        const docsSnapshot = await qGet;
+        if (!docsSnapshot.empty) {
+          const docs = docsSnapshot.docs[0];
           const docId = docs.id;
           await updateDoc(doc(database, "people", docId), {
             areaInteres: propiedadMayorIntereses,
             areaHabilidad: propiedadMayorHabilidades,
-          });
-
+          }) 
           dispatch(
             setUser({
               ...user,
@@ -201,7 +199,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     info();
   }
 
-  return user?.user?.data?.areaHabilidad && habilidad && interes ? (
+  return user.user.data.areaHabilidad && user.user.data.areaInteres && habilidad && interes ? (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
         <LinearGradient
@@ -254,7 +252,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
           }}
         >
           <View style={styles.container_test}>
-            <Text style={styles.title}>HABILIDADESHIJO de puta</Text>
+            <Text style={styles.title}>HABILIDADES</Text>
             <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
             <Text style={styles.thankYou}>({habilidad.msjArea})</Text>
             <Text style={styles.thankYou2}>{habilidad.textCarrera}</Text>
