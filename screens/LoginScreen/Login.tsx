@@ -75,6 +75,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                 style={styles.input}
                 onChangeText={setEmail}
                 placeholder="Emails"
+                keyboardType="email-address"
                 placeholderTextColor="#B39AE7"
                 scrollEnabled={true}
               />

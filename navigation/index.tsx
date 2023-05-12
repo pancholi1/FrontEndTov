@@ -62,12 +62,17 @@ function RootNavigator() {
   const [loading, setLoading] = React.useState(true);
   const dispatch = useAppDispatch();
   const user = useAppSelector(User);
+  console.log('user del index', user);
 
+  const u = user;
+  
+  console.log('uuuu', u)
   React.useEffect(() => {
-    console.log("!");
+    console.log('fuera del unsuscribe', user);
     const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
+      console.log('user del index dentro del effect', user);
       authenticatedUser
-        ? dispatch(setUser({ email: authenticatedUser.email }))
+        ? dispatch(setUser(user))
         : dispatch(setUser(null));
       setLoading(false);
     });

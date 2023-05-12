@@ -24,12 +24,13 @@ const HomeScreen = ({
   let [name, setName] = useState<any>({});
 
   useEffect(() => {
+    console.log('user', user);
+    console.log('user2', user.user.email);
+    console.log('user3', user.user.data);
     const info = async () => {
-
       const q = query(
             collection(database, "people"),
-            where("email", "==", user.user.email)
-          );
+            where("email", "==", user.user.data.email));
           const qGet = await getDocs(q);
           qGet.forEach((doc) => {
             setName(doc.data())
