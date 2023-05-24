@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Alert,
   Image,
   Pressable,
   SafeAreaView,
@@ -13,11 +12,20 @@ import {
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { database, firebaseConfig, providerGoogle } from "../../firebase-config";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import {
+  database,
+  firebaseConfig,
+  providerGoogle,
+} from "../../firebase-config";
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { setUser } from "../../navigation/redux/slices/user";
+import { UserState, setUser } from "../../navigation/redux/slices/user";
 import { useAppDispatch } from "../../navigation/redux/hooks";
 
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
@@ -27,24 +35,21 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const auth = getAuth(app);
   const dispatch = useAppDispatch();
 
-
   const handleSingIn = async () => {
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      const q = query(
-        collection(database, "people"),
-        where("email", "==", email)
-      );
-      const qGet = await getDocs(q);
-
-      qGet.forEach((doc) => {
-        let data = doc.data();
-        dispatch(setUser({ data }));
-        console.log("-----------------------------------------------");
-        console.log(data);
-        console.log("-----------------------------------------------");
-      });
-      return navigation.navigate("HomeScreen");
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const info = async () => {
+        const q = query(
+          collection(database, "people"),
+          where("email", "==", response.user.email)
+        );
+        const qGet = await getDocs(q);
+        const docs = qGet.docs[0];
+        qGet.forEach((doc) => {
+          dispatch(setUser({ ...doc.data(), key: docs.id } as UserState));
+        });
+      };
+      info();
     } catch (error) {
       console.log("error al entrar");
       console.log(error);
@@ -52,32 +57,33 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   };
 
   const handleSingInWithGoogle = async () => {
-    try{
-      signInWithPopup(auth, providerGoogle)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
-        console.log('token', token);
-        // The signed-in user info.
-        const user = result.user;
-        console.log('user', user);
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-    }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-    });
-    } catch (error){
-      console.log('error', error)
-    }
-  }
+    // try {
+    //   signInWithPopup(auth, providerGoogle)
+    //     .then((result) => {
+    //       // This gives you a Google Access Token. You can use it to access the Google API.
+    //       const credential = GoogleAuthProvider.credentialFromResult(result);
+    //       const token = credential?.accessToken;
+    //       console.log("token", token);
+    //       // The signed-in user info.
+    //       const user = result.user;
+    //       console.log("user", user);
+    //       // IdP data available using getAdditionalUserInfo(result)
+    //       // ...
+    //     })
+    //     .catch((error) => {
+    //       // Handle Errors here.
+    //       const errorCode = error.code;
+    //       const errorMessage = error.message;
+    //       // The email of the user's account used.
+    //       const email = error.customData.email;
+    //       // The AuthCredential type that was used.
+    //       const credential = GoogleAuthProvider.credentialFromError(error);
+    //       // ...
+    //     });
+    // } catch (error) {
+    //   console.log("error", error);
+    // }
+  };
 
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
@@ -125,11 +131,16 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                 scrollEnabled={true}
               />
             </LinearGradient>
-              <Pressable style={styles.containter_contraseña}>
-                <Text style={styles.olvidaste_contraseña}>¿Olvidaste tu contraseña?</Text>
-                </Pressable>
+            <Pressable style={styles.containter_contraseña}>
+              <Text style={styles.olvidaste_contraseña}>
+                ¿Olvidaste tu contraseña?
+              </Text>
+            </Pressable>
             <View style={styles.container_buton}>
-              <Pressable onPress={() => handleSingIn()} style={styles.button_login}>
+              <Pressable
+                onPress={() => handleSingIn()}
+                style={styles.button_login}
+              >
                 <LinearGradient
                   colors={["#0995a6", "#112044"]}
                   style={styles.login_button}
@@ -138,10 +149,16 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
                 </LinearGradient>
               </Pressable>
             </View>
-            
+
             <View style={styles.container_button}>
-              <Pressable onPress={() => handleSingInWithGoogle()} style={styles.button_google} >
-                <Image source={require('../../assets/images/Login/img_google.png')} style={styles.img_google}/>
+              <Pressable
+                onPress={() => handleSingInWithGoogle()}
+                style={styles.button_google}
+              >
+                <Image
+                  source={require("../../assets/images/Login/img_google.png")}
+                  style={styles.img_google}
+                />
                 <Text style={styles.text_google}>Ingresar con Google</Text>
               </Pressable>
             </View>
@@ -200,7 +217,7 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     fontFamily: "Poppins_Regular",
   },
-  
+
   container_buton: {
     width: "100%",
     marginTop: 20,
@@ -214,15 +231,15 @@ const styles = StyleSheet.create({
     padding: "3%",
   },
 
-  button_login:{
-    width:'70%'
+  button_login: {
+    width: "70%",
   },
 
   login_butontext: {
     fontSize: 18,
     color: "#DED3F4",
     fontFamily: "Poppins_ExtraBold",
-    textAlign:'center'
+    textAlign: "center",
   },
 
   login_containerhelp: {
@@ -261,35 +278,35 @@ const styles = StyleSheet.create({
     color: "white",
     opacity: 2,
   },
-  container_button:{
-    width:'55%',
-    borderRadius:20,
-    padding:'2%',
-    margin:'5%',
+  container_button: {
+    width: "55%",
+    borderRadius: 20,
+    padding: "2%",
+    margin: "5%",
     borderWidth: 2,
-    borderColor: '#B39AE7',
+    borderColor: "#B39AE7",
   },
   button_google: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
-  text_google:{
-    color:'#B39AE7',
+  text_google: {
+    color: "#B39AE7",
     fontFamily: "Poppins_Regular",
     fontSize: 13,
-    fontWeight:'600',
-    marginLeft:'10%'
+    fontWeight: "600",
+    marginLeft: "10%",
   },
-  img_google:{
-    marginLeft:5
+  img_google: {
+    marginLeft: 5,
   },
-  containter_contraseña:{
-    margin:'2%',
-    marginRight:'40%'
+  containter_contraseña: {
+    margin: "2%",
+    marginRight: "40%",
   },
-  olvidaste_contraseña:{
-    color:'#B39AE7'
-  }
+  olvidaste_contraseña: {
+    color: "#B39AE7",
+  },
 });
 
 export default Login;

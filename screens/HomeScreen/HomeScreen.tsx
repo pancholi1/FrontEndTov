@@ -1,15 +1,12 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
-
 import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
 import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { database } from "../../firebase-config";
 import { auth } from "../../firebase-config";
 import { setUser } from "../../navigation/redux/slices/user";
 
@@ -17,39 +14,18 @@ const HomeScreen = ({
   route,
   navigation,
 }: RootStackScreenProps<"HomeScreen">) => {
-
   const user = useAppSelector(User);
   const dispatch = useAppDispatch();
-
-  let [name, setName] = useState<any>({});
-
-  useEffect(() => {
-    console.log('user', user);
-    console.log('user2', user.user.email);
-    console.log('user3', user.user.data);
-    const info = async () => {
-      const q = query(
-            collection(database, "people"),
-            where("email", "==", user.user.data.email));
-          const qGet = await getDocs(q);
-          qGet.forEach((doc) => {
-            setName(doc.data())
-          });
-    }
-    info();
-      },[user])
-
 
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
         <View style={styles.header_container}>
           <Text style={styles.title_hello}>Hola</Text>
-          {
-            name.name !== undefined ? 
-          <Text style={styles.name}>{name.name}{' ' + name.apellido}</Text>
-          : null
-          }
+
+          <Text style={styles.name}>
+            {user.user?.name + " " + user.user?.apellido}
+          </Text>
 
           <LinearGradient
             colors={["#524c77", "#3d3758", "#1e173e"]}
@@ -72,7 +48,11 @@ const HomeScreen = ({
         <CardResult
           image={require("../../assets/images/HomeScreen/testPersonalidad.png")}
           title={"Test CHASIDE"}
-          description={"Toma menos de 12 minutos. Responde honestamente."}
+          description={
+            user.user?.areaHabilidad
+              ? "Test terminado"
+              : "Toma menos de 12 minutos. Responde honestamente."
+          }
           navigation={navigation}
           route={"DescriptionChasideScreen"}
           selected
@@ -95,13 +75,15 @@ const HomeScreen = ({
           navigation={navigation}
           route={"Description5GrandesScreen"}
         />
-        <Pressable 
+        <Pressable
           onPress={() => {
             auth.signOut();
             dispatch(setUser(null));
           }}
           style={styles.button}
-          ><Text style={styles.text_test}>Deslogeate</Text></Pressable>
+        >
+          <Text style={styles.text_test}>Deslogeate</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );

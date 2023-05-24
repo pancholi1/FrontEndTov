@@ -1,19 +1,9 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable, View, StyleSheet } from "react-native";
-
+import { Pressable, View, StyleSheet } from "react-native";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -45,8 +35,9 @@ import {
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { onAuthStateChanged } from "firebase/auth";
 import { User } from "./redux/store/store";
-import { auth } from "../firebase-config";
-import { setUser } from "./redux/slices/user";
+import { auth, database } from "../firebase-config";
+import { UserState, setUser } from "./redux/slices/user";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function Navigation() {
   return (
@@ -59,27 +50,29 @@ export default function Navigation() {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const [loading, setLoading] = React.useState(true);
   const dispatch = useAppDispatch();
   const user = useAppSelector(User);
-  console.log('user del index', user);
 
-  const u = user;
-  
-  console.log('uuuu', u)
   React.useEffect(() => {
-    console.log('fuera del unsuscribe', user);
     const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
-      console.log('user del index dentro del effect', user);
-      authenticatedUser
-        ? dispatch(setUser(user))
-        : dispatch(setUser(null));
-      setLoading(false);
+      if (authenticatedUser && authenticatedUser.email) {
+        const q = query(
+          collection(database, "people"),
+          where("email", "==", authenticatedUser.email)
+        );
+        const qGet = await getDocs(q);
+        const docs = qGet.docs[0];
+
+        qGet.forEach((doc) => {
+          dispatch(setUser({ ...doc.data(), key: docs.id } as UserState));
+        });
+      } else {
+        dispatch(setUser(null));
+      }
     });
 
     return unSuscribe();
   }, []);
-  //console.log(user.user);
 
   return (
     <Stack.Navigator>

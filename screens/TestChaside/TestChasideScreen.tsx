@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import surveyData from "./questions";
 import { RootStackScreenProps } from "../../types";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients, gradientsButton } from "../../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
 import { QuestionComponent } from "../../components/Chaside";
 
 import {
@@ -39,19 +32,10 @@ import {
   areaE,
 } from "../../constants/infoChaside";
 
-import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
+import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
-import {
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
-import { setUser } from "../../navigation/redux/slices/user";
 
 interface PropsAreas {
   msjArea: string;
@@ -61,18 +45,16 @@ interface PropsAreas {
 
 const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const user = useAppSelector(User);
-  const dispatch = useAppDispatch();
-
   const [habilidad, setHabilidad] = useState<PropsAreas>();
   const [interes, setInteres] = useState<PropsAreas>();
 
   useEffect(() => {
-    if (user?.user?.data?.areaHabilidad) {
-      const AreaHabilidad = areas[user.user.data.areaHabilidad];
+    if (user?.user?.areaHabilidad) {
+      const AreaHabilidad = areas[user.user.areaHabilidad];
       setHabilidad(AreaHabilidad);
     }
-    if (user?.user?.data?.areaInteres) {
-      const AreaHabilidad = areas[user.user.data.areaInteres];
+    if (user?.user?.areaInteres) {
+      const AreaHabilidad = areas[user.user.areaInteres];
       setInteres(AreaHabilidad);
     }
   }, [user.user]);
@@ -160,46 +142,28 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     });
   };
 
-  if (currentQuestion >= surveyData.length) {
+  useEffect(() => {
+    if (currentQuestion >= surveyData.length - 1) {
+      const { propiedad: propiedadMayorIntereses } =
+        obtenerPropiedadMayor(sumaAreasIntereses);
+      const { propiedad: propiedadMayorHabilidades } =
+        obtenerPropiedadMayor(sumaAreasHabilidades);
 
-    const { propiedad: propiedadMayorIntereses } =
-      obtenerPropiedadMayor(sumaAreasIntereses);
-
-    const { propiedad: propiedadMayorHabilidades } =
-      obtenerPropiedadMayor(sumaAreasHabilidades);
-
-    const info = async () => {
-      Alert.alert('error')
-      if (user) {
-        const q = query(
-          collection(database, "people"),
-          where("email", "==", user.user.data.email)
-          );
-        const qGet = getDocs(q);
-        const docsSnapshot = await qGet;
-        if (!docsSnapshot.empty) {
-          const docs = docsSnapshot.docs[0];
-          const docId = docs.id;
-          await updateDoc(doc(database, "people", docId), {
+      const info = async () => {
+        if (user.user?.key) {
+          await updateDoc(doc(database, "people", user.user?.key), {
             areaInteres: propiedadMayorIntereses,
             areaHabilidad: propiedadMayorHabilidades,
-          }) 
-          dispatch(
-            setUser({
-              ...user,
-              areaInteres: propiedadMayorIntereses,
-              areaHabilidad: propiedadMayorHabilidades,
-            })
-          );
+          });
           setHabilidad(areas[propiedadMayorHabilidades]);
           setInteres(areas[propiedadMayorIntereses]);
         }
-      }
-    };
-    info();
-  }
+      };
+      info();
+    }
+  }, [surveyData, currentQuestion]);
 
-  return user.user.data.areaHabilidad && user.user.data.areaInteres && habilidad && interes ? (
+  return habilidad && interes ? (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
         <LinearGradient
