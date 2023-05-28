@@ -16,8 +16,6 @@ import { Image } from "react-native";
 import {
   CarrerasChasideScreen,
   CarrerasMMYMGScreen,
-  Description5GrandesScreen,
-  DescriptionMMYMGScreen,
   HomeScreen,
   LoginScreen,
   MainScreen,
@@ -101,22 +99,6 @@ function RootNavigator() {
           </Stack.Group>
           <Stack.Group>
             <Stack.Screen
-              name="HomeScreen"
-              component={HomeScreen}
-              options={{
-                title: "Ingresa",
-                headerTitleAlign: "center",
-                headerStyle: { backgroundColor: "#130C34" },
-                headerTitleStyle: {
-                  color: "white",
-                  fontFamily: "Poppins_ExtraBold",
-                  fontSize: 20,
-                },
-                headerTintColor: "#06D6DD",
-              }}
-            />
-
-            <Stack.Screen
               name="ResultTestScreen"
               component={ResultTestScreen}
             />
@@ -160,21 +142,7 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
-            <Stack.Screen
-              name="DescriptionMMYMGScreen"
-              component={DescriptionMMYMGScreen}
-              options={{
-                title: "Test MM Y MG",
-                headerTitleAlign: "center",
-                headerStyle: { backgroundColor: "#130C34" },
-                headerTitleStyle: {
-                  color: "white",
-                  fontFamily: "Poppins_ExtraBold",
-                  fontSize: 20,
-                },
-                headerTintColor: "#06D6DD",
-              }}
-            />
+
             <Stack.Screen
               name="CarrerasMMYMGScreen"
               component={CarrerasMMYMGScreen}
@@ -239,21 +207,7 @@ function RootNavigator() {
               headerTintColor: "#06D6DD",
             }}
           />
-          <Stack.Screen
-            name="Description5GrandesScreen"
-            component={Description5GrandesScreen}
-            options={{
-              title: "Test 5 Grandes",
-              headerTitleAlign: "center",
-              headerStyle: { backgroundColor: "#130C34" },
-              headerTitleStyle: {
-                color: "white",
-                fontFamily: "Poppins_ExtraBold",
-                fontSize: 20,
-              },
-              headerTintColor: "#06D6DD",
-            }}
-          />
+
           <Stack.Screen
             name="Terms"
             component={Terms}
@@ -426,9 +380,10 @@ function BottomTabNavigator() {
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
-            color: "#06D6DD",
+            color: "#ffffff",
             fontFamily: "Poppins_Regular",
             fontSize: 20,
+            fontWeight: "700",
           },
           headerTintColor: "#06D6DD",
           tabBarIcon: () => (

@@ -5,10 +5,13 @@ export interface UserState {
   apellido?: string;
   areaHabilidad?: string;
   areaInteres?: string;
+  areaUno?: string;
+  areaDos?: string;
   name?: string;
   email?: string;
   key?: string;
   age?: number;
+  info: string[];
 }
 
 interface objCompleteUser {

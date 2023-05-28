@@ -10,16 +10,12 @@ export * from "./ResultadosScreen";
 export * from "./ResultChasideScreen";
 export * from "./SingUpScreen";
 
-export * from "./DescriptionChasideScreen";
 export * from "./CarrerasChasideScreen";
 
 export * from "./CarrerasMMYMGScreen";
-export * from "./DescriptionMMYMGScreen";
 
-export * from "./Description5GrandesScreen"
+export * from "./TestChaside";
+export * from "./TestMMYMG";
+export * from "./Test5Grandes";
 
-export * from "./TestChaside"
-export * from "./TestMMYMG"
-export * from "./Test5Grandes"
-
-export * from "./Terms&Conditions"
+export * from "./Terms&Conditions";

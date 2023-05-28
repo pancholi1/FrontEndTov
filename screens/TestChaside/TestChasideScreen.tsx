@@ -167,82 +167,59 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   return habilidad && interes ? (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={{
-            marginTop: "8%",
-            borderRadius: 15,
-            width: "90%",
-            alignItems: "center",
-          }}
-        >
-          <View style={styles.container_test}>
-            <Text style={styles.title}>INTERESES</Text>
-            <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
-            <Text style={styles.thankYou}>({interes?.msjArea})</Text>
-            <Text style={styles.thankYou2}>{interes?.textCarrera}</Text>
-            <Pressable
-              style={styles.button}
-              onPress={() =>
-                carrerasPosibles(interes?.area, habilidad.area, "interes")
-              }
+        <View style={styles.container_test}>
+          <Text style={styles.title}>INTERESES</Text>
+          <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
+          <Text style={styles.thankYou}>({interes?.msjArea})</Text>
+          <Text style={styles.thankYou2}>{interes?.textCarrera}</Text>
+          <Pressable
+            style={styles.button}
+            onPress={() =>
+              carrerasPosibles(interes?.area, habilidad.area, "interes")
+            }
+          >
+            <LinearGradient
+              colors={["#0995a6", "#197189", "#112044"]}
+              style={{
+                borderRadius: 15,
+                width: "100%",
+                height: 45,
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "4%",
+              }}
             >
-              <LinearGradient
-                colors={["#0995a6", "#197189", "#112044"]}
-                style={{
-                  borderRadius: 15,
-                  width: "100%",
-                  height: 45,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "4%",
-                }}
-              >
-                <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
-              </LinearGradient>
-            </Pressable>
-          </View>
-        </LinearGradient>
-        <LinearGradient
-          colors={gradients.inputs}
-          start={{ x: 1, y: 1 }}
-          end={{ x: 0, y: 0 }}
-          style={{
-            marginTop: "8%",
-            borderRadius: 15,
-            width: "90%",
-            alignItems: "center",
-          }}
-        >
-          <View style={styles.container_test}>
-            <Text style={styles.title}>HABILIDADES</Text>
-            <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
-            <Text style={styles.thankYou}>({habilidad.msjArea})</Text>
-            <Text style={styles.thankYou2}>{habilidad.textCarrera}</Text>
-            <Pressable
-              style={styles.button}
-              onPress={() =>
-                carrerasPosibles("asdas", habilidad.area, "habilidad")
-              }
+              <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+            </LinearGradient>
+          </Pressable>
+        </View>
+
+        <View style={styles.container_test}>
+          <Text style={styles.title}>HABILIDADES</Text>
+          <Text style={styles.thankYou}>RESPUESTA DEL GRUPO</Text>
+          <Text style={styles.thankYou}>({habilidad.msjArea})</Text>
+          <Text style={styles.thankYou2}>{habilidad.textCarrera}</Text>
+          <Pressable
+            style={styles.button}
+            onPress={() =>
+              carrerasPosibles("asdas", habilidad.area, "habilidad")
+            }
+          >
+            <LinearGradient
+              colors={["#0995a6", "#197189", "#112044"]}
+              style={{
+                borderRadius: 15,
+                width: "100%",
+                height: 45,
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "4%",
+              }}
             >
-              <LinearGradient
-                colors={["#0995a6", "#197189", "#112044"]}
-                style={{
-                  borderRadius: 15,
-                  width: "100%",
-                  height: 45,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "4%",
-                }}
-              >
-                <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
-              </LinearGradient>
-            </Pressable>
-          </View>
-        </LinearGradient>
+              <Text style={styles.text_button}>CARRERAS POSIBLES</Text>
+            </LinearGradient>
+          </Pressable>
+        </View>
       </View>
     </ScrollView>
   ) : flagDescription ? (
@@ -271,15 +248,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#130C34",
   },
   container_test: {
-    marginTop: "4%",
     borderRadius: 15,
-    width: "90%",
-    alignItems: "center",
+    backgroundColor: "#102548",
+    borderColor: "#0b7189",
+    borderWidth: 0.9,
+    opacity: 1.2,
+    width: "85%",
+    padding: 8,
+    margin: 12,
     textAlign: "center",
+    alignItems: "center",
   },
   thankYou: {
     color: "#06D6DD",
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 15,
     width: "85%",
     alignItems: "center",
@@ -288,22 +270,21 @@ const styles = StyleSheet.create({
   },
   thankYou2: {
     color: "#DED3F4",
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 14,
     width: "85%",
     alignItems: "center",
     fontFamily: "Poppins_Regular",
-    margin: "8%",
+    margin: "4%",
     textAlign: "center",
   },
   title: {
     color: "#DED3F4",
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 20,
     width: "85%",
     alignItems: "center",
     marginTop: "3%",
-    marginBottom: "2%",
     fontFamily: "Poppins_ExtraBold",
     textAlign: "center",
   },

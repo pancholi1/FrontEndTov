@@ -55,7 +55,6 @@ export default function CardResult({
 }
 
 const CardContainer = ({ route, children, navigation, selected }) => {
-  const dispatch = useAppDispatch();
   return route && navigation ? (
     <Pressable
       style={
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
   container_chart_selected: {
     padding: 15,
     borderRadius: 15,
-    backgroundColor: "#103456",
+    backgroundColor: "#102548",
     width: 313,
     height: 115,
     borderColor: "#0b7189",

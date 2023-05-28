@@ -1,22 +1,30 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
 import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
-import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
+import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
-import { auth } from "../../firebase-config";
-import { setUser } from "../../navigation/redux/slices/user";
 
-const HomeScreen = ({
-  route,
-  navigation,
-}: RootStackScreenProps<"HomeScreen">) => {
+const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   const user = useAppSelector(User);
-  const dispatch = useAppDispatch();
-
+  const [contProgress, setcontProgress] = useState(0);
+  useEffect(() => {
+    setcontProgress(0);
+    let contador = 0;
+    if (user.user?.info) {
+      contador = contador + 1;
+    }
+    if (user.user?.areaDos) {
+      contador = contador + 1;
+    }
+    if (user.user?.areaHabilidad) {
+      contador = contador + 1;
+    }
+    setcontProgress(contador / 3);
+  }, [user.user]);
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
@@ -37,8 +45,10 @@ const HomeScreen = ({
             <Text style={styles.text_progreso}>
               Realiza el 100% de los test para obtener el resultado final
             </Text>
-            <Text style={styles.title_progreso}>33%</Text>
-            <ProgressBar progress={0.33} color={"#06D6DD"} />
+            <Text style={styles.title_progreso}>
+              {Math.floor(contProgress * 100)}%
+            </Text>
+            <ProgressBar progress={contProgress} color={"#06D6DD"} />
           </LinearGradient>
 
           <Text style={styles.text_test}>¡COMENCEMOS!</Text>
@@ -48,14 +58,10 @@ const HomeScreen = ({
         <CardResult
           image={require("../../assets/images/HomeScreen/testPersonalidad.png")}
           title={"Test CHASIDE"}
-          description={
-            user.user?.areaHabilidad
-              ? "Test terminado"
-              : "Toma menos de 12 minutos. Responde honestamente."
-          }
+          description={"Toma menos de 12 minutos. Responde honestamente."}
           navigation={navigation}
           route={"TestChaside"}
-          selected
+          selected={user.user?.areaHabilidad ? true : false}
         />
         <Spacer height={20} />
         <CardResult
@@ -65,25 +71,18 @@ const HomeScreen = ({
             "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
           }
           navigation={navigation}
-          route={"DescriptionMMYMGScreen"}
+          route={"TestMMYMG"}
+          selected={user.user?.areaDos ? true : false}
         />
         <Spacer height={20} />
         <CardResult
           image={require("../../assets/images/HomeScreen/test5grandes.png")}
           title={"Test de los 5 Grandes"}
           description={"Conocé más sobre tu personalidad y capacidades."}
+          selected={user.user?.info ? true : false}
           navigation={navigation}
-          route={"Description5GrandesScreen"}
+          route={"Test5Grandes"}
         />
-        <Pressable
-          onPress={() => {
-            auth.signOut();
-            dispatch(setUser(null));
-          }}
-          style={styles.button}
-        >
-          <Text style={styles.text_test}>Deslogeate</Text>
-        </Pressable>
       </View>
     </ScrollView>
   );

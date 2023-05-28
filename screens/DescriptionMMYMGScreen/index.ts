@@ -1,1 +1,0 @@
-export { default as DescriptionMMYMGScreen } from "./DescriptionMMYMGScreen";

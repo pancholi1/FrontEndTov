@@ -3,8 +3,11 @@ import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { Image } from "react-native";
 import { Avatar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { auth } from "../../firebase-config";
+import { useAppDispatch } from "../../navigation/redux/hooks";
+import { setUser } from "../../navigation/redux/slices/user";
 export default function ModalScreen() {
+  const dispatch = useAppDispatch();
   return (
     <View style={styles.container}>
       <View style={styles.containerTerminos}>
@@ -46,10 +49,26 @@ export default function ModalScreen() {
         </LinearGradient>
       </View>
       <LinearGradient
-       colors={["#0995a6", "#112044"]}
+        colors={["#0995a6", "#112044"]}
         style={styles.botonContainer}
       >
         <Pressable
+          onPress={() => {
+            auth.signOut();
+            dispatch(setUser(null));
+          }}
+          style={({ pressed }) => ({
+            opacity: pressed ? 0.5 : 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 15,
+            width: "100%",
+          })}
+        >
+          <Text style={styles.botonText}>Deslogeate</Text>
+        </Pressable>
+        {/* <Pressable
           onPress={() => alert("")}
           style={({ pressed }) => ({
             opacity: pressed ? 0.5 : 1,
@@ -57,7 +76,7 @@ export default function ModalScreen() {
           })}
         >
           <Text style={styles.botonText}> BLOG EXCLUSIVO</Text>
-        </Pressable>
+        </Pressable> */}
       </LinearGradient>
 
       <View style={styles.containerTerminos}>
@@ -112,6 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#130C34",
     width: "100%",
     padding: 15,
+    justifyContent: "space-around",
   },
   perfil_container: {
     flexDirection: "row",
@@ -177,6 +197,7 @@ const styles = StyleSheet.create({
   botonContainer: {
     borderRadius: 15,
     margin: 60,
+    width: "80%",
   },
   botonText: {
     padding: 18,

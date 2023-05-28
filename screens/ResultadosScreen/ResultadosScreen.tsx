@@ -10,7 +10,7 @@ const ResultadosScreen = ({
   return (
     <View style={styles.resultados_screen_container}>
       <Spacer height={20} />
-      <CardResult
+      {/* <CardResult
         image={require("../../assets/images/Results/result1.png")}
         title={"Test CHASIDE"}
         description={"Toma menos de 12 minutos. Responde honestamente."}
@@ -29,7 +29,7 @@ const ResultadosScreen = ({
         title={"Test Los 5 Grandes"}
         description={"Conocé más sobre tu personalidad y capacidades."}
       />
-      <Spacer height={20} />
+      <Spacer height={20} /> */}
       {/* <CardResult
         image={require("../../assets/images/Results/result3.png")}
         title={"Entrevista"}

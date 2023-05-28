@@ -12,7 +12,7 @@ export default function NotFoundScreen({
 
   useEffect(() => {
     return user
-      ? navigation.navigate("HomeScreen")
+      ? navigation.navigate("BottomTabNavigator")
       : navigation.navigate("MainScreen");
   }, []);
   return (
