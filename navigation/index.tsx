@@ -17,7 +17,6 @@ import {
   CarrerasChasideScreen,
   CarrerasMMYMGScreen,
   Description5GrandesScreen,
-  DescriptionChasideScreen,
   DescriptionMMYMGScreen,
   HomeScreen,
   LoginScreen,
@@ -130,21 +129,6 @@ function RootNavigator() {
               component={BottomTabNavigator}
             />
 
-            <Stack.Screen
-              name="DescriptionChasideScreen"
-              component={DescriptionChasideScreen}
-              options={{
-                title: "Test Chaside",
-                headerTitleAlign: "center",
-                headerStyle: { backgroundColor: "#130C34" },
-                headerTitleStyle: {
-                  color: "white",
-                  fontFamily: "Poppins_ExtraBold",
-                  fontSize: 20,
-                },
-                headerTintColor: "#06D6DD",
-              }}
-            />
             <Stack.Screen
               name="TestChaside"
               component={TestChasideScreen}

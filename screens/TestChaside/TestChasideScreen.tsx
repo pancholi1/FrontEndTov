@@ -36,6 +36,8 @@ import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
+import { DescriptionTests } from "../../components/DescriptionTests";
+import { description, title } from "../../constants/DescriptionChaside";
 
 interface PropsAreas {
   msjArea: string;
@@ -47,18 +49,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const user = useAppSelector(User);
   const [habilidad, setHabilidad] = useState<PropsAreas>();
   const [interes, setInteres] = useState<PropsAreas>();
-
-  useEffect(() => {
-    if (user?.user?.areaHabilidad) {
-      const AreaHabilidad = areas[user.user.areaHabilidad];
-      setHabilidad(AreaHabilidad);
-    }
-    if (user?.user?.areaInteres) {
-      const AreaHabilidad = areas[user.user.areaInteres];
-      setInteres(AreaHabilidad);
-    }
-  }, [user.user]);
-
+  const [flagDescription, setFlagDescription] = useState(false);
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [sumaAreasIntereses, setSumaAreasIntereses] = useState({
@@ -142,6 +133,16 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     });
   };
 
+  useEffect(() => {
+    if (user?.user?.areaHabilidad) {
+      const AreaHabilidad = areas[user.user.areaHabilidad];
+      setHabilidad(AreaHabilidad);
+    }
+    if (user?.user?.areaInteres) {
+      const AreaHabilidad = areas[user.user.areaInteres];
+      setInteres(AreaHabilidad);
+    }
+  }, [user.user]);
   useEffect(() => {
     if (currentQuestion >= surveyData.length - 1) {
       const { propiedad: propiedadMayorIntereses } =
@@ -244,7 +245,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
         </LinearGradient>
       </View>
     </ScrollView>
-  ) : (
+  ) : flagDescription ? (
     <View style={styles.container}>
       <QuestionComponent
         id={surveyData[currentQuestion].id}
@@ -253,6 +254,12 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
         onAnswered={handleAnswered}
       />
     </View>
+  ) : (
+    <DescriptionTests
+      title={title}
+      description={description}
+      setFlag={setFlagDescription}
+    />
   );
 };
 

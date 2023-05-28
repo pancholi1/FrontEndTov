@@ -54,7 +54,7 @@ const HomeScreen = ({
               : "Toma menos de 12 minutos. Responde honestamente."
           }
           navigation={navigation}
-          route={"DescriptionChasideScreen"}
+          route={"TestChaside"}
           selected
         />
         <Spacer height={20} />
