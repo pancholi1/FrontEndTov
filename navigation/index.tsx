@@ -21,8 +21,8 @@ import {
   MainScreen,
   NotFoundScreen,
   ProfileScreen,
+  ResultTests,
   ResultadosScreen,
-  ResultTestScreen,
   SingUpScreen,
   Terms,
   Test5Grandes,
@@ -70,7 +70,6 @@ function RootNavigator() {
 
     return unSuscribe();
   }, []);
-
   return (
     <Stack.Navigator>
       {user.user && (
@@ -96,12 +95,23 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
-          </Stack.Group>
-          <Stack.Group>
             <Stack.Screen
               name="ResultTestScreen"
-              component={ResultTestScreen}
+              component={ResultTests}
+              options={{
+                title: "Resultado final",
+                headerTitleAlign: "center",
+                headerStyle: { backgroundColor: "#130C34" },
+                headerTitleStyle: {
+                  color: "white",
+                  fontFamily: "Poppins_ExtraBold",
+                  fontSize: 20,
+                },
+                headerTintColor: "#06D6DD",
+              }}
             />
+          </Stack.Group>
+          <Stack.Group>
             <Stack.Screen name="Resultados" component={ResultadosScreen} />
             <Stack.Screen
               options={{

@@ -41,6 +41,8 @@ const ResultadosScreen = ({
         description={
           "Conoce cual es tu resultado final y comienza a planificar."
         }
+        route={"ResultTestScreen"}
+        navigation={navigation}
       />
       <Spacer height={20} />
     </View>

@@ -5,32 +5,9 @@ import surveyData from "./questions";
 import { RootStackScreenProps } from "../../types";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
 import { QuestionComponent } from "../../components/Chaside";
 
-import {
-  msjAreaC,
-  msjAreaH,
-  msjAreaA,
-  msjAreaS,
-  msjAreaI,
-  msjAreaD,
-  msjAreaE,
-  textCarreraC,
-  textCarreraH,
-  textCarreraA,
-  textCarreraS,
-  textCarreraI,
-  textCarreraD,
-  textCarreraE,
-  areaC,
-  areaH,
-  areaA,
-  areaS,
-  areaI,
-  areaD,
-  areaE,
-} from "../../constants/infoChaside";
+import { areas } from "../../constants/infoChaside";
 
 import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
@@ -97,16 +74,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
         setSumaAreasHabilidades(updateCount);
       }
     }
-  };
-
-  const areas = {
-    C: { msjArea: msjAreaC, textCarrera: textCarreraC, area: areaC },
-    H: { msjArea: msjAreaH, textCarrera: textCarreraH, area: areaH },
-    A: { msjArea: msjAreaA, textCarrera: textCarreraA, area: areaA },
-    S: { msjArea: msjAreaS, textCarrera: textCarreraS, area: areaS },
-    I: { msjArea: msjAreaI, textCarrera: textCarreraI, area: areaI },
-    D: { msjArea: msjAreaD, textCarrera: textCarreraD, area: areaD },
-    E: { msjArea: msjAreaE, textCarrera: textCarreraE, area: areaE },
   };
 
   function obtenerPropiedadMayor(objeto: object) {

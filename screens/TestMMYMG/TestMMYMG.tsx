@@ -4,24 +4,11 @@ import { RootStackScreenProps } from "../../types";
 import ComponentQuestion from "../../components/MMYMG/ComponentQuestion";
 import { questions2 } from "./question";
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients } from "../../constants/Gradients";
-import {
-  carrerasAreaAC,
-  carrerasAreaCB,
-  carrerasAreaCSH,
-  carrerasAreaCT,
-  carrerasAreaEAF,
-  msjAreaAC,
-  msjAreaCB,
-  msjAreaCSH,
-  msjAreaCT,
-  msjAreaEAF,
-} from "../../constants/infoMMYMG";
+import { areaMMYMG } from "../../constants/infoMMYMG";
 import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
-import { setUser } from "../../navigation/redux/slices/user";
 import { DescriptionTests } from "../../components/DescriptionTests";
 import { description, title } from "../../constants/DescriptionMMYMG";
 
@@ -31,7 +18,7 @@ interface PropsAreas {
 }
 
 const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
-  const user = useAppSelector(User);
+  const { user } = useAppSelector(User);
   const dispatch = useAppDispatch();
   const [flagDescription, setFlagDescription] = useState(false);
   const [areas1, setAreas1] = useState<PropsAreas>();
@@ -48,15 +35,15 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
   });
 
   useEffect(() => {
-    if (user.user?.areaUno) {
-      const areaPrincipal = areaInfo[user.user?.areaUno];
+    if (user?.areaUno) {
+      const areaPrincipal = areaMMYMG[user?.areaUno];
       setAreas1(areaPrincipal);
     }
-    if (user.user?.areaDos) {
-      const areaSecundaria = areaInfo[user.user?.areaDos];
+    if (user?.areaDos) {
+      const areaSecundaria = areaMMYMG[user?.areaDos];
       setAreas2(areaSecundaria);
     }
-  }, [user.user]);
+  }, [user]);
 
   const handleAnswered = (answer: boolean) => {
     const newAnswers = [...answers];
@@ -80,16 +67,8 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
   const area1 = Object.keys(resultObj)[0];
   const area2 = Object.keys(resultObj)[1];
 
-  const areaInfo = {
-    CSH: { msjArea: msjAreaCSH, carrerasArea: carrerasAreaCSH },
-    EAF: { msjArea: msjAreaEAF, carrerasArea: carrerasAreaEAF },
-    CT: { msjArea: msjAreaCT, carrerasArea: carrerasAreaCT },
-    AC: { msjArea: msjAreaAC, carrerasArea: carrerasAreaAC },
-    CB: { msjArea: msjAreaCB, carrerasArea: carrerasAreaCB },
-  };
-
   function getAreaInfo(area: string) {
-    return areaInfo[area];
+    return areaMMYMG[area];
   }
 
   const carrerasPosibles = (areaUno: string, areaDos: string, prop: string) => {
@@ -105,14 +84,14 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
     getAreaInfo(area2);
     if (currentQuestion >= questions2.length - 1) {
       const info = async () => {
-        if (user.user?.key) {
-          await updateDoc(doc(database, "people", user.user?.key), {
+        if (user?.key) {
+          await updateDoc(doc(database, "people", user?.key), {
             areaUno: area1,
             areaDos: area2,
           });
 
-          setAreas1(areaInfo[area1]);
-          setAreas2(areaInfo[area2]);
+          setAreas1(areaMMYMG[area1]);
+          setAreas2(areaMMYMG[area2]);
         }
       };
       info();
