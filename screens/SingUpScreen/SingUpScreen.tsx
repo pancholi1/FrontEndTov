@@ -34,29 +34,40 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     email: "",
     password: "",
     school: "",
-    date: "",
     createdAt: new Date().toISOString(),
   });
 
   const handleCreateAccount = async () => {
-    if(input.name && input.apellido && input.email && input.password && input.school && input.date && !errors.password && !errors.date){
+    if (
+      input.name &&
+      input.apellido &&
+      input.email &&
+      input.password &&
+      input.school &&
+      !errors.password &&
+      !errors.date
+    ) {
       try {
         await createUserWithEmailAndPassword(auth, input.email, input.password);
-        await addDoc(collection(database, 'people'), input);
+        await addDoc(collection(database, "people"), input);
         console.log("account created");
         Alert.alert("Usuario creado con exito!");
         setInput({
           ...input,
-         name:'', apellido: '' , email:'' , password :'', school:'' , date:'', 
-        })
-        return navigation.navigate('Login')
+          name: "",
+          apellido: "",
+          email: "",
+          password: "",
+          school: "",
+        });
+        return navigation.navigate("Login");
       } catch (error) {
         console.log("account created error");
         console.log(error);
-        Alert.alert('Algun dato es invalido')
+        Alert.alert("Algun dato es invalido");
       }
     } else {
-      Alert.alert('Faltan llenar campos')
+      Alert.alert("Faltan llenar campos");
     }
   };
 
@@ -65,16 +76,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   //   const serializedCreatedAt = user.data.createdAt.toISOString();
   //   return { ...state, user: { ...user, data: { ...user.data, createdAt: serializedCreatedAt } } };
   // }
-
-  const onDateChange = (value) => {
-    setInput({ ...input, date: value });
-
-    if (patterns.date.test(value)) {
-      setErrors({ ...errors, date: false });
-    } else {
-      setErrors({ ...errors, date: true });
-    }
-  };
 
   const onPasswordChange = (value) => {
     setInput({ ...input, password: value });
@@ -91,7 +92,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       !input.email ||
       !input.password ||
       !input.school ||
-      !input.date ||
       errors.password ||
       errors.date;
 
@@ -187,29 +187,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             {errors.password && (
               <Text style={styles.error}>
                 La contraseña tiene que tener al menos 6 caracteres
-              </Text>
-            )}
-          </View>
-
-          <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Fecha de Nacimiento</Text>
-            <LinearGradient
-              colors={gradients.inputs}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0 }}
-              style={{ borderRadius: 15 }}
-            >
-              <TextInput
-                placeholder="Fecha de Nacimiento"
-                secureTextEntry={false}
-                placeholderTextColor="#B39AE7"
-                style={styles.input_nombre}
-                onChangeText={onDateChange}
-              />
-            </LinearGradient>
-            {errors.date && (
-              <Text style={styles.error}>
-                La fecha ingresada tiene que tener el formato YYYY-MM-DD
               </Text>
             )}
           </View>

@@ -12,17 +12,17 @@ import { DescriptionTests } from "../../components/DescriptionTests";
 import { description, title } from "../../constants/Description5Grandes";
 
 const Test5Grandes = () => {
-  const user = useAppSelector(User);
+  const { user } = useAppSelector(User);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [count, setCount] = useState<object>({});
   const [flagDescription, setFlagDescription] = useState(false);
   const [informacion, setInformacion] = useState<string[]>();
 
   useEffect(() => {
-    if (user.user?.info) {
-      setInformacion(user.user.info);
+    if (user?.info) {
+      setInformacion(user.info);
     }
-  }, [user.user]);
+  }, [user]);
 
   const handleAnswered = (contador: object) => {
     setCurrentQuestion(currentQuestion + 1);
@@ -30,6 +30,7 @@ const Test5Grandes = () => {
   };
 
   useEffect(() => {
+    console.log(currentQuestion, data.length);
     if (currentQuestion >= data.length - 1) {
       const suma = Object.values(count).reduce(
         (total, valor) => total + valor,
@@ -44,15 +45,15 @@ const Test5Grandes = () => {
       const porcentajes = Object.entries(percentages).map(([, value]) => value);
 
       const info = async () => {
-        if (user.user?.key) {
-          await updateDoc(doc(database, "people", user.user?.key), {
+        if (user?.key) {
+          await updateDoc(doc(database, "people", user.key), {
             info: porcentajes,
           });
         }
       };
       info();
     }
-  }, []);
+  }, [currentQuestion, data]);
 
   return informacion ? (
     <ScrollView>

@@ -3,12 +3,9 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import surveyData from "./questions";
 import { RootStackScreenProps } from "../../types";
-
 import { LinearGradient } from "expo-linear-gradient";
 import { QuestionComponent } from "../../components/Chaside";
-
 import { areas } from "../../constants/infoChaside";
-
 import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { doc, updateDoc } from "firebase/firestore";
@@ -75,7 +72,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
       }
     }
   };
-
   function obtenerPropiedadMayor(objeto: object) {
     let propiedadMayor = "";
     let mayorNumero = -Infinity;
@@ -87,7 +83,6 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     }
     return { propiedad: propiedadMayor };
   }
-
   const carrerasPosibles = (
     areaHabilidad: string,
     areaInteres: string,

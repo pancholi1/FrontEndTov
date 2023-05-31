@@ -12,6 +12,7 @@ export interface UserState {
   key?: string;
   age?: number;
   info: string[];
+  finalScore?: string;
 }
 
 interface objCompleteUser {
