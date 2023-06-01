@@ -190,6 +190,28 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
               </Text>
             )}
           </View>
+          <View style={styles.container_input_name}>
+            <Text style={styles.text_input_name}>Contraseña</Text>
+            <LinearGradient
+              colors={gradients.inputs}
+              start={{ x: 1, y: 1 }}
+              end={{ x: 0, y: 0 }}
+              style={{ borderRadius: 15 }}
+            >
+              <TextInput
+                placeholder="Contraseña"
+                secureTextEntry={true}
+                style={styles.input_nombre}
+                placeholderTextColor="#B39AE7"
+                onChangeText={onPasswordChange}
+              />
+            </LinearGradient>
+            {errors.password && (
+              <Text style={styles.error}>
+                La contraseña tiene que tener al menos 6 caracteres
+              </Text>
+            )}
+          </View>
 
           <View style={styles.container_input_name}>
             <Text style={styles.text_input_name}>Fecha de Nacimiento</Text>
