@@ -21,7 +21,6 @@ export type RootStackParamList = {
   ProfileScreen: undefined;
   NotFound: undefined;
   HomeScreen: undefined;
-  DescriptionChasideScreen: undefined;
   BottomTabNavigator: undefined;
   SingUp: undefined;
   Resultados: undefined;
@@ -51,7 +50,6 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   ResultTestScreen: undefined;
   HomeScreen: undefined;
-  DescriptionChasideScreen: undefined;
   ProfileScreen: undefined;
   BottomTabNavigator: undefined;
   SingUp: undefined;

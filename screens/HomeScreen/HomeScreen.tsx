@@ -1,55 +1,39 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
-
 import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
-import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
+import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { database } from "../../firebase-config";
-import { auth } from "../../firebase-config";
-import { setUser } from "../../navigation/redux/slices/user";
 
-const HomeScreen = ({
-  route,
-  navigation,
-}: RootStackScreenProps<"HomeScreen">) => {
-
+const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   const user = useAppSelector(User);
-  const dispatch = useAppDispatch();
-
-  let [name, setName] = useState<any>({});
-
+  const [contProgress, setcontProgress] = useState(0);
   useEffect(() => {
-    console.log('user', user);
-    console.log('user2', user.user.email);
-    console.log('user3', user.user.data);
-    const info = async () => {
-      const q = query(
-            collection(database, "people"),
-            where("email", "==", user.user.data.email));
-          const qGet = await getDocs(q);
-          qGet.forEach((doc) => {
-            setName(doc.data())
-          });
+    setcontProgress(0);
+    let contador = 0;
+    if (user.user?.info) {
+      contador = contador + 1;
     }
-    info();
-      },[user])
-
-
+    if (user.user?.areaDos) {
+      contador = contador + 1;
+    }
+    if (user.user?.areaHabilidad) {
+      contador = contador + 1;
+    }
+    setcontProgress(contador / 3);
+  }, [user.user]);
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
         <View style={styles.header_container}>
           <Text style={styles.title_hello}>Hola</Text>
-          {
-            name.name !== undefined ? 
-          <Text style={styles.name}>{name.name}{' ' + name.apellido}</Text>
-          : null
-          }
+
+          <Text style={styles.name}>
+            {user.user?.name + " " + user.user?.apellido}
+          </Text>
 
           <LinearGradient
             colors={["#524c77", "#3d3758", "#1e173e"]}
@@ -61,8 +45,10 @@ const HomeScreen = ({
             <Text style={styles.text_progreso}>
               Realiza el 100% de los test para obtener el resultado final
             </Text>
-            <Text style={styles.title_progreso}>33%</Text>
-            <ProgressBar progress={0.33} color={"#06D6DD"} />
+            <Text style={styles.title_progreso}>
+              {Math.floor(contProgress * 100)}%
+            </Text>
+            <ProgressBar progress={contProgress} color={"#06D6DD"} />
           </LinearGradient>
 
           <Text style={styles.text_test}>¡COMENCEMOS!</Text>
@@ -74,8 +60,8 @@ const HomeScreen = ({
           title={"Test CHASIDE"}
           description={"Toma menos de 12 minutos. Responde honestamente."}
           navigation={navigation}
-          route={"DescriptionChasideScreen"}
-          selected
+          route={"TestChaside"}
+          selected={user.user?.areaHabilidad ? true : false}
         />
         <Spacer height={20} />
         <CardResult
@@ -85,23 +71,18 @@ const HomeScreen = ({
             "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
           }
           navigation={navigation}
-          route={"DescriptionMMYMGScreen"}
+          route={"TestMMYMG"}
+          selected={user.user?.areaDos ? true : false}
         />
         <Spacer height={20} />
         <CardResult
           image={require("../../assets/images/HomeScreen/test5grandes.png")}
           title={"Test de los 5 Grandes"}
           description={"Conocé más sobre tu personalidad y capacidades."}
+          selected={user.user?.info ? true : false}
           navigation={navigation}
-          route={"Description5GrandesScreen"}
+          route={"Test5Grandes"}
         />
-        <Pressable 
-          onPress={() => {
-            auth.signOut();
-            dispatch(setUser(null));
-          }}
-          style={styles.button}
-          ><Text style={styles.text_test}>Deslogeate</Text></Pressable>
       </View>
     </ScrollView>
   );

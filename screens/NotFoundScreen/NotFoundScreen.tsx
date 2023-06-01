@@ -9,9 +9,10 @@ export default function NotFoundScreen({
   navigation,
 }: RootStackScreenProps<"NotFound">) {
   const user = useAppSelector(User);
+
   useEffect(() => {
-    return user.user
-      ? navigation.navigate("HomeScreen")
+    return user
+      ? navigation.navigate("BottomTabNavigator")
       : navigation.navigate("MainScreen");
   }, []);
   return (

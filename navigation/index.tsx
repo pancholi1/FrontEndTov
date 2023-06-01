@@ -1,19 +1,9 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable, View, StyleSheet } from "react-native";
-
+import { Pressable, View, StyleSheet } from "react-native";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -26,16 +16,13 @@ import { Image } from "react-native";
 import {
   CarrerasChasideScreen,
   CarrerasMMYMGScreen,
-  Description5GrandesScreen,
-  DescriptionChasideScreen,
-  DescriptionMMYMGScreen,
   HomeScreen,
   LoginScreen,
   MainScreen,
   NotFoundScreen,
   ProfileScreen,
+  ResultTests,
   ResultadosScreen,
-  ResultTestScreen,
   SingUpScreen,
   Terms,
   Test5Grandes,
@@ -45,8 +32,9 @@ import {
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { onAuthStateChanged } from "firebase/auth";
 import { User } from "./redux/store/store";
-import { auth } from "../firebase-config";
-import { setUser } from "./redux/slices/user";
+import { auth, database } from "../firebase-config";
+import { UserState, setUser } from "./redux/slices/user";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export default function Navigation() {
   return (
@@ -59,28 +47,29 @@ export default function Navigation() {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const [loading, setLoading] = React.useState(true);
   const dispatch = useAppDispatch();
   const user = useAppSelector(User);
-  console.log('user del index', user);
 
-  const u = user;
-  
-  console.log('uuuu', u)
   React.useEffect(() => {
-    console.log('fuera del unsuscribe', user);
     const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
-      console.log('user del index dentro del effect', user);
-      authenticatedUser
-        ? dispatch(setUser(user))
-        : dispatch(setUser(null));
-      setLoading(false);
+      if (authenticatedUser && authenticatedUser.email) {
+        const q = query(
+          collection(database, "people"),
+          where("email", "==", authenticatedUser.email)
+        );
+        const qGet = await getDocs(q);
+        const docs = qGet.docs[0];
+
+        qGet.forEach((doc) => {
+          dispatch(setUser({ ...doc.data(), key: docs.id } as UserState));
+        });
+      } else {
+        dispatch(setUser(null));
+      }
     });
 
     return unSuscribe();
   }, []);
-  //console.log(user.user);
-
   return (
     <Stack.Navigator>
       {user.user && (
@@ -106,13 +95,11 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
-          </Stack.Group>
-          <Stack.Group>
             <Stack.Screen
-              name="HomeScreen"
-              component={HomeScreen}
+              name="ResultTestScreen"
+              component={ResultTests}
               options={{
-                title: "Ingresa",
+                title: "Resultado final",
                 headerTitleAlign: "center",
                 headerStyle: { backgroundColor: "#130C34" },
                 headerTitleStyle: {
@@ -123,11 +110,8 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
-
-            <Stack.Screen
-              name="ResultTestScreen"
-              component={ResultTestScreen}
-            />
+          </Stack.Group>
+          <Stack.Group>
             <Stack.Screen name="Resultados" component={ResultadosScreen} />
             <Stack.Screen
               options={{
@@ -137,21 +121,6 @@ function RootNavigator() {
               component={BottomTabNavigator}
             />
 
-            <Stack.Screen
-              name="DescriptionChasideScreen"
-              component={DescriptionChasideScreen}
-              options={{
-                title: "Test Chaside",
-                headerTitleAlign: "center",
-                headerStyle: { backgroundColor: "#130C34" },
-                headerTitleStyle: {
-                  color: "white",
-                  fontFamily: "Poppins_ExtraBold",
-                  fontSize: 20,
-                },
-                headerTintColor: "#06D6DD",
-              }}
-            />
             <Stack.Screen
               name="TestChaside"
               component={TestChasideScreen}
@@ -183,21 +152,7 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
-            <Stack.Screen
-              name="DescriptionMMYMGScreen"
-              component={DescriptionMMYMGScreen}
-              options={{
-                title: "Test MM Y MG",
-                headerTitleAlign: "center",
-                headerStyle: { backgroundColor: "#130C34" },
-                headerTitleStyle: {
-                  color: "white",
-                  fontFamily: "Poppins_ExtraBold",
-                  fontSize: 20,
-                },
-                headerTintColor: "#06D6DD",
-              }}
-            />
+
             <Stack.Screen
               name="CarrerasMMYMGScreen"
               component={CarrerasMMYMGScreen}
@@ -262,21 +217,7 @@ function RootNavigator() {
               headerTintColor: "#06D6DD",
             }}
           />
-          <Stack.Screen
-            name="Description5GrandesScreen"
-            component={Description5GrandesScreen}
-            options={{
-              title: "Test 5 Grandes",
-              headerTitleAlign: "center",
-              headerStyle: { backgroundColor: "#130C34" },
-              headerTitleStyle: {
-                color: "white",
-                fontFamily: "Poppins_ExtraBold",
-                fontSize: 20,
-              },
-              headerTintColor: "#06D6DD",
-            }}
-          />
+
           <Stack.Screen
             name="Terms"
             component={Terms}
@@ -449,9 +390,10 @@ function BottomTabNavigator() {
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
-            color: "#06D6DD",
+            color: "#ffffff",
             fontFamily: "Poppins_Regular",
             fontSize: 20,
+            fontWeight: "700",
           },
           headerTintColor: "#06D6DD",
           tabBarIcon: () => (
