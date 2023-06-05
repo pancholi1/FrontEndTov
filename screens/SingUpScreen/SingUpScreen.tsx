@@ -25,7 +25,7 @@ import { collection, addDoc } from "firebase/firestore";
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isFormDisabled, setIsFormDisabled] = useState(true);
-  const [errors, setErrors] = useState({ password: false, date: false });
+  const [errors, setErrors] = useState({ password: false, date: false, passwordDos: false });
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const [input, setInput] = React.useState({
@@ -33,6 +33,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     apellido: "",
     email: "",
     password: "",
+    passwordDos: "",
     school: "",
     createdAt: new Date().toISOString(),
   });
@@ -45,7 +46,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       input.password &&
       input.school &&
       !errors.password &&
-      !errors.date
+      !errors.date && 
+      !errors.passwordDos
     ) {
       try {
         await createUserWithEmailAndPassword(auth, input.email, input.password);
@@ -59,6 +61,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           email: "",
           password: "",
           school: "",
+          passwordDos: ""
         });
         return navigation.navigate("Login");
       } catch (error) {
@@ -71,19 +74,19 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     }
   };
 
-  // const setUserReducer = (state: UserState, action: { type: 'user/setUser', payload: User }) => {
-  //   const { payload: user } = action;
-  //   const serializedCreatedAt = user.data.createdAt.toISOString();
-  //   return { ...state, user: { ...user, data: { ...user.data, createdAt: serializedCreatedAt } } };
-  // }
 
-  const onPasswordChange = (value) => {
+  const onPasswordChange = (value:string) => {
     setInput({ ...input, password: value });
 
     input.password.length < 6
       ? setErrors({ ...errors, password: true })
       : setErrors({ ...errors, password: false });
   };
+
+  const passwordDosChange = (value1:string, password:string) => {
+    value1 === password ? setErrors({ ...errors, passwordDos: false }) 
+      : setErrors({ ...errors, passwordDos: true });
+  }
 
   useEffect(() => {
     const isDisabled =
@@ -93,7 +96,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       !input.password ||
       !input.school ||
       errors.password ||
-      errors.date;
+      errors.date ||
+      errors.passwordDos;
 
     isFormDisabled !== isDisabled && setIsFormDisabled(isDisabled);
   }, [input]);
@@ -191,7 +195,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
             )}
           </View>
           <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Contraseña</Text>
+            <Text style={styles.text_input_name}>Repeti Contraseña</Text>
             <LinearGradient
               colors={gradients.inputs}
               start={{ x: 1, y: 1 }}
@@ -203,12 +207,12 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
                 secureTextEntry={true}
                 style={styles.input_nombre}
                 placeholderTextColor="#B39AE7"
-                onChangeText={onPasswordChange}
+                onChangeText={(value) => passwordDosChange(value, input.password)}
               />
             </LinearGradient>
-            {errors.password && (
+            {errors.passwordDos && (
               <Text style={styles.error}>
-                La contraseña tiene que tener al menos 6 caracteres
+                Las contraseñas tienen que coincidir
               </Text>
             )}
           </View>

@@ -1,9 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { Alert, Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { gradients, greenChaside } from "../constants/Gradients";
-import { useAppDispatch } from "../navigation/redux/hooks";
-import { setUser } from "../navigation/redux/slices/user";
+import { useAppSelector } from "../navigation/redux/hooks";
+import { User } from "../navigation/redux/store/store";
 
 export default function CardResult({
   image,
@@ -12,9 +12,11 @@ export default function CardResult({
   route,
   navigation,
   selected,
+  disabled
 }) {
+  
   return (
-    <CardContainer route={route} navigation={navigation} selected={selected}>
+    <CardContainer route={route} navigation={navigation} selected={selected} disabled={disabled}>
       {image && <Image style={styles.img_card} source={image} />}
       {selected ? (
         <View
@@ -54,18 +56,68 @@ export default function CardResult({
   );
 }
 
-const CardContainer = ({ route, children, navigation, selected }) => {
+const CardContainer = ({ route, children, navigation, selected, disabled }) => {
+  const user = useAppSelector(User);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [text, setText] = useState('')
+
+  const verificationTest = () => {
+    if(disabled){
+      if(!user.user?.areaInteres && !user.user?.areaUno){
+        setText('Chaside y MMYMG')
+        setModalVisible(true)
+      }
+      else if(user.user?.areaInteres && !user.user?.areaUno){
+        setText('MMYMG')
+        setModalVisible(true)
+      } else if(!user.user?.areaInteres){
+        setText('Chaside')
+        setModalVisible(true)
+      }
+    } else {
+      navigation.navigate(route)
+    }
+  };
+
+
+
+
   return route && navigation ? (
+    <>
+    <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Debes terminar todos los Test {text}</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
     <Pressable
-      style={
+    style={
         selected
           ? styles.card_result_container_selected
           : styles.card_result_container
       }
-      onPress={() => navigation.navigate(route)}
-    >
+      onPress={() => verificationTest()}
+      >
+      
       {children}
     </Pressable>
+    </>
   ) : (
     <View
       style={
@@ -148,5 +200,46 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 15,
     lineHeight: 17.5,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
