@@ -6,12 +6,13 @@ import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { QuestionComponent } from "../../components/Chaside";
 import { areas } from "../../constants/infoChaside";
-import { useAppSelector } from "../../navigation/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
 import { DescriptionTests } from "../../components/DescriptionTests";
 import { description, title } from "../../constants/DescriptionChaside";
+import { UserState, setUser } from "../../navigation/redux/slices/user";
 
 interface PropsAreas {
   msjArea: string;
@@ -21,6 +22,7 @@ interface PropsAreas {
 
 const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   const user = useAppSelector(User);
+  const dispatch = useAppDispatch();
   const [habilidad, setHabilidad] = useState<PropsAreas>();
   const [interes, setInteres] = useState<PropsAreas>();
   const [flagDescription, setFlagDescription] = useState(false);
@@ -118,6 +120,14 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
             areaInteres: propiedadMayorIntereses,
             areaHabilidad: propiedadMayorHabilidades,
           });
+          user &&
+            dispatch(
+              setUser({
+                ...user.user,
+                areaInteres: propiedadMayorIntereses,
+                areaHabilidad: propiedadMayorHabilidades,
+              } as UserState)
+            );
           setHabilidad(areas[propiedadMayorHabilidades]);
           setInteres(areas[propiedadMayorIntereses]);
         }

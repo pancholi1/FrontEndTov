@@ -5,11 +5,12 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { QuestionTest } from "../../components/5Grandes";
 import { gradients } from "../../constants/Gradients";
 import { database } from "../../firebase-config";
-import { useAppSelector } from "../../navigation/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { data } from "./question5Grandes";
 import { DescriptionTests } from "../../components/DescriptionTests";
 import { description, title } from "../../constants/Description5Grandes";
+import { UserState, setUser } from "../../navigation/redux/slices/user";
 
 const Test5Grandes = () => {
   const { user } = useAppSelector(User);
@@ -17,7 +18,7 @@ const Test5Grandes = () => {
   const [count, setCount] = useState<object>({});
   const [flagDescription, setFlagDescription] = useState(false);
   const [informacion, setInformacion] = useState<string[]>();
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
     if (user?.info) {
       setInformacion(user.info);
@@ -52,6 +53,7 @@ const Test5Grandes = () => {
         }
       };
       info();
+      dispatch(setUser({ ...user, info: porcentajes } as UserState));
     }
   }, [currentQuestion, data]);
 

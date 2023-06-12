@@ -7,7 +7,7 @@ import Navigation from "./navigation";
 import * as Font from "expo-font";
 import { Provider } from "react-redux";
 import { store } from "./navigation/redux/store/store";
-
+import "expo-dev-client";
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();

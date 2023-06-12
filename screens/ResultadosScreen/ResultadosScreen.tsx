@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Pressable,
-  Alert,
-  Modal,
-  Text,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, Pressable, Alert, Modal, Text } from "react-native";
 import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
 import { RootStackScreenProps } from "../../types";
@@ -17,29 +9,38 @@ import { areas } from "../../constants/infoChaside";
 import { areaMMYMG } from "../../constants/infoMMYMG";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
+import { ActivityIndicator, MD2Colors } from "react-native-paper";
 const API_KEY = "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";
 const ResultadosScreen = ({
   navigation,
 }: RootStackScreenProps<"Resultados">) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
   const { user } = useAppSelector(User);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
-    if (user?.areaDos && user.areaHabilidad && user.info && !user.finalScore) {
-      processMessageToChatGPT();
-    }
-    setLoading(false);
+    (async () => {
+      if (
+        user?.areaDos &&
+        user.areaHabilidad &&
+        user.info &&
+        !user.finalScore
+      ) {
+        await processMessageToChatGPT();
+      }
+      setIsLoading(false);
+    })();
   }, []);
 
   const saveMessageGPT = async (message: string) => {
     if (user?.key && !user.finalScore) {
-      await updateDoc(doc(database, "people", user.key), {
-        finalScore: message,
-      });
+      // await updateDoc(doc(database, "people", user.key), {
+      //   finalScore: message,
+      // });
     }
   };
   const processMessageToChatGPT = async () => {
+    console.log("hgolas");
     await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -54,24 +55,24 @@ const ResultadosScreen = ({
             content: `Pimero Saludame y dsp hace todo esto. 
             Mi nombre es ${user?.name} ${user?.apellido} y despues segui el texo con: Apartir de tus resultados en los test de Orientacion Vocacional te recomiendo`,
           },
-          {
-            role: "user",
-            content: `He hecho 3 tests de Orientacion Vocacional y me dio estos resultados.
-                     Primer test en Intereses:${
-                       areas[user?.areaInteres!]
-                     }  y en Habilidades :${areas[user?.areaHabilidad!]}.
-                     Segundo test en Area Ocupacional: ${
-                       areaMMYMG[user?.areaUno!]
-                     }
-                     tercer test de los 5 grandes: mi persona es en 
-                     APERTURA A LA EXPERIENCIA un ${user?.info[0]}%,
-                      en EXTROVERSIÓN un  ${user?.info[1]}% ,
-                      en AMABALIDAD ${user?.info[2]}%,
-                      en NEUROTICISMO ${user?.info[3]}%,
-                      en ESCRUPULOSIDAD ${user?.info[4]}%
-                     
-               `,
-          },
+          // {
+          //   role: "user",
+          //   content: `He hecho 3 tests de Orientacion Vocacional y me dio estos resultados.
+          //            Primer test en Intereses:${
+          //              areas[user?.areaInteres!]
+          //            }  y en Habilidades :${areas[user?.areaHabilidad!]}.
+          //            Segundo test en Area Ocupacional: ${
+          //              areaMMYMG[user?.areaUno!]
+          //            }
+          //            tercer test de los 5 grandes: mi persona es en
+          //            APERTURA A LA EXPERIENCIA un ${user?.info[0]}%,
+          //             en EXTROVERSIÓN un  ${user?.info[1]}% ,
+          //             en AMABALIDAD ${user?.info[2]}%,
+          //             en NEUROTICISMO ${user?.info[3]}%,
+          //             en ESCRUPULOSIDAD ${user?.info[4]}%
+
+          //      `,
+          // },
           {
             role: "user",
             content:
@@ -90,12 +91,20 @@ const ResultadosScreen = ({
       })
       .then((data) => {
         saveMessageGPT(data.choices[0].message.content);
+        console.log(data.choices[0].message.content);
       })
       .catch((error) => {
         Alert.alert("hubo un error");
       });
   };
 
+  const Loading = () => {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  };
   return (
     <View style={styles.resultados_screen_container}>
       <Modal
@@ -120,60 +129,38 @@ const ResultadosScreen = ({
         </View>
       </Modal>
       <Spacer height={20} />
-      {/* <CardResult
-        image={require("../../assets/images/Results/result1.png")}
-        title={"Test CHASIDE"}
-        description={"Toma menos de 12 minutos. Responde honestamente."}
-      />
-      <Spacer height={20} />
-      <CardResult
-        image={require("../../assets/images/Results/result2.png")}
-        title={"Test MM & MG"}
-        description={
-          "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
-        }
-      />
-      <Spacer height={20} />
-      <CardResult
-        image={require("../../assets/images/Results/result4.png")}
-        title={"Test Los 5 Grandes"}
-        description={"Conocé más sobre tu personalidad y capacidades."}
-      />
-      <Spacer height={20} /> */}
-      {/* <CardResult
-        image={require("../../assets/images/Results/result3.png")}
-        title={"Entrevista"}
-        description={"Agenda una entrevista con un profesional capacitado."}
-      /> */}
+
       <Pressable onPress={() => setModalVisible(true)}>
-        {user?.areaDos && user.areaHabilidad && user.info ? (
-          <View>
-            {loading ? (
-              <ActivityIndicator size="large" />
-            ) : (
-              <CardResult
-                image={require("../../assets/images/Results/result4.png")}
-                title={"Resultado Final"}
-                description={
-                  "Conoce cual es tu resultado final y comienza a planificar."
-                }
-                selected={true}
-                route={"ResultTestScreen"}
-                navigation={navigation}
-              />
-            )}
-          </View>
-        ) : (
-          <CardResult
-            image={require("../../assets/images/Results/result4.png")}
-            title={"Resultado Final"}
-            description={
-              "Conoce cual es tu resultado final y comienza a planificar."
-            }
-            route={""}
-            navigation={navigation}
-          />
-        )}
+        <View>
+          {user?.areaDos && user.areaHabilidad && user.info ? (
+            <View>
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <CardResult
+                  image={require("../../assets/images/Results/result4.png")}
+                  title={"Resultado Final"}
+                  description={
+                    "Conoce cual es tu resultado final y comienza a planificar."
+                  }
+                  selected={true}
+                  route={"ResultTestScreen"}
+                  navigation={navigation}
+                />
+              )}
+            </View>
+          ) : (
+            <CardResult
+              image={require("../../assets/images/Results/result4.png")}
+              title={"Resultado Final"}
+              description={
+                "Conoce cual es tu resultado final y comienza a planificar."
+              }
+              route={""}
+              navigation={navigation}
+            />
+          )}
+        </View>
       </Pressable>
       <Spacer height={20} />
     </View>

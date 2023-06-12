@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Image,
   Pressable,
   SafeAreaView,
@@ -27,14 +28,50 @@ import { initializeApp } from "firebase/app";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { UserState, setUser } from "../../navigation/redux/slices/user";
 import { useAppDispatch } from "../../navigation/redux/hooks";
+import * as AuthSession from "expo-auth-session";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
 
+WebBrowser.maybeCompleteAuthSession();
+//Web :554180172096-ligekenj228mh1k9n49jsghvavdcsosk.apps.googleusercontent.com
+// android : 554180172096-n9psu1c3p8mhehe7ijeurntvaepn6ejg.apps.googleusercontent.com
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
+  const [accessToken, setAccessToken] = useState("");
+  const [userGoogle, setUserGoogle] = useState(null);
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId:
+      "554180172096-ligekenj228mh1k9n49jsghvavdcsosk.apps.googleusercontent.com",
+    androidClientId:
+      "554180172096-n9psu1c3p8mhehe7ijeurntvaepn6ejg.apps.googleusercontent.com",
+  });
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (response?.type === "success") {
+      response.authentication?.accessToken &&
+        setAccessToken(response.authentication?.accessToken);
+      accessToken && fetchUserInfo();
+    }
+  }, [response, accessToken]);
+
+  const fetchUserInfo = async () => {
+    let response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const userInfo = await response.json();
+    setUser(userInfo);
+  };
+
+  // GoogleSignin.configure({
+  //   webClientId:
+  //     "863702419631-3b7mpfkuf5290ldffb6rfb1210svqbts.apps.googleusercontent.com",
+  // });
   const handleSingIn = async () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
@@ -152,7 +189,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
 
             <View style={styles.container_button}>
               <Pressable
-                onPress={() => handleSingInWithGoogle()}
+                onPress={() => promptAsync()}
                 style={styles.button_google}
               >
                 <Image
