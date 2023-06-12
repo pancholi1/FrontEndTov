@@ -41,7 +41,6 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
       setDisabled({...onDisabled, grandes: false});
     }
   },[user.user]);
-  console.log('user', user.user);
 
 
   return (

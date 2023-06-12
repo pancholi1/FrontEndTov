@@ -70,6 +70,9 @@ function RootNavigator() {
 
     return unSuscribe();
   }, []);
+
+
+
   return (
     <Stack.Navigator>
       {user.user && (
@@ -109,6 +112,7 @@ function RootNavigator() {
                 },
                 headerTintColor: "#06D6DD",
               }}
+
             />
           </Stack.Group>
           <Stack.Group>
@@ -119,7 +123,7 @@ function RootNavigator() {
               }}
               name="BottomTabNavigator"
               component={BottomTabNavigator}
-            />
+              />
 
             <Stack.Screen
               name="TestChaside"
@@ -136,7 +140,6 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
-
             <Stack.Screen
               name="TestMMYMG"
               component={TestMMYMG}

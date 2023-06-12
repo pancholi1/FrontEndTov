@@ -62,24 +62,22 @@ const CardContainer = ({ route, children, navigation, selected, disabled }) => {
   const [text, setText] = useState('')
 
   const verificationTest = () => {
-    if(disabled){
-      if(!user.user?.areaInteres && !user.user?.areaUno){
-        setText('Chaside y MMYMG')
-        setModalVisible(true)
+    const userAreaInteres = user.user?.areaInteres;
+    const userAreaUno = user.user?.areaUno;
+
+    if (disabled) {
+      if (!userAreaInteres && !userAreaUno) {
+        setText('Chaside y MMYMG');
+      } else if (!userAreaUno) {
+        setText('MM & MG');
+      } else {
+        setText('Chaside');
       }
-      else if(user.user?.areaInteres && !user.user?.areaUno){
-        setText('MMYMG')
-        setModalVisible(true)
-      } else if(!user.user?.areaInteres){
-        setText('Chaside')
-        setModalVisible(true)
-      }
+      setModalVisible(true);
     } else {
       navigation.navigate(route)
-    }
+    };
   };
-
-
 
 
   return route && navigation ? (
@@ -95,7 +93,7 @@ const CardContainer = ({ route, children, navigation, selected, disabled }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Debes terminar todos los Test {text}</Text>
+            <Text style={styles.modalText}>Debes terminar los Test {text}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}

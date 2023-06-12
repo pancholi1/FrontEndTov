@@ -109,7 +109,7 @@ const ResultadosScreen = ({
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Debes terminar los Test </Text>
+            <Text style={styles.modalText}>Debes terminar todos los Test </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
