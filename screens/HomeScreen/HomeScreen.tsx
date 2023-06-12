@@ -11,6 +11,13 @@ import { User } from "../../navigation/redux/store/store";
 const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   const user = useAppSelector(User);
   const [contProgress, setcontProgress] = useState(0);
+
+  const [onDisabled, setDisabled] = useState({
+    chaside:false,
+    mmymg: true,
+    grandes: true
+  })
+
   useEffect(() => {
     setcontProgress(0);
     let contador = 0;
@@ -25,6 +32,17 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
     }
     setcontProgress(contador / 3);
   }, [user.user]);
+
+  useEffect(() => {
+    if(user.user?.areaInteres){
+      setDisabled({...onDisabled, mmymg: false});
+    }
+    if(user.user?.areaInteres && user.user?.areaUno){
+      setDisabled({...onDisabled, grandes: false});
+    }
+  },[user.user]);
+
+
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
@@ -62,6 +80,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           navigation={navigation}
           route={"TestChaside"}
           selected={user.user?.areaHabilidad ? true : false}
+          disabled={onDisabled.chaside}
         />
         <Spacer height={20} />
         <CardResult
@@ -73,6 +92,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           navigation={navigation}
           route={"TestMMYMG"}
           selected={user.user?.areaDos ? true : false}
+          disabled={onDisabled.mmymg}
         />
         <Spacer height={20} />
         <CardResult
@@ -82,6 +102,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
           selected={user.user?.info ? true : false}
           navigation={navigation}
           route={"Test5Grandes"}
+          disabled={onDisabled.grandes}
         />
       </View>
     </ScrollView>

@@ -27,6 +27,8 @@ const Survey: React.FC<SurveyProps> = ({
     onAnswered(false);
   };
 
+  
+
   return (
     <View style={styles.container}>
       <LinearGradient

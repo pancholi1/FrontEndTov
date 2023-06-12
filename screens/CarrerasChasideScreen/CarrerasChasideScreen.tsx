@@ -10,8 +10,11 @@ type CarrerasScreenProps = {
 const CarrerasChasideScreen = ({ route }: CarrerasScreenProps) => {
   const { habilidad, intereses, area } = route.params;
 
+
   const txtHabilidad = habilidad?.split("-").join("\n");
   const txtInteres = intereses?.split("-").join("\n");
+
+
 
   return (
     <CarrerasScreen

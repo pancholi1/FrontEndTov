@@ -103,7 +103,6 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               colors={["#3d3758", "#1e173e"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
               style={{ borderRadius: 15, width: "80%" }}
             >
               <TextInput

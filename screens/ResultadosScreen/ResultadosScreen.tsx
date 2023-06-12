@@ -120,31 +120,7 @@ const ResultadosScreen = ({
         </View>
       </Modal>
       <Spacer height={20} />
-      {/* <CardResult
-        image={require("../../assets/images/Results/result1.png")}
-        title={"Test CHASIDE"}
-        description={"Toma menos de 12 minutos. Responde honestamente."}
-      />
-      <Spacer height={20} />
-      <CardResult
-        image={require("../../assets/images/Results/result2.png")}
-        title={"Test MM & MG"}
-        description={
-          "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
-        }
-      />
-      <Spacer height={20} />
-      <CardResult
-        image={require("../../assets/images/Results/result4.png")}
-        title={"Test Los 5 Grandes"}
-        description={"Conocé más sobre tu personalidad y capacidades."}
-      />
-      <Spacer height={20} /> */}
-      {/* <CardResult
-        image={require("../../assets/images/Results/result3.png")}
-        title={"Entrevista"}
-        description={"Agenda una entrevista con un profesional capacitado."}
-      /> */}
+
       <Pressable onPress={() => setModalVisible(true)}>
         {user?.areaDos && user.areaHabilidad && user.info ? (
           <View>
@@ -160,6 +136,7 @@ const ResultadosScreen = ({
                 selected={true}
                 route={"ResultTestScreen"}
                 navigation={navigation}
+                disabled
               />
             )}
           </View>
@@ -172,6 +149,7 @@ const ResultadosScreen = ({
             }
             route={""}
             navigation={navigation}
+            disabled
           />
         )}
       </Pressable>
