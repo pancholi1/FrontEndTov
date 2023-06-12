@@ -52,9 +52,9 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
-
-     setCurrentQuestion(currentQuestion + 1);
-
+    if(currentQuestion < 97){
+       setCurrentQuestion(currentQuestion + 1);
+     }
 
     if (answer === true) {
       const currentArea = surveyData[currentQuestion].area;
@@ -119,9 +119,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
         obtenerPropiedadMayor(sumaAreasHabilidades);
 
       const info = async () => {
-        console.log('entre')
         if (user?.key) {
-          console.log('entre aca')
           await updateDoc(doc(database, "people", user?.key), {
             areaInteres: propiedadMayorIntereses,
             areaHabilidad: propiedadMayorHabilidades,
