@@ -9,7 +9,30 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+# Expo
 
+web-build/
+web-report/
+ios/Pods/
+android/.gradle/
+android/app/build/
+android/gradle/
+android/gradlew
+android/local.properties
+*.iml
+*.ipr
+*.iws
+.idea/
+*.log
+
+# Build files
+*.apk
+*.aab
+*.ap_
+
+# Dependency directories
+ios/Pods/
+android/.gradle/
 # macOS
 .DS_Store
 
