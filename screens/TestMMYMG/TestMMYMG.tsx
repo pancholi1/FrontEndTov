@@ -11,6 +11,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
 import { DescriptionTests } from "../../components/DescriptionTests";
 import { description, title } from "../../constants/DescriptionMMYMG";
+import { setUser, UserState } from "../../navigation/redux/slices/user";
 
 interface PropsAreas {
   msjArea: string;
@@ -49,7 +50,9 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
-    setCurrentQuestion(currentQuestion + 1);
+    if(currentQuestion < 79){
+      setCurrentQuestion(currentQuestion + 1);
+    }
 
     const areas = questions2[currentQuestion].areas; //aca tengo el area de cada pregunta
     if (answer === true) {
@@ -92,6 +95,7 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
 
           setAreas1(areaMMYMG[area1]);
           setAreas2(areaMMYMG[area2]);
+          dispatch(setUser({ ...user,  areaUno:area1, areaDos:area2} as UserState));
         }
       };
       info();

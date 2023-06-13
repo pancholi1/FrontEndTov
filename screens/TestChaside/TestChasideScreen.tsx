@@ -52,8 +52,9 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
-
-    setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestion < 97) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
 
     if (answer === true) {
       const currentArea = surveyData[currentQuestion].area;

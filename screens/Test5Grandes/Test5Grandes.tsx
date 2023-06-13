@@ -1,16 +1,14 @@
-import { LinearGradient } from "expo-linear-gradient";
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { QuestionTest } from "../../components/5Grandes";
-import { gradients } from "../../constants/Gradients";
 import { database } from "../../firebase-config";
 import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { data } from "./question5Grandes";
 import { DescriptionTests } from "../../components/DescriptionTests";
 import { description, title } from "../../constants/Description5Grandes";
-import { UserState, setUser } from "../../navigation/redux/slices/user";
+import { setUser, UserState } from "../../navigation/redux/slices/user";
 
 const Test5Grandes = () => {
   const { user } = useAppSelector(User);
@@ -26,8 +24,10 @@ const Test5Grandes = () => {
   }, [user]);
 
   const handleAnswered = (contador: object) => {
-    setCurrentQuestion(currentQuestion + 1);
-    setCount(contador);
+    if (currentQuestion < 49) {
+      setCurrentQuestion(currentQuestion + 1);
+      setCount(contador);
+    }
   };
 
   useEffect(() => {
