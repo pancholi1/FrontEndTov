@@ -138,6 +138,7 @@ const ResultadosScreen = ({
                 <Loading />
               ) : (
                 <CardResult
+                  disabled={false}
                   image={require("../../assets/images/Results/result4.png")}
                   title={"Resultado Final"}
                   description={
@@ -151,6 +152,7 @@ const ResultadosScreen = ({
             </View>
           ) : (
             <CardResult
+              disabled={false}
               image={require("../../assets/images/Results/result4.png")}
               title={"Resultado Final"}
               description={

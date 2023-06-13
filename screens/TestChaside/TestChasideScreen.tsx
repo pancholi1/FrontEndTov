@@ -6,13 +6,14 @@ import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { QuestionComponent } from "../../components/Chaside";
 import { areas } from "../../constants/infoChaside";
-import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
+import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
 import { DescriptionTests } from "../../components/DescriptionTests";
 import { description, title } from "../../constants/DescriptionChaside";
-import { UserState, setUser } from "../../navigation/redux/slices/user";
+import { useDispatch } from "react-redux";
+import { setUser, UserState } from "../../navigation/redux/slices/user";
 
 interface PropsAreas {
   msjArea: string;
@@ -21,8 +22,8 @@ interface PropsAreas {
 }
 
 const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
-  const user = useAppSelector(User);
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
+  const { user } = useAppSelector(User);
   const [habilidad, setHabilidad] = useState<PropsAreas>();
   const [interes, setInteres] = useState<PropsAreas>();
   const [flagDescription, setFlagDescription] = useState(false);
@@ -51,6 +52,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
+
     setCurrentQuestion(currentQuestion + 1);
 
     if (answer === true) {
@@ -98,15 +100,16 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   };
 
   useEffect(() => {
-    if (user?.user?.areaHabilidad) {
-      const AreaHabilidad = areas[user.user.areaHabilidad];
+    if (user?.areaHabilidad) {
+      const AreaHabilidad = areas[user.areaHabilidad];
       setHabilidad(AreaHabilidad);
     }
-    if (user?.user?.areaInteres) {
-      const AreaHabilidad = areas[user.user.areaInteres];
+    if (user?.areaInteres) {
+      const AreaHabilidad = areas[user.areaInteres];
       setInteres(AreaHabilidad);
     }
-  }, [user.user]);
+  }, [user]);
+
   useEffect(() => {
     if (currentQuestion >= surveyData.length - 1) {
       const { propiedad: propiedadMayorIntereses } =
@@ -115,15 +118,15 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
         obtenerPropiedadMayor(sumaAreasHabilidades);
 
       const info = async () => {
-        if (user.user?.key) {
-          await updateDoc(doc(database, "people", user.user?.key), {
+        if (user?.key) {
+          await updateDoc(doc(database, "people", user?.key), {
             areaInteres: propiedadMayorIntereses,
             areaHabilidad: propiedadMayorHabilidades,
           });
           user &&
             dispatch(
               setUser({
-                ...user.user,
+                ...user,
                 areaInteres: propiedadMayorIntereses,
                 areaHabilidad: propiedadMayorHabilidades,
               } as UserState)
@@ -133,6 +136,13 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
         }
       };
       info();
+      dispatch(
+        setUser({
+          ...user,
+          areaInteres: propiedadMayorIntereses,
+          areaHabilidad: propiedadMayorHabilidades,
+        } as UserState)
+      );
     }
   }, [surveyData, currentQuestion]);
 

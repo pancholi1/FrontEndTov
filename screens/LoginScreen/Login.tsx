@@ -31,6 +31,7 @@ import { useAppDispatch } from "../../navigation/redux/hooks";
 import * as AuthSession from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
+import NotLogin from "../../components/Login/NotLogin";
 
 WebBrowser.maybeCompleteAuthSession();
 //Web :554180172096-ligekenj228mh1k9n49jsghvavdcsosk.apps.googleusercontent.com
@@ -39,6 +40,7 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
   const [accessToken, setAccessToken] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
   const [userGoogle, setUserGoogle] = useState(null);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId:
@@ -88,42 +90,18 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
       };
       info();
     } catch (error) {
+      setModalVisible(true);
       console.log("error al entrar");
       console.log(error);
     }
   };
 
-  const handleSingInWithGoogle = async () => {
-    // try {
-    //   signInWithPopup(auth, providerGoogle)
-    //     .then((result) => {
-    //       // This gives you a Google Access Token. You can use it to access the Google API.
-    //       const credential = GoogleAuthProvider.credentialFromResult(result);
-    //       const token = credential?.accessToken;
-    //       console.log("token", token);
-    //       // The signed-in user info.
-    //       const user = result.user;
-    //       console.log("user", user);
-    //       // IdP data available using getAdditionalUserInfo(result)
-    //       // ...
-    //     })
-    //     .catch((error) => {
-    //       // Handle Errors here.
-    //       const errorCode = error.code;
-    //       const errorMessage = error.message;
-    //       // The email of the user's account used.
-    //       const email = error.customData.email;
-    //       // The AuthCredential type that was used.
-    //       const credential = GoogleAuthProvider.credentialFromError(error);
-    //       // ...
-    //     });
-    // } catch (error) {
-    //   console.log("error", error);
-    // }
-  };
-
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
+      <NotLogin
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      ></NotLogin>
       <KeyboardAwareScrollView>
         <SafeAreaView style={{ width: "100%" }}>
           <View style={styles.container}>
@@ -140,7 +118,6 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
               colors={["#3d3758", "#1e173e"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              //style={props.errors.email && props.touched.email ? styles.input_error : styles.input}
               style={{ borderRadius: 15, width: "80%" }}
             >
               <TextInput

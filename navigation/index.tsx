@@ -49,7 +49,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(User);
-
+  console.log("asd");
   React.useEffect(() => {
     const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
       if (authenticatedUser && authenticatedUser.email) {
@@ -70,6 +70,7 @@ function RootNavigator() {
 
     return unSuscribe();
   }, []);
+
   return (
     <Stack.Navigator>
       {user.user && (
@@ -136,7 +137,6 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
-
             <Stack.Screen
               name="TestMMYMG"
               component={TestMMYMG}

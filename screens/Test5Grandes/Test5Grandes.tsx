@@ -31,7 +31,6 @@ const Test5Grandes = () => {
   };
 
   useEffect(() => {
-    console.log(currentQuestion, data.length);
     if (currentQuestion >= data.length - 1) {
       const suma = Object.values(count).reduce(
         (total, valor) => total + valor,
