@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { gradients } from "../../constants/Gradients";
 import { RootStackScreenProps } from "../../types";
 
-const Terms = ({navigation}: RootStackScreenProps<"Terms">) => {
+const Terminos = ({navigation}: RootStackScreenProps<"Terminos">) => {
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34",}}>
 
@@ -130,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Terms;
+export default Terminos;
