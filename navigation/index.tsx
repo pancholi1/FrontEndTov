@@ -24,7 +24,7 @@ import {
   ResultTests,
   ResultadosScreen,
   SingUpScreen,
-  Terms,
+  TerminosScreen,
   Test5Grandes,
   TestChasideScreen,
   TestMMYMG,
@@ -35,6 +35,7 @@ import { User } from "./redux/store/store";
 import { auth, database } from "../firebase-config";
 import { UserState, setUser } from "./redux/slices/user";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Terminos from "../screens/TerminosYCondiciones/TerminosScreen";
 
 export default function Navigation() {
   return (
@@ -137,6 +138,7 @@ function RootNavigator() {
                 headerTintColor: "#06D6DD",
               }}
             />
+
             <Stack.Screen
               name="TestMMYMG"
               component={TestMMYMG}
@@ -185,6 +187,8 @@ function RootNavigator() {
                 ),
               })}
             />
+            
+
           </Stack.Group>
           <Stack.Screen
             name="CarrerasChasideScreen"
@@ -202,6 +206,21 @@ function RootNavigator() {
             }}
           />
 
+<Stack.Screen
+            name="Terminos"
+            component={Terminos}
+            options={{
+              title: "TyC",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+          />
           <Stack.Screen
             name="Test5Grandes"
             component={Test5Grandes}
@@ -216,25 +235,6 @@ function RootNavigator() {
               },
               headerTintColor: "#06D6DD",
             }}
-          />
-
-          <Stack.Screen
-            name="Terms"
-            component={Terms}
-            options={({ navigation }: RootTabScreenProps<"Terms">) => ({
-              title: "T&C",
-              headerTitleAlign: "center",
-              headerStyle: { backgroundColor: "#130C34" },
-              headerTitleStyle: {
-                fontFamily: "Poppins_Regular",
-                color: "#06D6DD",
-                fontSize: 20,
-              },
-
-              headerLeft: () => (
-                <Pressable onPress={() => navigation.goBack()}></Pressable>
-              ),
-            })}
           />
         </>
       )}
@@ -268,6 +268,21 @@ function RootNavigator() {
             component={LoginScreen}
             options={{
               title: "Ingresa",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+          />
+          <Stack.Screen
+            name="Terminos"
+            component={Terminos}
+            options={{
+              title: "TyC",
               headerTitleAlign: "center",
               headerStyle: { backgroundColor: "#130C34" },
               headerTitleStyle: {

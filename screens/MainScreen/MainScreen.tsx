@@ -7,14 +7,13 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import TermsAndConditions from "../../components/TermsAndConditions";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 
 
 
 const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
-  const terminosNavegacion = () => navigation.navigate("Terms");
+
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
@@ -74,8 +73,14 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
             </LinearGradient>
           </Pressable>
         </View>
-        {/* <TermsAndConditions terminosNav={terminosNavegacion}/> */}
       </View>
+        <Text style={styles.login_parrafohelp}>
+        By continuing you agree to the
+      <Pressable
+      onPress={() => navigation.navigate("Terminos")}>
+        <Text style={styles.login_parrafohelp_finish}> terms and Conditions</Text>
+      </Pressable>
+      </Text>
     </ScrollView>
   );
 };
@@ -137,6 +142,25 @@ const styles = StyleSheet.create({
   },
   login_button_container: {
     alignItems: "center",
+  },
+  login_containerhelp: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  login_parrafohelp: {
+    color: "#5f52ab",
+    marginTop: '3%',
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
+    lineHeight: 18,
+    textAlign:'center'
+  },
+  login_parrafohelp_finish: {
+    color: "#06D6DD",
+    marginTop:'3%',
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
+    lineHeight: 18,
   },
 });
 
