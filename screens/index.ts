@@ -18,4 +18,4 @@ export * from "./TestChaside";
 export * from "./TestMMYMG";
 export * from "./Test5Grandes";
 
-export * from "./Terms&Conditions";
+export * from "./TerminosYCondiciones";

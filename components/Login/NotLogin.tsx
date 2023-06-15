@@ -24,17 +24,18 @@ const NotLogin = ({ modalVisible, setModalVisible }: PropsNotModal) => {
               <Pressable onPress={() => setModalVisible(!modalVisible)}>
                 <Image
                   source={require("../../assets/images/Login/cross.png")}
+                  style={{padding:9}}
                 />
               </Pressable>
             </View>
             <View style={styles.containerImage}>
               <Image
                 source={require("../../assets/images/Login/notLogin.png")}
-                style={{ transform: [{ rotate: "-3deg" }] }}
+                style={{ transform: [{ rotate: "-3deg" }], padding:70 }}
               />
             </View>
             <Text style={styles.modalTitle}>
-              Es posible queno hayas ingresado los datos correctos
+              Es posible que no hayas ingresado los datos correctos
             </Text>
             <Text style={styles.modalSubTitle}>
               Revisá muy bien los campos y volvé a intentarlo

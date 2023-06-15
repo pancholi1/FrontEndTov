@@ -13,7 +13,6 @@ import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients } from "../../constants/Gradients";
 import { patterns } from "../../constants/Patterns";
-import TermsAndConditions from "../../components/TermsAndConditions";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -102,7 +101,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     isFormDisabled !== isDisabled && setIsFormDisabled(isDisabled);
   }, [input]);
 
-  const terminosNavegacion = () => navigation.navigate("Terms");
 
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
@@ -256,7 +254,13 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
               </Pressable>
             </LinearGradient>
           </View>
-          {/* <TermsAndConditions terminosNav={terminosNavegacion}/> */}
+          <Text style={styles.login_parrafohelp}>
+        By continuing you agree to the
+      <Pressable
+      onPress={() => navigation.navigate("Terminos")}>
+        <Text style={styles.login_parrafohelp_finish}> terms and Conditions</Text>
+      </Pressable>
+      </Text>
         </View>
       </KeyboardAwareScrollView>
     </ScrollView>
@@ -353,5 +357,24 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingLeft: 30,
     paddingRight: 30,
+  },
+  login_containerhelp: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  login_parrafohelp: {
+    color: "#5f52ab",
+    marginTop: '3%',
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
+    lineHeight: 18,
+    textAlign:'center'
+  },
+  login_parrafohelp_finish: {
+    color: "#06D6DD",
+    marginTop:'3%',
+    fontFamily: "Poppins_Regular",
+    fontSize: 12,
+    lineHeight: 18,
   },
 });
