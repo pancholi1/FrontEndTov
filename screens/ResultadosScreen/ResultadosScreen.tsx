@@ -3,23 +3,26 @@ import { StyleSheet, View, Pressable, Alert, Modal, Text } from "react-native";
 import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
 import { RootStackScreenProps } from "../../types";
-import { useAppSelector } from "../../navigation/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
 import { areas } from "../../constants/infoChaside";
 import { areaMMYMG } from "../../constants/infoMMYMG";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
+import { UserState, setUser } from "../../navigation/redux/slices/user";
 const API_KEY = "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";
 const ResultadosScreen = ({
   navigation,
 }: RootStackScreenProps<"Resultados">) => {
+  const dispatch = useAppDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useAppSelector(User);
   const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
     (async () => {
+      console.log("USUARIO");
       if (
         user?.areaDos &&
         user.areaHabilidad &&
@@ -30,17 +33,18 @@ const ResultadosScreen = ({
       }
       setIsLoading(false);
     })();
-  }, []);
+  }, [user]);
 
   const saveMessageGPT = async (message: string) => {
     if (user?.key && !user.finalScore) {
-      // await updateDoc(doc(database, "people", user.key), {
-      //   finalScore: message,
-      // });
+      await updateDoc(doc(database, "people", user.key), {
+        finalScore: message,
+      });
+      dispatch(setUser({ ...user, finalScore: message } as UserState));
     }
   };
   const processMessageToChatGPT = async () => {
-    console.log("hgolas");
+    console.log("Esta cargando");
     await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -55,24 +59,30 @@ const ResultadosScreen = ({
             content: `Pimero Saludame y dsp hace todo esto. 
             Mi nombre es ${user?.name} ${user?.apellido} y despues segui el texo con: Apartir de tus resultados en los test de Orientacion Vocacional te recomiendo`,
           },
-          // {
-          //   role: "user",
-          //   content: `He hecho 3 tests de Orientacion Vocacional y me dio estos resultados.
-          //            Primer test en Intereses:${
-          //              areas[user?.areaInteres!]
-          //            }  y en Habilidades :${areas[user?.areaHabilidad!]}.
-          //            Segundo test en Area Ocupacional: ${
-          //              areaMMYMG[user?.areaUno!]
-          //            }
-          //            tercer test de los 5 grandes: mi persona es en
-          //            APERTURA A LA EXPERIENCIA un ${user?.info[0]}%,
-          //             en EXTROVERSIÓN un  ${user?.info[1]}% ,
-          //             en AMABALIDAD ${user?.info[2]}%,
-          //             en NEUROTICISMO ${user?.info[3]}%,
-          //             en ESCRUPULOSIDAD ${user?.info[4]}%
-
-          //      `,
-          // },
+          ...(user?.areaInteres && user?.areaHabilidad && user?.areaUno
+            ? [
+                {
+                  role: "user",
+                  content: `He hecho 3 tests de Orientacion Vocacional y me dio estos resultados.
+                         Primer test en Intereses:${
+                           areas[user?.areaInteres].msjArea
+                         }  y en Habilidades :${
+                    areas[user?.areaHabilidad].msjArea
+                  }.
+                         Segundo test en Area Ocupacional: ${
+                           areaMMYMG[user?.areaUno].msjArea
+                         }
+                         tercer test de los 5 grandes: mi persona es en
+                         APERTURA A LA EXPERIENCIA un ${user?.info[0]}%,
+                          en EXTROVERSIÓN un  ${user?.info[1]}% ,
+                          en AMABALIDAD ${user?.info[2]}%,
+                          en NEUROTICISMO ${user?.info[3]}%,
+                          en ESCRUPULOSIDAD ${user?.info[4]}%
+    
+                   `,
+                },
+              ]
+            : []),
           {
             role: "user",
             content:
@@ -89,8 +99,8 @@ const ResultadosScreen = ({
       .then((response) => {
         return response.json();
       })
-      .then((data) => {
-        saveMessageGPT(data.choices[0].message.content);
+      .then(async (data) => {
+        await saveMessageGPT(data.choices[0].message.content);
         console.log(data.choices[0].message.content);
       })
       .catch((error) => {
@@ -134,7 +144,7 @@ const ResultadosScreen = ({
         <View>
           {user?.areaDos && user.areaHabilidad && user.info ? (
             <View>
-              {isLoading ? (
+              {isLoading || !user.finalScore ? (
                 <Loading />
               ) : (
                 <CardResult
@@ -145,7 +155,7 @@ const ResultadosScreen = ({
                     "Conoce cual es tu resultado final y comienza a planificar."
                   }
                   selected={true}
-                  route={"ResultTestScreen"}
+                  route={user.finalScore ? "ResultTestScreen" : ""}
                   navigation={navigation}
                 />
               )}

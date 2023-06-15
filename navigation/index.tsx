@@ -49,7 +49,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(User);
-  console.log("asd");
   React.useEffect(() => {
     const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
       if (authenticatedUser && authenticatedUser.email) {
@@ -113,7 +112,7 @@ function RootNavigator() {
             />
           </Stack.Group>
           <Stack.Group>
-            <Stack.Screen name="Resultados" component={ResultadosScreen} />
+            {/* <Stack.Screen name="Resultados" component={ResultadosScreen} /> */}
             <Stack.Screen
               options={{
                 headerShown: false,
@@ -348,37 +347,13 @@ function BottomTabNavigator() {
                 <Avatar.Image
                   style={{ marginTop: 10 }}
                   size={40}
-                  source={require("../assets/images/pancho.jpeg")}
+                  source={require("../assets/images/ProfileScreen/addImg.png")}
                 />
               </Pressable>
             </View>
           ),
         })}
       />
-      {/* <BottomTab.Screen
-        name="Planes"
-        component={PlanesScreen}
-        options={({ navigation }: RootTabScreenProps<"Planes">) => ({
-          title: "Planes",
-
-          tabBarIcon: () => (
-            <Image source={require("../assets/images/planes.png")} />
-          ),
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("ProfileScreen")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <Avatar.Image
-                size={24}
-                source={require("../assets/images/pancho.jpeg")}
-              />
-            </Pressable>
-          ),
-        })}
-      /> */}
 
       <BottomTab.Screen
         name="Resultados"
@@ -409,13 +384,38 @@ function BottomTabNavigator() {
               >
                 <Avatar.Image
                   size={34}
-                  source={require("../assets/images/pancho.jpeg")}
+                  source={require("../assets/images/ProfileScreen/addImg.png")}
                 />
               </Pressable>
             </View>
           ),
         })}
       />
+      {/* <BottomTab.Screen
+          name="Planes"
+          component={PlanesScreen}
+          options={({ navigation }: RootTabScreenProps<"Planes">) => ({
+            title: "Planes",
+
+            tabBarIcon: () => (
+              <Image source={require("../assets/images/planes.png")} />
+            ),
+            headerRight: () => (
+              <Pressable
+                onPress={() => navigation.navigate("ProfileScreen")}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <Avatar.Image
+                  size={24}
+                  source={require("../assets/images/pancho.jpeg")}
+                />
+              </Pressable>
+            ),
+          })}
+        /> 
+      */}
     </BottomTab.Navigator>
   );
 }

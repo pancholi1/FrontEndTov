@@ -1,12 +1,34 @@
-import { StatusBar } from "expo-status-bar";
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Image } from "react-native";
 import { Avatar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { auth } from "../../firebase-config";
 import { useAppDispatch } from "../../navigation/redux/hooks";
 import { setUser } from "../../navigation/redux/slices/user";
+import * as DocumentPicker from "expo-document-picker";
+
 export default function ModalScreen() {
+  const handleFilePick = async () => {
+    try {
+      const document = await DocumentPicker.getDocumentAsync();
+
+      // Pasamos el documento seleccionado al callback
+      handleFileSelected(document);
+    } catch (error) {
+      console.error("Error al seleccionar el archivo", error);
+    }
+  };
+  const handleFileSelected = (document) => {
+    console.log("Archivo seleccionado:", document);
+    // Realiza las acciones necesarias con el archivo seleccionado
+    //aca IRia el proceso de storage de firebase
+  };
   const dispatch = useAppDispatch();
   return (
     <View style={styles.container}>
@@ -17,15 +39,18 @@ export default function ModalScreen() {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
-          <Avatar.Image
-            size={85}
-            source={require("../../assets/images/pancho.jpeg")}
-          />
+          <TouchableOpacity onPress={handleFilePick}>
+            <Avatar.Image
+              size={85}
+              source={require("../../assets/images/ProfileScreen/addImg.png")}
+            />
+          </TouchableOpacity>
           <View style={styles.containerText}>
             <Text style={styles.name}>Francisco Porta</Text>
             <Text style={styles.colegio}>Colegio Sacachispa</Text>
           </View>
         </LinearGradient>
+
         <LinearGradient
           style={styles.perfil_container}
           colors={["#3d3758", "#1e173e"]}

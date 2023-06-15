@@ -12,7 +12,6 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
 
   async function cargarFuentes() {
-    console.log("asds");
     await Font.loadAsync({
       Poppins_Regular: require("./assets/fonts/Poppins-Regular.ttf"),
       Poppins_ExtraBold: require("./assets/fonts/Poppins-ExtraBold.ttf"),
