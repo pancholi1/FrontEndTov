@@ -10,10 +10,7 @@ import {
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 
-
-
 const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
-
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
       <View style={styles.container}>
@@ -74,13 +71,16 @@ const Mainscreen = ({ navigation }: RootStackScreenProps<"Root">) => {
           </Pressable>
         </View>
       </View>
+      <View style={styles.containerTerms}>
         <Text style={styles.login_parrafohelp}>
-        By continuing you agree to the
-      <Pressable
-      onPress={() => navigation.navigate("Terminos")}>
-        <Text style={styles.login_parrafohelp_finish}> terms and Conditions</Text>
-      </Pressable>
-      </Text>
+          By continuing you agree to the
+        </Text>
+        <Pressable onPress={() => navigation.navigate("Terminos")}>
+          <Text style={styles.login_parrafohelp_finish}>
+            terms and Conditions
+          </Text>
+        </Pressable>
+      </View>
     </ScrollView>
   );
 };
@@ -147,20 +147,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  containerTerms: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "center",
+    marginTop: 10,
+  },
   login_parrafohelp: {
     color: "#5f52ab",
-    marginTop: '3%',
     fontFamily: "Poppins_Regular",
     fontSize: 12,
     lineHeight: 18,
-    textAlign:'center'
+    textAlign: "center",
   },
   login_parrafohelp_finish: {
     color: "#06D6DD",
-    marginTop:'3%',
     fontFamily: "Poppins_Regular",
     fontSize: 12,
     lineHeight: 18,
+    marginLeft: 5,
   },
 });
 

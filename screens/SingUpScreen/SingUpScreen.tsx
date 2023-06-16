@@ -12,7 +12,6 @@ import PopUp from "../../components/PopUp";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients } from "../../constants/Gradients";
-import { patterns } from "../../constants/Patterns";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -24,7 +23,11 @@ import { collection, addDoc } from "firebase/firestore";
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isFormDisabled, setIsFormDisabled] = useState(true);
-  const [errors, setErrors] = useState({ password: false, date: false, passwordDos: false });
+  const [errors, setErrors] = useState({
+    password: false,
+    date: false,
+    passwordDos: false,
+  });
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const [input, setInput] = React.useState({
@@ -45,7 +48,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       input.password &&
       input.school &&
       !errors.password &&
-      !errors.date && 
+      !errors.date &&
       !errors.passwordDos
     ) {
       try {
@@ -60,7 +63,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
           email: "",
           password: "",
           school: "",
-          passwordDos: ""
+          passwordDos: "",
         });
         return navigation.navigate("Login");
       } catch (error) {
@@ -73,8 +76,7 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     }
   };
 
-
-  const onPasswordChange = (value:string) => {
+  const onPasswordChange = (value: string) => {
     setInput({ ...input, password: value });
 
     input.password.length < 6
@@ -82,10 +84,11 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       : setErrors({ ...errors, password: false });
   };
 
-  const passwordDosChange = (value1:string, password:string) => {
-    value1 === password ? setErrors({ ...errors, passwordDos: false }) 
+  const passwordDosChange = (value1: string, password: string) => {
+    value1 === password
+      ? setErrors({ ...errors, passwordDos: false })
       : setErrors({ ...errors, passwordDos: true });
-  }
+  };
 
   useEffect(() => {
     const isDisabled =
@@ -100,7 +103,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
 
     isFormDisabled !== isDisabled && setIsFormDisabled(isDisabled);
   }, [input]);
-
 
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
@@ -205,7 +207,9 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
                 secureTextEntry={true}
                 style={styles.input_nombre}
                 placeholderTextColor="#B39AE7"
-                onChangeText={(value) => passwordDosChange(value, input.password)}
+                onChangeText={(value) =>
+                  passwordDosChange(value, input.password)
+                }
               />
             </LinearGradient>
             {errors.passwordDos && (
@@ -254,13 +258,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
               </Pressable>
             </LinearGradient>
           </View>
-          <Text style={styles.login_parrafohelp}>
-        By continuing you agree to the
-      <Pressable
-      onPress={() => navigation.navigate("Terminos")}>
-        <Text style={styles.login_parrafohelp_finish}> terms and Conditions</Text>
-      </Pressable>
-      </Text>
         </View>
       </KeyboardAwareScrollView>
     </ScrollView>
@@ -357,24 +354,5 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingLeft: 30,
     paddingRight: 30,
-  },
-  login_containerhelp: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  login_parrafohelp: {
-    color: "#5f52ab",
-    marginTop: '3%',
-    fontFamily: "Poppins_Regular",
-    fontSize: 12,
-    lineHeight: 18,
-    textAlign:'center'
-  },
-  login_parrafohelp_finish: {
-    color: "#06D6DD",
-    marginTop:'3%',
-    fontFamily: "Poppins_Regular",
-    fontSize: 12,
-    lineHeight: 18,
   },
 });

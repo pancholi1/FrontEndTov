@@ -22,7 +22,6 @@ const ResultadosScreen = ({
 
   useEffect(() => {
     (async () => {
-      console.log("USUARIO");
       if (
         user?.areaDos &&
         user.areaHabilidad &&
