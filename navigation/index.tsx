@@ -49,7 +49,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(User);
+  const { user } = useAppSelector(User);
   React.useEffect(() => {
     const unSuscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
       if (authenticatedUser && authenticatedUser.email) {
@@ -73,7 +73,7 @@ function RootNavigator() {
 
   return (
     <Stack.Navigator>
-      {user.user && (
+      {user && (
         <>
           <Stack.Screen
             name="NotFound"
@@ -113,7 +113,6 @@ function RootNavigator() {
             />
           </Stack.Group>
           <Stack.Group>
-            {/* <Stack.Screen name="Resultados" component={ResultadosScreen} /> */}
             <Stack.Screen
               options={{
                 headerShown: false,
@@ -186,8 +185,6 @@ function RootNavigator() {
                 ),
               })}
             />
-            
-
           </Stack.Group>
           <Stack.Screen
             name="CarrerasChasideScreen"
@@ -205,7 +202,7 @@ function RootNavigator() {
             }}
           />
 
-<Stack.Screen
+          <Stack.Screen
             name="Terminos"
             component={Terminos}
             options={{
@@ -237,7 +234,7 @@ function RootNavigator() {
           />
         </>
       )}
-      {!user.user && (
+      {!user && (
         <>
           <Stack.Screen
             name="Root"
@@ -305,6 +302,7 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const { user } = useAppSelector(User);
   return (
     <BottomTab.Navigator
       initialRouteName="HomeScreen"
@@ -312,34 +310,27 @@ function BottomTabNavigator() {
         tabBarStyle: {
           backgroundColor: "#130C34",
           borderTopWidth: 0,
+          paddingTop: 8,
         },
       }}
     >
       <BottomTab.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<"HomeScreen">) => ({
+        options={({ navigation, route }: RootTabScreenProps<"HomeScreen">) => ({
           tabBarLabel: "Inicio",
+          tabBarLabelStyle: {
+            fontSize: 12, // Tamaño de fuente deseado
+            fontFamily: "Poppins_ExtraBold",
+          },
           headerTitle: "Inicio",
           headerTitleAlign: "center",
-
           headerTitleStyle: {
             color: "white",
             fontFamily: "Poppins_ExtraBold",
             fontSize: 20,
           },
           headerTintColor: "#06D6DD",
-
-          // headerLeft: () => (
-          //   <Pressable
-          //     onPress={() => navigation.goBack()}
-          //     style={styles.button}
-          //   >
-
-          //     <TabBarIcon  name="chevron-left" color={'#06D6DD'} />
-          //     <Text style ={styles.text_button}>Back</Text>
-          //   </Pressable>
-          // ),
 
           tabBarIcon: () => (
             <Image source={require("../assets/images/home.png")} />
@@ -362,7 +353,11 @@ function BottomTabNavigator() {
                 <Avatar.Image
                   style={{ marginTop: 10 }}
                   size={40}
-                  source={require("../assets/images/ProfileScreen/addImg.png")}
+                  source={
+                    user?.urlImage
+                      ? { uri: user.urlImage }
+                      : require("../assets/images/ProfileScreen/addImg.png")
+                  }
                 />
               </Pressable>
             </View>
@@ -373,10 +368,13 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Resultados"
         component={ResultadosScreen}
-        options={({ navigation }: RootTabScreenProps<"Resultados">) => ({
+        options={({ navigation, route }: RootTabScreenProps<"Resultados">) => ({
           title: "Resultados",
           tabBarLabel: "Resultados",
-
+          tabBarLabelStyle: {
+            fontSize: 12, // Tamaño de fuente deseado
+            fontFamily: "Poppins_ExtraBold",
+          },
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },
           headerTitleStyle: {
@@ -399,38 +397,17 @@ function BottomTabNavigator() {
               >
                 <Avatar.Image
                   size={34}
-                  source={require("../assets/images/ProfileScreen/addImg.png")}
+                  source={
+                    user?.urlImage
+                      ? { uri: user.urlImage }
+                      : require("../assets/images/ProfileScreen/addImg.png")
+                  }
                 />
               </Pressable>
             </View>
           ),
         })}
       />
-      {/* <BottomTab.Screen
-          name="Planes"
-          component={PlanesScreen}
-          options={({ navigation }: RootTabScreenProps<"Planes">) => ({
-            title: "Planes",
-
-            tabBarIcon: () => (
-              <Image source={require("../assets/images/planes.png")} />
-            ),
-            headerRight: () => (
-              <Pressable
-                onPress={() => navigation.navigate("ProfileScreen")}
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.5 : 1,
-                })}
-              >
-                <Avatar.Image
-                  size={24}
-                  source={require("../assets/images/pancho.jpeg")}
-                />
-              </Pressable>
-            ),
-          })}
-        /> 
-      */}
     </BottomTab.Navigator>
   );
 }

@@ -8,9 +8,11 @@ export interface UserState {
   areaUno?: string;
   areaDos?: string;
   name?: string;
+  school?: string;
   email?: string;
   key?: string;
   age?: number;
+  urlImage?: string;
   info: string[];
   finalScore?: string;
 }

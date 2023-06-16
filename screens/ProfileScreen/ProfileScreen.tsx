@@ -6,30 +6,58 @@ import {
   View,
 } from "react-native";
 import { Image } from "react-native";
-import { Avatar } from "react-native-paper";
+import { ActivityIndicator, Avatar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-import { auth } from "../../firebase-config";
-import { useAppDispatch } from "../../navigation/redux/hooks";
-import { setUser } from "../../navigation/redux/slices/user";
+import { auth, database } from "../../firebase-config";
+import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
+import { UserState, setUser } from "../../navigation/redux/slices/user";
 import * as DocumentPicker from "expo-document-picker";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { User } from "../../navigation/redux/store/store";
+import { doc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
 
 export default function ModalScreen() {
+  const { user } = useAppSelector(User);
+  const dispatch = useAppDispatch();
+  // Create a root reference
+  const storage = getStorage();
+  const storageRef = ref(storage, `profile/${user?.key}`);
+  const [loading, setLoading] = useState(false);
   const handleFilePick = async () => {
     try {
       const document = await DocumentPicker.getDocumentAsync();
-
-      // Pasamos el documento seleccionado al callback
       handleFileSelected(document);
     } catch (error) {
       console.error("Error al seleccionar el archivo", error);
     }
   };
-  const handleFileSelected = (document) => {
-    console.log("Archivo seleccionado:", document);
-    // Realiza las acciones necesarias con el archivo seleccionado
-    //aca IRia el proceso de storage de firebase
+  const handleFileSelected = async (
+    document: DocumentPicker.DocumentResult
+  ) => {
+    setLoading(true);
+    if (document.type === "success" && user?.key) {
+      const { uri } = document;
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      await uploadBytes(storageRef, blob);
+      const url = await getDownloadURL(storageRef);
+
+      await updateDoc(doc(database, "people", user?.key), {
+        urlImage: url,
+      });
+      dispatch(setUser({ ...user, urlImage: url } as UserState));
+    }
+    setLoading(false);
   };
-  const dispatch = useAppDispatch();
+
+  const Loading = () => {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#130C34" />
+      </View>
+    );
+  };
   return (
     <View style={styles.container}>
       <View style={styles.containerTerminos}>
@@ -39,15 +67,24 @@ export default function ModalScreen() {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
-          <TouchableOpacity onPress={handleFilePick}>
-            <Avatar.Image
-              size={85}
-              source={require("../../assets/images/ProfileScreen/addImg.png")}
-            />
-          </TouchableOpacity>
+          {loading ? (
+            <Loading></Loading>
+          ) : (
+            <TouchableOpacity onPress={handleFilePick}>
+              <Avatar.Image
+                size={85}
+                source={
+                  user?.urlImage
+                    ? { uri: user.urlImage }
+                    : require("../../assets/images/ProfileScreen/addImg.png")
+                }
+              />
+            </TouchableOpacity>
+          )}
+
           <View style={styles.containerText}>
-            <Text style={styles.name}>Francisco Porta</Text>
-            <Text style={styles.colegio}>Colegio Sacachispa</Text>
+            <Text style={styles.name}>{user?.name + " " + user?.apellido}</Text>
+            <Text style={styles.colegio}>Escuela {user?.school}</Text>
           </View>
         </LinearGradient>
 
@@ -66,7 +103,7 @@ export default function ModalScreen() {
           <View style={styles.containerText}>
             <Text style={styles.myAccount}>Mi cuenta</Text>
             <Text style={styles.myEmail} numberOfLines={2}>
-              francisco.olivero1998@gmail.com
+              {user?.email}
             </Text>
             <Text style={styles.myPassword}>*********</Text>
             {/* <Text style={styles.MyB}>Cambiar contraseña</Text> */}
