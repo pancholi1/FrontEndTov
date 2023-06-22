@@ -55,8 +55,8 @@ const ResultadosScreen = ({
         messages: [
           {
             role: "user",
-            content: `Pimero Saludame y dsp hace todo esto. 
-            Mi nombre es ${user?.name} ${user?.apellido} y despues segui el texo con: Apartir de tus resultados en los test de Orientacion Vocacional te recomiendo`,
+            content: `Pimero Saludame y despues hace todo esto. 
+            Mi nombre es ${user?.name} ${user?.apellido} y despues segui el texto con: Apartir de tus resultados en los test de Orientacion Vocacional te recomiendo`,
           },
           ...(user?.areaInteres && user?.areaHabilidad && user?.areaUno
             ? [
