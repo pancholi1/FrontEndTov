@@ -23,8 +23,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {},
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "FranciscoIosTov"
+    },
     "android": {
       "package": "com.TovFrancisco.my_first_app",
       "versionCode": 1,
