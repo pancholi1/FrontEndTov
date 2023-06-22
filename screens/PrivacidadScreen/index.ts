@@ -1,1 +1,1 @@
-export { default as Privacidad } from "./Privacidad";
+export { default as PrivacidadScreen } from "./Privacidad";

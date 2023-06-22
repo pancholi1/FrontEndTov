@@ -17,8 +17,11 @@ import { User } from "../../navigation/redux/store/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { Loading } from "../../components/Loading";
+import { RootStackScreenProps } from "../../types";
 
-export default function ModalScreen() {
+export default function ModalScreen({
+  navigation,
+}: RootStackScreenProps<"ProfileScreen">) {
   const { user } = useAppSelector(User);
   const dispatch = useAppDispatch();
   // Create a root reference
@@ -137,7 +140,7 @@ export default function ModalScreen() {
 
       <View style={styles.containerTerminos}>
         <Pressable
-          onPress={() => alert("")}
+          onPress={() => navigation.navigate("Terminos")}
           style={({ pressed }) => [
             styles.terminos_container,
             { opacity: pressed ? 0.5 : 1 },
@@ -157,7 +160,7 @@ export default function ModalScreen() {
         </Pressable>
 
         <Pressable
-          onPress={() => alert("")}
+          onPress={() => navigation.navigate("PrivacidadScreen")}
           style={({ pressed }) => [
             styles.terminos_container,
             { opacity: pressed ? 0.5 : 1 },

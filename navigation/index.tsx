@@ -28,6 +28,7 @@ import {
   Test5Grandes,
   TestChasideScreen,
   TestMMYMG,
+  PrivacidadScreen,
 } from "../screens";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { onAuthStateChanged } from "firebase/auth";
@@ -35,7 +36,6 @@ import { User } from "./redux/store/store";
 import { auth, database } from "../firebase-config";
 import { UserState, setUser } from "./redux/slices/user";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import Terminos from "../screens/TerminosYCondiciones/TerminosScreen";
 
 export default function Navigation() {
   return (
@@ -204,7 +204,7 @@ function RootNavigator() {
 
           <Stack.Screen
             name="Terminos"
-            component={Terminos}
+            component={TerminosScreen}
             options={{
               title: "TyC",
               headerTitleAlign: "center",
@@ -232,6 +232,21 @@ function RootNavigator() {
               headerTintColor: "#06D6DD",
             }}
           />
+          <Stack.Screen 
+            name="PrivacidadScreen"
+            component={PrivacidadScreen}
+            options={{
+              title: "Privacidad",
+              headerTitleAlign: "center",
+              headerStyle: { backgroundColor: "#130C34" },
+              headerTitleStyle: {
+                color: "white",
+                fontFamily: "Poppins_ExtraBold",
+                fontSize: 20,
+              },
+              headerTintColor: "#06D6DD",
+            }}
+            />
         </>
       )}
       {!user && (
@@ -276,7 +291,7 @@ function RootNavigator() {
           />
           <Stack.Screen
             name="Terminos"
-            component={Terminos}
+            component={TerminosScreen}
             options={{
               title: "TyC",
               headerTitleAlign: "center",
@@ -289,6 +304,7 @@ function RootNavigator() {
               headerTintColor: "#06D6DD",
             }}
           />
+     
         </>
       )}
     </Stack.Navigator>
