@@ -91,7 +91,6 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
       info();
     } catch (error) {
       setModalVisible(true);
-      console.log("error al entrar");
       console.log(error);
     }
   };

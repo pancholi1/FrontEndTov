@@ -310,7 +310,8 @@ function BottomTabNavigator() {
         tabBarStyle: {
           backgroundColor: "#130C34",
           borderTopWidth: 0,
-          paddingTop: 8,
+          paddingTop: 20,
+          height: 65,
         },
       }}
     >
@@ -322,7 +323,11 @@ function BottomTabNavigator() {
           tabBarLabelStyle: {
             fontSize: 12, // Tamaño de fuente deseado
             fontFamily: "Poppins_ExtraBold",
+            marginTop: 8,
           },
+          tabBarIcon: () => (
+            <Image source={require("../assets/images/home.png")} />
+          ),
           headerTitle: "Inicio",
           headerTitleAlign: "center",
           headerTitleStyle: {
@@ -332,9 +337,6 @@ function BottomTabNavigator() {
           },
           headerTintColor: "#06D6DD",
 
-          tabBarIcon: () => (
-            <Image source={require("../assets/images/home.png")} />
-          ),
           headerStyle: {
             backgroundColor: "#130C34",
           },
@@ -368,12 +370,13 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Resultados"
         component={ResultadosScreen}
-        options={({ navigation, route }: RootTabScreenProps<"Resultados">) => ({
+        options={({ navigation }: RootTabScreenProps<"Resultados">) => ({
           title: "Resultados",
           tabBarLabel: "Resultados",
           tabBarLabelStyle: {
             fontSize: 12, // Tamaño de fuente deseado
             fontFamily: "Poppins_ExtraBold",
+            marginTop: 4,
           },
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#130C34" },

@@ -16,6 +16,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { User } from "../../navigation/redux/store/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
+import { Loading } from "../../components/Loading";
 
 export default function ModalScreen() {
   const { user } = useAppSelector(User);
@@ -51,13 +52,6 @@ export default function ModalScreen() {
     setLoading(false);
   };
 
-  const Loading = () => {
-    return (
-      <View>
-        <ActivityIndicator size="large" color="#130C34" />
-      </View>
-    );
-  };
   return (
     <View style={styles.container}>
       <View style={styles.containerTerminos}>

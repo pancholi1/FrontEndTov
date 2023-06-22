@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Pressable, Alert, Modal, Text } from "react-native";
-import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
 import { RootStackScreenProps } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../navigation/redux/hooks";
@@ -9,8 +8,9 @@ import { areas } from "../../constants/infoChaside";
 import { areaMMYMG } from "../../constants/infoMMYMG";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase-config";
-import { ActivityIndicator } from "react-native-paper";
 import { UserState, setUser } from "../../navigation/redux/slices/user";
+import { Loading } from "../../components/Loading";
+import ContainerCard from "../../components/HomeScreen/CardTest/ContainerCard";
 const API_KEY = "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";
 const ResultadosScreen = ({
   navigation,
@@ -107,13 +107,6 @@ const ResultadosScreen = ({
       });
   };
 
-  const Loading = () => {
-    return (
-      <View>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  };
   return (
     <View style={styles.resultados_screen_container}>
       <Modal
@@ -141,34 +134,19 @@ const ResultadosScreen = ({
 
       <Pressable onPress={() => setModalVisible(true)}>
         <View>
-          {user?.areaDos && user.areaHabilidad && user.info ? (
-            <View>
-              {isLoading || !user.finalScore ? (
-                <Loading />
-              ) : (
-                <CardResult
-                  disabled={false}
-                  image={require("../../assets/images/Results/result4.png")}
-                  title={"Resultado Final"}
-                  description={
-                    "Conoce cual es tu resultado final y comienza a planificar."
-                  }
-                  selected={true}
-                  route={user.finalScore ? "ResultTestScreen" : ""}
-                  navigation={navigation}
-                />
-              )}
-            </View>
+          {isLoading ? (
+            <Loading />
           ) : (
-            <CardResult
-              disabled={false}
+            <ContainerCard
               image={require("../../assets/images/Results/result4.png")}
               title={"Resultado Final"}
               description={
                 "Conoce cual es tu resultado final y comienza a planificar."
               }
-              route={""}
-              navigation={navigation}
+              route={"ResultTestScreen"}
+              selected={
+                user?.areaDos && user.areaHabilidad && user.info ? true : false
+              }
             />
           )}
         </View>

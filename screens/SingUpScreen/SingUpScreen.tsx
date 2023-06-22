@@ -8,7 +8,6 @@ import {
   TextInput,
   View,
 } from "react-native";
-import PopUp from "../../components/PopUp";
 import { RootStackScreenProps } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradients } from "../../constants/Gradients";
@@ -19,10 +18,23 @@ import { firebaseConfig } from "../../firebase-config";
 
 import { database } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
+import CorrectLogin from "../../components/Login/CorrectLogin";
 
+import Loading from "../../components/Loading/Loading";
+
+export interface PropsInput {
+  name: string;
+  apellido: string;
+  email: string;
+  password: string;
+  passwordDos: string;
+  school: string;
+  createdAt: string;
+}
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isFormDisabled, setIsFormDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     password: false,
     date: false,
@@ -30,7 +42,8 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
   });
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const [input, setInput] = React.useState({
+
+  const [input, setInput] = React.useState<PropsInput>({
     name: "",
     apellido: "",
     email: "",
@@ -52,24 +65,14 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       !errors.passwordDos
     ) {
       try {
+        setLoading(true);
         await createUserWithEmailAndPassword(auth, input.email, input.password);
         await addDoc(collection(database, "people"), input);
-        console.log("account created");
-        Alert.alert("Usuario creado con exito!");
-        setInput({
-          ...input,
-          name: "",
-          apellido: "",
-          email: "",
-          password: "",
-          school: "",
-          passwordDos: "",
-        });
-        return navigation.navigate("Login");
+        setModalVisible(true);
+        setLoading(false);
       } catch (error) {
-        console.log("account created error");
+        setLoading(false);
         console.log(error);
-        Alert.alert("Algun dato es invalido");
       }
     } else {
       Alert.alert("Faltan llenar campos");
@@ -106,160 +109,164 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
 
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
-      <KeyboardAwareScrollView>
-        <View style={styles.container}>
-          <PopUp
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            mesagge={"El registro ha fallado, vuelve a intentarlo"}
-          />
-          <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Nombre</Text>
-            <LinearGradient
-              colors={gradients.inputs}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0 }}
-              style={{ borderRadius: 15 }}
-            >
-              <TextInput
-                style={styles.input_nombre}
-                placeholder="Nombre"
-                cursorColor={"white"}
-                placeholderTextColor="#B39AE7"
-                onChangeText={(value) => {
-                  setInput({ ...input, name: value });
-                }}
-              />
-            </LinearGradient>
-          </View>
+      <CorrectLogin
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        input={input}
+      ></CorrectLogin>
+      {loading ? (
+        <Loading></Loading>
+      ) : (
+        <KeyboardAwareScrollView>
+          <View style={styles.container}>
+            <View style={styles.container_input_name}>
+              <Text style={styles.text_input_name}>Nombre</Text>
+              <LinearGradient
+                colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
+                style={{ borderRadius: 15 }}
+              >
+                <TextInput
+                  style={styles.input_nombre}
+                  placeholder="Nombre"
+                  cursorColor={"white"}
+                  placeholderTextColor="#B39AE7"
+                  onChangeText={(value) => {
+                    setInput({ ...input, name: value });
+                  }}
+                />
+              </LinearGradient>
+            </View>
 
-          <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Apellido</Text>
-            <LinearGradient
-              colors={gradients.inputs}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0 }}
-              style={{ borderRadius: 15 }}
-            >
-              <TextInput
-                placeholder="Apellido"
-                style={styles.input_nombre}
-                placeholderTextColor="#B39AE7"
-                onChangeText={(value) => {
-                  setInput({ ...input, apellido: value });
-                }}
-              />
-            </LinearGradient>
-          </View>
+            <View style={styles.container_input_name}>
+              <Text style={styles.text_input_name}>Apellido</Text>
+              <LinearGradient
+                colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
+                style={{ borderRadius: 15 }}
+              >
+                <TextInput
+                  placeholder="Apellido"
+                  style={styles.input_nombre}
+                  placeholderTextColor="#B39AE7"
+                  onChangeText={(value) => {
+                    setInput({ ...input, apellido: value });
+                  }}
+                />
+              </LinearGradient>
+            </View>
 
-          <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Email</Text>
-            <LinearGradient
-              colors={gradients.inputs}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0 }}
-              style={{ borderRadius: 15 }}
-            >
-              <TextInput
-                placeholder="Email"
-                style={styles.input_nombre}
-                keyboardType="email-address"
-                placeholderTextColor="#B39AE7"
-                onChangeText={(value) => {
-                  setInput({ ...input, email: value });
-                }}
-              />
-            </LinearGradient>
-          </View>
+            <View style={styles.container_input_name}>
+              <Text style={styles.text_input_name}>Email</Text>
+              <LinearGradient
+                colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
+                style={{ borderRadius: 15 }}
+              >
+                <TextInput
+                  placeholder="Email"
+                  style={styles.input_nombre}
+                  keyboardType="email-address"
+                  placeholderTextColor="#B39AE7"
+                  onChangeText={(value) => {
+                    setInput({ ...input, email: value });
+                  }}
+                />
+              </LinearGradient>
+            </View>
 
-          <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Contraseña</Text>
-            <LinearGradient
-              colors={gradients.inputs}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0 }}
-              style={{ borderRadius: 15 }}
-            >
-              <TextInput
-                placeholder="Contraseña"
-                secureTextEntry={true}
-                style={styles.input_nombre}
-                placeholderTextColor="#B39AE7"
-                onChangeText={onPasswordChange}
-              />
-            </LinearGradient>
-            {errors.password && (
-              <Text style={styles.error}>
-                La contraseña tiene que tener al menos 6 caracteres
-              </Text>
-            )}
-          </View>
-          <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Repeti Contraseña</Text>
-            <LinearGradient
-              colors={gradients.inputs}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0 }}
-              style={{ borderRadius: 15 }}
-            >
-              <TextInput
-                placeholder="Contraseña"
-                secureTextEntry={true}
-                style={styles.input_nombre}
-                placeholderTextColor="#B39AE7"
-                onChangeText={(value) =>
-                  passwordDosChange(value, input.password)
-                }
-              />
-            </LinearGradient>
-            {errors.passwordDos && (
-              <Text style={styles.error}>
-                Las contraseñas tienen que coincidir
-              </Text>
-            )}
-          </View>
+            <View style={styles.container_input_name}>
+              <Text style={styles.text_input_name}>Contraseña</Text>
+              <LinearGradient
+                colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
+                style={{ borderRadius: 15 }}
+              >
+                <TextInput
+                  placeholder="Contraseña"
+                  secureTextEntry={true}
+                  style={styles.input_nombre}
+                  placeholderTextColor="#B39AE7"
+                  onChangeText={onPasswordChange}
+                />
+              </LinearGradient>
+              {errors.password && (
+                <Text style={styles.error}>
+                  La contraseña tiene que tener al menos 6 caracteres
+                </Text>
+              )}
+            </View>
+            <View style={styles.container_input_name}>
+              <Text style={styles.text_input_name}>Repeti Contraseña</Text>
+              <LinearGradient
+                colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
+                style={{ borderRadius: 15 }}
+              >
+                <TextInput
+                  placeholder="Contraseña"
+                  secureTextEntry={true}
+                  style={styles.input_nombre}
+                  placeholderTextColor="#B39AE7"
+                  onChangeText={(value) =>
+                    passwordDosChange(value, input.password)
+                  }
+                />
+              </LinearGradient>
+              {errors.passwordDos && (
+                <Text style={styles.error}>
+                  Las contraseñas tienen que coincidir
+                </Text>
+              )}
+            </View>
 
-          <View style={styles.container_input_name}>
-            <Text style={styles.text_input_name}>Escuela</Text>
-            <LinearGradient
-              colors={gradients.inputs}
-              start={{ x: 1, y: 1 }}
-              end={{ x: 0, y: 0 }}
-              style={{ borderRadius: 15 }}
-            >
-              <TextInput
-                placeholder="Escuela"
-                style={styles.input_nombre}
-                placeholderTextColor="#B39AE7"
-                onChangeText={(value) => {
-                  setInput({ ...input, school: value });
-                }}
-              />
-            </LinearGradient>
-          </View>
-          <View style={styles.buttonContainer}>
-            <LinearGradient
-              colors={["#0995a6", "#112044"]}
-              style={
-                isFormDisabled
-                  ? styles.button_gradient_disable
-                  : styles.button_gradient
-              }
-            >
-              <Pressable
-                onPress={handleCreateAccount}
+            <View style={styles.container_input_name}>
+              <Text style={styles.text_input_name}>Escuela</Text>
+              <LinearGradient
+                colors={gradients.inputs}
+                start={{ x: 1, y: 1 }}
+                end={{ x: 0, y: 0 }}
+                style={{ borderRadius: 15 }}
+              >
+                <TextInput
+                  placeholder="Escuela"
+                  style={styles.input_nombre}
+                  placeholderTextColor="#B39AE7"
+                  onChangeText={(value) => {
+                    setInput({ ...input, school: value });
+                  }}
+                />
+              </LinearGradient>
+            </View>
+            <View style={styles.buttonContainer}>
+              <LinearGradient
+                colors={["#0995a6", "#112044"]}
                 style={
                   isFormDisabled
-                    ? styles.button_signup_disabled
-                    : styles.button_signup
+                    ? styles.button_gradient_disable
+                    : styles.button_gradient
                 }
               >
-                <Text style={styles.text_button}>Registrate</Text>
-              </Pressable>
-            </LinearGradient>
+                <Pressable
+                  onPress={handleCreateAccount}
+                  style={
+                    isFormDisabled
+                      ? styles.button_signup_disabled
+                      : styles.button_signup
+                  }
+                >
+                  <Text style={styles.text_button}>Registrate</Text>
+                </Pressable>
+              </LinearGradient>
+            </View>
           </View>
-        </View>
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
+      )}
     </ScrollView>
   );
 };

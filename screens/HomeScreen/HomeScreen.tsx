@@ -3,30 +3,29 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import { RootStackScreenProps } from "../../types";
-import CardResult from "../../components/CardResult";
 import Spacer from "../../components/Spacer";
 import { useAppSelector } from "../../navigation/redux/hooks";
 import { User } from "../../navigation/redux/store/store";
+import ContainerCard from "../../components/HomeScreen/CardTest/ContainerCard";
 
 const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
-  const user = useAppSelector(User);
+  const { user } = useAppSelector(User);
   const [contProgress, setcontProgress] = useState(0);
 
   useEffect(() => {
     setcontProgress(0);
     let contador = 0;
-    if (user.user?.info) {
+    if (user?.info) {
       contador = contador + 1;
     }
-    if (user.user?.areaDos) {
+    if (user?.areaDos) {
       contador = contador + 1;
     }
-    if (user.user?.areaHabilidad) {
+    if (user?.areaHabilidad) {
       contador = contador + 1;
     }
     setcontProgress(contador / 3);
-  }, [user.user]);
-
+  }, [user]);
 
   return (
     <ScrollView style={{ width: "100%", backgroundColor: "#130C34" }}>
@@ -34,9 +33,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
         <View style={styles.header_container}>
           <Text style={styles.title_hello}>Hola</Text>
 
-          <Text style={styles.name}>
-            {user.user?.name + " " + user.user?.apellido}
-          </Text>
+          <Text style={styles.name}>{user?.name + " " + user?.apellido}</Text>
 
           <LinearGradient
             colors={["#524c77", "#3d3758", "#1e173e"]}
@@ -58,37 +55,33 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
         </View>
         <Spacer height={10} />
 
-        <CardResult
+        <ContainerCard
           image={require("../../assets/images/HomeScreen/testPersonalidad.png")}
           title={"Test CHASIDE"}
           description={"Toma menos de 12 minutos. Responde honestamente."}
-          navigation={navigation}
           route={"TestChaside"}
-          selected={user.user?.areaHabilidad ? true : false}
-          disabled={false}
-        />
+          selected={user?.areaHabilidad ? true : false}
+        ></ContainerCard>
         <Spacer height={20} />
-        <CardResult
+
+        <ContainerCard
           image={require("../../assets/images/HomeScreen/testPsicotécnico.png")}
           title={"Test MM & MG"}
           description={
             "Comprueba cuáles son las áreas ocupacionales que se ajustan a tu perfil."
           }
-          navigation={navigation}
           route={"TestMMYMG"}
-          selected={user.user?.areaDos ? true : false}
-          disabled={user.user?.areaHabilidad ? false : true}
-        />
+          selected={user?.areaDos ? true : false}
+        ></ContainerCard>
         <Spacer height={20} />
-        <CardResult
+
+        <ContainerCard
           image={require("../../assets/images/HomeScreen/test5grandes.png")}
           title={"Test de los 5 Grandes"}
           description={"Conocé más sobre tu personalidad y capacidades."}
-          selected={user.user?.info ? true : false}
-          navigation={navigation}
           route={"Test5Grandes"}
-          disabled={user.user?.areaDos ? false : true}
-        />
+          selected={user?.info ? true : false}
+        ></ContainerCard>
       </View>
     </ScrollView>
   );
