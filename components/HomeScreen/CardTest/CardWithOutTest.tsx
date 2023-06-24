@@ -22,6 +22,9 @@ export default function CardWithOutTest({
   >("Test5Grandes");
 
   const verificationTest = () => {
+    if (route === "TestChaside") {
+      navigation.navigate(route);
+    }
     if (route === "TestMMYMG") {
       if (user?.areaInteres) {
         navigation.navigate(route);
