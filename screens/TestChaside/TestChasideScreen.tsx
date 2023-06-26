@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
   },
   text_button: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#DED3F4",
     fontFamily: "Poppins_ExtraBold",
   },
