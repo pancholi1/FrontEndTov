@@ -17,6 +17,7 @@ const Test5Grandes = () => {
   const [flagDescription, setFlagDescription] = useState(false);
   const [informacion, setInformacion] = useState<string[]>();
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (user?.info) {
       setInformacion(user.info);
@@ -43,7 +44,6 @@ const Test5Grandes = () => {
         ])
       );
       const porcentajes = Object.entries(percentages).map(([, value]) => value);
-
       const info = async () => {
         if (user?.key) {
           await updateDoc(doc(database, "people", user.key), {
@@ -56,12 +56,13 @@ const Test5Grandes = () => {
     }
   }, [currentQuestion, data]);
 
+
   return informacion ? (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.container_general}>
           <Text style={styles.title}>APERTURA A LA EXPERIENCIA</Text>
-          <Text style={styles.porcentaje}>{informacion[0] + "%"}</Text>
+          <Text style={styles.porcentaje}>{informacion['O'] + "%"}</Text>
           <Text style={styles.text}>
             Buscar nuevas experiencias y habilidades intelectuales, interesarse
             por distintos temas, apreciar el arte y ser sensibles a la belleza.
@@ -72,7 +73,7 @@ const Test5Grandes = () => {
 
         <View style={styles.container_general}>
           <Text style={styles.title}>EXTROVERSIÓN</Text>
-          <Text style={styles.porcentaje}>{informacion[1] + "%"}</Text>
+          <Text style={styles.porcentaje}>{informacion['E'] + "%"}</Text>
           <Text style={styles.text}>
             Pronunciado compromiso o unión con el mundo externo, ser muy
             sociables, asertivas, habladoras y necesitan constante estimulación
@@ -82,7 +83,7 @@ const Test5Grandes = () => {
 
         <View style={styles.container_general}>
           <Text style={styles.title}>AMABILIDAD</Text>
-          <Text style={styles.porcentaje}>{informacion[2] + "%"}</Text>
+          <Text style={styles.porcentaje}>{informacion['A'] + "%"}</Text>
           <Text style={styles.text}>
             Ser cordiales, amables, cooperativas, compasivas, altruistas,
             consideradas, confiadas y solidarias.
@@ -91,7 +92,7 @@ const Test5Grandes = () => {
 
         <View style={styles.container_general}>
           <Text style={styles.title}>Neuroticismo</Text>
-          <Text style={styles.porcentaje}>{informacion[3] + "%"}</Text>
+          <Text style={styles.porcentaje}>{informacion['N'] + "%"}</Text>
           <Text style={styles.text}>
             Inestabilidad emocional, ansiedad, preocupación, baja autoestima,
             baja tolerancia al estrés, poca sociabilidad.
@@ -100,7 +101,7 @@ const Test5Grandes = () => {
 
         <View style={styles.container_general}>
           <Text style={styles.title}>ESCRUPULOSIDAD</Text>
-          <Text style={styles.porcentaje}>{informacion[4] + "%"}</Text>
+          <Text style={styles.porcentaje}>{informacion['C'] + "%"}</Text>
           <Text style={styles.text}>
             Autocontrol, tanto en sus impulsos como también en la planificación,
             organización y ejecución de tareas. Está asociada además con la
