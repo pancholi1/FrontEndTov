@@ -12,6 +12,7 @@ const HomeScreen = ({ navigation }: RootStackScreenProps<"HomeScreen">) => {
   const { user } = useAppSelector(User);
   const [contProgress, setcontProgress] = useState(0);
 
+  console.log(user);
   useEffect(() => {
     setcontProgress(0);
     let contador = 0;

@@ -34,8 +34,7 @@ import * as Google from "expo-auth-session/providers/google";
 import NotLogin from "../../components/Login/NotLogin";
 
 WebBrowser.maybeCompleteAuthSession();
-//Web :554180172096-ligekenj228mh1k9n49jsghvavdcsosk.apps.googleusercontent.com
-// android : 554180172096-n9psu1c3p8mhehe7ijeurntvaepn6ejg.apps.googleusercontent.com
+
 const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
@@ -70,10 +69,6 @@ const Login = ({ navigation }: RootStackScreenProps<"Login">) => {
     setUser(userInfo);
   };
 
-  // GoogleSignin.configure({
-  //   webClientId:
-  //     "863702419631-3b7mpfkuf5290ldffb6rfb1210svqbts.apps.googleusercontent.com",
-  // });
   const handleSingIn = async () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);

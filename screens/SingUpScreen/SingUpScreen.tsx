@@ -28,7 +28,6 @@ export interface PropsInput {
   email: string;
   password: string;
   passwordDos: string;
-  school: string;
   createdAt: string;
 }
 const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
@@ -49,7 +48,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
     email: "",
     password: "",
     passwordDos: "",
-    school: "",
     createdAt: new Date().toISOString(),
   });
 
@@ -59,7 +57,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       input.apellido &&
       input.email &&
       input.password &&
-      input.school &&
       !errors.password &&
       !errors.date &&
       !errors.passwordDos
@@ -99,7 +96,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
       !input.apellido ||
       !input.email ||
       !input.password ||
-      !input.school ||
       errors.password ||
       errors.date ||
       errors.passwordDos;
@@ -225,24 +221,6 @@ const SingUpScreen = ({ navigation }: RootStackScreenProps<"SingUp">) => {
               )}
             </View>
 
-            <View style={styles.container_input_name}>
-              <Text style={styles.text_input_name}>Escuela</Text>
-              <LinearGradient
-                colors={gradients.inputs}
-                start={{ x: 1, y: 1 }}
-                end={{ x: 0, y: 0 }}
-                style={{ borderRadius: 15 }}
-              >
-                <TextInput
-                  placeholder="Escuela"
-                  style={styles.input_nombre}
-                  placeholderTextColor="#B39AE7"
-                  onChangeText={(value) => {
-                    setInput({ ...input, school: value });
-                  }}
-                />
-              </LinearGradient>
-            </View>
             <View style={styles.buttonContainer}>
               <LinearGradient
                 colors={["#0995a6", "#112044"]}

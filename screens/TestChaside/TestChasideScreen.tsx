@@ -208,9 +208,7 @@ const TestChaside = ({ navigation }: RootStackScreenProps<"TestChaside">) => {
   ) : flagDescription ? (
     <View style={styles.container}>
       <QuestionComponent
-        id={surveyData[currentQuestion].id}
-        question={surveyData[currentQuestion].question}
-        resultado={surveyData[currentQuestion].resultado}
+        question={surveyData[currentQuestion]}
         onAnswered={handleAnswered}
       />
     </View>

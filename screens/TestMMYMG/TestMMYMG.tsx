@@ -34,23 +34,17 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
     AC: 0,
     CB: 0,
   });
+  const sortedArr = Object.entries(countQuestion).sort((a, b) => b[1] - a[1]);
+  const resultObj = Object.fromEntries(sortedArr.slice(0, 2));
 
-  useEffect(() => {
-    if (user?.areaUno) {
-      const areaPrincipal = areaMMYMG[user?.areaUno];
-      setAreas1(areaPrincipal);
-    }
-    if (user?.areaDos) {
-      const areaSecundaria = areaMMYMG[user?.areaDos];
-      setAreas2(areaSecundaria);
-    }
-  }, [user]);
+  const area1 = Object.keys(resultObj)[0];
+  const area2 = Object.keys(resultObj)[1];
 
   const handleAnswered = (answer: boolean) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
     setAnswers(newAnswers);
-    if(currentQuestion < 79){
+    if (currentQuestion < 79) {
       setCurrentQuestion(currentQuestion + 1);
     }
 
@@ -63,12 +57,6 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
       setCountQuestion(updateCount);
     }
   };
-
-  const sortedArr = Object.entries(countQuestion).sort((a, b) => b[1] - a[1]);
-  const resultObj = Object.fromEntries(sortedArr.slice(0, 2));
-
-  const area1 = Object.keys(resultObj)[0];
-  const area2 = Object.keys(resultObj)[1];
 
   function getAreaInfo(area: string) {
     return areaMMYMG[area];
@@ -83,19 +71,31 @@ const TestMMYMG = ({ navigation }: RootStackScreenProps<"TestMMYMG">) => {
   };
 
   useEffect(() => {
+    if (user?.areaUno) {
+      const areaPrincipal = areaMMYMG[user?.areaUno];
+      setAreas1(areaPrincipal);
+    }
+    if (user?.areaDos) {
+      const areaSecundaria = areaMMYMG[user?.areaDos];
+      setAreas2(areaSecundaria);
+    }
+  }, [user]);
+
+  useEffect(() => {
     getAreaInfo(area1);
     getAreaInfo(area2);
     if (currentQuestion >= questions2.length - 1) {
+      setAreas1(areaMMYMG[area1]);
+      setAreas2(areaMMYMG[area2]);
       const info = async () => {
         if (user?.key) {
           await updateDoc(doc(database, "people", user?.key), {
             areaUno: area1,
             areaDos: area2,
           });
-
-          setAreas1(areaMMYMG[area1]);
-          setAreas2(areaMMYMG[area2]);
-          dispatch(setUser({ ...user,  areaUno:area1, areaDos:area2} as UserState));
+          dispatch(
+            setUser({ ...user, areaUno: area1, areaDos: area2 } as UserState)
+          );
         }
       };
       info();

@@ -1,4 +1,4 @@
-interface SurveyData {
+export interface SurveyData {
     id: number;
     question: string;
     resultado: string;

@@ -1,33 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-
 import { LinearGradient } from "expo-linear-gradient";
-import { gradients, gradientsButton } from "../../constants/Gradients";
+import { gradients } from "../../constants/Gradients";
+import { SurveyData } from "../../screens/TestChaside/questions";
 
 interface SurveyProps {
-  id: number;
-  question: string;
-  resultado: string;
+  question: SurveyData;
   onAnswered: (answer: boolean) => void;
 }
 
-const Survey: React.FC<SurveyProps> = ({
-  id,
-  question,
-  onAnswered,
-}) => {
-  const [answer, setAnswer] = useState<boolean | null>(null);
+const Survey: React.FC<SurveyProps> = ({ question, onAnswered }) => {
   const handleYes = () => {
-    setAnswer(true);
     onAnswered(true);
   };
 
   const handleNo = () => {
-    setAnswer(false);
     onAnswered(false);
   };
-
-  
 
   return (
     <View style={styles.container}>
@@ -44,8 +33,8 @@ const Survey: React.FC<SurveyProps> = ({
         }}
       >
         <View style={styles.container_test}>
-          <Text style={styles.numero_test}>{id}/98</Text>
-          <Text style={styles.text_test}>{question}</Text>
+          <Text style={styles.numero_test}>{question.id}/98</Text>
+          <Text style={styles.text_test}>{question.question}</Text>
           <LinearGradient
             colors={["#0995a6", "#197189", "#112044"]}
             style={{
@@ -112,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     fontFamily: "Poppins_ExtraBold",
-    height:100
+    height: 100,
   },
   button: {
     width: "100%",
